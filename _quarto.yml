@@ -3,13 +3,16 @@ project:
   output-dir: docs
 
 website:
-  title: "Workshop Title"
+  title: "Tidyverse"
   navbar:
+    logo: img/logo.png
     left:
       - href: index.qmd
         text: Home
       - href: about.qmd
         text: About
+      - href: apoyo.qmd
+        text: Recursos de apoyo
     right:
       - icon: github
         href: https://github.com
