@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tidyverse - Title of Your Workshop Session</title>
+<title>Tidyverse - Curso: Análisis de datos con Tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,6 +70,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./img/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Tidyverse</span>
     </a>
@@ -110,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Title of Your Workshop Session</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Curso: Análisis de datos con Tidyverse</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -152,8 +155,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
+  <li><a href="#bienvenidos" id="toc-bienvenidos" class="nav-link active" data-scroll-target="#bienvenidos">¡Bienvenidos!</a></li>
+  <li><a href="#horario-del-curso" id="toc-horario-del-curso" class="nav-link" data-scroll-target="#horario-del-curso">Horario del curso</a></li>
   </ul>
 </nav>
     </div>
@@ -162,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Title of Your Workshop Session</h1>
+<h1 class="title">Curso: Análisis de datos con Tidyverse</h1>
 </div>
 
 
@@ -178,85 +181,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>Date: <strong>Date and time</strong></p>
-<p>Room: <strong>Location</strong></p>
-<p>Instructors: Instructor A, B, C</p>
+<p>Lugar: <strong>Centro de Investigaciones Biológicas del Noroeste, S.C.</strong></p>
+<p>Instructores: <a href="https://migueltrippcv.netlify.app/">Miguel A. Tripp Valdez</a></p>
 <hr>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="bienvenidos" class="level1">
+<h1>¡Bienvenidos!</h1>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-This workshop template
+Objetivos del curso
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This workshop template contains 4 pages:</p>
 <ul>
-<li><p>Home: <code>index.qmd</code> (this page)</p></li>
-<li><p>About: <code>about.qmd</code></p></li>
+<li><p>Que el alumno tenga un panorama detallado sobre el uso de la herramientas dentro del conjunto de paquetes de Tidyverse para importar, manipular, extraer y visualizar información relevante a partir de bases de datos.</p></li>
+<li><p>Que el alumno adquiera habilidades prácticas para la manipulación y visualización de datos</p></li>
+<li><p>Que el alumno sea capaz de acoplar la experiencia adquirida en este curso para análisis estadísticos, datos genómicos, datos espaciales, etc.</p></li>
 </ul>
-<p>Two content pages</p>
+</div>
+</div>
+<section id="requisitos" class="level4">
+<h4 class="anchored" data-anchor-id="requisitos">Requisitos</h4>
 <ul>
-<li><p>Page without code: <code>part_1_prep.qmd</code></p></li>
-<li><p>Page with R code: <code>part_2_eda.qmd</code></p></li>
-</ul>
-<p>It is straightforward to add more content pages: you need to create a new <code>.qmd</code> file (or copy/paste the existing ones), then link the new page inside <code>_quarto.yml</code>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Homepage of your workshop
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This is the <strong>homepage</strong> <code>index.qmd</code> for your workshop, so ideally it should contain some key information such as <strong>time and place, instructors</strong> and information of the course/workshop.</p>
-<p>It should be easy to navigate.</p>
-</div>
-</div>
-<section id="welcome" class="level1">
-<h1>Welcome!</h1>
-<ul>
-<li>The goal of the workshop is to … (<em>insert your message</em>)</li>
-<li>For example, introduce kep concepts in machine learning, such as regularisation.</li>
-<li>Workshop material can be found in the workshop <a href="https://github.com">github repository</a>.</li>
-</ul>
-<section id="learning-objectives" class="level4">
-<h4 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h4>
-<p>At the end of the tutorial, participants will be able to</p>
-<ul>
-<li>understand key concepts for … (<em>insert your message</em>)</li>
-<li>For example, training machine learning models such as regularisation.</li>
-<li>another objective</li>
-</ul>
-</section>
-<section id="pre-requisites" class="level4">
-<h4 class="anchored" data-anchor-id="pre-requisites">Pre-requisites</h4>
-<ul>
-<li>Basic familiarity with R</li>
-<li>Some other knowledge</li>
+<li>Es deseable que el alumno tenga experiencia básica en el uso de R</li>
+<li>Tener acceso internet</li>
+<li>Tener instalado R y Rstudio en su computadora</li>
 </ul>
 </section>
 </section>
-<section id="schedule" class="level1">
-<h1>Schedule</h1>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tabular schedule
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>It can be useful to include a tabular schedule with links.</p>
-</div>
-</div>
+<section id="horario-del-curso" class="level1">
+<h1>Horario del curso</h1>
 <table class="table">
 <thead>
 <tr class="header">

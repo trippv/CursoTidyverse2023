@@ -1,0 +1,62 @@
+---
+title: "Introducción al curso"
+author: "Miguel A. Tripp Valdez"
+---
+
+# 1. ¿Que es Tidyverse?
+
+Tidyverse no es en si un paquete sino un conjunto de paquetes en el lenguaje de programación R, diseñado para facilitar la **manipulación**, **visualización** y **análisis** de datos. Desarrollado por Hadley Wickham y su equipo, Tidyverse busca proporcionar un enfoque coherente y eficiente para trabajar con datos, promoviendo la claridad, la reproducibilidad y la facilidad de uso en el análisis de datos.
+
+Podríamos decir que Tidyverse es una filosofía de trabajo que permite que diversos programas y funciones trabajen bajo esta misma filosofía.
+
+::: callout-note
+## ¿Realmente necesito aprender a usar Tidyverse?
+
+Realmente no. Todas las funciones y herramientas que veremos a lo largo de este curso pueden realizarse utilizando funciones de base de R. Sin embargo, Tidyverse tiene una estructura mas coherente, legible y comprensible.
+:::
+
+# 2. ¿Que paquetes componen a Tidyverse?
+
+El núcleo de Tidyverse esta compuesto por ocho paquetes[^1]:
+
+[^1]: [Tidyverse](https://www.tidyverse.org/)
+
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/dplyr.png){width="186"}   | **dplyr:**                                                                                                                                                 |
+|                                        |                                                                                                                                                            |
+|                                        | Proporciona una gramática para la manipulación de datos usando un conjunto de verbos que resuelven la mayoría de los desafíos en la manipulación de datos. |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/tidyr.png){width="186"}   | **tidyr:**                                                                                                                                                 |
+|                                        |                                                                                                                                                            |
+|                                        | Proporciona un conjunto de funciones que permite "limpiar" los datos (formato tidy)                                                                        |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/readr.png){width="186"}   | **readr:**                                                                                                                                                 |
+|                                        |                                                                                                                                                            |
+|                                        | Proporciona una forma rápida y amigable para leer datos rectangulares (csv, txt, tsv, etc).                                                                |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/purrr.png){width="186"}   | **purrr:**                                                                                                                                                 |
+|                                        |                                                                                                                                                            |
+|                                        | Proporciona un conjunto de herramientas para facilitar el trabajo con funciones y vectores.                                                                |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/tibble.png){width="186"}  | **tibble:**                                                                                                                                                |
+|                                        |                                                                                                                                                            |
+|                                        | Es una re estructuración del *data frame* que hace mas eficiente el análisis de datos rectangulares                                                        |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/stringr.png){width="186"} | **stringr:**                                                                                                                                               |
+|                                        |                                                                                                                                                            |
+|                                        | Proporciona un conjunto de herramientas para facilitar la manipulación de *string*s                                                                        |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/forcats.png){width="186"} | **forcats:**                                                                                                                                               |
+|                                        |                                                                                                                                                            |
+|                                        | Proporciona un conjunto de herramientas para resolver problemas comunes con factores                                                                       |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](img/hexs/ggplot2.png){width="186"} | **ggplot:**                                                                                                                                                |
+|                                        |                                                                                                                                                            |
+|                                        | Sistema basado en la [gramática de los gráficos](https://link.springer.com/book/10.1007/0-387-28695-0) para la creación de visualizaciones                 |
++----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+::: callout-important
+## ¡pero no son todos!
+
+Estos paquetes constituyen el núcleo de Tidverse y son los que se cargan al utilizar la librería. Sin embargo, existen cada vez más paquetes que se acoplan a esta "filosofía", desde [paquetes estadísticos](https://rpkgs.datanovia.com/rstatix/), [análisis espaciales](https://dieghernan.github.io/tidyterra/articles/tidyterra.html) y [análisis bioinformáticos](https://stemangiola.github.io/bioc_2020_tidytranscriptomics/articles/tidytranscriptomics.html).
+:::

@@ -1,69 +1,36 @@
 ---
-title: "Title of Your Workshop Session"
+title: "Curso: Análisis de datos con Tidyverse"
 ---
 
 Date: **Date and time**
 
-Room: **Location**
+Lugar: **Centro de Investigaciones Biológicas del Noroeste, S.C.**
 
-Instructors: Instructor A, B, C
+Instructores: [Miguel A. Tripp Valdez](https://migueltrippcv.netlify.app/)
 
 ------------------------------------------------------------------------
 
-::: callout-note
-## This workshop template
+# ¡Bienvenidos!
 
-This workshop template contains 4 pages:
+::: {.callout-tip icon="false"}
+## Objetivos del curso
 
--   Home: `index.qmd` (this page)
+-   Que el alumno tenga un panorama detallado sobre el uso de la herramientas dentro del conjunto de paquetes de Tidyverse para importar, manipular, extraer y visualizar información relevante a partir de bases de datos.
 
--   About: `about.qmd`
+-   Que el alumno adquiera habilidades prácticas para la manipulación y visualización de datos
 
-Two content pages
-
--   Page without code: `part_1_prep.qmd`
-
--   Page with R code: `part_2_eda.qmd`
-
-It is straightforward to add more content pages: you need to create a new `.qmd` file (or copy/paste the existing ones), then link the new page inside `_quarto.yml`.
+-   Que el alumno sea capaz de acoplar la experiencia adquirida en este curso para análisis estadísticos, datos genómicos, datos espaciales, etc.
 :::
 
-::: callout-tip
-## Homepage of your workshop
+#### Requisitos
 
-This is the **homepage** `index.qmd` for your workshop, so ideally it should contain some key information such as **time and place, instructors** and information of the course/workshop.
+-   Es deseable que el alumno tenga experiencia básica en el uso de R
+-   Tener acceso internet
+-   Tener instalado R y Rstudio en su computadora
 
-It should be easy to navigate.
-:::
-
-# Welcome!
-
--   The goal of the workshop is to ... (*insert your message*)
--   For example, introduce kep concepts in machine learning, such as regularisation.
--   Workshop material can be found in the workshop [github repository](https://github.com).
-
-#### Learning Objectives
-
-At the end of the tutorial, participants will be able to
-
--   understand key concepts for ... (*insert your message*)
--   For example, training machine learning models such as regularisation.
--   another objective
-
-#### Pre-requisites
-
--   Basic familiarity with R
--   Some other knowledge
-
-# Schedule
-
-::: callout-tip
-## Tabular schedule
-
-It can be useful to include a tabular schedule with links.
-:::
+# Horario del curso
 
 |     Time      |                       Topic                       |    Presenter    |
-|:---------------:|:------------------------------------:|:---------------:|
+|:----------------:|:-----------------------------------:|:----------------:|
 | 9:00 - 10:30  |     [Session 1: Preparation](part_1_prep.qmd)     |  Instructor A   |
 | 10:45 - 12:00 | [Session 2: Exploratory Analysis](part_2_eda.qmd) | Instructor B, C |
