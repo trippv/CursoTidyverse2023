@@ -1,0 +1,377 @@
+---
+title: "Importar y limpiar archivos"
+author: "Miguel Tripp Valdez"
+---
+
+# Importar archivos de texto
+
+La importación de archivos de texto es el primer paso y parte fundamental para la exploración de datos. Sin embargo, también puede llegar a ser una tarea complicada.
+
+Los tipos de archivos mas comunes con los que solemos trabajar son:
+
+-   Coma-separated values (csv)
+-   Tab-separated values (tsv)
+-   Excel (xls)
+-   Archivo de texto simple (txt)
+
+## Funciones base para importar archivos
+
+Para importar un archivo a nuestro ambiente podemos utilizar las funciones base `read.table`, `read.csv`, `read.delim`. Por ejemplo, para abrir un archivo txt separado por tabuladores utilizando la función:
+
+```{r readtxt}
+#| include: true
+#| echo: true
+
+df <- read.table("data/palmer_penguins.txt", header = TRUE, sep = "\t")
+head(df)
+```
+
+o usando `read.csv`
+
+```{r readcsv}
+#| include: true
+#| echo: true
+
+df <- read.csv("data/palmer_penguins.csv")
+head(df)
+```
+
+
+
+
+
+
+
+## Importar datos a lá Tidyverse
+
+Dentro del Tidyverse, la importación de datos rectangulares se realiza con el paquete [`readr`](https://readr.tidyverse.org/) el cual tiene funciones que van a sonar muy familiares:
+
+-   `read_csv()`: comma-separated values (CSV)
+-   `read_tsv()`: tab-separated values (TSV)
+-   `read_csv2()`: semicolon-separated values with , as the decimal mark
+-   `read_delim()`: delimited files (CSV and TSV are important special cases)
+-   `read_table()`: whitespace-separated files
+
+::: callout-important
+## ¿Has notado algo?
+
+Como ves, los nombres de las funciones son muy parecidas a las funciones base pero reemplazando el "*.*" por un "*\_*". Esta tendencia se repite en numerosas funciones que siguen la filosofía tidy. Por ejemplo, en lugar de la prueba `shapiro.test`, **rstatix** utiliza la función `shapiro_test`.
+:::
+
+Hagamos la prueba...
+
+```{r libraryTidyverse}
+library(tidyverse)
+library(here)
+```
+
+```{r read_tidy}
+df <- read_table("data/palmer_penguins.txt")
+```
+
+Observa como, aún antes de desplegar la tabla,`read_table` ya nos arroja información sobre la estructura de los datos y nos indica si cada columna es número, carácter u otro.
+
+Ahora observa como se despliega la tabla
+
+```{r read_tidy2}
+df
+```
+
+::: callout-note
+## ¿double? ¿character? 😱
+
+En caso de que no lo recuerdes, estos son los principales tipos de datos en R
+
+|           |                               |               |
+|-----------|-------------------------------|---------------|
+| **Tipo**  | **Descripción**               | **Ejemplo**   |
+| Numeric   | **interger** números enteros  | 0L, 1L        |
+| Numeric   | **double** números reales     | 1.0,          |
+| Logic     | valores booleanos             | TRUE, FALSE   |
+| Character | cadena de texto               | "Hola mundo"  |
+| Factor    | representan datos categóricos | macho, hembra |
+| Dates     | Fechas                        | "2023-08-24"  |
+:::
+
+## Tibbles
+
+Con R base, la función read.table nos genera un **data frame** pero readr nos genera un **tibble** los cuales son una versión actualizada de un data frame.
+
+Hay varias diferencias entre tibbles y data.frames. Puedes leer mas en la [viñeta](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html). Sin embargo, algunas de las diferencias mas notables son:
+
+-   El tipo de entrada permanece inalterado: los **data.frames** son conocidos por tratar las cadenas de texto como factores; esto no sucederá con los tibbles.
+
+-   Los nombres de las variables permanecen inalterados: En R base, al crear data.frames se eliminan los espacios de los nombres, convirtiéndolos en puntos o agregando una "x" antes de los nombres de las columnas numéricas. Al crear tibbles, los nombres de las variables (columnas) no cambian.
+
+-   No hay row.names() para un tibble: Los datos ordenados requieren que las variables se almacenen de manera consistente, eliminando la necesidad de nombres de filas. Los tibbles imprimen las primeras diez filas y columnas que caben en una pantalla: Imprimir un tibble en la pantalla nunca mostrará todo el enorme marco de datos. Por defecto, solo muestra lo que cabe en tu pantalla.
+
+### convertir data.frame a tibble
+
+Si tenemos datos rectangulares como **data.frame** podemos convertirlo facilmente a **tibble** con la función `as_tibble()`
+
+Por ejemplo, podemos:
+
+```{r as_tibble_ex}
+as_tibble(trees)
+```
+
+::: callout-warning
+Recuerda que si solo ejecutamos el comando `as_tibble(trees)` R solo nos arrojará el resutlado en la consola pero **no hizo ningún cambio al objeto trees**. Para esto necesitamos renombrar o generar un nuevo objeto. Por ejemplo
+
+```{r}
+trees_tbl <- as_tibble(trees)
+
+
+```
+
+ahora si, tenemos un nuevo objetvo como tibble
+
+```{r}
+class(trees)
+class(trees_tbl)
+```
+:::
+
+Al igual que como lo hariamos con un **data.frame** o una **matriz**, podemos acceder a las primeras o últimas filas de nuestro tibble con las funciones `head()` y `tail()`
+
+```{r}
+head(df)
+```
+
+```{r}
+tail(df)
+```
+
+### tibble()
+
+También es posible hacer tibble sobre la marcha utilizando la función `tibble()`. Por ejemplo:
+
+```{r}
+mi_tibl <- tibble(
+  a = 1:5,
+  b = 6:10,
+  c = 1,
+  z = (a + b)^2 + c
+)
+```
+
+Nota que al momento de generar este tibble, puedes hacer referencias a columnas del mismo tibble (columa z)
+
+Otro comportamiento de los tibbles es que es posible tener nombres de columnas con espacios u otros caracteres y estos estarán rodeados por ``` `` ```
+
+```{r}
+mi_tibl <- tibble(
+  `cinco números` = 1:5,
+  `12` = "numeric",
+  `:)` = "smile",
+)
+```
+
+## Importar desde Excel
+
+Las hojas de calculo de excel (formatos `.xls` o `.xlsx`) siguen siendo muy comunes y muy utilizados dentro de la comunidad académica.
+
+**Tidyverse** no tiende dentro de su núcleo una función para importar este tipo de archivos, pero esto se soluciona fácilmente con el paquete `readxl`.
+
+![](img/hexs/readxl.png){fig-align="center" width="146"}
+
+```{r}
+#| eval: false
+install.packages("readxl")
+
+```
+
+```{r}
+library(readxl)
+```
+
+Con esto podemos usar la función `read_excel()` que no necesita ningún otro argumento mas que la ruta (*path*) donde se encuentra el archivo `.xlsx`
+
+```{r readxl}
+excel_df <- read_excel("data/actividad_enzimas.xlsx")
+
+excel_df
+```
+
+En caso de que los datos de interes estén en una hoja en particular usamos el argumento `sheet=`
+
+```{r}
+excel_df<- read_excel("data/actividad_enzimas_completo.xlsx", sheet = "hoja2",)
+```
+
+Un caso mas complicado es cuando nuestro datos inician unas filas mas abajo y en un determinado intervalo de columnas. Otro caso común es que los nombres de las columnas tengan símbolos especiales o que estén repetidos
+
+```{r excel_complex}
+
+excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
+                       sheet = "hoja3", skip = 3, na = "-")
+excel_df
+
+```
+
+En caso de que tengamos otra información que nos este generando conflico podemos especificar el rango de datos de interés
+
+```{r}
+excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
+                       sheet = "hoja3", range = "D4:M409", na = "-")
+excel_df
+```
+
+```{r}
+excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
+                       sheet = "hoja3", range = "D4:M409", na = "-",
+                       .name_repair =  "universal")
+excel_df
+```
+
+
+
+## Limpiar etiquetas con **janitor**
+
+![](img/Horst_functions/janitor.png){fig-align="center" width="629"}
+
+El paquete **Janitor** es una herramienta pequeña pero increíblemente útil y conveniente cuando se trata de limpiar y mantener conjuntos de datos en RStudio. Además, es un paquete orientado a "tidyverse", por lo que se integra perfectamente con los pipes.
+
+Regresemos a los nombres de las columnas de nuestro archivo excel antes de utilizar janitor
+
+```{r}
+#| warning: false
+#| message: false
+
+excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
+                       sheet = "hoja3", range = "D4:M409", na = "-",
+                       .name_repair =  "universal")
+```
+
+```{r}
+#| echo: false
+
+colnames(excel_df)
+```
+
+-   No hay consistencia entre el uso de mayúsculas y minúsculas en los nombres. Recuerda que R es sensible a mayúsculas, por lo que `Temperatura` no es lo mismo que `temperatura`.
+-   Tenemos símbolos como acentos que nos pueden generar conflictos, sobre todo si tenemos símbolos en otros idiomas.
+-   Los espacios en blanco así como otros símbolos como `/` son reemplazados por un punto. Esto genera etiquetas complicadas.
+
+Lo ideal es tener consistencia en el formato de las etiquetas. Algunos formatos conocidos son los siguientes:
+
+![](img/Horst_functions/cases.jpeg){fig-align="center"}
+
+Ahora utilicemos **janitor** para limpiar las etiquetas
+
+```{r}
+library(janitor)
+```
+
+```{r}
+excel_clean <- clean_names(excel_df)
+excel_clean
+```
+
+las opciones son:
+
++ “snake” 
++ “small_camel”
++ “big_camel” 
++ “screaming_snake”
++ “parsed”
++ “lower_upper” 
++ “upper_lower”
+
+
+por ejemplo:
+```{r}
+excel_clean <- clean_names(excel_df, case = "screaming_snake")
+excel_clean
+```
+
+Con **janitor** podemos integrar la función `make_clean_name` al momento de importar datos ya sea con **readxl** o con **readr**. Por ejemplo:
+
+```{r}
+excel_clean <- read_excel("data/actividad_enzimas_completo.xlsx", 
+                       sheet = "hoja3", range = "D4:M409", na = "-",
+                       .name_repair =  make_clean_names)
+excel_clean
+```
+
+
+:::callout-warning
+Observa que tanto **readxl** como **readr** interpretan las columnas de número de experimento, tratamiento y temperatura como variables numéricas debido a que analizan la cantidad de datos para inferir el tipo de variable. No obstante, estas variables son en realidad factores, ya que representan categorías. Más adelante veremos cómo realizar este ajuste de manera manual. 
+
+:::
+
+
+## Echando un vistado a los datos
+
+Un aspecto importante para el análisis de datos es tener una perspectiva rápida del tibble o datafram para entender las variables que tenemos, asi como los patrones generales de los datos. 
+
+Hay varias funciones que podemos utilizar. Ya mencionamos algunas herramienta como `head()` o `tail()` para echar un vistazo a las primeras o últimas filas de la tabla, respectivamente.
+
+Otra herramienta es la función `glimpse()` de **dplyr** que nos muestra algunos datos de cada columna de nuestro tibble para tener una idea de la estructura de la tabla. 
+
+
+```{r}
+glimpse(excel_clean)
+```
+
+
+La función `summary()` es parte de las funciones base de R y es particularmente útil cuando tenemos datos continuos, ya que nos muestra, para cada columna, los valores mínimos, máximos, promedio, mediana y el 1er y 3er quartil. 
+
+
+```{r}
+summary(excel_clean)
+```
+
+Otra herramienta un poco mas sofisticada pero bastante útil es la función `gt_plt_summary()` del paquete **gtExtras**, la cual nos permite gráficar cada una de las variables, nos muestra los valores promedio, mediana y desvicación, y ádemas nos muestra el % de valores faltantes (missing).
+
+Para utilizar esta herramienta, primero necesitamos instalar el paquete **gtExtras** y posteriormente cargar la librería. 
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages("gtExtras")
+```
+
+
+
+```{r}
+library(gtExtras)
+
+
+gt_plt_summary(excel_clean)
+```
+
+
+## Exportar datos
+
+Una vez terminado nuestro análisis debemos guardarlo. Siguiendo la recomendación que vimos anteriormente, lo ideal es guardar los datos ya procesados (ya sea que se haya realizado algún tipo de filtrado o transformación) en una carpeta diferente a la carpeta donde están los datos crudos, los cuales se recomienda que se preserven sin alteraciones. 
+
+Podemos crear una nueva carpeta con *Archivos* > *Nuevo directorio* o desde la línea de comando usando la función `dir.create()`
+
+```{r}
+dir.create("resultados/tablas", recursive = TRUE)
+```
+
+
+Para guardar nuestros datos, las funciones que utilizaremos mas frecuentemente son `write.table` y `write_csv()`
+
+
+Por ejemplo, vamos a tomar las primeras filas de nuestro objeto `excel_clean` con la función `head()`
+
+```{r}
+excel_subset <- head(excel_clean)
+excel_subset
+```
+
+Ahora lo guardamos en la carpeta que acabamos de crear usando la función `write_csv()`
+
+```{r}
+write_csv(excel_subset, file = here("resultados/tablas/", "excel_subset.csv"))
+```
+
+o con `write.table()` la cual nos permite usar una mayor diversidad de formatos
+
+```{r}
+write.table(excel_subset, file = here("resultados/tablas/", "excel_subset.txt"), sep = "\t")
+```
+

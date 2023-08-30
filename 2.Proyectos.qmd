@@ -7,7 +7,7 @@ author: "Miguel A. Tripp Valdez"
 
 Independientemente de si estás dando tus primeros pasos en R o si ya eres un experto, es frecuente que la primera línea de tu código sea algo como esto:
 
-``` R
+``` r
 setwd("C:\Users\miguel\ruta\que\solo\yo\tengo")
 ```
 
@@ -27,20 +27,42 @@ Un ejemplo de como podemos estructurar un proyecto es el siguiente:
 
 ![](https://i1.wp.com/raw.githubusercontent.com/martinctc/blog/master/images/RPROJECT_2000dpi.png?zoom=1.25&w=578&ssl=1){fig-align="center"}
 
+-   **Datos:** Esta es la carpeta en la que se guardan los archivos que necesito leer en R para realizar mi análisis o visualización. Estos pueden ser CSV, TXT, TSV, etc. La idea principal de tener esta carpeta es que estos archivos crudos en ningún momento debería sobrescribir o editar para garantizar la reproducibilidad.
+
+-   **Script:** Aquí es donde puedes guardar los scripts de R y/o archivos RMarkdown o Quarto.
+
+-   **Salida:** En esta carpeta puedes guardar todas tus salidas, incluyendo gráficos, HTML y tablas, etc. Tener esta carpeta de Salida ayuda a otros a identificar qué archivos son resultados del código, en contraste con los archivos fuente que se utilizaron para producir el análisis.
+
 # Como generar un proyecto nuevo
 
 Para crear un proyecto nuevo sigue estos passos:
 
 1.  Abre Rstudio y selecciona `Archivo` -\> `Nuevo Proyecto`
+
+![](img/new_proj1.png){fig-align="center" width="253"}
+
 2.  Selecciona `Nueva Carpeta` si estas empezando el proyecto desde cero o `carpeta existente` si deseas crear un proyecto dentro de alguna carpeta que ya tengas
+
+![](img/new_proj3.png){fig-align="center" width="394"}
+
 3.  Da un nombre a tu proyecto y ¡listo! ya puedes empezar a trabajar.
 
-El proyecto R que has creado estará en una carpeta que contiene un archivo *`.Rproj`*. Este archivo es un acceso directo y probablemente la forma más directa de abrir tu proyecto. También puedes abrir un proyecto seleccionando \"Open Project\" en el menú File. Alternativamente, en el extremo superior derecho de RStudio verás un icono de R projects y un menú desplegable de proyectos disponibles.
+El proyecto R que has creado estará en una carpeta que contiene un archivo *`.Rproj`*. Este archivo es un acceso directo y probablemente la forma más directa de abrir tu proyecto. También puedes abrir un proyecto seleccionando "Open Project" en el menú File. Alternativamente, en el extremo superior derecho de RStudio verás un icono de R projects y un menú desplegable de proyectos disponibles.
+
+![](img/explorer.png){fig-align="center" width="186"}
 
 Para salir de un proyecto R, abre un nuevo proyecto o cierra el proyecto actual (Archivo - Cerrar proyecto).
 
-To create a project, open RStudio and select `File` -\> `New Project...` from the menu. You can create either an entirely new project, a project from an existing directory or a version controlled project (see the [GitHub Chapter](https://intro2r.com/github_r.html#github_r) for further details about this). In this Chapter we will create a project in a new directory.
+::: callout-warning
+## Ejercicio
+
+Ahora prueba creando un proyecto dentro de una carpeta local en tu computadora y genera una estructura de carpetas como la indicada anteriormente
+:::
 
 ::: callout-tip
 ## Pro tip: uso de here() para rutas relativas
+
+El paquete [**`here()`**](https://here.r-lib.org/) se utiliza para construir rutas de archivos y directorios de manera relativa al directorio del proyecto actual. En lugar de utilizar rutas absolutas (que especifican la ruta completa desde la raíz del sistema de archivos) o rutas relativas estándar (que se basan en la ubicación del script en ejecución), **`here()`** crea rutas relativas desde el directorio del proyecto.
 :::
+
+![](img/Horst_functions/here.png){fig-align="center" width="560"}

@@ -13,6 +13,12 @@ website:
         text: About
       - href: apoyo.qmd
         text: Recursos de apoyo
+      - text: "More"
+        menu:
+          - apoyo.qmd
+          - 3_Data_import.qmd 
+
+        
     right:
       - icon: github
         href: https://github.com
@@ -26,7 +32,7 @@ website:
 
 format:
   html:
-    theme: yeti
+    theme: sketchi
     css: styles.css
     toc: true
 

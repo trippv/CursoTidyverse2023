@@ -31,6 +31,6 @@ Instructores: [Miguel A. Tripp Valdez](https://migueltrippcv.netlify.app/)
 # Horario del curso
 
 |     Time      |                       Topic                       |    Presenter    |
-|:----------------:|:-----------------------------------:|:----------------:|
+|:-------------:|:-------------------------------------------------:|:---------------:|
 | 9:00 - 10:30  |     [Session 1: Preparation](part_1_prep.qmd)     |  Instructor A   |
 | 10:45 - 12:00 | [Session 2: Exploratory Analysis](part_2_eda.qmd) | Instructor B, C |
