@@ -1,5 +1,5 @@
 ---
-title: "Importar y limpiar archivos"
+title: "Leccion 2: Importar y limpiar archivos"
 author: "Miguel Tripp Valdez"
 ---
 
@@ -36,12 +36,6 @@ df <- read.csv("data/palmer_penguins.csv")
 head(df)
 ```
 
-
-
-
-
-
-
 ## Importar datos a lá Tidyverse
 
 Dentro del Tidyverse, la importación de datos rectangulares se realiza con el paquete [`readr`](https://readr.tidyverse.org/) el cual tiene funciones que van a sonar muy familiares:
@@ -53,7 +47,7 @@ Dentro del Tidyverse, la importación de datos rectangulares se realiza con el p
 -   `read_table()`: whitespace-separated files
 
 ::: callout-important
-## ¿Has notado algo?
+## ¿Has notado algo? 🧐
 
 Como ves, los nombres de las funciones son muy parecidas a las funciones base pero reemplazando el "*.*" por un "*\_*". Esta tendencia se repite en numerosas funciones que siguen la filosofía tidy. Por ejemplo, en lugar de la prueba `shapiro.test`, **rstatix** utiliza la función `shapiro_test`.
 :::
@@ -61,6 +55,9 @@ Como ves, los nombres de las funciones son muy parecidas a las funciones base pe
 Hagamos la prueba...
 
 ```{r libraryTidyverse}
+#| message: false
+#| warning: false
+
 library(tidyverse)
 library(here)
 ```
@@ -69,7 +66,7 @@ library(here)
 df <- read_table("data/palmer_penguins.txt")
 ```
 
-Observa como, aún antes de desplegar la tabla,`read_table` ya nos arroja información sobre la estructura de los datos y nos indica si cada columna es número, carácter u otro.
+Observa como, aún antes de desplegar la tabla,`read_table` ya nos arroja información sobre la estructura de los datos y nos indica si cada columna es número, carácter o de otro tipo.
 
 Ahora observa como se despliega la tabla
 
@@ -153,6 +150,8 @@ mi_tibl <- tibble(
   c = 1,
   z = (a + b)^2 + c
 )
+
+mi_tibl
 ```
 
 Nota que al momento de generar este tibble, puedes hacer referencias a columnas del mismo tibble (columa z)
@@ -165,13 +164,15 @@ mi_tibl <- tibble(
   `12` = "numeric",
   `:)` = "smile",
 )
+
+mi_tibl
 ```
 
 ## Importar desde Excel
 
 Las hojas de calculo de excel (formatos `.xls` o `.xlsx`) siguen siendo muy comunes y muy utilizados dentro de la comunidad académica.
 
-**Tidyverse** no tiende dentro de su núcleo una función para importar este tipo de archivos, pero esto se soluciona fácilmente con el paquete `readxl`.
+**Tidyverse** no tiene dentro de su núcleo una función para importar este tipo de archivos, pero esto se soluciona fácilmente con el paquete `readxl`.
 
 ![](img/hexs/readxl.png){fig-align="center" width="146"}
 
@@ -196,35 +197,32 @@ excel_df
 En caso de que los datos de interes estén en una hoja en particular usamos el argumento `sheet=`
 
 ```{r}
-excel_df<- read_excel("data/actividad_enzimas_completo.xlsx", sheet = "hoja2",)
+excel_df<- read_excel("data/actividad_enzimas.xlsx", sheet = "hoja1")
 ```
 
 Un caso mas complicado es cuando nuestro datos inician unas filas mas abajo y en un determinado intervalo de columnas. Otro caso común es que los nombres de las columnas tengan símbolos especiales o que estén repetidos
 
 ```{r excel_complex}
 
-excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
+excel_df <- read_excel("data/actividad_enzimas.xlsx", 
                        sheet = "hoja3", skip = 3, na = "-")
 excel_df
 
 ```
 
-En caso de que tengamos otra información que nos este generando conflico podemos especificar el rango de datos de interés
+En caso de que tengamos otra información que nos este generando conflicto podemos especificar el rango de datos de interés
 
 ```{r}
-excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
+excel_df <- read_excel("data/actividad_enzimas.xlsx", 
                        sheet = "hoja3", range = "D4:M409", na = "-")
 excel_df
 ```
 
-```{r}
-excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
-                       sheet = "hoja3", range = "D4:M409", na = "-",
-                       .name_repair =  "universal")
-excel_df
-```
+::: callout-note
+# Heterogeneidad en los nombres de las columna
 
-
+Observa como los tibbles permite que haya símbolos, espacios, acentos y alternancia de mayúsculas y minúsculas en los nombres de las columnas. Sin embargo, al momento de trabajar, esta heterogeneidad puede darnos problemas. Esto se puede solucionar con el paquete *janitor*.
+:::
 
 ## Limpiar etiquetas con **janitor**
 
@@ -238,9 +236,8 @@ Regresemos a los nombres de las columnas de nuestro archivo excel antes de utili
 #| warning: false
 #| message: false
 
-excel_df <- read_excel("data/actividad_enzimas_completo.xlsx", 
-                       sheet = "hoja3", range = "D4:M409", na = "-",
-                       .name_repair =  "universal")
+excel_df <- read_excel("data/actividad_enzimas.xlsx", 
+                       sheet = "hoja3", range = "D4:M409", na = "-")
 ```
 
 ```{r}
@@ -270,16 +267,16 @@ excel_clean
 
 las opciones son:
 
-+ “snake” 
-+ “small_camel”
-+ “big_camel” 
-+ “screaming_snake”
-+ “parsed”
-+ “lower_upper” 
-+ “upper_lower”
-
+-   “snake”
+-   “small_camel”
+-   “big_camel”
+-   “screaming_snake”
+-   “parsed”
+-   “lower_upper”
+-   “upper_lower”
 
 por ejemplo:
+
 ```{r}
 excel_clean <- clean_names(excel_df, case = "screaming_snake")
 excel_clean
@@ -288,35 +285,29 @@ excel_clean
 Con **janitor** podemos integrar la función `make_clean_name` al momento de importar datos ya sea con **readxl** o con **readr**. Por ejemplo:
 
 ```{r}
-excel_clean <- read_excel("data/actividad_enzimas_completo.xlsx", 
+excel_clean <- read_excel("data/actividad_enzimas.xlsx", 
                        sheet = "hoja3", range = "D4:M409", na = "-",
                        .name_repair =  make_clean_names)
 excel_clean
 ```
 
-
-:::callout-warning
-Observa que tanto **readxl** como **readr** interpretan las columnas de número de experimento, tratamiento y temperatura como variables numéricas debido a que analizan la cantidad de datos para inferir el tipo de variable. No obstante, estas variables son en realidad factores, ya que representan categorías. Más adelante veremos cómo realizar este ajuste de manera manual. 
-
+::: callout-warning
+Observa que tanto **readxl** como **readr** interpretan las columnas de número de experimento, tratamiento y temperatura como variables numéricas debido a que analizan la cantidad de datos para inferir el tipo de variable. No obstante, estas variables son en realidad factores, ya que representan categorías. Más adelante veremos cómo realizar este ajuste de manera manual.
 :::
-
 
 ## Echando un vistado a los datos
 
-Un aspecto importante para el análisis de datos es tener una perspectiva rápida del tibble o datafram para entender las variables que tenemos, asi como los patrones generales de los datos. 
+Un aspecto importante para el análisis de datos es tener una perspectiva rápida del tibble o datafram para entender las variables que tenemos, asi como los patrones generales de los datos.
 
 Hay varias funciones que podemos utilizar. Ya mencionamos algunas herramienta como `head()` o `tail()` para echar un vistazo a las primeras o últimas filas de la tabla, respectivamente.
 
-Otra herramienta es la función `glimpse()` de **dplyr** que nos muestra algunos datos de cada columna de nuestro tibble para tener una idea de la estructura de la tabla. 
-
+Otra herramienta es la función `glimpse()` de **dplyr** que nos muestra algunos datos de cada columna de nuestro tibble para tener una idea de la estructura de la tabla.
 
 ```{r}
 glimpse(excel_clean)
 ```
 
-
-La función `summary()` es parte de las funciones base de R y es particularmente útil cuando tenemos datos continuos, ya que nos muestra, para cada columna, los valores mínimos, máximos, promedio, mediana y el 1er y 3er quartil. 
-
+La función `summary()` es parte de las funciones base de R y es particularmente útil cuando tenemos datos continuos, ya que nos muestra, para cada columna, los valores mínimos, máximos, promedio, mediana y el 1er y 3er quartil.
 
 ```{r}
 summary(excel_clean)
@@ -324,15 +315,13 @@ summary(excel_clean)
 
 Otra herramienta un poco mas sofisticada pero bastante útil es la función `gt_plt_summary()` del paquete **gtExtras**, la cual nos permite gráficar cada una de las variables, nos muestra los valores promedio, mediana y desvicación, y ádemas nos muestra el % de valores faltantes (missing).
 
-Para utilizar esta herramienta, primero necesitamos instalar el paquete **gtExtras** y posteriormente cargar la librería. 
+Para utilizar esta herramienta, primero necesitamos instalar el paquete **gtExtras** y posteriormente cargar la librería.
 
 ```{r}
 #| echo: true
 #| eval: false
 install.packages("gtExtras")
 ```
-
-
 
 ```{r}
 library(gtExtras)
@@ -341,20 +330,17 @@ library(gtExtras)
 gt_plt_summary(excel_clean)
 ```
 
-
 ## Exportar datos
 
-Una vez terminado nuestro análisis debemos guardarlo. Siguiendo la recomendación que vimos anteriormente, lo ideal es guardar los datos ya procesados (ya sea que se haya realizado algún tipo de filtrado o transformación) en una carpeta diferente a la carpeta donde están los datos crudos, los cuales se recomienda que se preserven sin alteraciones. 
+Una vez terminado nuestro análisis debemos guardarlo. Siguiendo la recomendación que vimos anteriormente, lo ideal es guardar los datos ya procesados (ya sea que se haya realizado algún tipo de filtrado o transformación) en una carpeta diferente a la carpeta donde están los datos crudos, los cuales se recomienda que se preserven sin alteraciones.
 
-Podemos crear una nueva carpeta con *Archivos* > *Nuevo directorio* o desde la línea de comando usando la función `dir.create()`
+Podemos crear una nueva carpeta con *Archivos* \> *Nuevo directorio* o desde la línea de comando usando la función `dir.create()`
 
 ```{r}
 dir.create("resultados/tablas", recursive = TRUE)
 ```
 
-
 Para guardar nuestros datos, las funciones que utilizaremos mas frecuentemente son `write.table` y `write_csv()`
-
 
 Por ejemplo, vamos a tomar las primeras filas de nuestro objeto `excel_clean` con la función `head()`
 
@@ -366,12 +352,11 @@ excel_subset
 Ahora lo guardamos en la carpeta que acabamos de crear usando la función `write_csv()`
 
 ```{r}
-write_csv(excel_subset, file = here("resultados/tablas/", "excel_subset.csv"))
+write_csv(excel_subset, file = "resultados/tablas/excel_subset.csv")
 ```
 
 o con `write.table()` la cual nos permite usar una mayor diversidad de formatos
 
 ```{r}
-write.table(excel_subset, file = here("resultados/tablas/", "excel_subset.txt"), sep = "\t")
+write.table(excel_subset, file = "resultados/tablas/excel_subset.txt", sep = "\t")
 ```
-

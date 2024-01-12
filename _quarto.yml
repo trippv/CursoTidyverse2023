@@ -8,12 +8,12 @@ website:
     logo: img/logo.png
     left:
       - href: index.qmd
-        text: Home
+        text: Inicio
       - href: about.qmd
         text: About
       - href: apoyo.qmd
         text: Recursos de apoyo
-      - text: "More"
+      - text: "Secciones"
         menu:
           - apoyo.qmd
           - 3_Data_import.qmd 
@@ -26,15 +26,19 @@ website:
     style: "docked"
     search: true
     contents:
-      - part_1_prep.qmd
-      - part_2_eda.qmd
+      - 2.Proyectos.qmd
+      - 3.Data_import.qmd
   page-navigation: true
 
 format:
   html:
-    theme: sketchi
+    theme: flatly
     css: styles.css
     toc: true
+    toc-title: Contenido
+    number-sections: true
+    number-depth: 3
+    page-layout: article
 
 editor: visual
 

@@ -3,5 +3,11 @@
 .header-spacing {
     margin-top: 7em; /* Adjust the value as needed */
 }
+/*modificacion de color de fondo de los resultados 14/11/2023 */
+.cell-output {
+  background-color: #d3e3e2;
+  border-radius: 4px;
+}
+
 </style>
 

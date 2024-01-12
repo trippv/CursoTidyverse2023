@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,7 +90,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -105,6 +106,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./img/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Tidyverse</span>
     </a>
@@ -127,6 +131,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./apoyo.html" rel="" target="">
  <span class="menu-text">Recursos de apoyo</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-more" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">More</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-more">    
+        <li>
+    <a class="dropdown-item" href="./apoyo.html" rel="" target="">
+ <span class="dropdown-text">Recursos de apoyo</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./3_Data_import.html" rel="" target="">
+ <span class="dropdown-text">Leccion 1: Importar y limpiar archivos</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -148,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part_2_eda.html">Part I</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -184,12 +203,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#a-cancer-modeling-example" id="toc-a-cancer-modeling-example" class="nav-link active" data-scroll-target="#a-cancer-modeling-example">A Cancer Modeling Example</a>
+  <li><a href="#a-cancer-modeling-example" id="toc-a-cancer-modeling-example" class="nav-link active" data-scroll-target="#a-cancer-modeling-example"><span class="header-section-number">1</span> A Cancer Modeling Example</a>
   <ul class="collapse">
-  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data">Load the data</a></li>
+  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data"><span class="header-section-number">1.1</span> Load the data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -229,13 +248,13 @@ Page with R code
 <p>You can experiment with <code>code-fold</code> and <code>code-tools</code> in the yaml header above to change how the code cells look like.</p>
 </div>
 </div>
-<section id="a-cancer-modeling-example" class="level2">
-<h2 class="anchored" data-anchor-id="a-cancer-modeling-example">A Cancer Modeling Example</h2>
+<section id="a-cancer-modeling-example" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="a-cancer-modeling-example"><span class="header-section-number">1</span> A Cancer Modeling Example</h2>
 <p>Exercise on analysis of miRNA, mRNA and protein data from the paper Aure et al, Integrated analysis reveals microRNA networks coordinately expressed with key proteins in breast cancer, Genome Medicine, 2015.</p>
 <p>Please run the code provided to replicate some of the analyses. Make sure you can explain what all the analysis steps do and that you understand all the results.</p>
 <p>In addition, there are some extra tasks (<code>Task 1</code>), where no R code is provided. Please do these tasks when you have time available at the end of the lab.</p>
-<section id="load-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="load-the-data">Load the data</h3>
+<section id="load-the-data" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="load-the-data"><span class="header-section-number">1.1</span> Load the data</h3>
 <p>Read the data, and convert to matrix format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mrna <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/data_example.txt"</span>, <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">dec=</span><span class="st">"."</span>)</span>
