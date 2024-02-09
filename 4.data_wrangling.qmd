@@ -1,5 +1,5 @@
 ---
-title: "Lección 2. Manipulación de datos con dplyr"
+title: "Lección 3. Manipulación de datos con dplyr. pt I"
 author: "Miguel A. Tripp Valdez"
 editor_options: 
   chunk_output_type: console
@@ -34,7 +34,9 @@ El paquete Dplyr proporciona un conjunto coherente de funciones que permiten rea
 ::: callout-note
 # Sobre la base de datos
 
+::: column-margin
 ![](img/pokemon_log.png){width="221"}
+:::
 
 Para esta sección utilizaremos una versión modificada de la base POKEMON de [Kaggle](https://www.kaggle.com/datasets/rounakbanik/pokemon) y contiene la siguiente información:
 
@@ -153,8 +155,9 @@ Para establecer varios condiciones, simplemente las podemos separar por una `,`.
 filter(pokemon, attack > 100, type1 == "fire")
 ```
 
-:::{.callout-tip}
-Si tienes muchas condiciones, puedes escribir cada condición en una línea diferente para evitar líneas de código muy largas
+::: column-margin
+::: callout-tip
+Si tienes muchas condiciones, puedes escribir cada condición en una línea diferente.
 
 ```{r filter_manyconditions}
 #| eval: false
@@ -163,10 +166,8 @@ filter(pokemon, attack > 100,
        generation == 1, 
        speed > 50)
 ```
-
 :::
-
-
+:::
 
 Si queremos filtrar distintas condiciones de una misma variable (columna) podemos usar el operador `%in%`.
 
@@ -207,7 +208,9 @@ filter(pokemon, !between(attack, 100, 150))
 ::: {.callout-caution icon="false"}
 # **Ejercicio: ¿¡QUIEN ES ESE POKEMON!?** 📣
 
+::: column-margin
 ![](img/jigglypuff.png){fig-align="center" width="500"}
+:::
 
 Nuestro pokémon tiene un valor de HP entre 100 y 200; valor de velocidad menor a 50; es del tipo1 Normal; tiene un valor de defensa menor a 40 y pertenece a la primera generación
 
@@ -225,7 +228,7 @@ filter(pokemon, between(hp, 100, 200),
 ```
 :::
 
-### Filtrar variables con un patrón
+### Filtrar variables con un patrón; `str_detec()`
 
 Tambien es posible filtrar una variable a partir de un caracter en especifico usando la función `str_detect()`.
 
@@ -233,6 +236,16 @@ Tambien es posible filtrar una variable a partir de un caracter en especifico us
 filter(pokemon, str_detect(name, "eon"))
 
 ```
+
+Si buscamos multiples patrones dentro de nuestra variable con caracteres, podemos separarlas dentro de las comillas usando el símbolo "|". Por ejemplo, si queremos buscar los Pokemon cuyo nombre termine con "_saur_" o que empieza con "_Char_":
+
+
+```{r}
+filter(pokemon, str_detect(name, "saur|Char"))
+```
+
+
+
 
 ::: {.callout-caution icon="false"}
 # Ejercicio: Una galaxía muy lejana...
@@ -276,9 +289,24 @@ pokemon_mutate <- mutate(pokemon, type1 = factor(type1))
 pokemon_mutate
 ```
 
+
+# Renombrar variables con `rename()`
+
+La función `rename()` cambia el nombre de variables individuales usando una sintaxis `nuevo_nombre = viejo_nombre`.
+
+
+```{r}
+pokemon %>% 
+  rename(nombre = name,
+         ataque = attack)
+```
+
+
 # Pipes *%\>%* y *\|\>*
 
+::: column-margin
 ![](img/pipe.png){fig-align="center"}
+:::
 
 El operador %\>% nos permite aplicar una serie de funciones secuenciales a un objeto sin tener que ir creando variables para uso temporal o sin tener que anidar funciones.
 
@@ -315,25 +343,31 @@ pokemon_pipe <- pokemon %>%
 
 ![](img/catsup_pipes.png){fig-align="center" width="361"}
 
-Desde su versión 4.1.0, R incluye un pipe nativo `|>`. El comportamiento de ambos pipes es en gran medida el mismo, permitiendo expresar una secuencia de operaciones a un objeto, existen algunas diferencias que se discuten en [este articulo](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/). 
+Desde su versión 4.1.0, R incluye un pipe nativo `|>`. El comportamiento de ambos pipes es en gran medida el mismo, permitiendo expresar una secuencia de operaciones a un objeto, existen algunas diferencias que se discuten en [este articulo](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/).
 
 Para fines de este curso, nos enfocaremos a usar el pipe de **magritrr**.
 :::
 
-:::{.callout-tip}
-Para escribir rápidamente el operador ` %>% ` teclea Ctrl+shift+M
+::: column-margin
+::: callout-tip
+Para escribir rápidamente el operador `%>%` teclea Ctrl+shift+M
 :::
-
-
+:::
 
 ::: {.callout-caution icon="false"}
 # Ejercicio: Pingüinos
 
-Abre la tabla `palmer_penguis.csv` que se encuentra en el directorio de *databases* y utilizando pipies genera los siguientes objetos:
+
+::: {.column-margin}
+![](img/Palmer.png){fig-align="center" width="316"}
+:::
+
+
+Abre la tabla `palmer_penguis.csv` que se encuentra en el directorio de *databases* y utilizando pipes genera los siguientes objetos:
 
 1.  Una tabla con los pingüinos de la especie Adelie y que incluya una columna con la proporción (ratio) entre la longitud y profundidad del pico.
-2. Una tabla con solamente los individuos hembras de culquier especie y que solamente contenta las columnas de _especie_, _isla_ y peso corporal **en Kg**.
-3. Una tabla que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a 4 Kg. Convierte la columna isla a factor. 
+2.  Una tabla con solamente los individuos hembras de culquier especie y que solamente contenta las columnas de *especie*, *isla* y peso corporal **en Kg**.
+3.  Una tabla que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a 4 Kg. Convierte la columna isla a factor.
 
 ```{r palmer_exc}
 #| include: true
@@ -365,14 +399,13 @@ penguins_e3 <- penguins %>%
 
 
 ```
-
 :::
 
 # Resumen de los datos; `summarise()` y `group_by()`.
 
 Un elemento importante en el análisis exploratorio de datos es poder agrupar y resumir para obtener información relevante del set de datos. El promedio y la desviación estándar son ejemplos de esto. Además, agrupar los datos de acuerdo a alguna caracteristica permite obtener resultados mas informativos.
 
-Para hacer un resumen (_summary_) de una determinada variable en los datos podemos utilizar la función `summarise()` que a su vez nos permite aplicar una función (mean, sd, min, max) a una variable.
+Para hacer un resumen (*summary*) de una determinada variable en los datos podemos utilizar la función `summarise()` que a su vez nos permite aplicar una función (mean, sd, min, max) a una variable.
 
 Por ejemplo, para obtener el peso promedio en g de los pingüinos, podemos aplicar la función de la siguiente forma:
 
@@ -383,7 +416,6 @@ penguins %>%
   summarise(promedio = mean(body_mass_g, na.rm = TRUE))
 ```
 
-
 o aplicar el promedio y desviación estandar
 
 ```{r}
@@ -391,7 +423,6 @@ penguins %>%
   summarise(promedio = mean(body_mass_g, na.rm = TRUE),
             desviacion = sd(body_mass_g, na.rm = TRUE))
 ```
-
 
 ## Operaciones agrupadas
 
@@ -405,7 +436,6 @@ penguins %>%
   summarise(promedio_peso = mean(body_mass_g, na.rm = TRUE))
 ```
 
-
 Podemos agrupar utilizando mas variables separadas por una coma:
 
 ```{r}
@@ -416,16 +446,15 @@ penguins %>%
             N = n())
 ```
 
-
 Existen otras funciones útiles por las que nos podría interesar agrupar
 
-   +    `count()`
-   +    `mean()`
-  +   `median()`
-  +   `min()`
-  +   `max()`
-  +   `quantile(x, 0.25)`
-  +   `IQR()`
+-   `count()`
+-   `mean()`
+-   `median()`
+-   `min()`
+-   `max()`
+-   `quantile(x, 0.25)`
+-   `IQR()`
 
 El uso de la función `group_by()` tambien nos permite transformar una variable e incluirla en una columna en conjunto con la función `mutate()`
 
@@ -440,19 +469,17 @@ penguins %>%
 
 La función `summarise_all()` requiere una función como argumento, la cual aplica a todas las columnas de la tabla. En este ejemplo se agrego el argumento na.rm = TRUE el cual ignora los NAs
 
-
 ```{r}
 penguins %>% 
   group_by(species, island, sex) %>% 
   summarise_all(mean, na.rm = TRUE) 
 ```
 
-
 # `count()`
 
 La función `count()` nos permite saber cuantas observaciones hay en una variable especifica. Al agregar el argumento sort = TRUEdevuelve una tabla descendiente con el número de observaciones.
 
-Regresemos a la base de datos de star wars y evaluemos cuantos personajes hay de cada planeta.  
+Regresemos a la base de datos de star wars y evaluemos cuantos personajes hay de cada planeta.
 
 ```{r}
 starwars <- read_csv("data/starwars.csv")
@@ -463,33 +490,93 @@ starwars %>%
   count(homeworld, sort = TRUE)
 ```
 
-
 Tambien es posible hacer contenos anidados incluyendo mas variables separadas por comas:
-
 
 ```{r}
 starwars %>% 
   count(species, homeworld, sort = TRUE)
 ```
 
-
-:::{.callout-tip}
-Por default, la función `count()` nombra _n_ al número de items de cada groupo. Eso se puede modificar agregando el parámetro `name`.
+::: column-margin
+::: callout-tip
+Por default, la función `count()` nombra *n* al número de items de cada grupo. Eso se puede modificar agregando el parámetro `name`.
 
 ```{r}
+#| eval: false
 starwars %>% 
-  count(species, sort = TRUE, name = "otros")
+  count(species, 
+        sort = TRUE, 
+        name = "otros")
 ```
-
 :::
-
-
+:::
 
 ```{r}
 starwars  %>% 
   mutate(sp = fct_lump_min(species, 2)) %>% 
   count(sp, sort = TRUE)
+```
 
+
+filtra los registros que se tengan a partir del siglo XIX
+
+Usando las herramientas vistas en el curso contesta lo siguiente:
+
+  + ¿Que país tiene el mayor número de registros de ataque?
+  + ¿Que actividad tiene el mayor número de registros
+  
+
+```{r}
+attacks <- read_csv("data/attacks.csv", skip = 3)
+
+attacks_tidy <- attacks %>% 
+  clean_names() %>% 
+  filter(year > 1800) 
 
 ```
+
+
+```{r}
+# pregunta e1
+attacks_tidy %>% 
+  count(country, sort = TRUE, name = "pais")
+
+# pregunta e2
+attacks_tidy %>% 
+  count(activity, sort = TRUE)
+
+# Pregunta e3
+  attacks_tidy %>% 
+    mutate(age = str_remove(age, "[A-Za-z]+")) %>% 
+    mutate(age = as.numeric(age)) %>% 
+    group_by(country) %>% 
+    summarise(prom_edad = mean(age, na.rm = TRUE),
+              min_edad = min(age, na.rm = TRUE),
+              casos = n()) %>% 
+    arrange(-casos) %>% 
+    head()
+  
+  # pregunta e4
+  attacks_tidy %>% 
+    filter(fatal_y_n == "Y") %>% 
+    count(activity, sort = TRUE)
+  
+  # pregunta e5
+  attacks_tidy %>% 
+    filter(str_detect(species, "white shark|White shark")) %>% 
+    group_by(country) %>% 
+    count(fatal_y_n, sort = TRUE) 
+  
+  
+  attacks_tidy %>% 
+    count(country, sex) %>% 
+    group_by(country) %>% 
+    mutate(total = sum(n)) %>% 
+    mutate(prop_sex = n / total * 100) %>% 
+    filter(sex == "M") %>% View()
+  
+  
+```
+
+
 

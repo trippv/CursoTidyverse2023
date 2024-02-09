@@ -31,5 +31,17 @@
   },
   "4.data_wrangling.qmd": {
     "4.data_wrangling.html": "3a3090fa"
+  },
+  "5_visualization_ggplot.qmd": {
+    "5_visualization_ggplot.html": "da1c7e11"
+  },
+  "5.visualization_ggplot.qmd": {
+    "5.visualization_ggplot.html": "5997c6cd"
+  },
+  "6.visualization_ggplot_pt2.qmd": {
+    "6.visualization_ggplot_pt2.html": "5a798552"
+  },
+  "7.ggplot_sin_codigo.qmd": {
+    "7.ggplot_sin_codigo.html": "641f5d91"
   }
 }

@@ -1,0 +1,352 @@
+---
+title: "Lección 7: ggplot2 sin codigo"
+author: "Tripp-Valdez MA"
+---
+
+Como hemos visto hasta este punto, ggplot2 es una poderosa herramienta para realizar gráficos de alta calidad y un alto grado de personalización. Esto último conlleva al problema de que puede resultar complicado escribir la grpamatica necesario para gráficar lo que deseamos, o incluso que lleve tiempo realizar un gráfico relativametne sencillo.
+
+
+Afortunadamente, existen algunas alternativas dentro de R que nos ´permiten generar gráficos con ggplot2 pero usando una interfaz gráfica.
+
+
+# Esquisse 
+
+Este [addin](https://rstudio.github.io/rstudioaddins/) the permite explorar de forma interactiva tus datos con ggplot. Permite crear gráficos de barras, histogramas, boxplots, etc. y exportar el gráfico u obtener el código. 
+
+## Instalación.
+
+
+El addin de `esquisse` se instala como cualquier otro paquete usando la función `install.package()`
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages("esquisse")
+```
+
+
+
+## esquisse addin
+
+Una vez instalado, hay dos formas para correr `esquisse`:
+
+1.    Desde la línea de comando usando la función `esquisser()`
+
+```{r}
+#| echo: true
+#| eval: false
+
+
+library(esquisse)
+esquisser()
+
+library(ggplot2)
+
+```
+
+2.    Utilizando las opciones de addins:
+
+
+![Alt Text](img/gif/esquisser_addin.gif){width=800}
+
+
+:::{.callout-note}
+Si no tienes nada en tu ambiente, `esquisser()` abrirá un panel donde puedes seleccionar la base de datos a partir de un archivo, de un enlace, una hoja de google sheet o incluso copiar y pegar desde otro archivo.
+
+Si ya tienes datos en tu ambiente, puedes abrirlos directamente con esquisser de la siguiente forma:
+
+```{r}
+#| echo: true
+#| eval: false
+
+esquisser(penguins)
+```
+
+:::
+
+
+
+::: column-margin
+::: callout-tip
+Si tienes problemas con la ventana de esquisser en el panel, puedes abrirla en una ventana del explorador usando el parámetro `viewer = "browser"`
+
+```{r}
+#| eval: false
+
+esquisser(viewer = "browser")
+```
+:::
+:::
+
+Una vez seleccionados los datos, podemos proceder a arrastrar cada uno de las variables a los distintos *aes*. Dependiendo del tipo de datos, `esquisser` nos sugerirá una geometría (*geom*) adecuada para los datos o podemos seleccionar manualmente el tipo de gráfico.
+
+
+![Alt Text](img/gif/esquisser_use.gif){width=800}
+
+
+
+
+
+::: {.callout-caution icon="false"}
+# Desafio: Etch a sketch
+
+::: column-margin
+![](img/poke_sketch.jpeg){fig-align="center" width="350"}
+:::
+
+
+Recrea el siguiente gráfico usando `esquisser`
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+pokemon <- read_csv("data/pokemon.csv")
+
+pokesketch <- pokemon %>%
+ mutate(generation = factor(generation)) %>% 
+ filter(!(generation %in% c("2", "4", "6"))) %>%
+ filter(`is legendary` %in% "0") %>%
+ ggplot() +
+  aes(
+    x = defense,
+    y = attack,
+    colour = generation,
+    size = `weight kg`
+  ) +
+  geom_point(shape = "circle") +
+  geom_smooth(span = 1L) +
+  scale_color_brewer(palette = "Set2", direction = 1) +
+  labs(
+    x = "Defensa",
+    y = "Ataque",
+    title = "Relación Ataque vs Defensa",
+    subtitle = "Pokemon de la 1ra, 3ra,5ta y 7a generación",
+    caption = "Datos: https://www.kaggle.com/datasets",
+    color = "Generación",
+    size = "Masa corporal (kg)"
+  ) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  facet_wrap(vars(generation), ncol = 4L)
+
+pokesketch
+```
+
+:::
+
+# ggplotgui
+
+Otra herramienta para generar ggplot utilizando una interfáz de usuario gráfica es [ggplogui](https://cran.r-project.org/web/packages/ggplotgui/readme/README.html).
+
+En general, este paquete genera una interfaz gráfica en shiny para cargar datos, generar visualizaciones y exportar la visualización o el código. Hay dos formas en las que se puede usar `ggplotgui`: 1) En línea, donde puedes utilizar este programa sin necesidad de tener instalado R. 2) Dentro del ambiente de R usando la función `ggplot_shiny()`
+
+
+## Instalación de ggplotgui desde el ambiente de R
+
+:::{.callout-note}
+Es necesario tener instalada la libreria _"devtools"_
+
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages("devtools")
+devtools::install_github("gertstulp/ggplotgui")
+library("ggplotgui")
+```
+
+Una vez instalado, corremos la función:
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot_shiny()
+ggplot_shiny(pokemon)
+
+```
+
+
+En línea, se puede usar la herramienta en el siguiente enlace:
+
+[https://shiny.gmw.rug.nl/ggplotgui/](https://shiny.gmw.rug.nl/ggplotgui/)
+
+
+
+# ggThemeAssist
+
+[`ggThemeAssist`](https://github.com/calligross/ggthemeassist) es otro addin de RStudio que proporciona una interfaz gráfica **para editar los temas (themes) de ggplot2**.
+
+
+
+## Instalación
+
+Este paquete se encuentra disponible en su versión mas estable en CRAN:
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages("ggThemeAssist")
+```
+
+Una vez instalado, aparecera dentro de la lista de addins de RStudio
+
+## Uso
+
+Una vez instalado, para usarlo es necesario seleccionar un objeto ggplot que ya se haya generado y posteriormente abrir el addin desde el panel de RStudio.
+
+
+![](https://github.com/calligross/ggthemeassist/blob/master/examples/ggThemeAssist2.gif?raw=true){width=800}
+
+
+
+# Conclusiones finales
+
+Estas herramientas facilitan la exploración de datos y la edición de objetos ggplot, pero todas ellas tienen limitaciones para la edición mas fina o el uso de ciertos geoms no tan comunes. 
+
+
+
+
+
+
+
+
+
+::: {.callout-caution icon="false"}
+# Desafio: Haz tu propio theme
+
+::: column-margin
+![](img/theme_draw.jpeg){fig-align="center" width="350"}
+:::
+
+Como vimos en la lección anterior, ggplot2 cuento con algunos *themes* prediseñados, como `theme_minimal()`, `theme_void()`, etc. los cuales presentan o no algunos elementos visuales como grids, color de fondo, color de panel, etc. 
+
+Es posible, ademas, generar tu propio theme personalizado. Esto es de gran utilidad cuando estas trabajando en un proyecto y quieres que todos tus gráficos tengan el mismo estilo, o cuando tu escuela o empresa requiere el uso de un mismo estilo o colores. Esto te ahorrara modificar estos elementos en cada uno de los objetos ggplot2.
+
+Para crear tu propio *theme*, solamente tienes que incluir todos los elementos dentro una función. Con esto ya puedes incluir tu *theme* como si fuera una capa mas en ggplot. Por ejemplo
+
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+#| message: false
+library(tidyverse)
+
+pokemon <- read_csv("data/pokemon.csv")
+```
+
+
+```{r}
+#definir el tema
+my_theme <- function(){
+  theme(
+    # agregar borde 
+    panel.border = element_rect(colour = "blue", fill = NA, linetype = 2),
+    # modificar color de fondo
+    panel.background = element_rect(fill = "aliceblue"),
+    # modificar reticula
+    panel.grid.major.x = element_line(colour = "steelblue", linetype = 3, linewidth = 0.5),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y =  element_line(colour = "steelblue", linetype = 3, linewidth = 0.5),
+    panel.grid.minor.y = element_blank(),
+    # modificar texto y tick marks 4) and 5)
+    axis.text = element_text(colour = "steelblue", 
+                             face = "italic", 
+                             size = 12, 
+                             angle = 90),
+    axis.title = element_text(colour = "steelblue"),
+    axis.ticks = element_line(colour = "steelblue"),
+    # lleyenda en la parte inferior
+    legend.position = "bottom"
+  )
+  
+}
+
+
+# usar tema
+pokemon |> 
+  ggplot(aes(x = type1)) +
+  geom_bar() +
+  my_theme()
+
+```
+
+
+Ahora que sabes como hacer tu tema personalizado, el desafio consiste en generar dos temas basados en dos tipos de publicaciones:
+
+1: Tema basado en el Wall Street Journal, el cual es un diario de de divulgación
+
+![](img/wsj_theme.png){fig-align="center" width="350"}
+
+2: Tema basado en un journal científico
+
+![](img/journal_theme.gif){fig-align="center" width="350"}
+
+
+Puedes utilizar cualquiera de las herramientas que hemos revisado hasta el momento, así como la hoja de referencia de elementos dentro de `theme()`
+
+:::
+
+
+![Eleméntos gráficos que se pueden modificar dentro de la función `theme()`](img/theme_cheatsheet.jpeg){fig-align="center"}
+
+
+
+```{r}
+#| echo: false
+#| eval: false
+library(tidyverse)
+penguins <-  read_csv("data/palmer_penguins.csv")
+
+pp <- ggplot(penguins) +
+ aes(x = bill_length_mm, y = body_mass_g, colour = species) +
+ geom_point(shape = "circle", 
+ size = 2.7) +
+ scale_color_hue(direction = 1) +
+ theme_minimal()
+
+
+my_theme <-  function() {
+    theme(axis.ticks = element_line(linetype = "blank"),
+    panel.grid.major = element_line(colour = "gray0",
+        linetype = "dashed"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_line(linetype = "blank"),
+    plot.title = element_text(size = 20,
+        face = "bold"), 
+    legend.title = element_text(size = 15),
+    panel.background = element_rect(fill = NA, color = NA),
+    plot.background = element_rect(fill = "beige", color = NA),
+    legend.key = element_rect(fill = NA, color = NA),
+    legend.background = element_rect(fill = NA, color = NA),
+    legend.position = "top", 
+    legend.direction = "horizontal") 
+}
+
+
+
+pp + 
+  my_theme()
+
+
+
+
+pp + theme(axis.line = element_line(linetype = "solid"),
+    axis.ticks = element_line(linetype = "blank"),
+    panel.grid.major = element_line(colour = "gray0"),
+    panel.grid.minor = element_line(linetype = "blank"),
+    panel.background = element_rect(fill = NA,
+        colour = "gray0"),
+    panel.grid.major.x = element_blank(),
+    plot.background = element_rect(colour = NA),
+    legend.key = element_rect(fill = NA, color = NA),
+    legend.background = element_rect(fill = NA, color = NA),
+    legend.position = "right")
+
+```
+
+
