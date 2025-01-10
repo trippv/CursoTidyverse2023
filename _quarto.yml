@@ -15,9 +15,11 @@ website:
         text: Recursos de apoyo
       - text: "Secciones"
         menu:
-          - 2.Proyectos.qmd
-          - 3.Data_import.qmd
-          - 4.data_wrangling.qmd
+          - 1_Introduccion.qmd
+          - 2_RBasico.qmd
+          - 3_Proyectos.qmd
+          - 4_ImportarDatos.qmd
+          - 5_DataWrangling.qmd
           - 5.visualization_ggplot.qmd
           - 6.visualization_ggplot_pt2.qmd
           - 7.ggplot_sin_codigo.qmd
@@ -26,18 +28,18 @@ website:
     right:
       - icon: github
         href: https://github.com
-  sidebar:
-    style: "docked"
-    border: true
-    search: true
-    background: light
-    contents:
-      - 2.Proyectos.qmd
-      - 3.Data_import.qmd
-      - 4.data_wrangling.qmd
-      - 5.visualization_ggplot.qmd
-      - 6.visualization_ggplot_pt2.qmd
-      - 7.ggplot_sin_codigo.qmd
+  # sidebar:
+  #   style: "docked"
+  #   border: true
+  #   search: true
+  #   background: light
+  #   contents:
+  #     - 2.Proyectos.qmd
+  #     - 3.Data_import.qmd
+  #     - 4.data_wrangling.qmd
+  #     - 5.visualization_ggplot.qmd
+  #     - 6.visualization_ggplot_pt2.qmd
+  #     - 7.ggplot_sin_codigo.qmd
   page-navigation: true
 
 format:
@@ -45,14 +47,16 @@ format:
     grid: 
       body-width: 950px
       margin-width: 250px
-    theme: flatly
+    theme:
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
     toc-title: Contenido
     number-sections: true
-    number-depth: 3
+    number-depth: 2
     toc-expand: true
-    page-layout: full
+    page-layout: article # provides content area with margins
 
 
 editor: visual

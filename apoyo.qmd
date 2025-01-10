@@ -6,24 +6,20 @@ A continuación encontrarás diversos materiales disponibles en la red con la qu
 
 -   Libros en línea
 
-    -   [R para Ciencia de Datos](https://es.r4ds.hadley.nz/) - Versión en español de conocido libro R fo Data Science de Wickham y Grolemund
+    -   [R para Ciencia de Datos](https://es.r4ds.hadley.nz/) - Versión en español de conocido libro "*R for Data Science"* de Wickham y Grolemund.
 
-    -   [The Big Book of R](https://www.bigbookofr.com/) - Extensa colección de libros y materiales en línea 
-    
-    - [Data Visualization with R](https://rkabacoff.github.io/datavis/) - Libro para la creación de gráficos en ggplot
-    
-    - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) - Guía para generar visualizaciones efectivas
-    
-    - [Quarto](https://quarto.org/docs/books/) - Guia para generar reportes, páginas web y documentos PDF con Quarto
-    
+    -   [The Big Book of R](https://www.bigbookofr.com/) - Extensa colección de libros y materiales en línea.
+
+    -   [Data Visualization with R](https://rkabacoff.github.io/datavis/) - Libro para la creación de gráficos en ggplot.
+
+    -   [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) - Guía para generar visualizaciones efectivas.
+
+    -   [Quarto](https://quarto.org/docs/books/) - Guia para generar reportes, páginas web y documentos PDF con Quarto
 
 -   A quien seguir
 
-    -   [PositPBC](https://www.youtube.com/@PositPBC/featured) - Seminarios, tutoriales y comentarios sobre las últimas novedades de la comunidad de Rstudio (Posit)
+    -   [PositPBC](https://www.youtube.com/@PositPBC/featured) - Seminarios, tutoriales y comentarios sobre las últimas novedades de la comunidad de Rstudio (Posit).
 
     -   [R ladies](https://www.youtube.com/@RLadiesGlobal) - R-Ladies es una organización mundial cuya misión es promover la diversidad de género en la comunidad R.
-    
-    
-    -   [Community of Bioinformatics Software Developers](https://www.youtube.com/@CDSB/videos) - Canal de bioinformática con númerosos tutoriales de R desde nivel principiante hasta análisis avanzados
-    
 
+    -   [Community of Bioinformatics Software Developers](https://www.youtube.com/@CDSB/videos) - Canal de bioinformática con númerosos tutoriales de R desde nivel principiante hasta análisis avanzados.

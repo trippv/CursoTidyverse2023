@@ -1,8 +1,6 @@
 ---
-title: "Curso: Análisis de datos con Tidyverse"
+title: "Análisis de datos con Tidyverse"
 ---
-
-Date: **Date and time**
 
 Lugar: **Centro de Investigaciones Biológicas del Noroeste, S.C.**
 
@@ -10,44 +8,72 @@ Instructores: [Miguel A. Tripp Valdez](https://migueltrippcv.netlify.app/)
 
 ------------------------------------------------------------------------
 
-# ¡Bienvenidos!
+**Tidyverse** es un conjunto de paquetes dentro del ambiente R que comparten una misma filosofía y gramática lo que facilita la organización, transformación y visualización de datos tabulares.
 
 ::: {.callout-tip icon="false"}
 ## Objetivos del curso
 
--   Que el alumno tenga un panorama detallado sobre el uso de la herramientas dentro del conjunto de paquetes de Tidyverse para importar, manipular, extraer y visualizar información relevante a partir de bases de datos.
-
--   Que el alumno adquiera habilidades prácticas para la manipulación y visualización de datos
-
--   Que el alumno sea capaz de acoplar la experiencia adquirida en este curso para análisis estadísticos, datos genómicos, datos espaciales, etc.
+-   Que el alumno adquiera experiencia práctica en la utilización de herramientas de Tidyverse, dentro del ambiente R, para ordenar, transformar y visualizar datos tabulares.
 :::
 
 #### Requisitos
 
--   Es deseable que el alumno tenga experiencia básica en el uso de R
--   Tener acceso internet
--   Tener instalado R y Rstudio en su computadora
+-   Tener experiencia minima en el uso de R
 
-# Horario del curso
+-   Tener computadora personal y acceso a internet
 
-+--------------+-----------------------------------------------+----------------------------+
-| Horario      | Lección                                       |                            |
-+:============:+:=============================================:+============================+
-| xxxx - xxxxx | Introducción a Tidyvese, Rstuio y Posit Cloud |                            |
-|              |                                               |                            |
-|              | Importar datos, limpiar etiquetas y exportar  |                            |
-+--------------+-----------------------------------------------+----------------------------+
-| xxxx - xxxx  | Data wrangling                                | dplyr, tidyr, uso del pipe |
-+--------------+-----------------------------------------------+----------------------------+
-| xxxx - xxxx  |                                               |                            |
-+--------------+-----------------------------------------------+----------------------------+
-|              |                                               |                            |
-+--------------+-----------------------------------------------+----------------------------+
-|              |                                               |                            |
-+--------------+-----------------------------------------------+----------------------------+
+## Temario del curso
 
++-------------+----------------+-----------------------------------------------------+
+| Día         | Hora           | Tema                                                |
++=============+================+=====================================================+
+| Lunes       | 10:00 - 14:00  | **Introducción**                                    |
+|             |                |                                                     |
+|             |                | -   Introducción a R y Tidyverse                    |
+|             |                |                                                     |
+|             |                | -   Creación y organización de proyectos en Rstudio |
+|             |                |                                                     |
+|             |                | -   Importar y exportar datos                       |
+|             |                |                                                     |
+|             |                | -   Tibbles                                         |
++-------------+----------------+-----------------------------------------------------+
+| Martes      | 10:00 - 14:00  | **Manipulación de datos con Dplyr**                 |
+|             |                |                                                     |
+|             |                | -   `select()`                                      |
+|             |                |                                                     |
+|             |                | -   `filter()`                                      |
+|             |                |                                                     |
+|             |                | -   `mutate()`                                      |
+|             |                |                                                     |
+|             |                | -   pipes `%>%`                                     |
+|             |                |                                                     |
+|             |                | -   Operaciones agrupadas `group_by()`              |
+|             |                |                                                     |
+|             |                | -   `summarise()`                                   |
++-------------+----------------+-----------------------------------------------------+
+| Miércoles   | 10:00 - 14:00  | **Visualización de datos con ggplot**               |
+|             |                |                                                     |
+|             |                | -   Gramática de las gráficas                       |
+|             |                |                                                     |
+|             |                | -   Geoms y aestethics                              |
++-------------+----------------+-----------------------------------------------------+
+| Jueves      | 10::00 - 14:00 | **Visualización de datos con ggplot**               |
+|             |                |                                                     |
+|             |                | -   Edición                                         |
+|             |                |                                                     |
+|             |                | -   ggplot sin código                               |
++-------------+----------------+-----------------------------------------------------+
+| Viernes     | 10:00 - 14:00  | **Manipulación de datos**                           |
+|             |                |                                                     |
+|             |                | -   Operaciones por columnas (`across()`)           |
+|             |                |                                                     |
+|             |                | **Reportes**                                        |
++-------------+----------------+-----------------------------------------------------+
 
 ```{r}
+#| eval: false
+#| include: false
+
+
 countdown::countdown(1, warn_when = 10)
 ```
-

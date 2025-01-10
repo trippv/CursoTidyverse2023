@@ -43,5 +43,23 @@
   },
   "7.ggplot_sin_codigo.qmd": {
     "7.ggplot_sin_codigo.html": "641f5d91"
+  },
+  "8.tidyr.qmd": {
+    "8.tidyr.html": "6c0cacf5"
+  },
+  "2_RBasico.qmd": {
+    "2_RBasico.html": "109b865f"
+  },
+  "1_Introduccion.qmd": {
+    "1_Introduccion.html": "dba1e7e3"
+  },
+  "3_Proyectos.qmd": {
+    "3_Proyectos.html": "f6ddcbfd"
+  },
+  "4_ImportarDatos.qmd": {
+    "4_ImportarDatos.html": "a5497697"
+  },
+  "5_DataWrangling.qmd": {
+    "5_DataWrangling.html": "b5697271"
   }
 }

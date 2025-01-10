@@ -1,5 +1,5 @@
 ---
-title: "Leccion 1: Proyectos en Rstudio"
+title: "Proyectos en Rstudio"
 author: "Miguel A. Tripp Valdez"
 ---
 
@@ -25,7 +25,7 @@ Otra gran ventaja de los proyectos de Rstudio, es que puedes compartirlo con otr
 
 Un ejemplo de como podemos estructurar un proyecto es el siguiente:
 
-![](https://i1.wp.com/raw.githubusercontent.com/martinctc/blog/master/images/RPROJECT_2000dpi.png?zoom=1.25&w=578&ssl=1){fig-align="center"}
+![](https://i1.wp.com/raw.githubusercontent.com/martinctc/blog/master/images/RPROJECT_2000dpi.png?zoom=1.25&w=578&ssl=1){fig-align="center" width="455"}
 
 -   **Datos:** Esta es la carpeta en la que se guardan los archivos que necesito leer en R para realizar mi análisis o visualización. Estos pueden ser CSV, TXT, TSV, etc. La idea principal de tener esta carpeta es que estos archivos crudos en ningún momento debería sobrescribir o editar para garantizar la reproducibilidad.
 

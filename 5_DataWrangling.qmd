@@ -1,5 +1,5 @@
 ---
-title: "Lección 3. Manipulación de datos con dplyr. pt I"
+title: "Manipulación de datos. Parte I"
 author: "Miguel A. Tripp Valdez"
 editor_options: 
   chunk_output_type: console
@@ -11,9 +11,9 @@ editor_options:
 
 Tidy Data es un concepto fundamental dentro del ecosistema Tidyverse en R que se centra en la organización y manipulación eficiente de datos para análisis y visualización.
 
-En el contexto de Tidy Data, se busca estructurar los conjuntos de datos de manera que cada observación sea una fila, cada variable sea una columna y cada valor tenga su propia celda. Esto permite que los datos estén organizados en un formato uniforme y consistente, lo que facilita su manipulación y análisis. En resumen, los principios de Tidy Data son:
+En el contexto de Tidy Data, se busca estructurar los conjuntos de datos de manera que cada observación sea una fila, cada variable sea una columna y cada valor tenga su propia celda. Esto permite que los datos estén organizados en un formato uniforme y consistente, lo que facilita su manipulación y análisis.
 
-En resumen, un tidy data sigue las siguientes características:
+En resumen, los principios de tidy data son los siguientes:
 
 1.  Cada variable debe tener su **propia columna**
 2.  Cada observación debe tener su **propia fila**
@@ -23,7 +23,7 @@ En resumen, un tidy data sigue las siguientes características:
 
 # Manipulación de datos con Dplyr
 
-El paquete Dplyr proporciona un conjunto coherente de funciones que permiten realizar operaciones comunes de manipulación de datos de manera **intuitiva** y eficaz. Estas funciones están optimizadas para trabajar con datos grandes y complejos, y permiten realizar tareas como filtrar `filter()` filas, seleccionar `select()` columnas, transformar valores `mutate()`, crear resúmenes `summerise()` y agrupar datos `group_by()` entre otras funciones. Las cinco funciones mas comunes que usaremos son:
+El paquete Dplyr proporciona un conjunto coherente de funciones que permiten realizar operaciones comunes de manipulación de datos de manera **intuitiva** y eficaz. Estas funciones están optimizadas para trabajar con datos grandes y complejos, y permiten realizar tareas como filtrar `filter()` filas, seleccionar `select()` columnas, transformar valores `mutate()`, crear resúmenes `summarise()` y agrupar datos `group_by()` entre muchas otras funciones. Las cinco funciones mas comunes que usaremos son:
 
 -   `select()`: selecciona columnas de una tabla.
 -   `filter()`: selecciona (o filtra) filas de una tabla a partir de una o más condiciones lógicas.
@@ -104,7 +104,7 @@ pokemon_sub <- select(pokemon, name, attack:hp)
 pokemon_sub
 ```
 
-o lo inverso para descargar un intervalo de columnas
+o lo inverso para descartar un intervalo de columnas
 
 ```{r}
 pokemon_sub <- select(pokemon, -(attack:hp))
@@ -191,7 +191,9 @@ filter(pokemon, type1 %in% tipos)
 ```
 :::
 
-Es posbile filtrar un intervalo de valores utilizando la función `between()`. Esta función requiere como argumentos el nombre de la variable que queremos filtrar, el límite inferior y el límite superior.
+### Filtrar variables en un intervalo con `between()`
+
+Es posible filtrar un intervalo de valores utilizando la función `between()`. Esta función requiere como argumentos el nombre de la variable que queremos filtrar, el límite inferior y el límite superior.
 
 Por ejemplo, si queremos filtrar los pokemon que tengan un nivel de ataque (*attack*) mayor a 100 pero menor a 150
 
@@ -237,15 +239,11 @@ filter(pokemon, str_detect(name, "eon"))
 
 ```
 
-Si buscamos multiples patrones dentro de nuestra variable con caracteres, podemos separarlas dentro de las comillas usando el símbolo "|". Por ejemplo, si queremos buscar los Pokemon cuyo nombre termine con "_saur_" o que empieza con "_Char_":
-
+Si buscamos multiples patrones dentro de nuestra variable con caracteres, podemos separarlas dentro de las comillas usando el símbolo "\|". Por ejemplo, si queremos buscar los Pokemon cuyo nombre termine con "*saur*" o que empieza con "*Char*":
 
 ```{r}
 filter(pokemon, str_detect(name, "saur|Char"))
 ```
-
-
-
 
 ::: {.callout-caution icon="false"}
 # Ejercicio: Una galaxía muy lejana...
@@ -289,18 +287,15 @@ pokemon_mutate <- mutate(pokemon, type1 = factor(type1))
 pokemon_mutate
 ```
 
-
 # Renombrar variables con `rename()`
 
 La función `rename()` cambia el nombre de variables individuales usando una sintaxis `nuevo_nombre = viejo_nombre`.
-
 
 ```{r}
 pokemon %>% 
   rename(nombre = name,
          ataque = attack)
 ```
-
 
 # Pipes *%\>%* y *\|\>*
 
@@ -357,11 +352,9 @@ Para escribir rápidamente el operador `%>%` teclea Ctrl+shift+M
 ::: {.callout-caution icon="false"}
 # Ejercicio: Pingüinos
 
-
-::: {.column-margin}
+::: column-margin
 ![](img/Palmer.png){fig-align="center" width="316"}
 :::
-
 
 Abre la tabla `palmer_penguis.csv` que se encuentra en el directorio de *databases* y utilizando pipes genera los siguientes objetos:
 
@@ -517,26 +510,43 @@ starwars  %>%
   count(sp, sort = TRUE)
 ```
 
+------------------------------------------------------------------------
 
-filtra los registros que se tengan a partir del siglo XIX
+::: {.callout-caution icon="false"}
+# Ejercicio: TIburon a la vista!!
 
-Usando las herramientas vistas en el curso contesta lo siguiente:
+::: column-margin
+![](img/sharky.jpeg){fig-align="center" width="316"}
+:::
 
-  + ¿Que país tiene el mayor número de registros de ataque?
-  + ¿Que actividad tiene el mayor número de registros
-  
+Abre la tabla `attacks.csv` quee se encunetra en el directorio *databases*. Explora los datos que contiene y realiza lo siguiente:
+
+1.  Limpia el nombre de las columnas
+2.  Filtra los registros que se tengan a partir del siglo XIX
+
+Con esta nueva tabla y usando las herramientas vista al momento, contesta lo siguiente:
+
+-   ¿Que país tiene el mayor número de registros de ataque?
+-   ¿Que actividad tiene el mayor número de registros?
+-   ¿Que actividad tiene el mayor número de registros con resultado fatal?
+-   ¿Que país tiene el mayor número de registros de tiburon blanco?
+
+> Nota: observa que hay registros como "white shark" y otros como "White shark"
 
 ```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+
+
 attacks <- read_csv("data/attacks.csv", skip = 3)
 
 attacks_tidy <- attacks %>% 
   clean_names() %>% 
   filter(year > 1800) 
 
-```
 
-
-```{r}
 # pregunta e1
 attacks_tidy %>% 
   count(country, sort = TRUE, name = "pais")
@@ -545,38 +555,92 @@ attacks_tidy %>%
 attacks_tidy %>% 
   count(activity, sort = TRUE)
 
-# Pregunta e3
-  attacks_tidy %>% 
-    mutate(age = str_remove(age, "[A-Za-z]+")) %>% 
-    mutate(age = as.numeric(age)) %>% 
-    group_by(country) %>% 
-    summarise(prom_edad = mean(age, na.rm = TRUE),
-              min_edad = min(age, na.rm = TRUE),
-              casos = n()) %>% 
-    arrange(-casos) %>% 
-    head()
-  
-  # pregunta e4
+
+  # pregunta e3
   attacks_tidy %>% 
     filter(fatal_y_n == "Y") %>% 
     count(activity, sort = TRUE)
   
-  # pregunta e5
+  # pregunta e4
   attacks_tidy %>% 
     filter(str_detect(species, "white shark|White shark")) %>% 
     group_by(country) %>% 
-    count(fatal_y_n, sort = TRUE) 
+    count(country, sort = TRUE) 
   
   
-  attacks_tidy %>% 
-    count(country, sex) %>% 
-    group_by(country) %>% 
-    mutate(total = sum(n)) %>% 
-    mutate(prop_sex = n / total * 100) %>% 
-    filter(sex == "M") %>% View()
-  
-  
+
+```
+:::
+
+# Ejercicios de repaso
+
+::: {.callout-caution icon="false"}
+# Ejercicio 1
+
+A continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (body_mass_g) y el tamaño de la aleta (flipper_length_mm) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:
+
+```{r}
+#| include: true
+#| echo: true
+#| eval: false
+
+
+# a 
+arrange(aleta_peso_ratio_promedio)
+
+# b 
+pinguinos <- read.csv("data/palmer_penguins.csv")
+
+# c 
+group_by(species)
+
+# d
+summarise(aleta_peso_ratio_promedio = mean(aleta_peso_ratio, na.rm = TRUE))
+
+# e
+mutate(aleta_peso_ratio = body_mass_g/flipper_length_mm)
+
 ```
 
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+pinguinos <- read.csv("data/palmer_penguins.csv") %>% 
+  mutate(aleta_peso_ratio = body_mass_g/flipper_length_mm) %>% 
+  group_by(species) %>% 
+  summarise(aleta_peso_ratio_promedio = mean(aleta_peso_ratio, na.rm = TRUE)) %>% 
+  arrange(aleta_peso_ratio_promedio)
+```
+:::
+
+::: {.callout-caution icon="false"}
+# Ejercicio 2
+
+Identifica y corrije los **cuatro** errores en la siguiente cadena de funciones para obtener el tamaño promedio de la aleta en los pingüinos Adelie
+
+```{r}
+#| include: true
+#| echo: true
+#| eval: false
+
+pinguinos <- read_csv("data/palmer_penguins.csv") %>% 
+  filter(pinguinos, species = "Adelie") %>% 
+  sumarise(tamano_promedio = mean(flipper_length_mm) 
 
 
+```
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+
+
+pinguinos <- read_csv("data/palmer_penguins.csv") %>% 
+  filter(species == "Adelie") %>% 
+  summarise(tamano_promedio = mean(flipper_length_mm, na.rm = TRUE)) 
+```
+:::

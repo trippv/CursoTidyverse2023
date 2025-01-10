@@ -1,5 +1,5 @@
 ---
-title: "Leccion 2: Importar y limpiar archivos"
+title: "Importar datos"
 author: "Miguel Tripp Valdez"
 ---
 
@@ -36,7 +36,7 @@ df <- read.csv("data/palmer_penguins.csv")
 head(df)
 ```
 
-## Importar datos a lá Tidyverse
+## Importar datos *a lá Tidyverse*
 
 Dentro del Tidyverse, la importación de datos rectangulares se realiza con el paquete [`readr`](https://readr.tidyverse.org/) el cual tiene funciones que van a sonar muy familiares:
 
@@ -59,7 +59,7 @@ Hagamos la prueba...
 #| warning: false
 
 library(tidyverse)
-library(here)
+
 ```
 
 ```{r read_tidy}
@@ -92,7 +92,7 @@ En caso de que no lo recuerdes, estos son los principales tipos de datos en R
 
 ## Tibbles
 
-Con R base, la función read.table nos genera un **data frame** pero readr nos genera un **tibble** los cuales son una versión actualizada de un data frame.
+Con R base, la función read.table nos genera un **data frame** pero `readr` nos genera un **tibble** los cuales son una versión actualizada de un data.frame.
 
 Hay varias diferencias entre tibbles y data.frames. Puedes leer mas en la [viñeta](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html). Sin embargo, algunas de las diferencias mas notables son:
 
@@ -113,6 +113,8 @@ as_tibble(trees)
 ```
 
 ::: callout-warning
+# ¿Cuidado!
+
 Recuerda que si solo ejecutamos el comando `as_tibble(trees)` R solo nos arrojará el resutlado en la consola pero **no hizo ningún cambio al objeto trees**. Para esto necesitamos renombrar o generar un nuevo objeto. Por ejemplo
 
 ```{r}
@@ -121,7 +123,7 @@ trees_tbl <- as_tibble(trees)
 
 ```
 
-ahora si, tenemos un nuevo objetvo como tibble
+ahora si, tenemos un nuevo objeto como tibble
 
 ```{r}
 class(trees)
@@ -129,7 +131,7 @@ class(trees_tbl)
 ```
 :::
 
-Al igual que como lo hariamos con un **data.frame** o una **matriz**, podemos acceder a las primeras o últimas filas de nuestro tibble con las funciones `head()` y `tail()`
+Al igual que como lo haríamos con un **data.frame** o una **matriz**, podemos acceder a las primeras o últimas filas de nuestro tibble con las funciones `head()` y `tail()`
 
 ```{r}
 head(df)
@@ -219,16 +221,16 @@ excel_df
 ```
 
 ::: callout-note
-# Heterogeneidad en los nombres de las columna
+# Heterogeneidad en los nombres de las columna 🤯
 
-Observa como los tibbles permite que haya símbolos, espacios, acentos y alternancia de mayúsculas y minúsculas en los nombres de las columnas. Sin embargo, al momento de trabajar, esta heterogeneidad puede darnos problemas. Esto se puede solucionar con el paquete *janitor*.
+Observa como los tibbles permite que haya símbolos, espacios, acentos y alternancia de mayúsculas y minúsculas en los nombres de las columnas. Sin embargo, al momento de trabajar, esta heterogeneidad puede darnos algunos dolores de cabeza. Esto se puede solucionar con el paquete *janitor*.
 :::
 
 ## Limpiar etiquetas con **janitor**
 
-![](img/Horst_functions/janitor.png){fig-align="center" width="629"}
+![](img/Horst_functions/janitor.png){fig-align="center" width="529"}
 
-El paquete **Janitor** es una herramienta pequeña pero increíblemente útil y conveniente cuando se trata de limpiar y mantener conjuntos de datos en RStudio. Además, es un paquete orientado a "tidyverse", por lo que se integra perfectamente con los pipes.
+El paquete **Janitor** es una herramienta pequeña pero increíblemente útil y conveniente cuando se trata de limpiar y mantener conjuntos de datos en R. Además, es un paquete orientado a *Tidyverse*, por lo que se integra perfectamente con los pipes.
 
 Regresemos a los nombres de las columnas de nuestro archivo excel antes de utilizar janitor
 
@@ -247,12 +249,12 @@ colnames(excel_df)
 ```
 
 -   No hay consistencia entre el uso de mayúsculas y minúsculas en los nombres. Recuerda que R es sensible a mayúsculas, por lo que `Temperatura` no es lo mismo que `temperatura`.
--   Tenemos símbolos como acentos que nos pueden generar conflictos, sobre todo si tenemos símbolos en otros idiomas.
+-   Tenemos símbolos, como acentos, que nos pueden generar conflictos, sobre todo si tenemos símbolos en otros idiomas.
 -   Los espacios en blanco así como otros símbolos como `/` son reemplazados por un punto. Esto genera etiquetas complicadas.
 
-Lo ideal es tener consistencia en el formato de las etiquetas. Algunos formatos conocidos son los siguientes:
+Lo ideal es tener consistencia en el formato de las etiquetas. Algunos formatos conocidos se ilustran a continuación:
 
-![](img/Horst_functions/cases.jpeg){fig-align="center"}
+![](img/Horst_functions/cases.jpeg){fig-align="center" width="484"}
 
 Ahora utilicemos **janitor** para limpiar las etiquetas
 
@@ -282,7 +284,7 @@ excel_clean <- clean_names(excel_df, case = "screaming_snake")
 excel_clean
 ```
 
-Con **janitor** podemos integrar la función `make_clean_name` al momento de importar datos ya sea con **readxl** o con **readr**. Por ejemplo:
+Para ahorrar tiempo, con **janitor** podemos integrar la función `make_clean_name` al momento de importar datos ya sea con **readxl** o con **readr**. Por ejemplo:
 
 ```{r}
 excel_clean <- read_excel("data/actividad_enzimas.xlsx", 
@@ -290,6 +292,14 @@ excel_clean <- read_excel("data/actividad_enzimas.xlsx",
                        .name_repair =  make_clean_names)
 excel_clean
 ```
+
+::: column-margin
+::: callout-note
+# ¿Por que el punto?
+
+`.name_repair=` se pone con un punto para diferenciar que es un parámetro adicional (o auxiliar a la función principal (`read_excel`)
+:::
+:::
 
 ::: callout-warning
 Observa que tanto **readxl** como **readr** interpretan las columnas de número de experimento, tratamiento y temperatura como variables numéricas debido a que analizan la cantidad de datos para inferir el tipo de variable. No obstante, estas variables son en realidad factores, ya que representan categorías. Más adelante veremos cómo realizar este ajuste de manera manual.
@@ -324,6 +334,11 @@ install.packages("gtExtras")
 ```
 
 ```{r}
+#| warning: false
+#| comment: false
+#| message: false
+
+
 library(gtExtras)
 
 
@@ -360,3 +375,43 @@ o con `write.table()` la cual nos permite usar una mayor diversidad de formatos
 ```{r}
 write.table(excel_subset, file = "resultados/tablas/excel_subset.txt", sep = "\t")
 ```
+
+
+
+
+::: {.callout-caution icon="false"}
+# **Ejercicio**
+
+Pon a prueba tus conocimientos
+
+1. Abre el archivo `ejercicio_readxls.xlsx` que se encuentra dentro de la carpeta `datos`.
+2. Evalúa a partir de que se fila inicia los datos de interés.
+3. Limpia los nombres de las columnas con **janitor**.
+4. Visualiza con `summary` o con `gt_plt_summary()` las variables de la tabla. ¿Cuales de ellas son categóricas? 
+5. Guarda la nueva tabla como archivo `csv` dentro de la carpeta `resultados/tablas`.
+
+
+
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+
+e1 <- read_xlsx("data/ejercicio_readxls.xlsx", skip = 3)
+e1_clean <- clean_names(e1)
+gt_plt_summary(e1_clean)
+summary(e1_clean)
+write_csv(x = e1_clean, 
+          file = "resultados/tablas/ejercicio_readxls_clean.csv")
+```
+
+
+
+
+:::
+
+
+
+

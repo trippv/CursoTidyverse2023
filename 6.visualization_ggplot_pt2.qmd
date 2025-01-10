@@ -617,3 +617,49 @@ titanic |>
 
 -   *Tip*: La variable `Survived` tiene valores de 0 (no sobrevivió) y 1 (sobrevivió). ¿Que pasa si tratas de ajustar los colores de esta variable si no se transforma antes?
 :::
+
+
+
+# Exportar un gráfico; `ggsave()`
+
+Antes de guardar nuestro gráfico, revisemos un poco de teoría:
+
+Cuando exportas un gráfico para utilizarlo en otro programa, tienes dos opciones principales de formato: raster o vector.
+
+Los gráficos vectoriales describen el gráfico como una secuencia de operaciones, por ejemplo: dibuja una línea desde $(x_1,y_1)$ a $(x_2,y_2)$, dibuja un circulo en $(x_3,x_4)$ con radio $r$. Esto significa que pueden ser acercables "*infinitamente*" sin perder detalle. Los formatos mas comunes de gráficos vectoriales son `pdf`y `svg`.
+
+Por otro lado, los gráficos rasterizados se almacenan como una matriz de colores de píxeles y tienen un tamaño de visualización óptimo fijo. El formato de gráfico rasterizado más útil es `png`.
+
+La siguiente figura ilustra las principales diferencias entre ambos formatos.
+
+![Diferencia entre un gráfico rasterizado (izq) y vectorial (der). Imagen tomada de https://ggplot2-book.org/](img/vector-raster.png)
+
+
+
+Existen dos métodos para salvar un objetvo ggplot2. Puedes utilizar la aproximación estandar de R, donde se abre un dispositivo gráfico (_graphic device_), generar el gráfico y posteriormente cerrar el dispositivo:
+
+```{r}
+#| echo: true
+#| eval: false
+#| 
+pdf("resultados/figuras/ggplot.pdf", width = 6, height = 6)
+pp 
+dev.off()
+```
+
+
+Alternativamente, ggplot proporciona una opción mas corta con `ggsave()`
+
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggsave(plot = pp, filename = "resultados/figuras/ggplot.pdf")
+```
+
+::: column-margin
+::: callout-tip
+Si no especificas un objeto en el parámetro `plot`, en automático `ggsave()` tomara el último objeto ggplot2 que se haya generado.
+:::
+:::

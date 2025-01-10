@@ -3,11 +3,62 @@
 .header-spacing {
     margin-top: 7em; /* Adjust the value as needed */
 }
-/*modificacion de color de fondo de los resultados 14/11/2023 */
+/*modificacion de color de fondo de los resultados 14/11/2023 
 .cell-output {
-  background-color: #d3e3e2;
+  background-color: #d7dbdb;
   border-radius: 4px;
 }
+
+
+.callout-caution {
+    background-color: #FDF5E1; /* Color verde claro para callouts de éxito 
+}
+
+*/
+
+/* Default cell output styling */
+.cell-output {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Light mode */
+body.light .cell-output {
+    background-color: #d7dbdb; /* Light gray */
+    color: #2b2b2b;           /* Dark gray text */
+    border: 1px solid #cccccc; /* Subtle border */
+}
+
+/* Dark mode */
+body.dark .cell-output {
+    background-color: #2b2b2b; /* Dark gray */
+    color: #f9f9f9;           /* Light text */
+    border: 1px solid #444444; /* Subtle border */
+}
+
+
+
+
+
+p {
+  text-align: justify /* justificar el texto*/
+}
+
+/* added 09/01/2025 */
+.quarto-container {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+}
+
+.quarto-content {
+    margin-right: auto; /* Ensure content stays on the left */
+}
+
+
+.quarto-content {
+    margin-left: 20px; /* Adjust this value as needed */
+}
+
 
 </style>
 
