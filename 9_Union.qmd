@@ -1,0 +1,446 @@
+---
+title: "Manipulación de tablas"
+author: "Tripp Valdez MA"
+---
+
+# Tidy data
+
+Al principio del curso aprendimos un poco sobre la filosofía Tidy y como se aplica en la construcción y análisis de datos tabulados.
+
+Es posible representar los mismo datos en diversas maneras. Como ejemplo, se muestra a continuación la misma información organizada de manera diferente. Cada set de datos muestra el mismo valor de cuatro variables: `country`, `year`, `population` `cases`, pero cada set esta organizado de manera diferente
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| layout-ncol: 2
+
+
+library(tidyverse)
+
+table1 %>% 
+  knitr::kable(caption = "tabla 1")
+
+table2 %>% 
+  knitr::kable(caption = "tabla2")
+
+table4a %>% 
+  knitr::kable(caption = "tabla4a: casos")
+
+table4b %>% 
+  knitr::kable(caption = "tabla4b: población")
+```
+
+Las cuatro tablas anteriores son representaciones del mismo set de datos, pero no son igual fáciles de trabajar con ellas. Solamente una de ellas podemos decir que se considera como "*Tidy*" y será mucho mas fácil de trabajar. Por ejemplo, para calcular el promedio de casos por país y por año, o por ejemplo para calcular una nueva variable a partir del número de casos por tamaño poblacional.
+
+Hay tres reglas interrelacionadas que hacen un set de datos limpio:
+
+1.  Cada variable tiene su propia columna
+2.  Cada observación tiene su propia fila
+3.  cada valor tiene su propia celda
+
+![Formato Tidy](img/tidydata.png){fig-align="center"}
+
+Bajo este contexto, la `tabla 1` es la única que cumple con la característica de una variable por columna.
+
+::: {.callout-caution icon="false"}
+# Desafio
+
+Intenta calcular la `tasa` (casos / población) por país y por año en cada una de las tabla. ¿En cual de ellas es mas fácil?
+:::
+
+# Pivot!!!
+
+![](img/gif/ross_pivot.gif){fig-align="center" width="500"}
+
+A pesar de los beneficios del formato *Tidy*, en realidad la mayoría de los datos con los que trabajamos cotidianamente no estan en este formato, ya que muchas veces se están organizados en una forma que facilite lo mas posible la captura de cada dato.
+
+Para arreglar estos problemas en el formato de los datos tabulados, vamos a necesitar de dos de las funciones mas importante de **tidyr**: `pivot_longer()` y `pivot_wider()`
+
+## `pivot_longer()`
+
+La `tabla4a` muestra una situación muy común en la que las columnas no son nombres de variables; es decir, las columnas `1999` y `2000`representan valores de la variable `año`, y los valores en las columas `1999`y `2000`representan valores de la variable `casos`. Cada fila representa dos observaciones y no una.
+
+```{r}
+#| echo: false
+table4a
+```
+
+Para ajustar este set de datos a un formato mas adecuado, necesitamos tres parámetros:
+
+1.  El set de columnas cuyo nombre son valores y no variables; en este caso, las columnas son `1999`y `2000`.
+
+2.  El nombre de la variable donde se moverán las columnas. En este caso sería `year`
+
+3.  El nombre de la variable de la columna con los valores. En este caso sería `cases`.
+
+![](img/pivoting_table4.png){fig-align="center"}
+
+```{r}
+table4b %>% 
+  pivot_longer(c(`1999`, `2000`), names_to = "year", values_to = "population")
+
+
+# alternativamente
+table4a %>% 
+  pivot_longer(-country, names_to = "year", values_to = "population")
+```
+
+## `pivot_wider()`
+
+`pivot_wider()` es lo opuesto de `pivot_longer()`. Se utiliza cuando las observaciones están dispersas en varias filas. `table2` constituye un ejemplo de esto: una observación es un país en un año, pero cada observación esta dispersa en dos filas.
+
+```{r}
+table2
+```
+
+Para ajustar la tabla2, necesitamos solo dos parámetros:
+
+1.  La columna de donde se obtendrá el nombre de las variables. En este caso es `type`
+
+2.  La columna de donde se obtendrán los valores. En este caso es `count`.
+
+![](img/pivot_table2.png){fig-align="center"}
+
+```{r}
+table2 %>%
+    pivot_wider(names_from = type, values_from = count)
+
+
+```
+
+::: {.callout-caution icon="false"}
+# Ejercicio: Respiración
+
+En el siguiente enlace puedes encontrar datos de consumo de oxígeno de diversos organismos expuestos a dos condiciones experimentales (*"Control"* y *"Experimental"*). Abre el archivo y modifica la tabla para que puedas calcular el promedio diario del consumo de oxígeno y graficalo.
+
+::: column-margin
+::: callout-tip
+Para importar una base de datos que se encuentra en un sitio remoto, simplemente puedes ingresar la ruta (http:www//...) entre comillas dentro de la función para importar los datos (p. ej `read_csv()`).
+
+```{r}
+#| eval: false
+
+www <- "https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/respiracion.csv"
+
+df <- read_csv(www)
+```
+:::
+:::
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+
+respiracion <- read_csv("https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/respiracion.csv")
+
+respiracion %>%  
+  pivot_longer(c(-individuo, -experimento), names_to = "dia", values_to = "respiracion") %>%  
+  group_by(experimento, dia) %>% 
+  summarise(respiracion_promedio = mean(respiracion, 
+                                        na.rm = TRUE)) %>%  
+  ungroup() |> 
+  ggplot(aes(x = dia, 
+             y = respiracion_promedio, 
+             group = experimento, 
+             color = experimento))+
+  geom_line()
+```
+:::
+
+# Unir tablas (`_join()`)
+
+Dentro de los análisis, es muy común que tengamos que unir dos o mas tablas distintas que se relacionen entre ellas por uno o mas elementos en común. Por ejemplo, podemos unir una lista de genes expresados diferencialmente en un análisis transcriptómico con sus valores de abundancia, los cuales se encuentran en objetos diferentes. O podemos unir información de grupos taxonómicos que se encuentren en objetivos diferentes y que se unan por el nombre o identificador de una especie.
+
+`Dplyr` tiene diversas herramientas para unir tablas. Entre las funciones mas comunes tenemos:
+
+-   `inner_join()`: Esta función combina dos tablas (data frames) manteniendo solo las filas que tienen una coincidencia en ambas tablas en función de las columnas especificadas. Las filas que no tienen coincidencias en ambas tablas se descartan del resultado final.
+
+-   `left_join()`: Une dos tablas conservando todas las filas de la tabla izquierda y las filas coincidentes de la tabla derecha. Si una fila de la tabla izquierda no tiene una coincidencia en la tabla derecha, se llenará con valores NA (missing values) en las columnas de la tabla derecha.
+
+-   `right_join()`: Es similar a left_join, pero conserva todas las filas de la tabla derecha y las filas coincidentes de la tabla izquierda. Las filas de la tabla derecha que no tienen una coincidencia en la tabla izquierda se llenan con valores NA en las columnas de la tabla izquierda.
+
+-   `full_join()`: Esta función une dos tablas manteniendo todas las filas de ambas tablas. Si una fila tiene una coincidencia en la otra tabla, se incluirá en el resultado final. Si no hay una coincidencia para una fila en alguna de las tablas, se llenarán las columnas correspondientes con valores NA en el resultado final.
+
+![](img/joins.png)
+
+veamos algunos ejemplo. Para esto vamos a importar unas cuantas tablas que se encuentran precargadas con el paquete `dplyr`
+
+```{r}
+band_members
+
+band_instruments
+
+```
+
+::: callout-warning
+# ¿cual es la columna en común entre ambas tablas?
+:::
+
+## `left_join()`
+
+Cuando se utiliza `left_join()` unión dentro de un pipe, la tabla que ingresamos desde arriba esta del lado derecho, mientras que la tabla que vamos unir esta del lado izquierdo.
+
+El argumento `by =` le dice a la función cual es la variable en común que se va a utilizar en la unión.
+
+```{r}
+band_members %>% 
+  left_join(band_instruments, by = "name")
+
+
+band_instruments %>% 
+  left_join(band_members, by = "name")
+```
+
+::: {callout-note}
+Observa que cuando no hay coincidencia en alguna de las celdas de la izquierda, se llenara el espacio con `NA`
+:::
+
+## `rigth_join()`
+
+Cuando se utiliza `rigth_join()` unión dentro de un pipe, la tabla que ingresamos desde arriba esta del lado izquierdo, mientras que la tabla que vamos unir esta del lado derecho.
+
+```{r}
+band_members %>% 
+  right_join(band_instruments, by = "name")
+```
+
+## `full_join()`
+
+`full_join()` retiene todas las filas en ambas tablas e inserta `NA`cuando existan registros faltantes que alguna de ellas.
+
+the full_join functions retains all rows of both input data sets and inserts NA when an ID is missing in one of the data frames.
+
+```{r}
+band_members %>% 
+  full_join(band_instruments, by = "name")
+```
+
+## `inner_join()`
+
+```{r}
+band_members %>% 
+  inner_join(band_instruments , by = "name")
+```
+
+::: callout-warning
+Es importante que estes conciente de la función que vas a utilizar y cual es el objetivo, ya que `inner_join()`podria resultar en la perdida inadvertida de información.
+:::
+
+# Filtrar uniones
+
+Hasta ahora hemos examinado uniones que modifican la primera tabla agregando columnas de la segunda tabla. Por otro lado están las uniones de filtrado. Estas funcionan de manera ligeramente diferente en el sentido de que las columnas de la primera tabla permanecen sin cambios y no se agregan nuevas. La unión se utiliza más como una forma de filtrar datos, es decir, eliminar filas según cómo se relacionen con otra tabla.
+
+Entre estas opciones tenemos:
+
+-   `semi_join()`
+-   `anti_join()`
+
+```{r}
+band_members %>% 
+  semi_join(band_instruments)
+```
+
+```{r}
+
+band_members %>% 
+  anti_join(band_instruments)
+```
+
+::: {.callout-caution icon="false"}
+# Ejercicio: Pokemon
+
+Abre las tablas de `pokemon.csv` y `pokemon_extended.csv` que se encuentran en la carpeta de `data`.
+
+Usando una sola cadena, une ambas tablas de manera que se retengan todos los individuos con información en ambas tablas
+
+-   ¿Que pasa si no defines la variable de unión `by =`?
+-   ¿Que problema encuentras con el nombre de la variable de unión?
+
+::: column-margin
+::: callout-tip
+Cuando la variable en común en ambas tablas no tienen la misma etiqueta es necesario especificar un vector de caracteres de tipo `by = c("a" = "b")`. Esto hara una unión de la variable `a`en la tabla `x` con la variable `b` de la tabla `y`. La variable de `x` será utilizada como el resultado.
+:::
+:::
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+
+
+pokemon <- read_csv("data/pokemon.csv")
+
+pokemon_extended <- read_csv("data/pokemon_extended.csv")
+
+
+pokemon %>% 
+  inner_join(pokemon_extended, by = c("NAME" = "Name"))
+```
+
+Ahora repite el mismo procedimiento, pero aplica la función `janitor::clean_names()`en ambas tablas.
+
+-   ¿Que pasa si no defines la variable de unión `by =`?
+-   ¿Que pasa con la tabla resultante si defines la variable de unión `by = name`?
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+
+
+pokemon <- read_csv("data/pokemon.csv") %>% 
+  janitor::clean_names()
+
+pokemon_extended <- read_csv("data/pokemon_extended.csv") %>% 
+  janitor::clean_names()
+
+
+pokemon %>% 
+  inner_join(pokemon_extended)
+```
+:::
+
+# Separar y unir columnas; `separate()` y `unite()`
+
+Al principio de esta lección vimos algunos diferentes formatos de datos tabulares y aprendimos como "limpiar" algunos de ellos. Sin embargo, el caso de la tabla 3 (`table3`) es diferente ya que tenemos dos variables (*cases* y *population*) en una sola columna (*rate*).
+
+```{r}
+table3
+```
+
+Para modificar esta columna podemos utilizar la función `separate()`. Esta función separa una columna en múltiples columnas a partir de un carácter.
+
+```{r}
+table3 %>% 
+  separate(rate, into = c("cases", "population"), sep = "/")
+```
+
+::: callout-warning
+¿Que problema observas con el tipo de variables que se generaron?
+:::
+
+Por default, `separate()` devuelve variables del mismo tipo que la original, que en este caso son caracteres. En este ejemplo en particular, este comportamiento no es el mas conveniente, ya que en realidad se tratan de variables numéricas. Para evitar este comportamiento se puede usar el parámetro `convert = TRUE`
+
+```{r}
+table3 %>% 
+  separate(rate, into = c("cases", "population"), sep = "/", convert = TRUE)
+```
+
+De igual manera, `separate()` elimina la columna que estamos separando pero si queremos conservarla, podemos utilizar el parámetro `remove = FALSE` como se muestra en el siguiente ejemplo:
+
+```{r}
+table3 |> 
+  separate(rate, into = c("cases", "population"), 
+           sep = "/", 
+           convert = TRUE, 
+           remove = FALSE)
+```
+
+La función `unite()` tiene el comportamiento opuesto y permite unir dos variables ubicadas en dos columnas en una sola. Por ejemplo, si queremos convertir `table1` a un formato similar a `table3`
+
+```{r}
+table1 |> 
+  unite(rate, cases, population,sep = "/")
+```
+
+# Separar y unir filas; `separate_rows()`
+
+Hay ocasiones en las que una variable tiene varios elementos agrupados en una misma celda. Toma por ejemplo en la tabla `starwars` que hemos utilizado a lo largo del curso.
+
+```{r}
+#| warning: false
+#| message: false
+
+
+starwars <- read_csv("data/starwars.csv")
+```
+
+La columna `films` contiene las películas en las que ha aparecido cada personaje, separados con una coma. Para poder separar cada uno de estos elementos podemos utilizar la función `separate_rows()`
+
+```{r}
+starwars %>% 
+  separate_rows(films, sep = ",") 
+
+```
+
+Observa que ahora cada personaje estará repetido en múltiples filas, con cada una de las películas en filas diferentes.
+
+```{r}
+starwars %>% 
+  separate_rows(films, sep = ",") %>% 
+  ggplot(aes(x = films, fill = films))+
+  geom_bar()+
+  theme(legend.position = "none")
+ 
+```
+
+Si queremos hacer lo opuesto, es un poco mas complicado e involucra dos pasos:
+
+1.  Agrupar la variable que queremos unir en una sola fila
+2.  colapsar con la función `summarise()`
+
+Por ejemplo, si queremos unir a los personajes de acuerdo a su planeta de origen:
+
+```{r}
+starwars %>% 
+  group_by(homeworld) %>% 
+  summarise(personaje = paste(name, collapse = ","))
+
+```
+
+Podemos hacer agrupaciones por mas de una variable, por ejemplo por planeta de origen y sexo:
+
+```{r}
+starwars %>% 
+  group_by(homeworld, sex) %>% 
+  summarise(personaje = paste(name, collapse = ",")) 
+```
+
+::: {.callout-caution icon="false" appearance="simple"}
+# Desafio: Rutas metabolicas
+
+Se realizó un experimento para ver cambios en la expresión de genes entre tres tratamientos sometidos a condiciones experimentales diferentes, cada condición con tres replicas.
+
+Como resultado del análisis de expresión diferencial de genes se obtuvieron dos bases de datos:
+
+-   `RNAseq_GED_Deseq2_P0.05.txt` con la lista de genes expresados diferencial mente y su valor de abundancia (expresión) en cada uno de las replicas.
+-   `RNAseq_enrich_kegg.txt` con los resultados de las principales rutas metabólicas enriquecidas y los genes que se encuentran en cada ruta.
+
+Importa ambas bases de datos y en una sola cadena gráfica los valores de expresión de cada replica de cada tratamiento de los genes que estén involucradas en cualquier proceso catabólico `catabolic process` tal como se muestra en la imagen.
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+#| message: false
+#| warning: false
+
+
+# abrir lista de genes expresados diferencialmente
+ged <- read_delim("data/RNAseq_GED_Deseq2_P0.05.txt")
+
+enrich <- read_delim("data/RNAseq_enrich_kegg.txt")
+
+
+enrich %>% 
+  filter(str_detect(Term, "catabolic")) %>% 
+  separate_rows(Genes, sep = ",") %>% 
+  select(Genes, Term) %>% 
+  inner_join(ged, by = c("Genes" = "gene")) %>% 
+  select(Genes, Term, contains("_rep")) %>% 
+  pivot_longer(c(-Genes, -Term), names_to = "muestra", values_to = "expresion") %>% 
+  separate(muestra, into = c("condicion", "replica"), sep = "_") %>% 
+  ggplot(aes(x = Genes, y = expresion, color = condicion))+
+  geom_point(position = position_dodge(0.3))+
+  facet_wrap(~Term, scales = "free_x")+
+  labs(y = "Expresión", color = "Condición")+
+  theme_light()
+  
+```
+:::

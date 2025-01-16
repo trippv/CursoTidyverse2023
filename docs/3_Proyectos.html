@@ -103,12 +103,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>
+div.callout-thumbs-up.callout {
+  border-left-color: #008000;
+}
+div.callout-thumbs-up.callout-style-default > .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-thumbs-up .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-thumbs-up.callout-style-default .callout-icon::before, div.callout-thumbs-up.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+div.callout-todo.callout {
+  border-left-color: pink;
+}
+div.callout-todo.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-todo .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-todo.callout-style-default .callout-icon::before, div.callout-todo.callout-titled .callout-icon::before {
+  content: '📝';
+  background-image: none;
+}
+div.callout-ejercicio.callout {
+  border-left-color: #f56c49;
+}
+div.callout-ejercicio.callout-style-default > .callout-header {
+  background-color: rgba(245, 108, 73, 0.13);
+}
+div.callout-ejercicio .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-ejercicio.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -159,23 +196,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./4_ImportarDatos.html">
- <span class="dropdown-text">Importar y limpiar archivos</span></a>
+ <span class="dropdown-text">Importar datos</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./4.data_wrangling.html">
- <span class="dropdown-text">Lección 3. Manipulación de datos con dplyr. pt I</span></a>
+    <a class="dropdown-item" href="./5_DataWrangling.html">
+ <span class="dropdown-text">Manipulación de datos. Parte I</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./5.visualization_ggplot.html">
+    <a class="dropdown-item" href="./6_VisualizationGgplot.html">
  <span class="dropdown-text">Visualización de datos con ggplot2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./6.visualization_ggplot_pt2.html">
- <span class="dropdown-text">Leccion 5: Visualización con ggplot2; Edición</span></a>
+    <a class="dropdown-item" href="./7_VisualizationGgplot2.html">
+ <span class="dropdown-text">Visualización con ggplot2; Edición</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./7.ggplot_sin_codigo.html">
- <span class="dropdown-text">Lección 7: ggplot2 sin codigo</span></a>
+    <a class="dropdown-item" href="./8_GgplotNoCode.html">
+ <span class="dropdown-text">ggplot2 sin codigo</span></a>
   </li>  
     </ul>
   </li>
@@ -197,16 +234,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#proyectos-en-rstudio" id="toc-proyectos-en-rstudio" class="nav-link active" data-scroll-target="#proyectos-en-rstudio"><span class="header-section-number">1</span> Proyectos en Rstudio</a></li>
-  <li><a href="#como-generar-un-proyecto-nuevo" id="toc-como-generar-un-proyecto-nuevo" class="nav-link" data-scroll-target="#como-generar-un-proyecto-nuevo"><span class="header-section-number">2</span> Como generar un proyecto nuevo</a></li>
+  <li><a href="#proyectos-en-rstudio" id="toc-proyectos-en-rstudio" class="nav-link active" data-scroll-target="#proyectos-en-rstudio">Proyectos en Rstudio</a></li>
+  <li><a href="#como-generar-un-proyecto-nuevo" id="toc-como-generar-un-proyecto-nuevo" class="nav-link" data-scroll-target="#como-generar-un-proyecto-nuevo">Como generar un proyecto nuevo</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -245,8 +285,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Independientemente de si estás dando tus primeros pasos en R o si ya eres un experto, es frecuente que la primera línea de tu código sea algo como esto:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:\Users\miguel</span><span class="sc">\r</span><span class="st">uta\que\solo\yo</span><span class="sc">\t</span><span class="st">engo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>setwd()</code> toma una ruta absoluta y la establece como el directorio de trabajo activo. El utilizar una ruta absoluta como directorio de trabajo hace que sea difícil de reproducir o de mover ya que otra persona u otro equipo no tiene esa misma ruta absoluta.</p>
-<section id="proyectos-en-rstudio" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Proyectos en Rstudio</h1>
+<section id="proyectos-en-rstudio" class="level1">
+<h1>Proyectos en Rstudio</h1>
 <p>Los proyectos de RStudio resuelven el problema de las rutas ‘frágiles’ al hacer que las rutas de archivo sean <strong>relativas</strong>. El archivo de proyecto de RStudio es un archivo que se encuentra en el directorio raíz, con la extensión .Rproj. Cuando tu sesión de RStudio está siendo ejecutada a través del archivo de proyecto (.Rproj), el directorio de trabajo actual apunta a la carpeta raíz donde se guarda ese archivo .Rproj.</p>
 <p>Este proyecto facilita importar y exportar archivos ya que todos están <em>a la mano</em> a partir de rutas relativas a la carpeta raíz.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -274,8 +314,8 @@ Tip
 <li><p><strong>Salida:</strong> En esta carpeta puedes guardar todas tus salidas, incluyendo gráficos, HTML y tablas, etc. Tener esta carpeta de Salida ayuda a otros a identificar qué archivos son resultados del código, en contraste con los archivos fuente que se utilizaron para producir el análisis.</p></li>
 </ul>
 </section>
-<section id="como-generar-un-proyecto-nuevo" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Como generar un proyecto nuevo</h1>
+<section id="como-generar-un-proyecto-nuevo" class="level1">
+<h1>Como generar un proyecto nuevo</h1>
 <p>Para crear un proyecto nuevo sigue estos passos:</p>
 <ol type="1">
 <li>Abre Rstudio y selecciona <code>Archivo</code> -&gt; <code>Nuevo Proyecto</code></li>

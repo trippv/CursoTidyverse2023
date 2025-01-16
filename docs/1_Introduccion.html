@@ -69,12 +69,49 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>
+div.callout-thumbs-up.callout {
+  border-left-color: #008000;
+}
+div.callout-thumbs-up.callout-style-default > .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-thumbs-up .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-thumbs-up.callout-style-default .callout-icon::before, div.callout-thumbs-up.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+div.callout-todo.callout {
+  border-left-color: pink;
+}
+div.callout-todo.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-todo .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-todo.callout-style-default .callout-icon::before, div.callout-todo.callout-titled .callout-icon::before {
+  content: '📝';
+  background-image: none;
+}
+div.callout-ejercicio.callout {
+  border-left-color: #f56c49;
+}
+div.callout-ejercicio.callout-style-default > .callout-header {
+  background-color: rgba(245, 108, 73, 0.13);
+}
+div.callout-ejercicio .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-ejercicio.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -125,23 +162,23 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./4_ImportarDatos.html">
- <span class="dropdown-text">Importar y limpiar archivos</span></a>
+ <span class="dropdown-text">Importar datos</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./4.data_wrangling.html">
- <span class="dropdown-text">Lección 3. Manipulación de datos con dplyr. pt I</span></a>
+    <a class="dropdown-item" href="./5_DataWrangling.html">
+ <span class="dropdown-text">Manipulación de datos. Parte I</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./5.visualization_ggplot.html">
+    <a class="dropdown-item" href="./6_VisualizationGgplot.html">
  <span class="dropdown-text">Visualización de datos con ggplot2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./6.visualization_ggplot_pt2.html">
- <span class="dropdown-text">Leccion 5: Visualización con ggplot2; Edición</span></a>
+    <a class="dropdown-item" href="./7_VisualizationGgplot2.html">
+ <span class="dropdown-text">Visualización con ggplot2; Edición</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./7.ggplot_sin_codigo.html">
- <span class="dropdown-text">Lección 7: ggplot2 sin codigo</span></a>
+    <a class="dropdown-item" href="./8_GgplotNoCode.html">
+ <span class="dropdown-text">ggplot2 sin codigo</span></a>
   </li>  
     </ul>
   </li>
@@ -163,16 +200,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#que-es-tidyverse" id="toc-que-es-tidyverse" class="nav-link active" data-scroll-target="#que-es-tidyverse"><span class="header-section-number">1</span> 1. ¿Que es Tidyverse?</a></li>
-  <li><a href="#que-paquetes-componen-a-tidyverse" id="toc-que-paquetes-componen-a-tidyverse" class="nav-link" data-scroll-target="#que-paquetes-componen-a-tidyverse"><span class="header-section-number">2</span> 2. ¿Que paquetes componen a Tidyverse?</a></li>
+  <li><a href="#que-es-tidyverse" id="toc-que-es-tidyverse" class="nav-link active" data-scroll-target="#que-es-tidyverse">¿Que es Tidyverse?</a></li>
+  <li><a href="#que-paquetes-componen-a-tidyverse" id="toc-que-paquetes-componen-a-tidyverse" class="nav-link" data-scroll-target="#que-paquetes-componen-a-tidyverse">¿Que paquetes componen a Tidyverse?</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -202,8 +242,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="que-es-tidyverse" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 1. ¿Que es Tidyverse?</h1>
+<section id="que-es-tidyverse" class="level1">
+<h1>¿Que es Tidyverse?</h1>
 <p>Tidyverse no es en si un paquete sino un conjunto de paquetes en el lenguaje de programación R, diseñado para facilitar la <strong>manipulación</strong>, <strong>visualización</strong> y <strong>análisis</strong> de datos. Desarrollado por Hadley Wickham y su equipo, Tidyverse busca proporcionar un enfoque coherente y eficiente para trabajar con datos, promoviendo la claridad, la reproducibilidad y la facilidad de uso en el análisis de datos.</p>
 <p>Podríamos decir que Tidyverse es una filosofía de trabajo que permite que diversos programas y funciones trabajen bajo esta misma filosofía.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -220,8 +260,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="que-paquetes-componen-a-tidyverse" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 2. ¿Que paquetes componen a Tidyverse?</h1>
+<section id="que-paquetes-componen-a-tidyverse" class="level1">
+<h1>¿Que paquetes componen a Tidyverse?</h1>
 <p>El núcleo de Tidyverse esta compuesto por ocho paquetes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <table class="caption-top table">
 <tbody>

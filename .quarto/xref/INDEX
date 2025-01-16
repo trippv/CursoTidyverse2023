@@ -61,5 +61,17 @@
   },
   "5_DataWrangling.qmd": {
     "5_DataWrangling.html": "b5697271"
+  },
+  "6_VisualizationGgplot.qmd": {
+    "6_VisualizationGgplot.html": "90f321cb"
+  },
+  "7_VisualizationGgplot2.qmd": {
+    "7_VisualizationGgplot2.html": "dee9ebf8"
+  },
+  "8_GgplotNoCode.qmd": {
+    "8_GgplotNoCode.html": "5a4da419"
+  },
+  "9_Union.qmd": {
+    "9_Union.html": "58e50bdd"
   }
 }

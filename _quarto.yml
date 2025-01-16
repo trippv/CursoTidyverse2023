@@ -20,9 +20,9 @@ website:
           - 3_Proyectos.qmd
           - 4_ImportarDatos.qmd
           - 5_DataWrangling.qmd
-          - 5.visualization_ggplot.qmd
-          - 6.visualization_ggplot_pt2.qmd
-          - 7.ggplot_sin_codigo.qmd
+          - 6_VisualizationGgplot.qmd
+          - 7_VisualizationGgplot2.qmd
+          - 8_GgplotNoCode.qmd
 
         
     right:
@@ -45,19 +45,37 @@ website:
 format:
   html:
     grid: 
-      body-width: 950px
-      margin-width: 250px
+      body-width: 1200px
+      margin-width: 200px
+      sidebar-width: 220px
     theme:
       light: flatly
       dark: darkly
-    css: styles.css
+    css:  styles.css
     toc: true
     toc-title: Contenido
-    number-sections: true
-    number-depth: 2
-    toc-expand: true
+    number-sections: false
+    #number-depth: 2
+    toc-expand: 1
+    toc-location: left
     page-layout: article # provides content area with margins
 
 
 editor: visual
 
+
+custom-callout:
+  ejercicio:
+    icon-symbol: "fa-thumbs-up"
+    title: "Ejercicio"
+    color: "#f56c49"
+    appearance: "default"
+  todo:
+    icon-symbol: "📝"
+    color: "pink"
+  thumbs-up:
+    title: "Great job!"
+    icon-symbol: "fa-thumbs-up"
+    color: "#008000"
+filters:
+- custom-callout

@@ -5,6 +5,12 @@ editor_options:
   chunk_output_type: console
 ---
 
+::: callout-objetivos
+## Objetivos
+
+Este es un bloque personalizado con un gorro de graduación como ícono.
+:::
+
 # El formato Tidy
 
 ![](img/tidydata-messy.jpg){fig-align="center" width="582"}
@@ -73,7 +79,7 @@ pokemon <- clean_names(pokemon)
 pokemon
 ```
 
-## Seleccionar columnas con `select()`
+# Seleccionar columnas con `select()`
 
 Permite **seleccionar** una o varias columnas de un tibble o data.frame.
 
@@ -117,7 +123,7 @@ La función `everything()` se puede seleccionar todo, y con esto es factible com
 select(pokemon, type1, everything())
 ```
 
-### Seleccionar variables con un patrón
+## Seleccionar variables con un patrón
 
 Estas funcionen ayudad a seleccionar variables según un patrón determinado
 
@@ -137,7 +143,7 @@ O podemos seleccionar las variables relacionadas con ataque (*attack*)
 select(pokemon, name, contains("attack"))
 ```
 
-## Filtrar variables con `filter()`
+# Filtrar variables con `filter()`
 
 ![](img/Horst_functions/filter.png)
 
@@ -191,7 +197,7 @@ filter(pokemon, type1 %in% tipos)
 ```
 :::
 
-### Filtrar variables en un intervalo con `between()`
+## Filtrar variables en un intervalo con `between()`
 
 Es posible filtrar un intervalo de valores utilizando la función `between()`. Esta función requiere como argumentos el nombre de la variable que queremos filtrar, el límite inferior y el límite superior.
 
@@ -230,7 +236,7 @@ filter(pokemon, between(hp, 100, 200),
 ```
 :::
 
-### Filtrar variables con un patrón; `str_detec()`
+## Filtrar variables con un patrón; `str_detec()`
 
 Tambien es posible filtrar una variable a partir de un caracter en especifico usando la función `str_detect()`.
 
@@ -255,7 +261,7 @@ Abre la tabla `starwars` que se encuentra en el directorio de *databases* y gene
 3.  Una tabla con los personajes que hayan aparecido en *Attack of the Clones*.
 :::
 
-## Transformar o crear columnas con `mutate()`
+# Transformar o crear columnas con `mutate()`
 
 ![](img/Horst_functions/mutate.png){fig-align="center" width="500"}
 
@@ -287,13 +293,25 @@ pokemon_mutate <- mutate(pokemon, type1 = factor(type1))
 pokemon_mutate
 ```
 
+::: callout-tip
+# Protip
+
+Cuando generas una nueva conlumna con mutate, puedes ajustar la posición de la columna incluyendo el parámetro `.before =` o `.after =` indicando la posición de la columna deseada
+
+```{r}
+pokemon_mutate <- mutate(pokemon, pokemon_ratio = attack / defense, 
+                         .after  =1)
+pokemon_mutate
+```
+:::
+
 # Renombrar variables con `rename()`
 
 La función `rename()` cambia el nombre de variables individuales usando una sintaxis `nuevo_nombre = viejo_nombre`.
 
 ```{r}
-pokemon %>% 
-  rename(nombre = name,
+  rename(pokemon, 
+         nombre = name,
          ataque = attack)
 ```
 
@@ -303,21 +321,21 @@ pokemon %>%
 ![](img/pipe.png){fig-align="center"}
 :::
 
-El operador %\>% nos permite aplicar una serie de funciones secuenciales a un objeto sin tener que ir creando variables para uso temporal o sin tener que anidar funciones.
+El operador `%\>%` nos permite aplicar una serie de funciones secuenciales a un objeto sin tener que ir creando variables para uso temporal o sin tener que anidar funciones.
 
-Dplyr importa este operador de otro paquete (magrittr). De manera general, el operador permite unir el resultado de una función a la entrada de otra función.
+**Dplyr** importa este operador de otro paquete (**magrittr**). De manera general, el operador permite unir el resultado de una función a la entrada de otra función.
 
-Por ejemplo, si yo quiere filtrar los pokemon con valor de ataque mayor a 100, seleccionar las columnas Name y Attack y posteriormente mostrar solo las primeras seis filas (head) tendria que correr la siguiente linea:
+Por ejemplo, para filtrar los Pokemon con valor de ataque mayor a 100, seleccionar las columnas Name y Attack y posteriormente mostrar solo las primeras seis filas (head) tendría que correr la siguiente linea:
 
 ```{r pipe_exam}
 head(select(filter(pokemon, attack < 100), name, attack))
 ```
 
-Usando pipes, podemos reescribir esta secuencia de funciones asi:
+Usando pipes, podemos reescribir esta secuencia de funciones de la siguiente forma:
 
 ```{r pipe_examii}
 
-pokemon |> 
+pokemon %>%  
   filter(attack < 100) %>%  
   select(name, attack) %>%  
   head()
@@ -403,6 +421,7 @@ Para hacer un resumen (*summary*) de una determinada variable en los datos podem
 Por ejemplo, para obtener el peso promedio en g de los pingüinos, podemos aplicar la función de la siguiente forma:
 
 ```{r}
+#| message: false
 penguins <- read_csv("data/palmer_penguins.csv")
 
 penguins %>% 
@@ -470,11 +489,12 @@ penguins %>%
 
 # `count()`
 
-La función `count()` nos permite saber cuantas observaciones hay en una variable especifica. Al agregar el argumento sort = TRUEdevuelve una tabla descendiente con el número de observaciones.
+La función `count()` nos permite saber cuantas observaciones hay en una variable especifica. Al agregar el argumento `sort = TRUE` devuelve una tabla descendiente con el número de observaciones.
 
-Regresemos a la base de datos de star wars y evaluemos cuantos personajes hay de cada planeta.
+Regresemos a la base de datos de **Star Wars** y evaluemos cuantos personajes hay de cada planeta.
 
 ```{r}
+#| message: false
 starwars <- read_csv("data/starwars.csv")
 ```
 
@@ -499,15 +519,30 @@ Por default, la función `count()` nombra *n* al número de items de cada grupo.
 starwars %>% 
   count(species, 
         sort = TRUE, 
-        name = "otros")
+        name = "numero")
 ```
 :::
 :::
 
+# Simplificación de categorias
+
+Hay ocasiones en las que queremos obtener la frecuencia de ocurrencias de alguna categoría pero no nos importa mucho aquellas que tienen muy poca frecuencia y queremos agruparlas. Para esto, podemos incorporar una función del paquete `forcats` llamada `fct_lump_min`. Este convierte las observaciones con una frecuencia mínima y le asigna una etiqueta
+
 ```{r}
-starwars  %>% 
-  mutate(sp = fct_lump_min(species, 2)) %>% 
-  count(sp, sort = TRUE)
+starwars_fct <- starwars %>% 
+  mutate(species_fct = fct_lump_min(species, min = 2), 
+         .before = 11)
+starwars_fct
+```
+
+Si ahora aplicamos la función `count()` tendremos un resumen de los datos mas sencillo
+
+```{r}
+starwars_fct <- starwars %>% 
+  mutate(species_fct = fct_lump_min(species, min = 2), 
+         .before = 11) %>% 
+  count(species_fct, sort = TRUE, name = "frecuencia")
+starwars_fct
 ```
 
 ------------------------------------------------------------------------
@@ -519,7 +554,7 @@ starwars  %>%
 ![](img/sharky.jpeg){fig-align="center" width="316"}
 :::
 
-Abre la tabla `attacks.csv` quee se encunetra en el directorio *databases*. Explora los datos que contiene y realiza lo siguiente:
+Abre la tabla `attacks.csv` que se encuentra en el directorio *databases*. Explora los datos que contiene y realiza lo siguiente:
 
 1.  Limpia el nombre de las columnas
 2.  Filtra los registros que se tengan a partir del siglo XIX
@@ -618,7 +653,7 @@ pinguinos <- read.csv("data/palmer_penguins.csv") %>%
 ::: {.callout-caution icon="false"}
 # Ejercicio 2
 
-Identifica y corrije los **cuatro** errores en la siguiente cadena de funciones para obtener el tamaño promedio de la aleta en los pingüinos Adelie
+Identifica y corrige los errores en la siguiente cadena de funciones para obtener el tamaño promedio de la aleta en los pingüinos Adelie
 
 ```{r}
 #| include: true
@@ -626,7 +661,7 @@ Identifica y corrije los **cuatro** errores en la siguiente cadena de funciones 
 #| eval: false
 
 pinguinos <- read_csv("data/palmer_penguins.csv") %>% 
-  filter(pinguinos, species = "Adelie") %>% 
+  filter(pinguinos, species = Adelie) %>% 
   sumarise(tamano_promedio = mean(flipper_length_mm) 
 
 

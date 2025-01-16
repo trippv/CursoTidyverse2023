@@ -60,5 +60,46 @@ p {
 }
 
 
+/* Callout personalizado */
+.callout-objetivos {
+  border-left: 4px solid #83e69d; /* Color del borde */
+  background-color: rgba(131, 230, 157, 0.1); /* Fondo translúcido */
+  padding: 1em;
+  border-radius: 8px;
+}
+
+.callout-objetivos h2::before {
+  content: "\f19d"; /* Unicode del ícono de gorro de graduación */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Estilo sólido del ícono */
+  margin-right: 0.5em;
+  color: #808080; /* Color del ícono */
+}
+
+/* Ajusta el tamaño de letra y espaciado en el TOC */
+.toc {
+  font-size: 0.75em; /* Reduce el tamaño de la fuente valor original 0.9*/
+  line-height: 1.4; /* Mejora la legibilidad */
+}
+
+.toc a {
+  font-size: 0.65em; /* Tamaño específico para enlaces valor original 0.85*/
+  text-decoration: none; /* Quita el subrayado */
+}
+
+.toc a:hover {
+  text-decoration: underline; /* Subraya al pasar el ratón */
+}
+
+.toc ul {
+  margin: 0;
+  padding: 0;
+}
+
+.toc li {
+  margin-bottom: 0.5em; /* Reduce el espacio entre elementos */
+}
+
+
 </style>
 

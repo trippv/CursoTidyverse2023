@@ -103,12 +103,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>
+div.callout-thumbs-up.callout {
+  border-left-color: #008000;
+}
+div.callout-thumbs-up.callout-style-default > .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-thumbs-up .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-thumbs-up.callout-style-default .callout-icon::before, div.callout-thumbs-up.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+div.callout-ejercicio.callout {
+  border-left-color: #f56c49;
+}
+div.callout-ejercicio.callout-style-default > .callout-header {
+  background-color: rgba(245, 108, 73, 0.13);
+}
+div.callout-ejercicio .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-ejercicio.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+div.callout-todo.callout {
+  border-left-color: pink;
+}
+div.callout-todo.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-todo .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-todo.callout-style-default .callout-icon::before, div.callout-todo.callout-titled .callout-icon::before {
+  content: '📝';
+  background-image: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -159,23 +196,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./4_ImportarDatos.html">
- <span class="dropdown-text">Importar y limpiar archivos</span></a>
+ <span class="dropdown-text">Importar datos</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./4.data_wrangling.html">
- <span class="dropdown-text">Lección 3. Manipulación de datos con dplyr. pt I</span></a>
+    <a class="dropdown-item" href="./5_DataWrangling.html">
+ <span class="dropdown-text">Manipulación de datos. Parte I</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./5.visualization_ggplot.html">
+    <a class="dropdown-item" href="./6_VisualizationGgplot.html">
  <span class="dropdown-text">Visualización de datos con ggplot2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./6.visualization_ggplot_pt2.html">
- <span class="dropdown-text">Leccion 5: Visualización con ggplot2; Edición</span></a>
+    <a class="dropdown-item" href="./7_VisualizationGgplot2.html">
+ <span class="dropdown-text">Visualización con ggplot2; Edición</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./7.ggplot_sin_codigo.html">
- <span class="dropdown-text">Lección 7: ggplot2 sin codigo</span></a>
+    <a class="dropdown-item" href="./8_GgplotNoCode.html">
+ <span class="dropdown-text">ggplot2 sin codigo</span></a>
   </li>  
     </ul>
   </li>
@@ -197,21 +234,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#introducción-a-r-y-algunos-comandos-básicos" id="toc-introducción-a-r-y-algunos-comandos-básicos" class="nav-link active" data-scroll-target="#introducción-a-r-y-algunos-comandos-básicos"><span class="header-section-number">0.1</span> Introducción a R y algunos comandos básicos</a></li>
-  <li><a href="#generalidades" id="toc-generalidades" class="nav-link" data-scroll-target="#generalidades"><span class="header-section-number">0.2</span> Generalidades</a></li>
-  <li><a href="#uso-de-la-línea-de-comando-como-calculadora" id="toc-uso-de-la-línea-de-comando-como-calculadora" class="nav-link" data-scroll-target="#uso-de-la-línea-de-comando-como-calculadora"><span class="header-section-number">0.3</span> Uso de la línea de comando como calculadora</a></li>
-  <li><a href="#uso-de-objetos" id="toc-uso-de-objetos" class="nav-link" data-scroll-target="#uso-de-objetos"><span class="header-section-number">0.4</span> Uso de objetos</a></li>
-  <li><a href="#tipos-y-estructura-de-datos-classes" id="toc-tipos-y-estructura-de-datos-classes" class="nav-link" data-scroll-target="#tipos-y-estructura-de-datos-classes"><span class="header-section-number">0.5</span> Tipos y estructura de datos (Classes)</a></li>
-  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="header-section-number">0.6</span> Vectores</a></li>
-  <li><a href="#uso-de-paquetes-y-librerias" id="toc-uso-de-paquetes-y-librerias" class="nav-link" data-scroll-target="#uso-de-paquetes-y-librerias"><span class="header-section-number">1</span> Uso de paquetes y librerias</a></li>
+  <li><a href="#introducción-a-r-y-algunos-comandos-básicos" id="toc-introducción-a-r-y-algunos-comandos-básicos" class="nav-link active" data-scroll-target="#introducción-a-r-y-algunos-comandos-básicos">Introducción a R y algunos comandos básicos</a></li>
+  <li><a href="#generalidades" id="toc-generalidades" class="nav-link" data-scroll-target="#generalidades">Generalidades</a></li>
+  <li><a href="#uso-de-la-línea-de-comando-como-calculadora" id="toc-uso-de-la-línea-de-comando-como-calculadora" class="nav-link" data-scroll-target="#uso-de-la-línea-de-comando-como-calculadora">Uso de la línea de comando como calculadora</a></li>
+  <li><a href="#uso-de-objetos" id="toc-uso-de-objetos" class="nav-link" data-scroll-target="#uso-de-objetos">Uso de objetos</a></li>
+  <li><a href="#tipos-y-estructura-de-datos-classes" id="toc-tipos-y-estructura-de-datos-classes" class="nav-link" data-scroll-target="#tipos-y-estructura-de-datos-classes">Tipos y estructura de datos (Classes)</a></li>
+  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores">Vectores</a></li>
+  <li><a href="#uso-de-paquetes-y-librerias" id="toc-uso-de-paquetes-y-librerias" class="nav-link" data-scroll-target="#uso-de-paquetes-y-librerias">Uso de paquetes y librerias</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -241,14 +281,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introducción-a-r-y-algunos-comandos-básicos" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="introducción-a-r-y-algunos-comandos-básicos"><span class="header-section-number">0.1</span> Introducción a R y algunos comandos básicos</h2>
+<section id="introducción-a-r-y-algunos-comandos-básicos" class="level2">
+<h2 class="anchored" data-anchor-id="introducción-a-r-y-algunos-comandos-básicos">Introducción a R y algunos comandos básicos</h2>
 <p>R es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&amp;T a partir de otro lenguaje de programación.</p>
 <p>Entre las caracteristicas que han hecho de R un lenguaje muy popular entre la comunidad científica y academica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso.</p>
 <hr>
 </section>
-<section id="generalidades" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="generalidades"><span class="header-section-number">0.2</span> Generalidades</h2>
+<section id="generalidades" class="level2">
+<h2 class="anchored" data-anchor-id="generalidades">Generalidades</h2>
 <p>Antes de iniciar en el <em>Tidyverse</em> vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores así como revisar los diferentes tipos de estructuras de datos.</p>
 <p>Algunos aspectos importantes que debemos recordar son los siguientes:</p>
 <ul>
@@ -258,8 +298,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Si despúes de ejecutar un comando la consola nos arroja un mensaje de advertencia <code>WARNING</code> significa que el comando se ejecutó pero hay algo inesperado que debe revisarse. Por el contrario si nos arroja un mensaje de error <code>ERROR</code> entonces hay algo mal en la línea de codigo y por lo tanto no se pudo ejecutar.</p></li>
 </ul>
 </section>
-<section id="uso-de-la-línea-de-comando-como-calculadora" class="level2" data-number="0.3">
-<h2 data-number="0.3" class="anchored" data-anchor-id="uso-de-la-línea-de-comando-como-calculadora"><span class="header-section-number">0.3</span> Uso de la línea de comando como calculadora</h2>
+<section id="uso-de-la-línea-de-comando-como-calculadora" class="level2">
+<h2 class="anchored" data-anchor-id="uso-de-la-línea-de-comando-como-calculadora">Uso de la línea de comando como calculadora</h2>
 <p>Podemos utilizar R para realizar operaciones básicas:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="co">#suma</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -343,8 +383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="uso-de-objetos" class="level2" data-number="0.4">
-<h2 data-number="0.4" class="anchored" data-anchor-id="uso-de-objetos"><span class="header-section-number">0.4</span> Uso de objetos</h2>
+<section id="uso-de-objetos" class="level2">
+<h2 class="anchored" data-anchor-id="uso-de-objetos">Uso de objetos</h2>
 <p>Para crear un nuevo objeto se puede usar “=” o “&lt;-”. Este nuevo objeto, se almacenará en la memoria y se puede usar para otras operaciones.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co">#asignar a la variable x el valor de 2</span></span>
@@ -423,8 +463,8 @@ Ejercicio:
 </div>
 </div>
 </section>
-<section id="tipos-y-estructura-de-datos-classes" class="level2" data-number="0.5">
-<h2 data-number="0.5" class="anchored" data-anchor-id="tipos-y-estructura-de-datos-classes"><span class="header-section-number">0.5</span> Tipos y estructura de datos (Classes)</h2>
+<section id="tipos-y-estructura-de-datos-classes" class="level2">
+<h2 class="anchored" data-anchor-id="tipos-y-estructura-de-datos-classes">Tipos y estructura de datos (Classes)</h2>
 <p>R tiene los siguientes tipos de datos basicos:</p>
 <ul>
 <li><code>logical:</code> valores lógicos, pueden ser <em>TRUE</em> o <em>FALSE</em></li>
@@ -455,8 +495,8 @@ Ejercicio:
 </div>
 </div>
 </section>
-<section id="vectores" class="level2" data-number="0.6">
-<h2 data-number="0.6" class="anchored" data-anchor-id="vectores"><span class="header-section-number">0.6</span> Vectores</h2>
+<section id="vectores" class="level2">
+<h2 class="anchored" data-anchor-id="vectores">Vectores</h2>
 <p>Un vector es la estructura de datos más sencilla en R. Un vector es una colección de uno o más datos del <strong>mismo tipo</strong>.</p>
 <p>Para crear un <strong>vector</strong> utilizamos el comando <code>c()</code>, de combinar</p>
 <div class="cell">
@@ -501,8 +541,8 @@ Warning
 </div>
 </div>
 </section>
-<section id="uso-de-paquetes-y-librerias" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Uso de paquetes y librerias</h1>
+<section id="uso-de-paquetes-y-librerias" class="level1">
+<h1>Uso de paquetes y librerias</h1>
 <p>R hace uso de paquetes que le permiten extender su funcionalidad y disponer de funciones para aplicaciones especificas.</p>
 <p>Para instalar un paquete podemos ejecutar la siguiente linea:</p>
 <div class="cell">

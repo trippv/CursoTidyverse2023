@@ -68,12 +68,49 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>
+div.callout-thumbs-up.callout {
+  border-left-color: #008000;
+}
+div.callout-thumbs-up.callout-style-default > .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-thumbs-up .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-thumbs-up.callout-style-default .callout-icon::before, div.callout-thumbs-up.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+div.callout-ejercicio.callout {
+  border-left-color: #f56c49;
+}
+div.callout-ejercicio.callout-style-default > .callout-header {
+  background-color: rgba(245, 108, 73, 0.13);
+}
+div.callout-ejercicio .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-ejercicio.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+div.callout-todo.callout {
+  border-left-color: pink;
+}
+div.callout-todo.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-todo .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-todo.callout-style-default .callout-icon::before, div.callout-todo.callout-titled .callout-icon::before {
+  content: '📝';
+  background-image: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -111,28 +148,36 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-secciones">    
         <li>
-    <a class="dropdown-item" href="./2.Proyectos.html">
- <span class="dropdown-text">Leccion 1: Proyectos en Rstudio</span></a>
+    <a class="dropdown-item" href="./1_Introduccion.html">
+ <span class="dropdown-text">Introducción al curso</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./3.Data_import.html">
- <span class="dropdown-text">Leccion 2: Importar y limpiar archivos</span></a>
+    <a class="dropdown-item" href="./2_RBasico.html">
+ <span class="dropdown-text">R y Rstudio: Comandos Basicos</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./4.data_wrangling.html">
- <span class="dropdown-text">Lección 3. Manipulación de datos con dplyr. pt I</span></a>
+    <a class="dropdown-item" href="./3_Proyectos.html">
+ <span class="dropdown-text">Proyectos en Rstudio</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./5.visualization_ggplot.html">
+    <a class="dropdown-item" href="./4_ImportarDatos.html">
+ <span class="dropdown-text">Importar datos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./5_DataWrangling.html">
+ <span class="dropdown-text">Manipulación de datos. Parte I</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./6_VisualizationGgplot.html">
  <span class="dropdown-text">Visualización de datos con ggplot2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./6.visualization_ggplot_pt2.html">
- <span class="dropdown-text">Leccion 5: Visualización con ggplot2; Edición</span></a>
+    <a class="dropdown-item" href="./7_VisualizationGgplot2.html">
+ <span class="dropdown-text">Visualización con ggplot2; Edición</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./7.ggplot_sin_codigo.html">
- <span class="dropdown-text">Lección 7: ggplot2 sin codigo</span></a>
+    <a class="dropdown-item" href="./8_GgplotNoCode.html">
+ <span class="dropdown-text">ggplot2 sin codigo</span></a>
   </li>  
     </ul>
   </li>
@@ -154,9 +199,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">

@@ -3,7 +3,7 @@ title: "Introducción al curso"
 author: "Miguel A. Tripp Valdez"
 ---
 
-# 1. ¿Que es Tidyverse?
+# ¿Que es Tidyverse?
 
 Tidyverse no es en si un paquete sino un conjunto de paquetes en el lenguaje de programación R, diseñado para facilitar la **manipulación**, **visualización** y **análisis** de datos. Desarrollado por Hadley Wickham y su equipo, Tidyverse busca proporcionar un enfoque coherente y eficiente para trabajar con datos, promoviendo la claridad, la reproducibilidad y la facilidad de uso en el análisis de datos.
 
@@ -15,7 +15,7 @@ Podríamos decir que Tidyverse es una filosofía de trabajo que permite que dive
 Realmente no. Todas las funciones y herramientas que veremos a lo largo de este curso pueden realizarse utilizando funciones de base de R. Sin embargo, Tidyverse tiene una estructura mas coherente, legible y comprensible.
 :::
 
-# 2. ¿Que paquetes componen a Tidyverse?
+# ¿Que paquetes componen a Tidyverse?
 
 El núcleo de Tidyverse esta compuesto por ocho paquetes[^1]:
 

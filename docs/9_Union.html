@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.53">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tripp Valdez MA">
+
+<title>Manipulación de tablas – Tidyverse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+div.callout-todo.callout {
+  border-left-color: pink;
+}
+div.callout-todo.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-todo .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-todo.callout-style-default .callout-icon::before, div.callout-todo.callout-titled .callout-icon::before {
+  content: '📝';
+  background-image: none;
+}
+div.callout-thumbs-up.callout {
+  border-left-color: #008000;
+}
+div.callout-thumbs-up.callout-style-default > .callout-header {
+  background-color: rgba(0, 128, 0, 0.13);
+}
+div.callout-thumbs-up .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-thumbs-up.callout-style-default .callout-icon::before, div.callout-thumbs-up.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+div.callout-ejercicio.callout {
+  border-left-color: #f56c49;
+}
+div.callout-ejercicio.callout-style-default > .callout-header {
+  background-color: rgba(245, 108, 73, 0.13);
+}
+div.callout-ejercicio .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-ejercicio.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./img/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Tidyverse</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./apoyo.html"> 
+<span class="menu-text">Recursos de apoyo</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-secciones" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Secciones</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-secciones">    
+        <li>
+    <a class="dropdown-item" href="./1_Introduccion.html">
+ <span class="dropdown-text">Introducción al curso</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./2_RBasico.html">
+ <span class="dropdown-text">R y Rstudio: Comandos Basicos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./3_Proyectos.html">
+ <span class="dropdown-text">Proyectos en Rstudio</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./4_ImportarDatos.html">
+ <span class="dropdown-text">Importar datos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./5_DataWrangling.html">
+ <span class="dropdown-text">Manipulación de datos. Parte I</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./6_VisualizationGgplot.html">
+ <span class="dropdown-text">Visualización de datos con ggplot2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./7_VisualizationGgplot2.html">
+ <span class="dropdown-text">Visualización con ggplot2; Edición</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./8_GgplotNoCode.html">
+ <span class="dropdown-text">ggplot2 sin codigo</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link active" data-scroll-target="#tidy-data">Tidy data</a></li>
+  <li><a href="#pivot" id="toc-pivot" class="nav-link" data-scroll-target="#pivot">Pivot!!!</a>
+  <ul class="collapse">
+  <li><a href="#pivot_longer" id="toc-pivot_longer" class="nav-link" data-scroll-target="#pivot_longer"><code>pivot_longer()</code></a></li>
+  <li><a href="#pivot_wider" id="toc-pivot_wider" class="nav-link" data-scroll-target="#pivot_wider"><code>pivot_wider()</code></a></li>
+  </ul></li>
+  <li><a href="#unir-tablas-_join" id="toc-unir-tablas-_join" class="nav-link" data-scroll-target="#unir-tablas-_join">Unir tablas (<code>_join()</code>)</a>
+  <ul class="collapse">
+  <li><a href="#left_join" id="toc-left_join" class="nav-link" data-scroll-target="#left_join"><code>left_join()</code></a></li>
+  <li><a href="#rigth_join" id="toc-rigth_join" class="nav-link" data-scroll-target="#rigth_join"><code>rigth_join()</code></a></li>
+  <li><a href="#full_join" id="toc-full_join" class="nav-link" data-scroll-target="#full_join"><code>full_join()</code></a></li>
+  <li><a href="#inner_join" id="toc-inner_join" class="nav-link" data-scroll-target="#inner_join"><code>inner_join()</code></a></li>
+  </ul></li>
+  <li><a href="#filtrar-uniones" id="toc-filtrar-uniones" class="nav-link" data-scroll-target="#filtrar-uniones">Filtrar uniones</a></li>
+  <li><a href="#separar-y-unir-columnas-separate-y-unite" id="toc-separar-y-unir-columnas-separate-y-unite" class="nav-link" data-scroll-target="#separar-y-unir-columnas-separate-y-unite">Separar y unir columnas; <code>separate()</code> y <code>unite()</code></a></li>
+  <li><a href="#separar-y-unir-filas-separate_rows" id="toc-separar-y-unir-filas-separate_rows" class="nav-link" data-scroll-target="#separar-y-unir-filas-separate_rows">Separar y unir filas; <code>separate_rows()</code></a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Manipulación de tablas</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tripp Valdez MA </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="tidy-data" class="level1">
+<h1>Tidy data</h1>
+<p>Al principio del curso aprendimos un poco sobre la filosofía Tidy y como se aplica en la construcción y análisis de datos tabulados.</p>
+<p>Es posible representar los mismo datos en diversas maneras. Como ejemplo, se muestra a continuación la misma información organizada de manera diferente. Cada set de datos muestra el mismo valor de cuatro variables: <code>country</code>, <code>year</code>, <code>population</code> <code>cases</code>, pero cada set esta organizado de manera diferente</p>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<caption>tabla 1</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<caption>tabla2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">745</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">2666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">37737</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">80488</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">212258</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">213766</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<caption>tabla4a: casos</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">1999</th>
+<th style="text-align: right;">2000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">2666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">80488</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">213766</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<caption>tabla4b: población</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">1999</th>
+<th style="text-align: right;">2000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">19987071</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">172006362</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1272915272</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Las cuatro tablas anteriores son representaciones del mismo set de datos, pero no son igual fáciles de trabajar con ellas. Solamente una de ellas podemos decir que se considera como “<em>Tidy</em>” y será mucho mas fácil de trabajar. Por ejemplo, para calcular el promedio de casos por país y por año, o por ejemplo para calcular una nueva variable a partir del número de casos por tamaño poblacional.</p>
+<p>Hay tres reglas interrelacionadas que hacen un set de datos limpio:</p>
+<ol type="1">
+<li>Cada variable tiene su propia columna</li>
+<li>Cada observación tiene su propia fila</li>
+<li>cada valor tiene su propia celda</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/tidydata.png" class="img-fluid figure-img"></p>
+<figcaption>Formato Tidy</figcaption>
+</figure>
+</div>
+<p>Bajo este contexto, la <code>tabla 1</code> es la única que cumple con la característica de una variable por columna.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Desafio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Intenta calcular la <code>tasa</code> (casos / población) por país y por año en cada una de las tabla. ¿En cual de ellas es mas fácil?</p>
+</div>
+</div>
+</section>
+<section id="pivot" class="level1 page-columns page-full">
+<h1>Pivot!!!</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/gif/ross_pivot.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p>A pesar de los beneficios del formato <em>Tidy</em>, en realidad la mayoría de los datos con los que trabajamos cotidianamente no estan en este formato, ya que muchas veces se están organizados en una forma que facilite lo mas posible la captura de cada dato.</p>
+<p>Para arreglar estos problemas en el formato de los datos tabulados, vamos a necesitar de dos de las funciones mas importante de <strong>tidyr</strong>: <code>pivot_longer()</code> y <code>pivot_wider()</code></p>
+<section id="pivot_longer" class="level2">
+<h2 class="anchored" data-anchor-id="pivot_longer"><code>pivot_longer()</code></h2>
+<p>La <code>tabla4a</code> muestra una situación muy común en la que las columnas no son nombres de variables; es decir, las columnas <code>1999</code> y <code>2000</code>representan valores de la variable <code>año</code>, y los valores en las columas <code>1999</code>y <code>2000</code>representan valores de la variable <code>casos</code>. Cada fila representa dos observaciones y no una.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  country     `1999` `2000`
+  &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+1 Afghanistan    745   2666
+2 Brazil       37737  80488
+3 China       212258 213766</code></pre>
+</div>
+</div>
+<p>Para ajustar este set de datos a un formato mas adecuado, necesitamos tres parámetros:</p>
+<ol type="1">
+<li><p>El set de columnas cuyo nombre son valores y no variables; en este caso, las columnas son <code>1999</code>y <code>2000</code>.</p></li>
+<li><p>El nombre de la variable donde se moverán las columnas. En este caso sería <code>year</code></p></li>
+<li><p>El nombre de la variable de la columna con los valores. En este caso sería <code>cases</code>.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/pivoting_table4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>table4b <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1999</span><span class="st">`</span>, <span class="st">`</span><span class="at">2000</span><span class="st">`</span>), <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country     year  population
+  &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;
+1 Afghanistan 1999    19987071
+2 Afghanistan 2000    20595360
+3 Brazil      1999   172006362
+4 Brazil      2000   174504898
+5 China       1999  1272915272
+6 China       2000  1280428583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alternativamente</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>table4a <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>country, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country     year  population
+  &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;
+1 Afghanistan 1999         745
+2 Afghanistan 2000        2666
+3 Brazil      1999       37737
+4 Brazil      2000       80488
+5 China       1999      212258
+6 China       2000      213766</code></pre>
+</div>
+</div>
+</section>
+<section id="pivot_wider" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="pivot_wider"><code>pivot_wider()</code></h2>
+<p><code>pivot_wider()</code> es lo opuesto de <code>pivot_longer()</code>. Se utiliza cuando las observaciones están dispersas en varias filas. <code>table2</code> constituye un ejemplo de esto: una observación es un país en un año, pero cada observación esta dispersa en dos filas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>table2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+   country      year type            count
+   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+ 1 Afghanistan  1999 cases             745
+ 2 Afghanistan  1999 population   19987071
+ 3 Afghanistan  2000 cases            2666
+ 4 Afghanistan  2000 population   20595360
+ 5 Brazil       1999 cases           37737
+ 6 Brazil       1999 population  172006362
+ 7 Brazil       2000 cases           80488
+ 8 Brazil       2000 population  174504898
+ 9 China        1999 cases          212258
+10 China        1999 population 1272915272
+11 China        2000 cases          213766
+12 China        2000 population 1280428583</code></pre>
+</div>
+</div>
+<p>Para ajustar la tabla2, necesitamos solo dos parámetros:</p>
+<ol type="1">
+<li><p>La columna de donde se obtendrá el nombre de las variables. En este caso es <code>type</code></p></li>
+<li><p>La columna de donde se obtendrán los valores. En este caso es <code>count</code>.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/pivot_table2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type, <span class="at">values_from =</span> count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year  cases population
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ejercicio: Respiración
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el siguiente enlace puedes encontrar datos de consumo de oxígeno de diversos organismos expuestos a dos condiciones experimentales (<em>“Control”</em> y <em>“Experimental”</em>). Abre el archivo y modifica la tabla para que puedas calcular el promedio diario del consumo de oxígeno y graficalo.</p>
+
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>respiracion <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/respiracion.csv"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>respiracion <span class="sc">%&gt;%</span>  </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="sc">-</span>individuo, <span class="sc">-</span>experimento), <span class="at">names_to =</span> <span class="st">"dia"</span>, <span class="at">values_to =</span> <span class="st">"respiracion"</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(experimento, dia) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">respiracion_promedio =</span> <span class="fu">mean</span>(respiracion, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dia, </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> respiracion_promedio, </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> experimento, </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> experimento))<span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div class="callout-margin-content">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para importar una base de datos que se encuentra en un sitio remoto, simplemente puedes ingresar la ruta (http:www//…) entre comillas dentro de la función para importar los datos (p.&nbsp;ej <code>read_csv()</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>www <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/respiracion.csv"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(www)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div></div></section>
+</section>
+<section id="unir-tablas-_join" class="level1">
+<h1>Unir tablas (<code>_join()</code>)</h1>
+<p>Dentro de los análisis, es muy común que tengamos que unir dos o mas tablas distintas que se relacionen entre ellas por uno o mas elementos en común. Por ejemplo, podemos unir una lista de genes expresados diferencialmente en un análisis transcriptómico con sus valores de abundancia, los cuales se encuentran en objetos diferentes. O podemos unir información de grupos taxonómicos que se encuentren en objetivos diferentes y que se unan por el nombre o identificador de una especie.</p>
+<p><code>Dplyr</code> tiene diversas herramientas para unir tablas. Entre las funciones mas comunes tenemos:</p>
+<ul>
+<li><p><code>inner_join()</code>: Esta función combina dos tablas (data frames) manteniendo solo las filas que tienen una coincidencia en ambas tablas en función de las columnas especificadas. Las filas que no tienen coincidencias en ambas tablas se descartan del resultado final.</p></li>
+<li><p><code>left_join()</code>: Une dos tablas conservando todas las filas de la tabla izquierda y las filas coincidentes de la tabla derecha. Si una fila de la tabla izquierda no tiene una coincidencia en la tabla derecha, se llenará con valores NA (missing values) en las columnas de la tabla derecha.</p></li>
+<li><p><code>right_join()</code>: Es similar a left_join, pero conserva todas las filas de la tabla derecha y las filas coincidentes de la tabla izquierda. Las filas de la tabla derecha que no tienen una coincidencia en la tabla izquierda se llenan con valores NA en las columnas de la tabla izquierda.</p></li>
+<li><p><code>full_join()</code>: Esta función une dos tablas manteniendo todas las filas de ambas tablas. Si una fila tiene una coincidencia en la otra tabla, se incluirá en el resultado final. Si no hay una coincidencia para una fila en alguna de las tablas, se llenarán las columnas correspondientes con valores NA en el resultado final.</p></li>
+</ul>
+<p><img src="img/joins.png" class="img-fluid"></p>
+<p>veamos algunos ejemplo. Para esto vamos a importar unas cuantas tablas que se encuentran precargadas con el paquete <code>dplyr</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  plays 
+  &lt;chr&gt; &lt;chr&gt; 
+1 John  guitar
+2 Paul  bass  
+3 Keith guitar</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿cual es la columna en común entre ambas tablas?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<section id="left_join" class="level2">
+<h2 class="anchored" data-anchor-id="left_join"><code>left_join()</code></h2>
+<p>Cuando se utiliza <code>left_join()</code> unión dentro de un pipe, la tabla que ingresamos desde arriba esta del lado derecho, mientras que la tabla que vamos unir esta del lado izquierdo.</p>
+<p>El argumento <code>by =</code> le dice a la función cual es la variable en común que se va a utilizar en la unión.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(band_instruments, <span class="at">by =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>band_instruments <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(band_members, <span class="at">by =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  plays  band   
+  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
+1 John  guitar Beatles
+2 Paul  bass   Beatles
+3 Keith guitar &lt;NA&gt;   </code></pre>
+</div>
+</div>
+<div class="{callout-note}">
+<p>Observa que cuando no hay coincidencia en alguna de las celdas de la izquierda, se llenara el espacio con <code>NA</code></p>
+</div>
+</section>
+<section id="rigth_join" class="level2">
+<h2 class="anchored" data-anchor-id="rigth_join"><code>rigth_join()</code></h2>
+<p>Cuando se utiliza <code>rigth_join()</code> unión dentro de un pipe, la tabla que ingresamos desde arriba esta del lado izquierdo, mientras que la tabla que vamos unir esta del lado derecho.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(band_instruments, <span class="at">by =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 John  Beatles guitar
+2 Paul  Beatles bass  
+3 Keith &lt;NA&gt;    guitar</code></pre>
+</div>
+</div>
+</section>
+<section id="full_join" class="level2">
+<h2 class="anchored" data-anchor-id="full_join"><code>full_join()</code></h2>
+<p><code>full_join()</code> retiene todas las filas en ambas tablas e inserta <code>NA</code>cuando existan registros faltantes que alguna de ellas.</p>
+<p>the full_join functions retains all rows of both input data sets and inserts NA when an ID is missing in one of the data frames.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(band_instruments, <span class="at">by =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  
+4 Keith &lt;NA&gt;    guitar</code></pre>
+</div>
+</div>
+</section>
+<section id="inner_join" class="level2">
+<h2 class="anchored" data-anchor-id="inner_join"><code>inner_join()</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(band_instruments , <span class="at">by =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 John  Beatles guitar
+2 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es importante que estes conciente de la función que vas a utilizar y cual es el objetivo, ya que <code>inner_join()</code>podria resultar en la perdida inadvertida de información.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="filtrar-uniones" class="level1 page-columns page-full">
+<h1>Filtrar uniones</h1>
+<p>Hasta ahora hemos examinado uniones que modifican la primera tabla agregando columnas de la segunda tabla. Por otro lado están las uniones de filtrado. Estas funcionan de manera ligeramente diferente en el sentido de que las columnas de la primera tabla permanecen sin cambios y no se agregan nuevas. La unión se utiliza más como una forma de filtrar datos, es decir, eliminar filas según cómo se relacionen con otra tabla.</p>
+<p>Entre estas opciones tenemos:</p>
+<ul>
+<li><code>semi_join()</code></li>
+<li><code>anti_join()</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(name)`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 John  Beatles
+2 Paul  Beatles</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(name)`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  name  band  
+  &lt;chr&gt; &lt;chr&gt; 
+1 Mick  Stones</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ejercicio: Pokemon
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Abre las tablas de <code>pokemon.csv</code> y <code>pokemon_extended.csv</code> que se encuentran en la carpeta de <code>data</code>.</p>
+<p>Usando una sola cadena, une ambas tablas de manera que se retengan todos los individuos con información en ambas tablas</p>
+<ul>
+<li>¿Que pasa si no defines la variable de unión <code>by =</code>?</li>
+<li>¿Que problema encuentras con el nombre de la variable de unión?</li>
+</ul>
+
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pokemon <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pokemon.csv"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>pokemon_extended <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pokemon_extended.csv"</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>pokemon <span class="sc">%&gt;%</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pokemon_extended, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"NAME"</span> <span class="ot">=</span> <span class="st">"Name"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Ahora repite el mismo procedimiento, pero aplica la función <code>janitor::clean_names()</code>en ambas tablas.</p>
+<ul>
+<li>¿Que pasa si no defines la variable de unión <code>by =</code>?</li>
+<li>¿Que pasa con la tabla resultante si defines la variable de unión <code>by = name</code>?</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pokemon <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pokemon.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>pokemon_extended <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pokemon_extended.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>pokemon <span class="sc">%&gt;%</span> </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pokemon_extended)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div class="callout-margin-content">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cuando la variable en común en ambas tablas no tienen la misma etiqueta es necesario especificar un vector de caracteres de tipo <code>by = c("a" = "b")</code>. Esto hara una unión de la variable <code>a</code>en la tabla <code>x</code> con la variable <code>b</code> de la tabla <code>y</code>. La variable de <code>x</code> será utilizada como el resultado.</p>
+</div>
+</div>
+</div></div></section>
+<section id="separar-y-unir-columnas-separate-y-unite" class="level1">
+<h1>Separar y unir columnas; <code>separate()</code> y <code>unite()</code></h1>
+<p>Al principio de esta lección vimos algunos diferentes formatos de datos tabulares y aprendimos como “limpiar” algunos de ellos. Sin embargo, el caso de la tabla 3 (<code>table3</code>) es diferente ya que tenemos dos variables (<em>cases</em> y <em>population</em>) en una sola columna (<em>rate</em>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>table3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country      year rate             
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            
+1 Afghanistan  1999 745/19987071     
+2 Afghanistan  2000 2666/20595360    
+3 Brazil       1999 37737/172006362  
+4 Brazil       2000 80488/174504898  
+5 China        1999 212258/1272915272
+6 China        2000 213766/1280428583</code></pre>
+</div>
+</div>
+<p>Para modificar esta columna podemos utilizar la función <code>separate()</code>. Esta función separa una columna en múltiples columnas a partir de un carácter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>), <span class="at">sep =</span> <span class="st">"/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year cases  population
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     
+1 Afghanistan  1999 745    19987071  
+2 Afghanistan  2000 2666   20595360  
+3 Brazil       1999 37737  172006362 
+4 Brazil       2000 80488  174504898 
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Que problema observas con el tipo de variables que se generaron?</p>
+</div>
+</div>
+<p>Por default, <code>separate()</code> devuelve variables del mismo tipo que la original, que en este caso son caracteres. En este ejemplo en particular, este comportamiento no es el mas conveniente, ya que en realidad se tratan de variables numéricas. Para evitar este comportamiento se puede usar el parámetro <code>convert = TRUE</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>), <span class="at">sep =</span> <span class="st">"/"</span>, <span class="at">convert =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year  cases population
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt;
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+</div>
+<p>De igual manera, <code>separate()</code> elimina la columna que estamos separando pero si queremos conservarla, podemos utilizar el parámetro <code>remove = FALSE</code> como se muestra en el siguiente ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>), </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">"/"</span>, </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">convert =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">remove =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  country      year rate               cases population
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;              &lt;int&gt;      &lt;int&gt;
+1 Afghanistan  1999 745/19987071         745   19987071
+2 Afghanistan  2000 2666/20595360       2666   20595360
+3 Brazil       1999 37737/172006362    37737  172006362
+4 Brazil       2000 80488/174504898    80488  174504898
+5 China        1999 212258/1272915272 212258 1272915272
+6 China        2000 213766/1280428583 213766 1280428583</code></pre>
+</div>
+</div>
+<p>La función <code>unite()</code> tiene el comportamiento opuesto y permite unir dos variables ubicadas en dos columnas en una sola. Por ejemplo, si queremos convertir <code>table1</code> a un formato similar a <code>table3</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(rate, cases, population,<span class="at">sep =</span> <span class="st">"/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country      year rate             
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            
+1 Afghanistan  1999 745/19987071     
+2 Afghanistan  2000 2666/20595360    
+3 Brazil       1999 37737/172006362  
+4 Brazil       2000 80488/174504898  
+5 China        1999 212258/1272915272
+6 China        2000 213766/1280428583</code></pre>
+</div>
+</div>
+</section>
+<section id="separar-y-unir-filas-separate_rows" class="level1">
+<h1>Separar y unir filas; <code>separate_rows()</code></h1>
+<p>Hay ocasiones en las que una variable tiene varios elementos agrupados en una misma celda. Toma por ejemplo en la tabla <code>starwars</code> que hemos utilizado a lo largo del curso.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/starwars.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La columna <code>films</code> contiene las películas en las que ha aparecido cada personaje, separados con una coma. Para poder separar cada uno de estos elementos podemos utilizar la función <code>separate_rows()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(films, <span class="at">sep =</span> <span class="st">","</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 173 × 14
+   name     height  mass hair_color skin_color eye_color birth_year sex   gender
+   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 Luke Sk…    172    77 blond      fair       blue              19 male  mascu…
+ 2 Luke Sk…    172    77 blond      fair       blue              19 male  mascu…
+ 3 Luke Sk…    172    77 blond      fair       blue              19 male  mascu…
+ 4 Luke Sk…    172    77 blond      fair       blue              19 male  mascu…
+ 5 Luke Sk…    172    77 blond      fair       blue              19 male  mascu…
+ 6 C-3PO       167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
+ 7 C-3PO       167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
+ 8 C-3PO       167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
+ 9 C-3PO       167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
+10 C-3PO       167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
+# ℹ 163 more rows
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;chr&gt;,
+#   vehicles &lt;chr&gt;, starships &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Observa que ahora cada personaje estará repetido en múltiples filas, con cada una de las películas en filas diferentes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(films, <span class="at">sep =</span> <span class="st">","</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> films, <span class="at">fill =</span> films))<span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="9_Union_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Si queremos hacer lo opuesto, es un poco mas complicado e involucra dos pasos:</p>
+<ol type="1">
+<li>Agrupar la variable que queremos unir en una sola fila</li>
+<li>colapsar con la función <code>summarise()</code></li>
+</ol>
+<p>Por ejemplo, si queremos unir a los personajes de acuerdo a su planeta de origen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(homeworld) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">personaje =</span> <span class="fu">paste</span>(name, <span class="at">collapse =</span> <span class="st">","</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 49 × 2
+   homeworld      personaje                                      
+   &lt;chr&gt;          &lt;chr&gt;                                          
+ 1 Alderaan       Leia Organa,Bail Prestor Organa,Raymus Antilles
+ 2 Aleen Minor    Ratts Tyerell                                  
+ 3 Bespin         Lobot                                          
+ 4 Bestine IV     Jek Tono Porkins                               
+ 5 Cato Neimoidia Nute Gunray                                    
+ 6 Cerea          Ki-Adi-Mundi                                   
+ 7 Champala       Mas Amedda                                     
+ 8 Chandrila      Mon Mothma                                     
+ 9 Concord Dawn   Jango Fett                                     
+10 Corellia       Han Solo,Wedge Antilles                        
+# ℹ 39 more rows</code></pre>
+</div>
+</div>
+<p>Podemos hacer agrupaciones por mas de una variable, por ejemplo por planeta de origen y sexo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(homeworld, sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">personaje =</span> <span class="fu">paste</span>(name, <span class="at">collapse =</span> <span class="st">","</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'homeworld'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 61 × 3
+# Groups:   homeworld [49]
+   homeworld      sex    personaje                          
+   &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;                              
+ 1 Alderaan       female Leia Organa                        
+ 2 Alderaan       male   Bail Prestor Organa,Raymus Antilles
+ 3 Aleen Minor    male   Ratts Tyerell                      
+ 4 Bespin         male   Lobot                              
+ 5 Bestine IV     male   Jek Tono Porkins                   
+ 6 Cato Neimoidia male   Nute Gunray                        
+ 7 Cerea          male   Ki-Adi-Mundi                       
+ 8 Champala       male   Mas Amedda                         
+ 9 Chandrila      female Mon Mothma                         
+10 Concord Dawn   male   Jango Fett                         
+# ℹ 51 more rows</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Desafio: Rutas metabolicas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se realizó un experimento para ver cambios en la expresión de genes entre tres tratamientos sometidos a condiciones experimentales diferentes, cada condición con tres replicas.</p>
+<p>Como resultado del análisis de expresión diferencial de genes se obtuvieron dos bases de datos:</p>
+<ul>
+<li><code>RNAseq_GED_Deseq2_P0.05.txt</code> con la lista de genes expresados diferencial mente y su valor de abundancia (expresión) en cada uno de las replicas.</li>
+<li><code>RNAseq_enrich_kegg.txt</code> con los resultados de las principales rutas metabólicas enriquecidas y los genes que se encuentran en cada ruta.</li>
+</ul>
+<p>Importa ambas bases de datos y en una sola cadena gráfica los valores de expresión de cada replica de cada tratamiento de los genes que estén involucradas en cualquier proceso catabólico <code>catabolic process</code> tal como se muestra en la imagen.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># abrir lista de genes expresados diferencialmente</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>ged <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/RNAseq_GED_Deseq2_P0.05.txt"</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>enrich <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/RNAseq_enrich_kegg.txt"</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>enrich <span class="sc">%&gt;%</span> </span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(Term, <span class="st">"catabolic"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(Genes, <span class="at">sep =</span> <span class="st">","</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Genes, Term) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(ged, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Genes"</span> <span class="ot">=</span> <span class="st">"gene"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Genes, Term, <span class="fu">contains</span>(<span class="st">"_rep"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="sc">-</span>Genes, <span class="sc">-</span>Term), <span class="at">names_to =</span> <span class="st">"muestra"</span>, <span class="at">values_to =</span> <span class="st">"expresion"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(muestra, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"condicion"</span>, <span class="st">"replica"</span>), <span class="at">sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Genes, <span class="at">y =</span> expresion, <span class="at">color =</span> condicion))<span class="sc">+</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.3</span>))<span class="sc">+</span></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Term, <span class="at">scales =</span> <span class="st">"free_x"</span>)<span class="sc">+</span></span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Expresión"</span>, <span class="at">color =</span> <span class="st">"Condición"</span>)<span class="sc">+</span></span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="9_Union_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
