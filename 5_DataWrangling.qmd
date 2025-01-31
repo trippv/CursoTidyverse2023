@@ -8,7 +8,13 @@ editor_options:
 ::: callout-objetivos
 ## Objetivos
 
-Este es un bloque personalizado con un gorro de graduación como ícono.
+Al final de esta lección serás capaz de:
+
+-   Filtrar y manipular valores de datos tabulares.
+-   Realizar operaciones agrupadas.
+-   Manejar pipes para unir cadena de operaciones en un data.frame
+-   Filtrar y manipular datos faltantes (`NA`)
+
 :::
 
 # El formato Tidy
@@ -679,3 +685,71 @@ pinguinos <- read_csv("data/palmer_penguins.csv") %>%
   summarise(tamano_promedio = mean(flipper_length_mm, na.rm = TRUE)) 
 ```
 :::
+
+# Manejo de datos faltantes `NA`
+
+Los datos faltantes (`NA`) son bastante comunes en el análisis de datos y puedes afectar los resultados y ser un verdadero dolor en el 🍑 si no se manejan adecuadamente.    
+
+## Detectar valores faltantes
+
+Para estos ejercicios utilizaremos nuestra base de pingünos `penguins`
+
+
+Para detectar valores faltantes en nuestra base de datos podemos utilizar herramientas como `ìs.na()` en conjunto con la función `any()`
+
+```{r}
+any(is.na(penguins))
+```
+
+`is.na()` nos dice cuales valores de nuestra tabla son NA (`TRUE`) o no (`FALSE`) mientras que la función `any()` nos dice si hay algun valor faltante en cualquier punto de la tabla
+
+
+La función `summary()` también nos puede dar un panorama de cuantos datos faltantes hay en la base de datos. 
+
+```{r}
+summary(penguins)
+```
+
+
+## `drop_na`
+
+La función `drop_na` nos permite descartar **todas** las filas que contengan valores faltantes en alguna de sus columnas.
+
+```{r}
+penguins %>% 
+  drop_na() 
+```
+
+Esta función también nos permite eliminar los datos faltantes de una columna en especifica. Por ejemplo, si queremos preservar los individuos de los que tenemos el dato del sexo, podemos ejecutar:
+
+```{r}
+penguins %>% 
+  drop_na(sex)
+```
+
+
+## Reemplazar `NA`con un valor especifico con `replace`_na()`
+
+La función `replace_na()` nos permite reemplazar los valores faltantes de una o varias columnas. Como esto implica de transformar una columna, entonces tendremos que anidarla de la función `mutate()`
+
+```{r}
+penguins %>% 
+  mutate(bill_length_mm = replace_na(bill_length_mm, 100))
+```
+
+
+Incluso podemos reemplazar los valores faltantes con el valor promedio.
+
+```{r}
+penguins %>% 
+  mutate(bill_length_mm = replace_na(bill_length_mm, mean(bill_length_mm, na.rm = TRUE)))
+```
+
+
+```{r}
+penguins %>% 
+  group_by(species) %>% 
+  mutate(bill_length_mm = replace_na(bill_length_mm, mean(bill_length_mm, na.rm = TRUE))) 
+```
+
+

@@ -104,6 +104,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>
+div.callout-ejercicio.callout {
+  border-left-color: #f56c49;
+}
+div.callout-ejercicio.callout-style-default > .callout-header {
+  background-color: rgba(245, 108, 73, 0.13);
+}
+div.callout-ejercicio .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-ejercicio.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free';
+  content: '\f164';
+  background-image: none;
+}
 div.callout-thumbs-up.callout {
   border-left-color: #008000;
 }
@@ -125,18 +137,6 @@ div.callout-todo.callout-style-default > .callout-header {
 div.callout-todo .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
 div.callout-todo.callout-style-default .callout-icon::before, div.callout-todo.callout-titled .callout-icon::before {
   content: '📝';
-  background-image: none;
-}
-div.callout-ejercicio.callout {
-  border-left-color: #f56c49;
-}
-div.callout-ejercicio.callout-style-default > .callout-header {
-  background-color: rgba(245, 108, 73, 0.13);
-}
-div.callout-ejercicio .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-ejercicio.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free';
-  content: '\f164';
   background-image: none;
 }
 </style>
@@ -262,6 +262,12 @@ div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-e
   <li><a href="#count" id="toc-count" class="nav-link" data-scroll-target="#count"><code>count()</code></a></li>
   <li><a href="#simplificación-de-categorias" id="toc-simplificación-de-categorias" class="nav-link" data-scroll-target="#simplificación-de-categorias">Simplificación de categorias</a></li>
   <li><a href="#ejercicios-de-repaso" id="toc-ejercicios-de-repaso" class="nav-link" data-scroll-target="#ejercicios-de-repaso">Ejercicios de repaso</a></li>
+  <li><a href="#manejo-de-datos-faltantes-na" id="toc-manejo-de-datos-faltantes-na" class="nav-link" data-scroll-target="#manejo-de-datos-faltantes-na">Manejo de datos faltantes <code>NA</code></a>
+  <ul class="collapse">
+  <li><a href="#detectar-valores-faltantes" id="toc-detectar-valores-faltantes" class="nav-link" data-scroll-target="#detectar-valores-faltantes">Detectar valores faltantes</a></li>
+  <li><a href="#drop_na" id="toc-drop_na" class="nav-link" data-scroll-target="#drop_na"><code>drop_na</code></a></li>
+  <li><a href="#reemplazar-nacon-un-valor-especifico-con-replace_na" id="toc-reemplazar-nacon-un-valor-especifico-con-replace_na" class="nav-link" data-scroll-target="#reemplazar-nacon-un-valor-especifico-con-replace_na">Reemplazar <code>NA</code>con un valor especifico con <code>replace</code>_na()`</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -299,7 +305,13 @@ div.callout-ejercicio.callout-style-default .callout-icon::before, div.callout-e
 
 <section id="objetivos" class="level2 callout-objetivos">
 <h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
-<p>Este es un bloque personalizado con un gorro de graduación como ícono.</p>
+<p>Al final de esta lección serás capaz de:</p>
+<ul>
+<li>Filtrar y manipular valores de datos tabulares.</li>
+<li>Realizar operaciones agrupadas.</li>
+<li>Manejar pipes para unir cadena de operaciones en un data.frame</li>
+<li>Filtrar y manipular datos faltantes (<code>NA</code>)</li>
+</ul>
 </section>
 <section id="el-formato-tidy" class="level1">
 <h1>El formato Tidy</h1>
@@ -1540,8 +1552,163 @@ Ejercicio 2
 </div>
 </div>
 </div>
+</section>
+<section id="manejo-de-datos-faltantes-na" class="level1">
+<h1>Manejo de datos faltantes <code>NA</code></h1>
+<p>Los datos faltantes (<code>NA</code>) son bastante comunes en el análisis de datos y puedes afectar los resultados y ser un verdadero dolor en el 🍑 si no se manejan adecuadamente.</p>
+<section id="detectar-valores-faltantes" class="level2">
+<h2 class="anchored" data-anchor-id="detectar-valores-faltantes">Detectar valores faltantes</h2>
+<p>Para estos ejercicios utilizaremos nuestra base de pingünos <code>penguins</code></p>
+<p>Para detectar valores faltantes en nuestra base de datos podemos utilizar herramientas como <code>ìs.na()</code> en conjunto con la función <code>any()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(penguins))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><code>is.na()</code> nos dice cuales valores de nuestra tabla son NA (<code>TRUE</code>) o no (<code>FALSE</code>) mientras que la función <code>any()</code> nos dice si hay algun valor faltante en cualquier punto de la tabla</p>
+<p>La función <code>summary()</code> también nos puede dar un panorama de cuantos datos faltantes hay en la base de datos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species             island          bill_length_mm  bill_depth_mm  
+ Length:344         Length:344         Min.   :32.10   Min.   :13.10  
+ Class :character   Class :character   1st Qu.:39.23   1st Qu.:15.60  
+ Mode  :character   Mode  :character   Median :44.45   Median :17.30  
+                                       Mean   :43.92   Mean   :17.15  
+                                       3rd Qu.:48.50   3rd Qu.:18.70  
+                                       Max.   :59.60   Max.   :21.50  
+                                       NA's   :2       NA's   :2      
+ flipper_length_mm  body_mass_g       sex                 year     
+ Min.   :172.0     Min.   :2700   Length:344         Min.   :2007  
+ 1st Qu.:190.0     1st Qu.:3550   Class :character   1st Qu.:2007  
+ Median :197.0     Median :4050   Mode  :character   Median :2008  
+ Mean   :200.9     Mean   :4202                      Mean   :2008  
+ 3rd Qu.:213.0     3rd Qu.:4750                      3rd Qu.:2009  
+ Max.   :231.0     Max.   :6300                      Max.   :2009  
+ NA's   :2         NA's   :2                                       </code></pre>
+</div>
+</div>
+</section>
+<section id="drop_na" class="level2">
+<h2 class="anchored" data-anchor-id="drop_na"><code>drop_na</code></h2>
+<p>La función <code>drop_na</code> nos permite descartar <strong>todas</strong> las filas que contengan valores faltantes en alguna de sus columnas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 333 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           36.7          19.3               193        3450
+ 5 Adelie  Torgersen           39.3          20.6               190        3650
+ 6 Adelie  Torgersen           38.9          17.8               181        3625
+ 7 Adelie  Torgersen           39.2          19.6               195        4675
+ 8 Adelie  Torgersen           41.1          17.6               182        3200
+ 9 Adelie  Torgersen           38.6          21.2               191        3800
+10 Adelie  Torgersen           34.6          21.1               198        4400
+# ℹ 323 more rows
+# ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Esta función también nos permite eliminar los datos faltantes de una columna en especifica. Por ejemplo, si queremos preservar los individuos de los que tenemos el dato del sexo, podemos ejecutar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 333 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           36.7          19.3               193        3450
+ 5 Adelie  Torgersen           39.3          20.6               190        3650
+ 6 Adelie  Torgersen           38.9          17.8               181        3625
+ 7 Adelie  Torgersen           39.2          19.6               195        4675
+ 8 Adelie  Torgersen           41.1          17.6               182        3200
+ 9 Adelie  Torgersen           38.6          21.2               191        3800
+10 Adelie  Torgersen           34.6          21.1               198        4400
+# ℹ 323 more rows
+# ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="reemplazar-nacon-un-valor-especifico-con-replace_na" class="level2">
+<h2 class="anchored" data-anchor-id="reemplazar-nacon-un-valor-especifico-con-replace_na">Reemplazar <code>NA</code>con un valor especifico con <code>replace</code>_na()`</h2>
+<p>La función <code>replace_na()</code> nos permite reemplazar los valores faltantes de una o varias columnas. Como esto implica de transformar una columna, entonces tendremos que anidarla de la función <code>mutate()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">replace_na</span>(bill_length_mm, <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen          100            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Incluso podemos reemplazar los valores faltantes con el valor promedio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">replace_na</span>(bill_length_mm, <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           43.9          NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">replace_na</span>(bill_length_mm, <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+# Groups:   species [3]
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           38.8          NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
