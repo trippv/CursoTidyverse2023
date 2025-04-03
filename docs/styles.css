@@ -1,63 +1,127 @@
-/* Estilos generales de texto */
-body {
-    font-size: 16px;
-    text-align: justify;
+/* css styles */
+<style>
+.header-spacing {
+    margin-top: 7em; /* Adjust the value as needed */
 }
 
-/* Navbar */
-.navbar {
-    background-color: #386b64 !important; /* Color azul oscuro con importancia */
+
+
+/*modificacion de color de fondo de los resultados 14/11/2023 
+.cell-output {
+  background-color: #d7dbdb;
+  border-radius: 4px;
 }
 
-.navbar a:hover {
-    background-color: #0f8a7a !important; /* Azul más oscuro al hacer hover con importancia */
+
+.callout-caution {
+    background-color: #FDF5E1; /* Color verde claro para callouts de éxito 
 }
 
-/* Logo encima del TOC */
+*/
+
+/* Default cell output styling */
+.cell-output {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Light mode */
+body.light .cell-output {
+    background-color: #d7dbdb; /* Light gray */
+    color: #2b2b2b;           /* Dark gray text */
+    border: 1px solid #cccccc; /* Subtle border */
+}
+
+/* Dark mode */
+body.dark .cell-output {
+    background-color: #2b2b2b; /* Dark gray */
+    color: #f9f9f9;           /* Light text */
+    border: 1px solid #444444; /* Subtle border */
+}
+
+
+
+
+
+p {
+  text-align: justify /* justificar el texto*/
+}
+
+/* added 09/01/2025 */
+.quarto-container {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+}
+
+.quarto-content {
+    margin-right: auto; /* Ensure content stays on the left */
+}
+
+
+.quarto-content {
+    margin-left: 20px; /* Adjust this value as needed */
+}
+
+
+/* Callout personalizado */
+.callout-objetivos {
+  border-left: 4px solid #83e69d; /* Color del borde */
+  background-color: rgba(131, 230, 157, 0.1); /* Fondo translúcido */
+  padding: 1em;
+  border-radius: 8px;
+}
+
+.callout-objetivos h2::before {
+  content: "\f19d"; /* Unicode del ícono de gorro de graduación */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Estilo sólido del ícono */
+  margin-right: 0.5em;
+  color: #808080; /* Color del ícono */
+}
+
+
+
+/*----------LOGO above TOC---------*/
+
 #TOC::before {
-    content: "";
-    display: block;
-    height: 150px;
-    margin: 2em 20px 40px 20px;
-    background-image: url("img/logo.png");
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-/* TOC ajustes generales */
-#toc {
-    font-size: 10px !important; /* Tamaño de letra más pequeño */
-    width: 100% !important;
-    border: none;
-}
-
-/*----------------ADDING WHITE SPACE-------------*/
-
-.title {
-  margin-top: 2em !important;
-  margin-bottom: 0.75em;
-}
-
-.section h1,
-.section h2, 
-.section h3, 
-.section h4, 
-.section h5 { 
-  padding-top: 3em !important; /*adding so much padding because theme adds a margin-top: -65px by default */
-  margin-bottom: 0.75em;
-}
-
-.center {
+  content: "";
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  height: 150px;
+  margin: 2em 20px 40px 20px;
+  background-image: url("img/logo.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.alert-info {
-    background-color: #0e9a83;
-    border-color: #007367;
-    color: #ffffff;
-    font-weight: 900;
+
+/* Ajusta el tamaño de letra y espaciado en el TOC */
+.toc {
+  font-size: 0.75em; /* Reduce el tamaño de la fuente valor original 0.9*/
+  line-height: 1.4; /* Mejora la legibilidad */
 }
+
+.toc a {
+  font-size: 0.65em; /* Tamaño específico para enlaces valor original 0.85*/
+  text-decoration: none; /* Quita el subrayado */
+  color: #000000; /* Color por defecto */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Transición suave */
+}
+
+.toc a:hover {
+  text-decoration: underline; /* Subraya al pasar el ratón */
+  color: #ff5722; /* Cambia a naranja al pasar el cursor */
+}
+
+.toc ul {
+  margin: 0;
+  padding: 0;
+}
+
+.toc li {
+  margin-bottom: 0.5em; /* Reduce el espacio entre elementos */
+}
+
+
+</style>
+
