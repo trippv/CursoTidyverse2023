@@ -1,0 +1,372 @@
+---
+title: "Análisis de series de tiempo"
+author: "Tripp Valdez MA"
+---
+
+::: callout-objetivos
+## Objetivos
+
+Al final de esta lección serás capaz de:
+
+-   Reconocer los distintos tipos de objetos de fechas y fecha-tiempo.
+-   Visualizar series de tiempo.
+-   Agrupar datos de acuerdo a lapsos de tiempo.
+-   Entender e identificar los patrones principales en las series de tiempo: tendencia, estacional y residual.
+:::
+
+# Introducción a los objetos de tiempo en R
+
+En R, existen varios tipos de objetos para manejar fechas y horas. Es importante entenderlos antes de comenzar a trabajar con series de tiempo.
+
+1.  `Date`
+
+-   Representa objetos sin hora `YYY-m-d`.
+-   Se almacena como número de días desde el 1 de enero de 1970.
+
+2.  `DateTime`
+
+-   Representa objetos con fecha y hora `YYY-m-d H:M:S`.
+
+-   Podemos encontrarlo en dos formatos distintos:
+
+    -   `POSIXct` almacena la fecha como el número de segundos desde 1970-01-01.
+    -   `POSIXlt` almacena la fecha como una lista con componentes individuales (año, mes, día, hroa, etc.)
+
+Veamos algunos ejemplos:
+
+```{r}
+# evaluar la fecha actual
+fecha <- Sys.Date()
+
+fecha
+
+
+class(fecha)
+```
+
+```{r}
+#Evaluar la hora actual
+hora <- Sys.time()
+hora
+
+class(hora)
+```
+
+Podemos convertir un objeto `POSIXct` a uno `POSIXlt` con la función `as.POSIXlt`
+
+```{r}
+hora_lt <- as.POSIXlt(hora)
+hora_lt
+
+class(hora_lt)
+```
+
+A simple vista pareciera que no hay cambio, pero la diferencia entre los formatos se hace evidente cuando usamos la función `unclass()`
+
+```{r}
+unclass(hora)
+
+
+unclass(hora_lt)
+```
+
+Por engorroso que sea esto, es importante reconocer los distintos formatos de tiempo y fecha ya que en las bases de datos podemos toparnos con distintos formatos y es importante ser capaces de homogenizarlos.
+
+Por ejemplo, veamos la base de datos de
+
+```{r}
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+
+url <- "https://raw.githubusercontent.com/PacktPublishing/Hands-On-Time-Series-Analysis-with-R/master/Chapter02/dates_formats.csv"
+
+
+dates_df <- read_csv(url)
+
+glimpse(dates_df)
+```
+
+Esto es algo que nos podríamos encontrar comúnmente en nuestro trabajo, !Cada fecha tiene un formato completamente diferente!
+
+Para poder homogeneizarlo, necesitamos especificar el formato de cada uno, para lo cual ocupamos símbolos especiales.
+
+| Símbolo | Significado                                                                             | Ejemplo                  |
+|------------------------|------------------------|------------------------|
+| %a      | Abrevia el nombre del día de la semana de acuerdo a la configuración de cada plataforma | Sun, Mon, Thu            |
+| %A      | Nombre completo del día de la semana                                                    | Sunday, Monday, Thursday |
+| %b      | Nombre abreviado del mes de acuerdo a la configuración de cada plataforma               | Jan, Feb, Mar            |
+| %B      | Nombre completo del mes                                                                 | January, February, March |
+| %d      | Día del mes como número decimal                                                         | 01, 02, 03               |
+| %m      | Mes como número decimal                                                                 | 01, 02, 03               |
+| %y      | Año sin el siglo (dos dígitos)                                                          | 25                       |
+| %Y      | Año con siglo (cuatro dígitos)                                                          | 2025                     |
+
+```{r}
+dates_df %>% 
+  mutate(US_format = as.POSIXct(US_format, format = "%m/%d/%Y"))
+```
+
+::: callout-warning
+# ¡Cuidado!
+
+Es importante que el formato sea el mismo (uso de `/` o `-` como separadores). De lo contrario no se podrá cambiar el formato
+:::
+
+Ahora vamos a modificar la columna `US_long_format`
+
+```{r}
+dates_df %>% 
+  mutate(US_long_format = as.POSIXct(US_long_format, format = "%A, %B %d, %Y"))
+```
+
+# Manejo de fechas con **Lubridate**
+
+Lubridate es un paquete que nos facilita el trabajar con los distintos formatos de fecha y tiempo. Lo único que se requiere hacer es usar el orden correcto de las abreviaciones (y = año; m = mes; d = día).
+
+Para ponerlo a prueba, vamos a hacer las mismas modificaciones que realizamos anteriormente.
+
+**Lubridate ya viene incorporado dentro del Tidyverse**
+
+```{r}
+dates_df %>% 
+  mutate(US_format = mdy(US_format))
+```
+
+```{r}
+dates_df %>% 
+  mutate(US_long_format = mdy(US_long_format))
+```
+
+Entonces, dependiendo de la estructura de la fecha, vamos a indicar la función `ymd` para **año**, **mes**, **día**; `mdy` para **mes**, **día**, **año**; etc.
+
+Por ejemplo:
+
+```{r}
+dates_df %>% 
+  mutate(Japanese_format = ymd(Japanese_format))
+
+dates_df %>% 
+  mutate(SA_mix_format = dmy(SA_mix_format))
+```
+
+Ademas, `lubridate` puede reconocer estructuras mas complejas en las fechas, por ejemplo:
+
+```{r}
+#| echo: false
+#| output: false
+
+
+Sys.setlocale("LC_TIME", "es_ES.UTF-8")
+```
+
+```{r}
+
+
+
+fecha_mx <- "Lunes, 31 de diciembre del 2020"
+dmy(fecha_mx)
+
+
+fecha_us <- "Monday, December 31 2020"
+mdy(fecha_us)
+```
+
+Para estructura de fechas mas complejas que incluyen la hora, podemos extender la funcion agregando `_hms`.
+
+```{r}
+fecha_us_hora <- "Monday, December 31, 2018 11:59:59 PM"
+mdy_hms(fecha_us_hora)
+
+
+fecha_mx_hora <- "Lunes, 31 de diciembre, 2018 11:59:59 PM"
+dmy_hms(fecha_mx_hora )
+```
+
+::: callout-warning
+# Advertencía
+
+En caso de que haya incomposibilidades en el idioma, quiza sea necesario ajustar el locale. por ejemplo:
+
+```{r}
+#| echo: true
+#| eval: false
+#| output: false
+Sys.setlocale("LC_TIME", "es_ES.UTF-8")
+```
+:::
+
+# Extraer componentes de una serie de tiempo
+
+Para analizar mas a detalle como extraer los distintos componentes de una serie de tiempo asi como calcular promedios por intervalos específicos, vamos a utilizar una base de datos de temperatura superficial del mar de dos sitios diferentes y de dos fuentes diferentes.
+
+```{r}
+sst_data <- read_csv("data/OSTIA_SST_LOL-BA_2000-2022.csv")
+```
+
+::: callout-warning
+Antes de utilizar esta base de datos, vamos hacer un prefiltrado:
+
+-   Filtrar solamente los datos de Bahia de Los Angeles (BA)
+-   Obtener el promedio de cada base de datos (un dato por fecha)
+
+```{r}
+sst_data_tidy <- sst_data %>% 
+  filter(site == "BA") %>%
+  group_by(date) %>% 
+  summarise(temperatura_promedio = mean(mean_sst, na.rm =TRUE)) %>% 
+  mutate(date = ymd(date)) 
+```
+:::
+
+Antes que nada, podemos graficar la serie de tiempo
+
+```{r}
+ggplot(sst_data_tidy, aes(x = date, y = temperatura_promedio))+
+  geom_line()+
+  geom_smooth(se = FALSE)+
+  labs(x = "Fecha",
+       y = "Temperatura")
+```
+
+Una forma de simplificar una serie de tiempo es agregar los datos por alguna frecuencia especifica (diaria, mensual, estacional, anual)
+
+Para nuestra suerte, `lubridate` tiene funciones para extraer diferentes componentes de un objeto `DateTime`
+
+```{r}
+year(sst_data_tidy$temperatura_promedio) %>% 
+  head
+```
+
+```{r}
+month(sst_data_tidy$date, label = TRUE) %>% 
+  head
+```
+
+Con esta información, podemos agregar los datos con `group_by()` para obtener el valor promedio mensual
+
+```{r}
+sst_data_mensual <- sst_data_tidy %>% 
+  mutate(año = year(date),
+         mes = month(date)) %>% 
+  group_by(año, mes) %>% 
+  summarise(temperatura_mensual = mean(temperatura_promedio)) %>% 
+  ungroup()
+```
+
+Esto cumple nuestro cometido, pero observa que las columnas de `año` y `mes` son de tipo carácter 🤦‍♂️
+
+
+Esto lo podemos resolver de dos formar:
+
+1. Crear una nueva columna donde unimos el año y el mes en un objeto `DateTime`
+
+```{r}
+sst_data_mensual <- sst_data_mensual %>% 
+  mutate(fecha = paste(mes, año, sep = "-")) %>% 
+  mutate(fecha = my(fecha))
+```
+
+
+```{r}
+ggplot(sst_data_mensual, aes(x = fecha, y = temperatura_mensual))+
+  geom_line()
+```
+
+
+2. Utilizar el paquete [Timetk](https://business-science.github.io/timetk/) el cual ofrece diversas funciones que facilitan el análisis de series de tiempo.
+
+```{r}
+#install.packages("timetk")
+library(timetk)
+```
+
+Entre las funciones tenemos la función `summarize_by_time` que nos permite agrupar los datos de acuerdo a diversos intervalos de tiempo.
+
+Como promedios mensuales `month`
+
+```{r}
+sst_data_mensual <- sst_data_tidy %>% 
+  summarise_by_time(.date_var = date, # especifica la columna con la fecha
+                    .by = "month", #month, daily, year
+                    temperatura_mensual = mean(temperatura_promedio))
+```
+
+```{r}
+ggplot(sst_data_mensual, aes(x = date, y = temperatura_mensual))+
+  geom_line()
+```
+
+o promedios anuales `year`
+
+```{r}
+sst_data_anual <- sst_data_tidy %>% 
+  summarise_by_time(.date_var = date, 
+                    .by = "year", 
+                    temperatura_anual = mean(temperatura_promedio))
+```
+
+```{r}
+ggplot(sst_data_anual, aes(x = date, y = temperatura_anual))+
+  geom_line()
+```
+
+
+El paquete `timetk` también nos permite gráficar directamente nuestra serie de tiempo con la función `plot_time-series`.
+
+Esta necesita los parámetros:
+
+*   `.date_var=`: Columna con las fechas en formato `DateTime`
+*   `.value=`: Valores que se van a gráficar
+
+```{r}
+sst_data_tidy %>% 
+  plot_time_series(.date_var = date, .value = temperatura_promedio)
+```
+
+## Extraer el componente estacional, tendencia y anomalías
+
+La descomposición de las serie de tiempo busca separar la serie en sus principales componentes: observada, estacional, tendencia y residuo. 
+
+*   **Observada (Observed):** Es la serie de tiempo original.Contiene todas las variaciones, patrones y tendencias presentes en los datos.
+
+*   **Estacional (Seasonal):** Representa los patrones que se repiten en intervalos fijos (estacionalidad).
+
+*   **Tendencia (Trend):** Muestra los cambios a largo plazo en la serie y permite identificar aumentos o disminuciones graduales en los datos, eliminando el ruido a corto plazo.
+
+*   **Residuo (Remainder):** También llamado componente de error o ruido. Es lo que queda después de eliminar la tendencia y la estacionalidad. Idealmente, debe parecerse a un ruido blanco (fluctuaciones aleatorias sin patrón definido).
+
+
+Estos componentes puedes extraerse con la función `plot_stl_diagnostics` del paquete `timetk`.
+
+
+```{r}
+sst_data_tidy %>% 
+  plot_stl_diagnostics(
+    .date_var = date,                 # Columna que contiene las fechas de la serie temporal.
+    .value = temperatura_promedio,     # Columna con los valores a analizar (temperatura).
+    .frequency = "year",               # Estacionalidad de la serie (ciclos de un año).
+    .trend = "1 year"                  # Suaviza las fluctuaciones con una ventana de un año.
+  )
+
+```
+
+Finalmente podemos obtener boxplot de los datos en diferente estacionalidad (anual, mensual, diaria, etc)
+
+
+
+```{r}
+
+sst_data_tidy %>% 
+  plot_seasonal_diagnostics(
+    .date_var = date,              
+    .value = temperatura_promedio,   
+    .feature_set = c("month.lbl", "year")
+  )
+
+
+
+```
+

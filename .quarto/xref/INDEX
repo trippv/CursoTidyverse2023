@@ -73,5 +73,20 @@
   },
   "9_Union.qmd": {
     "9_Union.html": "58e50bdd"
+  },
+  "10_Across.qmd": {
+    "10_Across.html": "5200939c"
+  },
+  "10_Statistics.qmd": {
+    "10_Statistics.html": "e5df2400"
+  },
+  "10_TimeSeries.qmd": {
+    "10_TimeSeries.html": "acc6d789"
+  },
+  "11_TimeSeries.qmd": {
+    "11_TimeSeries.html": "8e6083ec"
+  },
+  "8_ggplotNoCode.qmd": {
+    "8_ggplotNoCode.html": "491df0e8"
   }
 }

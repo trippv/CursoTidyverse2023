@@ -1,5 +1,5 @@
 ---
-title: "Manipulación de datos. Parte I"
+title: "Manipulación de datos"
 author: "Miguel A. Tripp Valdez"
 editor_options: 
   chunk_output_type: console
@@ -12,9 +12,8 @@ Al final de esta lección serás capaz de:
 
 -   Filtrar y manipular valores de datos tabulares.
 -   Realizar operaciones agrupadas.
--   Manejar pipes para unir cadena de operaciones en un data.frame
--   Filtrar y manipular datos faltantes (`NA`)
-
+-   Manejar pipes para unir cadena de operaciones en un data.frame.
+-   Filtrar y manipular datos faltantes (`NA`).
 :::
 
 # El formato Tidy
@@ -43,7 +42,7 @@ El paquete Dplyr proporciona un conjunto coherente de funciones que permiten rea
 -   `mutate()`: agrega nuevas columnas a una tabla.
 -   `summarise()`: calcula estadísticas para cada grupo de una tabla.
 
-::: callout-note
+:::: callout-note
 # Sobre la base de datos
 
 ::: column-margin
@@ -63,7 +62,7 @@ Para esta sección utilizaremos una versión modificada de la base POKEMON de [K
 -   **Speed**: Velocidad. Determina cual Pokémon ataca primero en cada ronda
 -   **Weight**: peso en kg Generatio: A cual generación pertenece
 -   **is legendary**: Si es legendario o no
-:::
+::::
 
 ```{r}
 #| message: false
@@ -78,7 +77,7 @@ pokemon <- read_csv("data/pokemon.csv")
 pokemon
 ```
 
-Vamos a correjir los nombres de las columnas con **janitor**
+Vamos a corregir los nombres de las columnas con **janitor**
 
 ```{r}
 pokemon <- clean_names(pokemon)
@@ -151,7 +150,7 @@ select(pokemon, name, contains("attack"))
 
 # Filtrar variables con `filter()`
 
-![](img/Horst_functions/filter.png)
+![Allison Horst (\@allison_horst)](img/Horst_functions/filter.png)
 
 La función `filter()` nos permite filtrar los elementos de una variable (columna) que cumplan con una condición especifica.
 
@@ -167,7 +166,6 @@ Para establecer varios condiciones, simplemente las podemos separar por una `,`.
 filter(pokemon, attack > 100, type1 == "fire")
 ```
 
-::: column-margin
 ::: callout-tip
 Si tienes muchas condiciones, puedes escribir cada condición en una línea diferente.
 
@@ -179,11 +177,10 @@ filter(pokemon, attack > 100,
        speed > 50)
 ```
 :::
-:::
 
 Si queremos filtrar distintas condiciones de una misma variable (columna) podemos usar el operador `%in%`.
 
-Por ejemplo, para filtar los pokemon que sean de tipo fuego **y** agua
+Por ejemplo, para filtrar los pokemon que sean de tipo fuego **y** agua
 
 ```{r}
 filter(pokemon, type1 %in% c("fire", "water"))
@@ -192,7 +189,7 @@ filter(pokemon, type1 %in% c("fire", "water"))
 ::: callout-note
 # Nota
 
-Si tienes muchas condiciones o si tienes las mismas condiciones que quieres filtrar en distintos sets de datos, puedes hacer un vector y despues incorporarlo en la funcion filter. Por ejemplo
+Si tienes muchas condiciones o si tienes las mismas condiciones que quieres filtrar en distintos sets de datos, puedes hacer un vector y después incorporarlo en la función `filter()`. Por ejemplo
 
 ```{r}
 tipos <- c("fire", "normal", "water")
@@ -219,7 +216,7 @@ Podemos usar la operación opuesta utilizando el operado `!`
 filter(pokemon, !between(attack, 100, 150))
 ```
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # **Ejercicio: ¿¡QUIEN ES ESE POKEMON!?** 📣
 
 ::: column-margin
@@ -240,25 +237,25 @@ filter(pokemon, between(hp, 100, 200),
        defense < 40,
        generation == 1)
 ```
-:::
+::::
 
 ## Filtrar variables con un patrón; `str_detec()`
 
-Tambien es posible filtrar una variable a partir de un caracter en especifico usando la función `str_detect()`.
+También es posible filtrar una variable a partir de un carácter en especifico usando la función `str_detect()`.
 
 ```{r string_detect}
 filter(pokemon, str_detect(name, "eon"))
 
 ```
 
-Si buscamos multiples patrones dentro de nuestra variable con caracteres, podemos separarlas dentro de las comillas usando el símbolo "\|". Por ejemplo, si queremos buscar los Pokemon cuyo nombre termine con "*saur*" o que empieza con "*Char*":
+Si buscamos múltiples patrones dentro de nuestra variable con caracteres, podemos separarlas dentro de las comillas usando el símbolo "\|". Por ejemplo, si queremos buscar los Pokemon cuyo nombre termine con "*saur*" o que empieza con "*Char*":
 
 ```{r}
 filter(pokemon, str_detect(name, "saur|Char"))
 ```
 
 ::: {.callout-caution icon="false"}
-# Ejercicio: Una galaxía muy lejana...
+# Ejercicio: Una galaxia muy lejana...
 
 Abre la tabla `starwars` que se encuentra en el directorio de *databases* y genera los siguientes objetos:
 
@@ -269,11 +266,11 @@ Abre la tabla `starwars` que se encuentra en el directorio de *databases* y gene
 
 # Transformar o crear columnas con `mutate()`
 
-![](img/Horst_functions/mutate.png){fig-align="center" width="500"}
+![Allison Horst (\@allison_horst)](img/Horst_functions/mutate.png){fig-align="center" width="500"}
 
-La función `mutate()` es una función versatil en el sentido que nos permite crear nuevas variables que contengan alguna operación a partir de las que ya tenemos, añadir una nueva variable o transformar una variable ya existente
+La función `mutate()` es una función versátil en el sentido que nos permite crear nuevas variables que contengan alguna operación a partir de las que ya tenemos, añadir una nueva variable o transformar una variable ya existente
 
-Por ejemplo, podemos generar una nueva columna llamada “at_df_ratio” con la propoción de los valores de Ataque sobre Defensa
+Por ejemplo, podemos generar una nueva columna llamada “at_df_ratio” con la proporción de los valores de Ataque sobre Defensa
 
 ```{r mutate_ratio}
 pokemon_mutate <- mutate(pokemon, at_df_ratio = attack/defense )
@@ -302,7 +299,7 @@ pokemon_mutate
 ::: callout-tip
 # Protip
 
-Cuando generas una nueva conlumna con mutate, puedes ajustar la posición de la columna incluyendo el parámetro `.before =` o `.after =` indicando la posición de la columna deseada
+Cuando generas una nueva columna con *mutate*, puedes ajustar la posición de la columna incluyendo el parámetro `.before =` o `.after =` indicando la posición de la columna deseada
 
 ```{r}
 pokemon_mutate <- mutate(pokemon, pokemon_ratio = attack / defense, 
@@ -331,7 +328,7 @@ El operador `%\>%` nos permite aplicar una serie de funciones secuenciales a un 
 
 **Dplyr** importa este operador de otro paquete (**magrittr**). De manera general, el operador permite unir el resultado de una función a la entrada de otra función.
 
-Por ejemplo, para filtrar los Pokemon con valor de ataque mayor a 100, seleccionar las columnas Name y Attack y posteriormente mostrar solo las primeras seis filas (head) tendría que correr la siguiente linea:
+Por ejemplo, para filtrar los Pokemon con valor de ataque mayor a 100, seleccionar las columnas *Name* y *Attack* y posteriormente mostrar solo las primeras seis filas (head) tendría que correr la siguiente linea:
 
 ```{r pipe_exam}
 head(select(filter(pokemon, attack < 100), name, attack))
@@ -367,13 +364,13 @@ Desde su versión 4.1.0, R incluye un pipe nativo `|>`. El comportamiento de amb
 Para fines de este curso, nos enfocaremos a usar el pipe de **magritrr**.
 :::
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 Para escribir rápidamente el operador `%>%` teclea Ctrl+shift+M
 :::
-:::
+::::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # Ejercicio: Pingüinos
 
 ::: column-margin
@@ -416,7 +413,7 @@ penguins_e3 <- penguins %>%
 
 
 ```
-:::
+::::
 
 # Resumen de los datos; `summarise()` y `group_by()`.
 
@@ -434,7 +431,7 @@ penguins %>%
   summarise(promedio = mean(body_mass_g, na.rm = TRUE))
 ```
 
-o aplicar el promedio y desviación estandar
+o aplicar el promedio y desviación estándar
 
 ```{r}
 penguins %>% 
@@ -474,7 +471,7 @@ Existen otras funciones útiles por las que nos podría interesar agrupar
 -   `quantile(x, 0.25)`
 -   `IQR()`
 
-El uso de la función `group_by()` tambien nos permite transformar una variable e incluirla en una columna en conjunto con la función `mutate()`
+El uso de la función `group_by()` también nos permite transformar una variable e incluirla en una columna en conjunto con la función `mutate()`
 
 ```{r}
 penguins %>% 
@@ -509,14 +506,13 @@ starwars %>%
   count(homeworld, sort = TRUE)
 ```
 
-Tambien es posible hacer contenos anidados incluyendo mas variables separadas por comas:
+También es posible hacer conteos anidados incluyendo mas variables separadas por comas:
 
 ```{r}
 starwars %>% 
   count(species, homeworld, sort = TRUE)
 ```
 
-::: column-margin
 ::: callout-tip
 Por default, la función `count()` nombra *n* al número de items de cada grupo. Eso se puede modificar agregando el parámetro `name`.
 
@@ -528,9 +524,8 @@ starwars %>%
         name = "numero")
 ```
 :::
-:::
 
-# Simplificación de categorias
+# Simplificación de categorías
 
 Hay ocasiones en las que queremos obtener la frecuencia de ocurrencias de alguna categoría pero no nos importa mucho aquellas que tienen muy poca frecuencia y queremos agruparlas. Para esto, podemos incorporar una función del paquete `forcats` llamada `fct_lump_min`. Este convierte las observaciones con una frecuencia mínima y le asigna una etiqueta
 
@@ -553,8 +548,8 @@ starwars_fct
 
 ------------------------------------------------------------------------
 
-::: {.callout-caution icon="false"}
-# Ejercicio: TIburon a la vista!!
+:::: {.callout-caution icon="false"}
+# Ejercicio: !!Tiburón a la vista!!
 
 ::: column-margin
 ![](img/sharky.jpeg){fig-align="center" width="316"}
@@ -570,7 +565,7 @@ Con esta nueva tabla y usando las herramientas vista al momento, contesta lo sig
 -   ¿Que país tiene el mayor número de registros de ataque?
 -   ¿Que actividad tiene el mayor número de registros?
 -   ¿Que actividad tiene el mayor número de registros con resultado fatal?
--   ¿Que país tiene el mayor número de registros de tiburon blanco?
+-   ¿Que país tiene el mayor número de registros de tiburón blanco?
 
 > Nota: observa que hay registros como "white shark" y otros como "White shark"
 
@@ -611,7 +606,7 @@ attacks_tidy %>%
   
 
 ```
-:::
+::::
 
 # Ejercicios de repaso
 
@@ -688,12 +683,11 @@ pinguinos <- read_csv("data/palmer_penguins.csv") %>%
 
 # Manejo de datos faltantes `NA`
 
-Los datos faltantes (`NA`) son bastante comunes en el análisis de datos y puedes afectar los resultados y ser un verdadero dolor en el 🍑 si no se manejan adecuadamente.    
+Los datos faltantes (`NA`) son bastante comunes en el análisis de datos y puedes afectar los resultados y ser un verdadero dolor en el 🍑 si no se manejan adecuadamente.
 
 ## Detectar valores faltantes
 
 Para estos ejercicios utilizaremos nuestra base de pingünos `penguins`
-
 
 Para detectar valores faltantes en nuestra base de datos podemos utilizar herramientas como `ìs.na()` en conjunto con la función `any()`
 
@@ -703,13 +697,11 @@ any(is.na(penguins))
 
 `is.na()` nos dice cuales valores de nuestra tabla son NA (`TRUE`) o no (`FALSE`) mientras que la función `any()` nos dice si hay algun valor faltante en cualquier punto de la tabla
 
-
-La función `summary()` también nos puede dar un panorama de cuantos datos faltantes hay en la base de datos. 
+La función `summary()` también nos puede dar un panorama de cuantos datos faltantes hay en la base de datos.
 
 ```{r}
 summary(penguins)
 ```
-
 
 ## `drop_na`
 
@@ -727,8 +719,7 @@ penguins %>%
   drop_na(sex)
 ```
 
-
-## Reemplazar `NA`con un valor especifico con `replace`_na()`
+## Reemplazar `NA`con un valor especifico con `replace`\_na()\`
 
 La función `replace_na()` nos permite reemplazar los valores faltantes de una o varias columnas. Como esto implica de transformar una columna, entonces tendremos que anidarla de la función `mutate()`
 
@@ -737,7 +728,6 @@ penguins %>%
   mutate(bill_length_mm = replace_na(bill_length_mm, 100))
 ```
 
-
 Incluso podemos reemplazar los valores faltantes con el valor promedio.
 
 ```{r}
@@ -745,11 +735,8 @@ penguins %>%
   mutate(bill_length_mm = replace_na(bill_length_mm, mean(bill_length_mm, na.rm = TRUE)))
 ```
 
-
 ```{r}
 penguins %>% 
   group_by(species) %>% 
   mutate(bill_length_mm = replace_na(bill_length_mm, mean(bill_length_mm, na.rm = TRUE))) 
 ```
-
-

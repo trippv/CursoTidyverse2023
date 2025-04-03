@@ -3,6 +3,16 @@ title: "Manipulación de tablas"
 author: "Tripp Valdez MA"
 ---
 
+::: callout-objetivos
+## Objetivos
+
+Al final de esta lección serás capaz de:
+
+-   Diferenciar entre tipos de estructuras datos tabulares.
+-   Unir dos o mas tablas a partir de una variable relacional.
+-   Unir o separar elementos de una misma variable.
+:::
+
 # Tidy data
 
 Al principio del curso aprendimos un poco sobre la filosofía Tidy y como se aplica en la construcción y análisis de datos tabulados.

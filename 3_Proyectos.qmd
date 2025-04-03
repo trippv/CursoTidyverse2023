@@ -3,7 +3,7 @@ title: "Proyectos en Rstudio"
 author: "Miguel A. Tripp Valdez"
 ---
 
-![\@allison_horst](img/Horst_functions/rProj.png){fig-align="center" width="613"}
+![Alliston Horts (\@allison_horst)](img/Horst_functions/rProj.png){fig-align="center" width="613"}
 
 Independientemente de si estás dando tus primeros pasos en R o si ya eres un experto, es frecuente que la primera línea de tu código sea algo como esto:
 
@@ -35,7 +35,7 @@ Un ejemplo de como podemos estructurar un proyecto es el siguiente:
 
 # Como generar un proyecto nuevo
 
-Para crear un proyecto nuevo sigue estos passos:
+Para crear un proyecto nuevo sigue estos pasos:
 
 1.  Abre Rstudio y selecciona `Archivo` -\> `Nuevo Proyecto`
 
@@ -62,7 +62,7 @@ Ahora prueba creando un proyecto dentro de una carpeta local en tu computadora y
 ::: callout-tip
 ## Pro tip: uso de here() para rutas relativas
 
-El paquete [**`here()`**](https://here.r-lib.org/) se utiliza para construir rutas de archivos y directorios de manera relativa al directorio del proyecto actual. En lugar de utilizar rutas absolutas (que especifican la ruta completa desde la raíz del sistema de archivos) o rutas relativas estándar (que se basan en la ubicación del script en ejecución), **`here()`** crea rutas relativas desde el directorio del proyecto.
+El paquete **`here()`** se utiliza para construir rutas de archivos y directorios de manera relativa al directorio del proyecto actual. En lugar de utilizar rutas absolutas (que especifican la ruta completa desde la raíz del sistema de archivos) o rutas relativas estándar (que se basan en la ubicación del script en ejecución), **`here()`** crea rutas relativas desde el directorio del proyecto.
 :::
 
-![](img/Horst_functions/here.png){fig-align="center" width="560"}
+![Allison Horst (\@allison_horst)](img/Horst_functions/here.png){fig-align="center" width="560"}

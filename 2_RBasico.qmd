@@ -7,7 +7,7 @@ author: "Miguel Tripp"
 
 R es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&T a partir de otro lenguaje de programación.
 
-Entre las caracteristicas que han hecho de R un lenguaje muy popular entre la comunidad científica y academica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso.
+Entre las características que han hecho de R un lenguaje muy popular entre la comunidad científica y académica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso.
 
 ------------------------------------------------------------------------
 
@@ -142,7 +142,7 @@ Es importante resaltar que solamente los `data.frame` pueden contener distintos 
 
 ------------------------------------------------------------------------
 
-Si no sabes que tipo de dato contiene una variable, se puede sar la función `class()`
+Si no sabes que tipo de dato contiene una variable, se puede usar la función `class()`
 
 ```{r uso class, echo=TRUE, include=TRUE}
 
@@ -172,7 +172,7 @@ variables <- c(x, y, z)
 variables
 ```
 
-Los vectores tambien puende contener elementos de otros tipos como **caracteres**, los cuales tienen que ir dentro de comillas `" "`.
+Los vectores también pueden contener elementos de otros tipos como **caracteres**, los cuales tienen que ir dentro de comillas `" "`.
 
 ```{r}
 nombres <- c("Juan", "Pepe", "Sofia")
@@ -181,7 +181,7 @@ nombres <- c("Juan", "Pepe", "Sofia")
 ::: callout-warning
 # 
 
-¿Que pasa si intentamos unir el vector de caracteres (`nombres`) con numeros (`variables`)
+¿Que pasa si intentamos unir el vector de caracteres (`nombres`) con números (`variables`)
 
 ```{r}
 nombre_variable <- c(nombres, variables)
@@ -191,7 +191,7 @@ nombre_variable
 Como las cadenas de texto son el tipo de dato más flexible, siempre que creamos un vector que incluye un dato de este tipo, el resultado será un vector de texto.
 :::
 
-# Uso de paquetes y librerias
+# Uso de paquetes y librerías
 
 R hace uso de paquetes que le permiten extender su funcionalidad y disponer de funciones para aplicaciones especificas.
 

@@ -23,3 +23,13 @@ A continuación encontrarás diversos materiales disponibles en la red con la qu
     -   [R ladies](https://www.youtube.com/@RLadiesGlobal) - R-Ladies es una organización mundial cuya misión es promover la diversidad de género en la comunidad R.
 
     -   [Community of Bioinformatics Software Developers](https://www.youtube.com/@CDSB/videos) - Canal de bioinformática con númerosos tutoriales de R desde nivel principiante hasta análisis avanzados.
+
+    -   [Albert Rapp](https://www.youtube.com/@rappa753/videos) - Contiene numerosos tutoriales básicos y avanzados para el análisis de datos en R
+
+-   Cheat Sheets
+
+    -   [Dplyr](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+    -   [ggplot2](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+    -   [readr](https://rstudio.github.io/cheatsheets/data-import.pdf)
+    -   [stringr](https://rstudio.github.io/cheatsheets/strings.pdf)
+    -   [y muchos otros](https://posit.co/resources/cheatsheets/)

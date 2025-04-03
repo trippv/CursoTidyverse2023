@@ -9,10 +9,7 @@ website:
     left:
       - href: index.qmd
         text: Inicio
-      - href: about.qmd
-        text: About
-      - href: apoyo.qmd
-        text: Recursos de apoyo
+
       - text: "Secciones"
         menu:
           - 1_Introduccion.qmd
@@ -22,7 +19,12 @@ website:
           - 5_DataWrangling.qmd
           - 6_VisualizationGgplot.qmd
           - 7_VisualizationGgplot2.qmd
-          - 8_GgplotNoCode.qmd
+          - 8_ggplotNoCode.qmd
+          - 9_Union.qmd
+          - 10_Across.qmd
+          - 11_TimeSeries.qmd
+      - href: apoyo.qmd
+        text: Recursos de apoyo
 
         
     right:
@@ -48,9 +50,9 @@ format:
       body-width: 1200px
       margin-width: 200px
       sidebar-width: 220px
-    theme:
-      light: flatly
-      dark: darkly
+    #theme: cosmo
+#      light: cosmo
+#      dark: darkly
     css:  styles.css
     toc: true
     toc-title: Contenido
@@ -63,19 +65,3 @@ format:
 
 editor: visual
 
-
-custom-callout:
-  ejercicio:
-    icon-symbol: "fa-thumbs-up"
-    title: "Ejercicio"
-    color: "#f56c49"
-    appearance: "default"
-  todo:
-    icon-symbol: "📝"
-    color: "pink"
-  thumbs-up:
-    title: "Great job!"
-    icon-symbol: "fa-thumbs-up"
-    color: "#008000"
-filters:
-- custom-callout

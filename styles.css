@@ -3,6 +3,9 @@
 .header-spacing {
     margin-top: 7em; /* Adjust the value as needed */
 }
+
+
+
 /*modificacion de color de fondo de los resultados 14/11/2023 
 .cell-output {
   background-color: #d7dbdb;
@@ -76,6 +79,22 @@ p {
   color: #808080; /* Color del ícono */
 }
 
+
+
+/*----------LOGO above TOC---------*/
+
+#TOC::before {
+  content: "";
+  display: block;
+  height: 150px;
+  margin: 2em 20px 40px 20px;
+  background-image: url("img/logo.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
 /* Ajusta el tamaño de letra y espaciado en el TOC */
 .toc {
   font-size: 0.75em; /* Reduce el tamaño de la fuente valor original 0.9*/
@@ -85,10 +104,13 @@ p {
 .toc a {
   font-size: 0.65em; /* Tamaño específico para enlaces valor original 0.85*/
   text-decoration: none; /* Quita el subrayado */
+  color: #000000; /* Color por defecto */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Transición suave */
 }
 
 .toc a:hover {
   text-decoration: underline; /* Subraya al pasar el ratón */
+  color: #ff5722; /* Cambia a naranja al pasar el cursor */
 }
 
 .toc ul {

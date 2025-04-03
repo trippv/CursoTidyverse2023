@@ -115,7 +115,7 @@ as_tibble(trees)
 ::: callout-warning
 # ¿Cuidado!
 
-Recuerda que si solo ejecutamos el comando `as_tibble(trees)` R solo nos arrojará el resutlado en la consola pero **no hizo ningún cambio al objeto trees**. Para esto necesitamos renombrar o generar un nuevo objeto. Por ejemplo
+Recuerda que si solo ejecutamos el comando `as_tibble(trees)` R solo nos arrojará el resultado en la consola pero **no hizo ningún cambio al objeto trees**. Para esto necesitamos renombrar o generar un nuevo objeto. Por ejemplo
 
 ```{r}
 trees_tbl <- as_tibble(trees)
@@ -156,7 +156,7 @@ mi_tibl <- tibble(
 mi_tibl
 ```
 
-Nota que al momento de generar este tibble, puedes hacer referencias a columnas del mismo tibble (columa z)
+Nota que al momento de generar este tibble, puedes hacer referencias a columnas del mismo tibble (columna z)
 
 Otro comportamiento de los tibbles es que es posible tener nombres de columnas con espacios u otros caracteres y estos estarán rodeados por ``` `` ```
 
@@ -172,7 +172,7 @@ mi_tibl
 
 ## Importar desde Excel
 
-Las hojas de calculo de excel (formatos `.xls` o `.xlsx`) siguen siendo muy comunes y muy utilizados dentro de la comunidad académica.
+Las hojas de calculo de Excel (formatos `.xls` o `.xlsx`) siguen siendo muy comunes y muy utilizados dentro de la comunidad académica.
 
 **Tidyverse** no tiene dentro de su núcleo una función para importar este tipo de archivos, pero esto se soluciona fácilmente con el paquete `readxl`.
 
@@ -228,7 +228,7 @@ Observa como los tibbles permite que haya símbolos, espacios, acentos y alterna
 
 ## Limpiar etiquetas con **janitor**
 
-![](img/Horst_functions/janitor.png){fig-align="center" width="529"}
+![Allison Horst (\@allison_horst)](img/Horst_functions/janitor.png){fig-align="center" width="529"}
 
 El paquete **Janitor** es una herramienta pequeña pero increíblemente útil y conveniente cuando se trata de limpiar y mantener conjuntos de datos en R. Además, es un paquete orientado a *Tidyverse*, por lo que se integra perfectamente con los pipes.
 
@@ -254,7 +254,7 @@ colnames(excel_df)
 
 Lo ideal es tener consistencia en el formato de las etiquetas. Algunos formatos conocidos se ilustran a continuación:
 
-![](img/Horst_functions/cases.jpeg){fig-align="center" width="484"}
+![Allison Horst (\@alisson_horst)](img/Horst_functions/cases.jpeg){fig-align="center" width="484"}
 
 Ahora utilicemos **janitor** para limpiar las etiquetas
 
@@ -323,7 +323,7 @@ La función `summary()` es parte de las funciones base de R y es particularmente
 summary(excel_clean)
 ```
 
-Otra herramienta un poco mas sofisticada pero bastante útil es la función `gt_plt_summary()` del paquete **gtExtras**, la cual nos permite gráficar cada una de las variables, nos muestra los valores promedio, mediana y desvicación, y ádemas nos muestra el % de valores faltantes (missing).
+Otra herramienta un poco mas sofisticada pero bastante útil es la función `gt_plt_summary()` del paquete **gtExtras**, la cual nos permite graficar cada una de las variables, nos muestra los valores promedio, mediana y desviación, y además nos muestra el % de valores faltantes (missing).
 
 Para utilizar esta herramienta, primero necesitamos instalar el paquete **gtExtras** y posteriormente cargar la librería.
 
@@ -376,22 +376,16 @@ o con `write.table()` la cual nos permite usar una mayor diversidad de formatos
 write.table(excel_subset, file = "resultados/tablas/excel_subset.txt", sep = "\t")
 ```
 
-
-
-
 ::: {.callout-caution icon="false"}
 # **Ejercicio**
 
 Pon a prueba tus conocimientos
 
-1. Abre el archivo `ejercicio_readxls.xlsx` que se encuentra dentro de la carpeta `datos`.
-2. Evalúa a partir de que se fila inicia los datos de interés.
-3. Limpia los nombres de las columnas con **janitor**.
-4. Visualiza con `summary` o con `gt_plt_summary()` las variables de la tabla. ¿Cuales de ellas son categóricas? 
-5. Guarda la nueva tabla como archivo `csv` dentro de la carpeta `resultados/tablas`.
-
-
-
+1.  Abre el archivo `ejercicio_readxls.xlsx` que se encuentra dentro de la carpeta `datos`.
+2.  Evalúa a partir de que se fila inicia los datos de interés.
+3.  Limpia los nombres de las columnas con **janitor**.
+4.  Visualiza con `summary` o con `gt_plt_summary()` las variables de la tabla. ¿Cuales de ellas son categóricas?
+5.  Guarda la nueva tabla como archivo `csv` dentro de la carpeta `resultados/tablas`.
 
 ```{r}
 #| include: true
@@ -406,12 +400,4 @@ summary(e1_clean)
 write_csv(x = e1_clean, 
           file = "resultados/tablas/ejercicio_readxls_clean.csv")
 ```
-
-
-
-
 :::
-
-
-
-

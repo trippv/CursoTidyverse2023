@@ -56,7 +56,7 @@ esquisser(penguins)
 ```
 :::
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 Si tienes problemas con la ventana de esquisser en el panel, puedes abrirla en una ventana del explorador usando el parámetro `viewer = "browser"`
 
@@ -66,13 +66,13 @@ Si tienes problemas con la ventana de esquisser en el panel, puedes abrirla en u
 esquisser(viewer = "browser")
 ```
 :::
-:::
+::::
 
 Una vez seleccionados los datos, podemos proceder a arrastrar cada uno de las variables a los distintos *aes*. Dependiendo del tipo de datos, `esquisser` nos sugerirá una geometría (*geom*) adecuada para los datos o podemos seleccionar manualmente el tipo de gráfico.
 
 ![Alt Text](img/gif/esquisser_use.gif){width="800"}
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # Desafio: Etch a sketch
 
 ::: column-margin
@@ -117,7 +117,7 @@ pokesketch <- pokemon %>%
 
 pokesketch
 ```
-:::
+::::
 
 # ggplotgui
 
@@ -180,7 +180,7 @@ Una vez instalado, para usarlo es necesario seleccionar un objeto ggplot que ya 
 
 Estas herramientas facilitan la exploración de datos y la edición de objetos ggplot, pero todas ellas tienen limitaciones para la edición mas fina o el uso de ciertos geoms no tan comunes.
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # Desafio: Haz tu propio theme
 
 ::: column-margin
@@ -249,7 +249,7 @@ Ahora que sabes como hacer tu tema personalizado, el desafio consiste en generar
 ![](img/journal_theme.gif){fig-align="center" width="350"}
 
 Puedes utilizar cualquiera de las herramientas que hemos revisado hasta el momento, así como la hoja de referencia de elementos dentro de `theme()`
-:::
+::::
 
 ![Eleméntos gráficos que se pueden modificar dentro de la función `theme()`](img/theme_cheatsheet.jpeg){fig-align="center"}
 

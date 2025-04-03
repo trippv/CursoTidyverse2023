@@ -5,19 +5,15 @@ editor_options:
   chunk_output_type: console
 ---
 
-
-
 ::: callout-objetivos
 ## Objetivos
 
 Al final de esta lección serás capaz de:
 
-*   Utilizar `ggplot2` para gráficar variables cualitativas y cuantitativas
-*   Reconocer los distintos elementos que componen un gráfico de `ggplot2`
-*   Utilizar disintos tipos de geometrias (*geoms*) de acuerdo al tipo de variable
-
+-   Utilizar `ggplot2` para gráficar variables cualitativas y cuantitativas.
+-   Reconocer los distintos elementos que componen un gráfico de `ggplot2`.
+-   Utilizar distintos tipos de geometrías (*geoms*) de acuerdo al tipo de variable.
 :::
-
 
 # Introducción
 
