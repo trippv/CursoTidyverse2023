@@ -25,7 +25,7 @@
     "href": "index.html#temario-del-curso",
     "title": "Análisis de datos con Tidyverse",
     "section": "Temario del curso",
-    "text": "Temario del curso\n\n\n\n\n\n\n\n\nDía\nHora\nTema\n\n\n\n\nLunes\n10:00 - 14:00\nIntroducción\n\nIntroducción a R y Tidyverse\nCreación y organización de proyectos en Rstudio\nImportar y exportar datos\nTibbles\n\n\n\nMartes\n10:00 - 14:00\nManipulación de datos con Dplyr\n\nselect()\nfilter()\nmutate()\npipes %&gt;%\nOperaciones agrupadas group_by()\nsummarise()\n\n\n\nMiércoles\n10:00 - 14:00\nVisualización de datos con ggplot\n\nGramática de las gráficas\nGeoms y aestethics\n\n\n\nJueves\n10::00 - 14:00\nVisualización de datos con ggplot\n\nEdición\nggplot sin código\n\n\n\nViernes\n10:00 - 14:00\nManipulación de datos\n\nOperaciones por columnas (across())\n\nReportes"
+    "text": "Temario del curso\n\n\n\n\n\n\n\n\nDía\nHora\nTema\n\n\n\n\nLunes\n10:00 - 14:00\nIntroducción\n\nIntroducción a R y Tidyverse\nFamiliarización con el IDE Rstudio\nCreación y organización de proyectos con Rstudio\nImportar y exportar datos\nTibbles\nUso de Posit Cloud\n\n\n\nMartes\n10:00 - 14:00\nManipulación de datos con Dplyr\n\nselect()\nfilter()\nmutate()\npipes %&gt;%\nOperaciones agrupadas group_by()\nsummarise()\n\n\n\nMiércoles\n10:00 - 14:00\nVisualización de datos con ggplot\n\nGramática de las gráficas\nGeoms y aestethics\n\n\n\nJueves\n10::00 - 14:00\nVisualización de datos con ggplot\n\nEdición (temas, etiquetas, paletas de colores)\nggplot sin código\n\n\n\nViernes\n10:00 - 14:00\nManipulación de tablas\n\nPivot\nUnión de tablas\nTransformaciones por columnas (across())\n\nAnálisis de series de tiempo\n\nLubridate"
   },
   {
     "objectID": "9_Union.html",
