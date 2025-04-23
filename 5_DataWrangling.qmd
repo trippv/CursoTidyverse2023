@@ -6,7 +6,7 @@ editor_options:
 ---
 
 ::: callout-objetivos
-## Objetivos
+### 🎓Objetivos
 
 Al final de esta lección serás capaz de:
 

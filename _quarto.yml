@@ -25,43 +25,30 @@ website:
           - 11_TimeSeries.qmd
       - href: apoyo.qmd
         text: Recursos de apoyo
-
-        
     right:
       - icon: github
-        href: https://github.com
-  # sidebar:
-  #   style: "docked"
-  #   border: true
-  #   search: true
-  #   background: light
-  #   contents:
-  #     - 2.Proyectos.qmd
-  #     - 3.Data_import.qmd
-  #     - 4.data_wrangling.qmd
-  #     - 5.visualization_ggplot.qmd
-  #     - 6.visualization_ggplot_pt2.qmd
-  #     - 7.ggplot_sin_codigo.qmd
-  page-navigation: true
+        href: https://github.com/trippv/CursoTidyverse2023
+
+
 
 format:
   html:
     grid: 
       body-width: 1200px
       margin-width: 200px
-      sidebar-width: 220px
-    #theme: cosmo
-#      light: cosmo
-#      dark: darkly
+      sidebar-width: 270px # incremento el espacio del toc
+    theme: cosmo
     css:  styles.css
     toc: true
     toc-title: Contenido
     number-sections: false
-    #number-depth: 2
     toc-expand: 1
     toc-location: left
     page-layout: article # provides content area with margins
+    page-navigation: true
 
+dependencies:
+  - quarto-ext/fontawesome
 
 editor: visual
 

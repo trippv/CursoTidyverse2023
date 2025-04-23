@@ -2,7 +2,7 @@
 title: "Recursos de apoyo"
 ---
 
-A continuación encontrarás diversos materiales disponibles en la red con la que puedes ampliar tus conocimientos en R y ciencia de datos
+A continuación se muestran diversos materiales disponibles en la red con los que puedes ampliar tus conocimientos en R y ciencia de datos
 
 -   Libros en línea
 

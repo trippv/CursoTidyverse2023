@@ -1,88 +1,105 @@
 /* css styles */
-<style>
+
+
+/* ====================== */
+/* ESTILOS GENERALES DEL NAVBAR */
+/* ====================== */
+
+/* Contenedor principal del navbar */
+.navbar {
+    background-color: #2e7d7d !important;  /* Color de fondo verde azulado */
+    position: sticky !important;          /* Fija el navbar al hacer scroll */
+    top: 0;                              /* Lo posiciona en la parte superior */
+    z-index: 1000;                       /* Asegura que esté por encima de otros elementos */
+    padding: 0.5rem 1rem;                /* Espaciado interno (mejora visual) */
+}
+
+/* Texto del navbar (título y enlaces) */
+.navbar,
+.navbar .navbar-brand,                  /* Estilo para el logo/título */
+.navbar .nav-link {                     /* Estilo para los items de menú */
+    color: white !important;            /* Color blanco para texto */
+    font-weight: 500;                   /* Grosor de fuente medio */
+    transition: all 0.3s ease;          /* Transición suave para efectos hover */
+}
+
+/* Efecto hover para enlaces */
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+    opacity: 0.8;                       /* Ligera transparencia al pasar el mouse */
+    text-decoration: none;              /* Elimina subrayado predeterminado */
+}
+
+/* ====================== */
+/* ESPACIADO Y ESTRUCTURA */
+/* ====================== */
+
+/* Margen superior para compensar navbar fijo */
 .header-spacing {
-    margin-top: 7em; /* Adjust the value as needed */
+    margin-top: 7em;                   /* Espacio para que el contenido no quede oculto */
 }
 
+/* ====================== */
+/* ESTILOS DE CÓDIGO */
+/* ====================== */
 
-
-/*modificacion de color de fondo de los resultados 14/11/2023 
+/* Contenedor de outputs de código */
 .cell-output {
-  background-color: #d7dbdb;
-  border-radius: 4px;
+    padding: 10px;                     /* Espaciado interno */
+    border: 2px solid #b2c9d1;         /* Borde azul claro */
+    border-radius: 5px;                /* Esquinas redondeadas */
+    margin: 1rem 0;                    /* Margen vertical */
+    margin-bottom: 2.5rem !important;
+    background-color: #f8f9fa;         /* Fondo gris claro (mejora legibilidad) */
 }
 
 
-.callout-caution {
-    background-color: #FDF5E1; /* Color verde claro para callouts de éxito 
-}
-
-*/
-
-/* Default cell output styling */
-.cell-output {
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Light mode */
-body.light .cell-output {
-    background-color: #d7dbdb; /* Light gray */
-    color: #2b2b2b;           /* Dark gray text */
-    border: 1px solid #cccccc; /* Subtle border */
-}
-
-/* Dark mode */
-body.dark .cell-output {
-    background-color: #2b2b2b; /* Dark gray */
-    color: #f9f9f9;           /* Light text */
-    border: 1px solid #444444; /* Subtle border */
-}
-
-
-
-
-
-p {
-  text-align: justify /* justificar el texto*/
-}
-
-/* added 09/01/2025 */
+/* Container adjustments */
 .quarto-container {
     display: flex;
-    justify-content: flex-start; /* Align content to the left */
+    justify-content: flex-start;
 }
 
 .quarto-content {
-    margin-right: auto; /* Ensure content stays on the left */
+    margin-right: auto;
+    margin-left: 20px;
 }
 
 
-.quarto-content {
-    margin-left: 20px; /* Adjust this value as needed */
+
+/* ====================== */
+/* CALLOUT NOTE (AZUL CLARO) */
+/* ====================== */
+.callout-note {
+    background-color: #e6f2ff !important;  /* Azul claro */
+    border-left: 4px solid #4d8be8 !important;  /* Borde azul */
+    border-radius: 6px !important;
 }
 
+.callout-tip {
+    background-color:rgba(131, 230, 157, 0.1) !important;  /* Verde claro */
+    border-left: 4px solid #28a745 !important;  /* Borde verde */
+    border-radius: 6px !important;
+}
 
-/* Callout personalizado */
+/* Custom Callout */
 .callout-objetivos {
-  border-left: 4px solid #83e69d; /* Color del borde */
-  background-color: rgba(131, 230, 157, 0.1); /* Fondo translúcido */
+  border-left: 4px solid #83e69d;
+  background-color: rgba(131, 230, 157, 0.1);
   padding: 1em;
   border-radius: 8px;
+  margin: 1em 0;
 }
 
 .callout-objetivos h2::before {
-  content: "\f19d"; /* Unicode del ícono de gorro de graduación */
+  content: "\f19d";
   font-family: "Font Awesome 5 Free";
-  font-weight: 900; /* Estilo sólido del ícono */
+  font-weight: 900;
   margin-right: 0.5em;
-  color: #808080; /* Color del ícono */
+  color: #808080;
 }
 
-
-
-/*----------LOGO above TOC---------*/
-
+/* TOC Logo */
 #TOC::before {
   content: "";
   display: block;
@@ -94,34 +111,4 @@ p {
   background-repeat: no-repeat;
 }
 
-
-/* Ajusta el tamaño de letra y espaciado en el TOC */
-.toc {
-  font-size: 0.75em; /* Reduce el tamaño de la fuente valor original 0.9*/
-  line-height: 1.4; /* Mejora la legibilidad */
-}
-
-.toc a {
-  font-size: 0.65em; /* Tamaño específico para enlaces valor original 0.85*/
-  text-decoration: none; /* Quita el subrayado */
-  color: #000000; /* Color por defecto */
-  transition: color 0.3s ease, text-decoration 0.3s ease; /* Transición suave */
-}
-
-.toc a:hover {
-  text-decoration: underline; /* Subraya al pasar el ratón */
-  color: #ff5722; /* Cambia a naranja al pasar el cursor */
-}
-
-.toc ul {
-  margin: 0;
-  padding: 0;
-}
-
-.toc li {
-  margin-bottom: 0.5em; /* Reduce el espacio entre elementos */
-}
-
-
-</style>
 
