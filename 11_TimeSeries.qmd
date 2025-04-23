@@ -4,8 +4,7 @@ author: "Tripp Valdez MA"
 ---
 
 ::: callout-objetivos
-## Objetivos
-
+### 🎓Objetivos
 Al final de esta lección serás capaz de:
 
 -   Reconocer los distintos tipos de objetos de fechas y fecha-tiempo.
@@ -93,16 +92,16 @@ Esto es algo que nos podríamos encontrar comúnmente en nuestro trabajo, !Cada 
 
 Para poder homogeneizarlo, necesitamos especificar el formato de cada uno, para lo cual ocupamos símbolos especiales.
 
-| Símbolo | Significado                                                                             | Ejemplo                  |
+| Símbolo | Significado | Ejemplo |
 |------------------------|------------------------|------------------------|
-| %a      | Abrevia el nombre del día de la semana de acuerdo a la configuración de cada plataforma | Sun, Mon, Thu            |
-| %A      | Nombre completo del día de la semana                                                    | Sunday, Monday, Thursday |
-| %b      | Nombre abreviado del mes de acuerdo a la configuración de cada plataforma               | Jan, Feb, Mar            |
-| %B      | Nombre completo del mes                                                                 | January, February, March |
-| %d      | Día del mes como número decimal                                                         | 01, 02, 03               |
-| %m      | Mes como número decimal                                                                 | 01, 02, 03               |
-| %y      | Año sin el siglo (dos dígitos)                                                          | 25                       |
-| %Y      | Año con siglo (cuatro dígitos)                                                          | 2025                     |
+| %a | Abrevia el nombre del día de la semana de acuerdo a la configuración de cada plataforma | Sun, Mon, Thu |
+| %A | Nombre completo del día de la semana | Sunday, Monday, Thursday |
+| %b | Nombre abreviado del mes de acuerdo a la configuración de cada plataforma | Jan, Feb, Mar |
+| %B | Nombre completo del mes | January, February, March |
+| %d | Día del mes como número decimal | 01, 02, 03 |
+| %m | Mes como número decimal | 01, 02, 03 |
+| %y | Año sin el siglo (dos dígitos) | 25 |
+| %Y | Año con siglo (cuatro dígitos) | 2025 |
 
 ```{r}
 dates_df %>% 
@@ -174,7 +173,7 @@ fecha_us <- "Monday, December 31 2020"
 mdy(fecha_us)
 ```
 
-Para estructura de fechas mas complejas que incluyen la hora, podemos extender la funcion agregando `_hms`.
+Para estructura de fechas mas complejas que incluyen la hora, podemos extender la función agregando `_hms`.
 
 ```{r}
 fecha_us_hora <- "Monday, December 31, 2018 11:59:59 PM"
@@ -188,7 +187,7 @@ dmy_hms(fecha_mx_hora )
 ::: callout-warning
 # Advertencía
 
-En caso de que haya incomposibilidades en el idioma, quiza sea necesario ajustar el locale. por ejemplo:
+En caso de que haya incomposibilidades en el idioma, quizá sea necesario ajustar el locale. por ejemplo:
 
 ```{r}
 #| echo: true
@@ -258,10 +257,9 @@ sst_data_mensual <- sst_data_tidy %>%
 
 Esto cumple nuestro cometido, pero observa que las columnas de `año` y `mes` son de tipo carácter 🤦‍♂️
 
-
 Esto lo podemos resolver de dos formar:
 
-1. Crear una nueva columna donde unimos el año y el mes en un objeto `DateTime`
+1.  Crear una nueva columna donde unimos el año y el mes en un objeto `DateTime`
 
 ```{r}
 sst_data_mensual <- sst_data_mensual %>% 
@@ -269,14 +267,12 @@ sst_data_mensual <- sst_data_mensual %>%
   mutate(fecha = my(fecha))
 ```
 
-
 ```{r}
 ggplot(sst_data_mensual, aes(x = fecha, y = temperatura_mensual))+
   geom_line()
 ```
 
-
-2. Utilizar el paquete [Timetk](https://business-science.github.io/timetk/) el cual ofrece diversas funciones que facilitan el análisis de series de tiempo.
+2.  Utilizar el paquete [Timetk](https://business-science.github.io/timetk/) el cual ofrece diversas funciones que facilitan el análisis de series de tiempo.
 
 ```{r}
 #install.packages("timetk")
@@ -313,13 +309,12 @@ ggplot(sst_data_anual, aes(x = date, y = temperatura_anual))+
   geom_line()
 ```
 
-
 El paquete `timetk` también nos permite gráficar directamente nuestra serie de tiempo con la función `plot_time-series`.
 
 Esta necesita los parámetros:
 
-*   `.date_var=`: Columna con las fechas en formato `DateTime`
-*   `.value=`: Valores que se van a gráficar
+-   `.date_var=`: Columna con las fechas en formato `DateTime`
+-   `.value=`: Valores que se van a gráficar
 
 ```{r}
 sst_data_tidy %>% 
@@ -328,19 +323,17 @@ sst_data_tidy %>%
 
 ## Extraer el componente estacional, tendencia y anomalías
 
-La descomposición de las serie de tiempo busca separar la serie en sus principales componentes: observada, estacional, tendencia y residuo. 
+La descomposición de las serie de tiempo busca separar la serie en sus principales componentes: observada, estacional, tendencia y residuo.
 
-*   **Observada (Observed):** Es la serie de tiempo original.Contiene todas las variaciones, patrones y tendencias presentes en los datos.
+-   **Observada (Observed):** Es la serie de tiempo original.Contiene todas las variaciones, patrones y tendencias presentes en los datos.
 
-*   **Estacional (Seasonal):** Representa los patrones que se repiten en intervalos fijos (estacionalidad).
+-   **Estacional (Seasonal):** Representa los patrones que se repiten en intervalos fijos (estacionalidad).
 
-*   **Tendencia (Trend):** Muestra los cambios a largo plazo en la serie y permite identificar aumentos o disminuciones graduales en los datos, eliminando el ruido a corto plazo.
+-   **Tendencia (Trend):** Muestra los cambios a largo plazo en la serie y permite identificar aumentos o disminuciones graduales en los datos, eliminando el ruido a corto plazo.
 
-*   **Residuo (Remainder):** También llamado componente de error o ruido. Es lo que queda después de eliminar la tendencia y la estacionalidad. Idealmente, debe parecerse a un ruido blanco (fluctuaciones aleatorias sin patrón definido).
-
+-   **Residuo (Remainder):** También llamado componente de error o ruido. Es lo que queda después de eliminar la tendencia y la estacionalidad. Idealmente, debe parecerse a un ruido blanco (fluctuaciones aleatorias sin patrón definido).
 
 Estos componentes puedes extraerse con la función `plot_stl_diagnostics` del paquete `timetk`.
-
 
 ```{r}
 sst_data_tidy %>% 
@@ -355,8 +348,6 @@ sst_data_tidy %>%
 
 Finalmente podemos obtener boxplot de los datos en diferente estacionalidad (anual, mensual, diaria, etc)
 
-
-
 ```{r}
 
 sst_data_tidy %>% 
@@ -369,4 +360,3 @@ sst_data_tidy %>%
 
 
 ```
-

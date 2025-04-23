@@ -5,24 +5,21 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 ::: callout-objetivos
-## Objetivos
+### 🎓Objetivos
 
 Al final de esta lección serás capaz de:
 
-*   Modificar aspectos visuales como color, forma, transparencia, etc.
-*   Generar paneles para dividir subconjuntos de datos.
-*   Modificar el tema general de una gráfica.
-*   Modificar etiquetas y leyendas.
-*   Exportar una gráfica en distintos formatos.
-
+-   Modificar aspectos visuales como color, forma, transparencia, etc.
+-   Generar paneles para dividir subconjuntos de datos.
+-   Modificar el tema general de una gráfica.
+-   Modificar etiquetas y leyendas.
+-   Exportar una gráfica en distintos formatos.
 :::
-
 
 # Colores, formas y tamaños; mas sobre aes()
 
-En la sección anterior ya habíamos mencionado como el formato de los _geoms_ nos permite distinguir grupos, clases o estructuras de datos:
+En la sección anterior ya habíamos mencionado como el formato de los *geoms* nos permite distinguir grupos, clases o estructuras de datos:
 
 ```{r aes_demo}
 #| echo: false
@@ -181,7 +178,7 @@ pp +
 
 ```
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 Dado que se requiere un vector con los colores que se deseen utilizar, es posible hacer un objeto con un vector de colores y utilizarlo de forma recurrente en distintas figuras. Por ejemplo
 
@@ -196,7 +193,7 @@ pp +
   scale_color_manual(values = colores)
 ```
 :::
-:::
+::::
 
 ## Ajuste manual de gradientes
 
@@ -288,15 +285,15 @@ pp2 +
   scale_colour_viridis_c(option = "magma")
 ```
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 # ¿Quieres mas colores?
 
 Existen numerosas opciones en línea para escoger colores y paletas de colores. Una herramienta básica es el [Selector de color de Google](https://g.co/kgs/gaCNNmg) que te permite generar el código HEX de un color en específico, o la herramienta [R Color Palettes](https://emilhvitfeldt.github.io/r-color-palettes/) que te permite generar un vector con una paleta de colores.
 :::
-:::
+::::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # Ejercicio: Colores y formas
 
 ::: column-margin
@@ -339,7 +336,7 @@ pokemon %>%
   geom_col()+
   scale_fill_viridis_c()
 ```
-:::
+::::
 
 # Multiples paneles; `facet_wrap()`y `facet_grid()`
 
@@ -421,13 +418,13 @@ ggplot(penguins)+
   facet_wrap(~ island, scales = "free")
 ```
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 Las escalas fijas facilitan visualizar patrones entre los paneles; las escalas variables facilitan ver patrones dentro de cada panel
 :::
-:::
+::::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # Desafio paneles
 
 ::: column-margin
@@ -456,7 +453,7 @@ ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+
 
 -   *Tip1*: Tienes que utilizar dos `geom_points()`; una con la base de datos original y una transformada.
 -   *Tip2*: Presta atención en donde pones el parámetro `color` para cada geom.
-:::
+::::
 
 # Themes
 
@@ -602,7 +599,7 @@ pp +
        caption = "Datos: Palmer Penguins")
 ```
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # Desafio: gráficame como a una de tus chicas francesas
 
 ::: column-margin
@@ -642,7 +639,7 @@ titanic |>
 ```
 
 -   *Tip*: La variable `Survived` tiene valores de 0 (no sobrevivió) y 1 (sobrevivió). ¿Que pasa si tratas de ajustar los colores de esta variable si no se transforma antes?
-:::
+::::
 
 # Exportar un gráfico; `ggsave()`
 
@@ -678,8 +675,8 @@ Alternativamente, ggplot proporciona una opción mas corta con `ggsave()`
 ggsave(plot = pp, filename = "resultados/figuras/ggplot.pdf")
 ```
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 Si no especificas un objeto en el parámetro `plot`, en automático `ggsave()` tomara el último objeto ggplot2 que se haya generado.
 :::
-:::
+::::

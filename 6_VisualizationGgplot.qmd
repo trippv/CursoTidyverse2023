@@ -6,7 +6,7 @@ editor_options:
 ---
 
 ::: callout-objetivos
-## Objetivos
+### 🎓Objetivos
 
 Al final de esta lección serás capaz de:
 
@@ -130,7 +130,7 @@ ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+
   geom_point()
 ```
 
-::: column-margin
+:::: column-margin
 ::: {.callout-tip icon="true"}
 # Donde poner los aes?
 
@@ -150,7 +150,7 @@ ggplot()+
   geom_point(data = data, aes(x = x, y = y))
 ```
 :::
-:::
+::::
 
 ## Aesthetics()
 
@@ -285,7 +285,7 @@ ggplot(penguins, aes(x = species, fill = sex)) +
   geom_bar(position = "fill")
 ```
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 # Ejercicio: Star Wars
 
 ::: column-margin
@@ -327,7 +327,7 @@ starwars %>%
   ggplot(., aes(x = homeworld)) +
   geom_bar()
 ```
-:::
+::::
 
 ### Variable discreta + variable continua
 
@@ -382,7 +382,7 @@ ggplot(data = penguins, aes(x = species, y = bill_length_mm, color = sex))+
   geom_point(position = position_jitterdodge(0.1))
 ```
 
-::: column-margin
+:::: column-margin
 ::: callout-note
 # ¿Jitter? 🤷️
 
@@ -390,7 +390,7 @@ En dotplots, el *jitter* se refiere al desplazamiento aleatorio de puntos de dat
 
 Dado que el valor es aleatorio, cada que se genere la gráfica, el desplazamiento de cada puto puede variar un poco sobre el eje x, pero su valor real (eje y) no se verá afectado.
 :::
-:::
+::::
 
 ### Visualización de una variable continua + una continua
 
@@ -459,7 +459,7 @@ penguins %>%
 ```
 :::
 
-::: callout-warning
+:::: callout-warning
 ::: column-margin
 ![](img/friends_dont_barcharts.jpg){fig-align="center" width="316"}
 :::
@@ -504,4 +504,4 @@ demo %>%
 El uso de histogramas, densidades o gráficas de dispersión nos permite hacer un análisis exploratorio de los datos, permitiendo tomar mejores decisiones sobre el tipo de estadísticos o procesamiento que se van a utilizar.
 
 Puedes encontrar una discusión mas profunda sobra la importancia de la correcta presentación e interpretación de datos en publicaciones científicas [aquí](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128).
-:::
+::::

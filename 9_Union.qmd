@@ -4,7 +4,7 @@ author: "Tripp Valdez MA"
 ---
 
 ::: callout-objetivos
-## Objetivos
+### 🎓Objetivos
 
 Al final de esta lección serás capaz de:
 
@@ -119,12 +119,12 @@ table2 %>%
 
 ```
 
-::: {.callout-caution icon="false"}
+::::: {.callout-caution icon="false"}
 # Ejercicio: Respiración
 
 En el siguiente enlace puedes encontrar datos de consumo de oxígeno de diversos organismos expuestos a dos condiciones experimentales (*"Control"* y *"Experimental"*). Abre el archivo y modifica la tabla para que puedas calcular el promedio diario del consumo de oxígeno y graficalo.
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 Para importar una base de datos que se encuentra en un sitio remoto, simplemente puedes ingresar la ruta (http:www//...) entre comillas dentro de la función para importar los datos (p. ej `read_csv()`).
 
@@ -136,7 +136,7 @@ www <- "https://raw.githubusercontent.com/trippv/Miguel_Tripp/master/respiracion
 df <- read_csv(www)
 ```
 :::
-:::
+::::
 
 ```{r}
 #| include: true
@@ -158,7 +158,7 @@ respiracion %>%
              color = experimento))+
   geom_line()
 ```
-:::
+:::::
 
 # Unir tablas (`_join()`)
 
@@ -259,7 +259,7 @@ band_members %>%
   anti_join(band_instruments)
 ```
 
-::: {.callout-caution icon="false"}
+::::: {.callout-caution icon="false"}
 # Ejercicio: Pokemon
 
 Abre las tablas de `pokemon.csv` y `pokemon_extended.csv` que se encuentran en la carpeta de `data`.
@@ -269,11 +269,11 @@ Usando una sola cadena, une ambas tablas de manera que se retengan todos los ind
 -   ¿Que pasa si no defines la variable de unión `by =`?
 -   ¿Que problema encuentras con el nombre de la variable de unión?
 
-::: column-margin
+:::: column-margin
 ::: callout-tip
 Cuando la variable en común en ambas tablas no tienen la misma etiqueta es necesario especificar un vector de caracteres de tipo `by = c("a" = "b")`. Esto hara una unión de la variable `a`en la tabla `x` con la variable `b` de la tabla `y`. La variable de `x` será utilizada como el resultado.
 :::
-:::
+::::
 
 ```{r}
 #| include: true
@@ -313,7 +313,7 @@ pokemon_extended <- read_csv("data/pokemon_extended.csv") %>%
 pokemon %>% 
   inner_join(pokemon_extended)
 ```
-:::
+:::::
 
 # Separar y unir columnas; `separate()` y `unite()`
 

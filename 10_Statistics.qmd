@@ -3,7 +3,6 @@ title: "Estadísticos con Tidyverse"
 author: "Tripp Valdez MA"
 ---
 
-
 ::: callout-objetivos
 ## Objetivos
 
@@ -11,17 +10,13 @@ Al final de esta lección serás capaz de:
 
 -   Implementar análisis estadisticos compatibles con pipes con el paquete `rstatixs`.
 -   Incluir resultados estadisticos en gráficos generados con ggplot
-
-
 :::
-
 
 # Estadísticos con `rstatix`
 
 El paquete [rstatix](https://rpkgs.datanovia.com/rstatix/) proporciona un marco simple e intuitivo compatible con cadenas (*pipe-friendly*), coherente con la filosofía de diseño del ‘tidyverse’, para realizar pruebas estadísticas básicas, incluyendo pruebas t, prueba de Wilcoxon, ANOVA, Kruskal-Wallis y análisis de correlación.
 
 El resultado de cada prueba se transforma automáticamente en un marco de datos ordenado (tidy data frame) para facilitar la visualización.
-
 
 ## Resumen de los datos con `get_summary_stats()`
 
@@ -43,6 +38,7 @@ penguins <- read_csv("data/palmer_penguins.csv")
 penguins %>% 
   get_summary_stats(flipper_length_mm, type= "full")
 ```
+
 Utilizando la filosofía Tidyverse, podemos obtener los estadísticos por grupos:
 
 ```{r}
@@ -53,41 +49,31 @@ penguins %>%
   
 ```
 
-
-:::callout-tip
-
+::: callout-tip
 Con el parámetro `type` podemos ajustar que tanta información que nos arroja la función, donde algunas de las opciones son:
 
 -   `mean_sd`: Promedio y desviación estándar
 -   `mean_se`: Promedio y error estándar
 -   `five_number`: Mínimo, máximo, q1, q3 y mediana (como en un boxplot)
--   `full`: Nos arroja toda la información 
-
-
-
+-   `full`: Nos arroja toda la información
 
 ```{r}
 penguins %>% 
   group_by(island, species) %>% 
   get_summary_stats(flipper_length_mm, type = "mean_se")
 ```
-
 :::
-
-
 
 # Supuesto de normalidad y varianza
 
 ## `Shapiro_test`
 
-Una de las pruebas mas comunes para la evaluar si nuestra muestra viene de una distribución normal es la prueba de Shapiro. Si bien los principios teóricos de esta prueba van mas allá de los objetivos de este curso, se puede implementar facilmente con la función `shapiro_test()`, en donde el único argumento que necesita es el nombre de la variable de interés. 
+Una de las pruebas mas comunes para la evaluar si nuestra muestra viene de una distribución normal es la prueba de Shapiro. Si bien los principios teóricos de esta prueba van mas allá de los objetivos de este curso, se puede implementar facilmente con la función `shapiro_test()`, en donde el único argumento que necesita es el nombre de la variable de interés.
 
 ```{r}
 penguins %>% 
   shapiro_test(flipper_length_mm)
 ```
-
-
 
 De igual manera,siguiendo la filosofía Tidyverse, podemos realizar la prueba por grupos:
 
@@ -97,18 +83,14 @@ penguins %>%
   shapiro_test(flipper_length_mm)
 ```
 
-
 ## `levene_test()`
 
 Evalúa la homogeneidad de varianzas entre grupos. A diferencia de la función anterior, el estadístico se calcula en función de una variable independiente, por lo que debemos utilizar el operado `~`
-
 
 ```{r}
 penguins %>% 
   levene_test(flipper_length_mm ~ island)
 ```
-
-
 
 De igual manera es posible hacer el estadístico por grupos:
 
@@ -120,7 +102,6 @@ penguins %>%
   levene_test(flipper_length_mm ~ species)
 ```
 
-
 # Comparación de dos gruos con T de student
 
 ```{r}
@@ -128,21 +109,16 @@ penguins %>%
   t_test(flipper_length_mm ~ sex)
 ```
 
-
 ```{r}
 penguins %>% 
   pairwise_t_test(flipper_length_mm ~ species)
 ```
-
-
 
 ```{r}
 penguins %>% 
   group_by(species) %>% 
   t_test(flipper_length_mm ~ sex, p.adjust.method = "BH")
 ```
-
-
 
 # Análisis de varianza
 
@@ -158,15 +134,13 @@ penguins %>%
   anova_test(flipper_length_mm ~ species * sex)
 ```
 
-# Añadir resultados estadísticos a un gráfico de ggplot 
+# Añadir resultados estadísticos a un gráfico de ggplot
 
 ## Uso de`ggpubr`
+
 ```{r}
 library(ggpubr)
 ```
-
-
-
 
 ```{r}
 
@@ -182,6 +156,3 @@ penguins %>%
                                         c("Adelie", "Gentoo"),
                                         c("Chinstrap", "Gentoo")))
 ```
-
-
-

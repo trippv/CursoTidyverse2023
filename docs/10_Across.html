@@ -188,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/trippv/CursoTidyverse2023"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#objetivos" id="toc-objetivos" class="nav-link active" data-scroll-target="#objetivos">Objetivos</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link active" data-scroll-target="#objetivos">🎓Objetivos</a></li>
   <li><a href="#seleccionar-columnas-con-where" id="toc-seleccionar-columnas-con-where" class="nav-link" data-scroll-target="#seleccionar-columnas-con-where">Seleccionar columnas con <code>where()</code></a>
   <ul class="collapse">
   <li><a href="#operaciones-por-columna-con-across" id="toc-operaciones-por-columna-con-across" class="nav-link" data-scroll-target="#operaciones-por-columna-con-across">Operaciones por columna con <code>across()</code></a></li>
@@ -248,8 +248,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="objetivos" class="level2 callout-objetivos">
-<h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
+<section id="objetivos" class="level3 callout-objetivos">
+<h3 class="anchored" data-anchor-id="objetivos">🎓Objetivos</h3>
 <p>Al final de esta lección serás capaz de:</p>
 <ul>
 <li>Filtrar y manipular valores de datos tabulares.</li>
@@ -342,7 +342,7 @@ Warning
  4 Darth Vader           202   136       41.9
  5 Leia Organa           150    49       19  
  6 Owen Lars             178   120       52  
- 7 Beru Whitesun lars    165    75       47  
+ 7 Beru Whitesun Lars    165    75       47  
  8 R5-D4                  97    32       NA  
  9 Biggs Darklighter     183    84       24  
 10 Obi-Wan Kenobi        182    77       57  
@@ -398,7 +398,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <pre><code># A tibble: 1 × 3
   height  mass birth_year
    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1   174.  97.3       87.6</code></pre>
+1   175.  97.3       87.6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># que es lo mismo que </span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
@@ -408,7 +408,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <pre><code># A tibble: 1 × 3
   height  mass birth_year
    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1   178.  77.8       51.3</code></pre>
+1   179.  77.8       51.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># que tambien es lo mismo que:</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
@@ -417,7 +417,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <pre><code># A tibble: 1 × 3
   height  mass birth_year
    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1   174.  97.3       87.6</code></pre>
+1   175.  97.3       87.6</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -443,7 +443,7 @@ Pro tip
 <pre><code># A tibble: 1 × 3
   height  mass birth_year
    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1   174.  97.3       87.6</code></pre>
+1   175.  97.3       87.6</code></pre>
 </div>
 </div>
 <p>y así podemos implementar funciones mas complejas</p>
@@ -454,7 +454,7 @@ Pro tip
 <pre><code># A tibble: 1 × 3
   height  mass birth_year
    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1   5.01 0.574      0.566</code></pre>
+1   5.02 0.574      0.566</code></pre>
 </div>
 </div>
 </div>
@@ -509,7 +509,7 @@ Pro tip
  4 Darth Vader           202 Alto            
  5 Leia Organa           150 Mediano         
  6 Owen Lars             178 Mediano         
- 7 Beru Whitesun lars    165 Mediano         
+ 7 Beru Whitesun Lars    165 Mediano         
  8 R5-D4                  97 Bajo            
  9 Biggs Darklighter     183 Alto            
 10 Obi-Wan Kenobi        182 Alto            
@@ -540,7 +540,7 @@ Pro tip
  4 Darth Vader        Human   Humanoide        
  5 Leia Organa        Human   Humanoide        
  6 Owen Lars          Human   Humanoide        
- 7 Beru Whitesun lars Human   Humanoide        
+ 7 Beru Whitesun Lars Human   Humanoide        
  8 R5-D4              Droid   Alienigena       
  9 Biggs Darklighter  Human   Humanoide        
 10 Obi-Wan Kenobi     Human   Humanoide        

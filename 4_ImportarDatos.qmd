@@ -3,6 +3,16 @@ title: "Importar datos"
 author: "Miguel Tripp Valdez"
 ---
 
+::: callout-objetivos
+### 🎓Objetivos
+
+Al final de esta lección serás capaz de:
+
+-   Importar datos de archivos csv,txt, tsv, xlsx y otros
+-   Reconocer los objetos tibbles y diferenciarlo de un data frame
+-   Exportar datos en diferentes formatos
+:::
+
 # Importar archivos de texto
 
 La importación de archivos de texto es el primer paso y parte fundamental para la exploración de datos. Sin embargo, también puede llegar a ser una tarea complicada.
@@ -293,13 +303,13 @@ excel_clean <- read_excel("data/actividad_enzimas.xlsx",
 excel_clean
 ```
 
-::: column-margin
+:::: column-margin
 ::: callout-note
 # ¿Por que el punto?
 
 `.name_repair=` se pone con un punto para diferenciar que es un parámetro adicional (o auxiliar a la función principal (`read_excel`)
 :::
-:::
+::::
 
 ::: callout-warning
 Observa que tanto **readxl** como **readr** interpretan las columnas de número de experimento, tratamiento y temperatura como variables numéricas debido a que analizan la cantidad de datos para inferir el tipo de variable. No obstante, estas variables son en realidad factores, ya que representan categorías. Más adelante veremos cómo realizar este ajuste de manera manual.
@@ -307,7 +317,7 @@ Observa que tanto **readxl** como **readr** interpretan las columnas de número 
 
 ## Echando un vistado a los datos
 
-Un aspecto importante para el análisis de datos es tener una perspectiva rápida del tibble o datafram para entender las variables que tenemos, asi como los patrones generales de los datos.
+Un aspecto importante para el análisis de datos es tener una perspectiva rápida del tibble o data frame para entender las variables que tenemos, así como los patrones generales de los datos.
 
 Hay varias funciones que podemos utilizar. Ya mencionamos algunas herramienta como `head()` o `tail()` para echar un vistazo a las primeras o últimas filas de la tabla, respectivamente.
 
@@ -321,28 +331,6 @@ La función `summary()` es parte de las funciones base de R y es particularmente
 
 ```{r}
 summary(excel_clean)
-```
-
-Otra herramienta un poco mas sofisticada pero bastante útil es la función `gt_plt_summary()` del paquete **gtExtras**, la cual nos permite graficar cada una de las variables, nos muestra los valores promedio, mediana y desviación, y además nos muestra el % de valores faltantes (missing).
-
-Para utilizar esta herramienta, primero necesitamos instalar el paquete **gtExtras** y posteriormente cargar la librería.
-
-```{r}
-#| echo: true
-#| eval: false
-install.packages("gtExtras")
-```
-
-```{r}
-#| warning: false
-#| comment: false
-#| message: false
-
-
-library(gtExtras)
-
-
-gt_plt_summary(excel_clean)
 ```
 
 ## Exportar datos

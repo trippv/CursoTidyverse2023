@@ -4,7 +4,7 @@ author: "Miguel A. Tripp Valdez"
 ---
 
 ::: callout-objetivos
-## Objetivos
+### 🎓Objetivos
 
 Al final de esta lección serás capaz de:
 
@@ -12,16 +12,11 @@ Al final de esta lección serás capaz de:
 -   Realizar operaciones agrupadas.
 -   Manejar pipes para unir cadena de operaciones en un data.frame.
 -   Filtrar y manipular datos faltantes (`NA`).
-
 :::
-
 
 # Seleccionar columnas con `where()`
 
 La función `where()` es auxiliar para seleccionar columnas en un tibble o data.frame. Anteriormente vimos como podíamos seleccionar columnas especificas basados en caracteres (`starts_with()`, `cointains()`, `ends_with()`). En este caso, `where()` nos permite seleccionar columnas que sean de un tipo especifico (numérico, carácter, factor, etc).
-
-
-
 
 Para los siguientes ejercicios, utilizaremos la base de starwars
 
@@ -35,7 +30,6 @@ library(tidyverse)
 starwars
 ```
 
-
 Por ejemplo, si queremos seleccionar solamente las columnas que tengan valores de tipo **numerico**.
 
 ```{r}
@@ -44,19 +38,14 @@ starwars %>%
   select(where(is.numeric))
 ```
 
-
-
-:::callout-warning
+::: callout-warning
 Recuerda que las funciones `is.numeric()`, `is.character()` y `is.factor()` se utiliza para *"preguntar"* si un objeto es de un tipo especifico donde nos dará un resultado booleano `TRUE` o `FALSE`.
 
 ```{r}
 objeto_caracter = "Esto es un caracter"
 is.character(objeto_caracter)
 ```
-
 :::
-
-
 
 Ademas de que podemos incluir manualmente columnas adicionales
 
@@ -65,25 +54,21 @@ starwars %>%
   select(name, where(is.numeric))
 ```
 
-
 y podemos seleccionar las columnas que sean de tipo caracter
+
 ```{r}
 starwars %>% 
   select(name, where(is.character))
 ```
 
-
-
 ## Operaciones por columna con `across()`
 
-La función `across()` permite aplicar una o mas operaciones a multiples columnas de un tibble o data.frame de manera simultanea. Es particularmente útil para evitar repetir código cuando quieres hacer lo mismo en varias columnas. 
-
+La función `across()` permite aplicar una o mas operaciones a multiples columnas de un tibble o data.frame de manera simultanea. Es particularmente útil para evitar repetir código cuando quieres hacer lo mismo en varias columnas.
 
 `across()` tiene dos argumentos principales:
 
-*   `.cols` que selecciona las columnas a las que deseen hacer una operación. Utiliza la sintaxis de Tidy select, por lo que puedes seleccionar columnas por posición, nombre, tipo, etc.
-*   `.funs` es una función o lista de funciones que se desea aplicar a cada columna. 
-
+-   `.cols` que selecciona las columnas a las que deseen hacer una operación. Utiliza la sintaxis de Tidy select, por lo que puedes seleccionar columnas por posición, nombre, tipo, etc.
+-   `.funs` es una función o lista de funciones que se desea aplicar a cada columna.
 
 ```{r}
 
@@ -103,32 +88,20 @@ starwars %>%
 
 ```
 
-
-
-
-
-
-
-:::callout-tip
+:::: callout-tip
 # Pro tip
-
 
 ::: column-margin
 ![](img/protip.png){fig-align="center" width="500"}
 :::
 
-
-
-
-
-La tercera opción es la forma mas sencilla de poder realizar una operación "_columnwise_". Sin embargo, tal como lo muestra la advertencia es una forma que no es **preferida** en las nuevas versiones de _Tidyverse_ por problemas de compatibilidad en operaciones mas complejas. 
+La tercera opción es la forma mas sencilla de poder realizar una operación "*columnwise*". Sin embargo, tal como lo muestra la advertencia es una forma que no es **preferida** en las nuevas versiones de *Tidyverse* por problemas de compatibilidad en operaciones mas complejas.
 
 Una opción mucho mas versátil es utilizar **funciones anónimas** lo cual permite implementar funciones mas complejas y personalizadas.
 
 Las funciones anonimas se pueden implementar con la sintaxis
 
-`~ mean(.x, na.rm = TRUE) ` 
-
+`~ mean(.x, na.rm = TRUE)`
 
 Entonces, si queremos aplicar el promedio usando esta función anónima:
 
@@ -144,18 +117,17 @@ y así podemos implementar funciones mas complejas
 starwars %>% 
   summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE) / sd(.x,na.rm = TRUE)))
 ```
-
-:::
+::::
 
 # Modificación de valores en una columna con `case_when()`
 
-`case_when()` es una función del paquete dplyr en el ecosistema tidyverse, utilizada para crear nuevas variables o modificar valores de una columna basada en condiciones lógicas, similar a un "_if-else_" estructurado.
+`case_when()` es una función del paquete dplyr en el ecosistema tidyverse, utilizada para crear nuevas variables o modificar valores de una columna basada en condiciones lógicas, similar a un "*if-else*" estructurado.
 
 Es útil cuando:
 
-*   Se necesita asignar valores según múltiples condiciones.
-*   Se quiere evitar el uso repetitivo de ifelse().
-*   Se busca escribir código más limpio y legible.
+-   Se necesita asignar valores según múltiples condiciones.
+-   Se quiere evitar el uso repetitivo de ifelse().
+-   Se busca escribir código más limpio y legible.
 
 Dado que esta función transforme los valores de una columna, se debe de utilizar anidado dentro de `mutate()`
 
@@ -173,11 +145,11 @@ mutate(nueva_columna = case_when(
 
 ```
 
-por ejemplo, si queremos clasificar a nuestros personajes de _starwars_ por su altura usando la clasificación:
+por ejemplo, si queremos clasificar a nuestros personajes de *starwars* por su altura usando la clasificación:
 
-*   "Bajo" si mide menos de 150 cm
-*   "Mediano" si están entre 150 y 180 cm
-*   "Alto" si mide mas de 180 cm
+-   "Bajo" si mide menos de 150 cm
+-   "Mediano" si están entre 150 y 180 cm
+-   "Alto" si mide mas de 180 cm
 
 ```{r}
 starwars %>% 
@@ -189,15 +161,11 @@ starwars %>%
   ))
 ```
 
-
 Ahora clasificaremos las especies en tres grupos según la `specie`:
 
-*   "Humanoide" para "Human" y "Droid".
-*   "Alienígena" para otras especies.
-*   "Desconocido" si la especie no está registrada.
-
-
-
+-   "Humanoide" para "Human" y "Droid".
+-   "Alienígena" para otras especies.
+-   "Desconocido" si la especie no está registrada.
 
 ```{r}
 starwars %>% 
@@ -208,6 +176,3 @@ starwars %>%
       TRUE ~ "Desconocido"
   ))
 ```
-
-
-

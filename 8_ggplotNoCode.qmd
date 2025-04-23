@@ -9,7 +9,7 @@ Afortunadamente, existen algunas alternativas dentro de R que nos ´permiten gen
 
 # Esquisse
 
-Este [addin](https://rstudio.github.io/rstudioaddins/) the permite explorar de forma interactiva tus datos con ggplot. Permite crear gráficos de barras, histogramas, boxplots, etc. y exportar el gráfico u obtener el código.
+Este [addin](https://rstudio.github.io/rstudioaddins/) te permite explorar de forma interactiva tus datos con ggplot. Permite crear gráficos de barras, histogramas, boxplots, etc. y exportar el gráfico u obtener el código.
 
 ## Instalación.
 
