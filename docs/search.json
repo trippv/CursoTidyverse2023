@@ -628,5 +628,12 @@
     "title": "Análisis de datos con Tidyverse",
     "section": "¿Quien desarrolla Tidyverse?",
     "text": "¿Quien desarrolla Tidyverse?"
+  },
+  {
+    "objectID": "slides/introduccion.html#que-es-el-tidyverse",
+    "href": "slides/introduccion.html#que-es-el-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "¿Que es el Tidyverse?",
+    "text": "¿Que es el Tidyverse?\n\n\n\n\n\nUn conjunto de paquetes de R diseñados para ciencia de datos.\nTodos los paquetes comparten una filosofía, gramática y estructura.\nDiseñados para apoyar el flujo de trabajo de cualquier proyecto de análisis de datos."
   }
 ]
