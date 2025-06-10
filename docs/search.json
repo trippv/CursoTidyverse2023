@@ -635,5 +635,12 @@
     "title": "Análisis de datos con Tidyverse",
     "section": "¿Que es el Tidyverse?",
     "text": "¿Que es el Tidyverse?\n\n\n\n\n\nUn conjunto de paquetes de R diseñados para ciencia de datos.\nTodos los paquetes comparten una filosofía, gramática y estructura.\nDiseñados para apoyar el flujo de trabajo de cualquier proyecto de análisis de datos."
+  },
+  {
+    "objectID": "slides/introduccion.html#rstudio",
+    "href": "slides/introduccion.html#rstudio",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Rstudio",
+    "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
   }
 ]
