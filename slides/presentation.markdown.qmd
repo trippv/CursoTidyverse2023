@@ -1,0 +1,76 @@
+---
+title: "Introduction to R, RStudio, and Tidyverse"
+format: 
+  revealjs:
+    theme: default
+    logo: logo.png
+    footer: "Introduction to R and Tidyverse"
+    slide-number: true
+    css: styles/custom.scss
+---
+
+## Introduction to R and RStudio
+
+-   **R**: A programming language for statistical computing and graphics.
+    -   Open-source, widely used in data analysis and research.
+-   **RStudio**: An IDE for R (now part of Posit).
+    -   Features: Code editor, package management, visualization tools, and Quarto integration.
+-   **Why use them?**
+    -   Free, extensible, and supported by a large community.
+    -   Ideal for reproducible research and data science.
+
+------------------------------------------------------------------------
+
+## Introduction to Tidyverse
+
+-   **Tidyverse**: A collection of R packages for data manipulation, visualization, and analysis.
+-   Core packages include:
+    -   `ggplot2`: Advanced data visualization.
+    -   `dplyr`: Data manipulation (filtering, grouping, etc.).
+    -   `tidyr`: Data tidying (reshaping datasets).
+    -   `readr`: Fast data import.
+    -   `purrr`: Functional programming tools.
+    -   `tibble`: Enhanced data frames.
+-   Focuses on "tidy" data principles.
+
+------------------------------------------------------------------------
+
+## Tidyverse vs. R Base
+
+-   **R Base**:
+    -   Uses built-in functions (e.g., `subset()`, `merge()`).
+    -   Syntax can be less consistent and harder to read.
+    -   Suited for basic statistical tasks.
+-   **Tidyverse**:
+    -   Unified syntax with the pipe operator (`%>%` or `|>`) for chaining operations.
+    -   Designed for tidy data (each column a variable, each row an observation).
+    -   More intuitive for complex data workflows.
+
+------------------------------------------------------------------------
+
+## Advantages of Using Tidyverse
+
+-   **Readability**: Pipe-based syntax makes code clear and sequential.
+-   **Consistency**: Shared design philosophy across packages.
+-   **Efficiency**: Simplifies common tasks like filtering, summarizing, and joining.
+-   **Visualization**: `ggplot2` offers publication-quality graphics.
+-   **Community Support**: Extensive tutorials, forums, and documentation.
+
+------------------------------------------------------------------------
+
+## Who Develops and Maintains Tidyverse?
+
+-   **Developed by**: Posit (formerly RStudio), with key contributions from Hadley Wickham.
+-   **Maintained by**:
+    -   Posit team for core packages.
+    -   Open-source contributors via GitHub.
+-   **Updates**: Regular releases and new packages to address modern data needs.
+-   **Community**: Engaged through Posit Community, R conferences, and online platforms.
+
+------------------------------------------------------------------------
+
+## Thank You!
+
+-   Learn more at [tidyverse.org](https://www.tidyverse.org/).
+-   Download R and RStudio at [posit.co](https://posit.co/).
+-   Join the conversation at [community.rstudio.com](https://community.rstudio.com/).
