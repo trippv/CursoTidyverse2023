@@ -19,3 +19,81 @@ title-slide-attributes:
   data-background-opacity: "0.4"
 ---
 
+# Directorios de trabajo
+
+El directorio de trabajo [*working directory*]{.fragment .highlight-red} es la carpeta donde R busca archivos por defecto.
+
+Para saber en que carpeta estas trabajando, puedes usar el comando
+
+```{r}
+getwd()
+```
+
+y para establecer un directorio de trabajo.
+
+```{r}
+#| eval: false
+setwd()
+```
+
+------------------------------------------------------------------------
+
+::::: columns
+::: {.column width="50%"}
+![](img/jenny_fire1.jpeg)
+:::
+
+::: {.column width="50%"}
+![](img/jenny_fire2.jpeg)
+:::
+:::::
+
+Puedes leer la discusión [aqui](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/){target="_blank"}
+
+------------------------------------------------------------------------
+
+```{r}
+#| eval: false
+
+
+library(ggplot2)
+setwd("/Users/miguel/documentos/analisis/data")
+df <- read.delim("datos_crudos.csv")
+
+p <- ggplot(df, aes(x, y)) + geom_point()
+
+setwd("/Users/miguel/documentos/analisis/figuras")
+ggsave("figura_scatterplot.png")
+```
+
+La posibilidad de que esto tenga el efecto deseado en alguien mas es de 0%
+
+::: {.fragment .fade-in}
+![](img/better_way.jpg){fig-align="center" width="500"}
+:::
+
+
+
+# Flujos de trabajo en proyectos
+
+::::: columns
+::: {.column width="40%"}
+![](img/rproj_str.png){width="743"}
+:::
+
+::: {.column width="60%"}
+**Ventajas**:
+
+-   Facilita trabajar con rutas relativas
+-   Mantiene organizados tus scripts, figuras, tablas, etc.
+-   Mejora la reproducibilidad
+-   Evita el uso de `setwd()`
+:::
+:::::
+
+
+------------------------------------------------------------------------
+
+
+![](img/handson.png){fig-alt="manos a la obra" fig-align="center" width="751"}
+
