@@ -1,0 +1,11 @@
+/* Custom styles for Reveal.js presentation in Quarto with simple theme */
+.reveal {
+  /* Background color (customizable) */
+  background-color: #f5f4f0; /* Light blue background */
+}
+
+
+:root {
+  --slide-max-width: 100%; /* O usa 100% si quieres pantalla completa */
+}
+

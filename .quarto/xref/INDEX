@@ -88,5 +88,14 @@
   },
   "8_ggplotNoCode.qmd": {
     "8_ggplotNoCode.html": "491df0e8"
+  },
+  "slides/introduccion.qmd": {
+    "introduccion.html": "5802fd42"
+  },
+  "slides/presentation.markdown.qmd": {
+    "presentation.markdown.html": "1b7b6ce7"
+  },
+  "slides/proyectos.qmd": {
+    "proyectos.html": "f1db36e7"
   }
 }

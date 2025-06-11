@@ -1,0 +1,179 @@
+---
+title: "Análisis de datos con Tidyverse"
+author: "Miguel A. Tripp Valdez"
+date: "`r Sys.Date()`"
+institute: CIBNOR
+format: 
+  revealjs:
+    theme: simple
+    width: 1200
+    slide-number: c/t
+    transition: fade
+    toc: false
+    logo: "img/logo.png"
+    echo: true
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
+    css: styles/custom.scss
+title-slide-attributes: 
+  data-background-image: img/tidyverse_cover.png
+  data-background-size: cover
+  data-background-opacity: "0.4"
+---
+
+## Sobre mi
+
+::::: columns
+::: {.column width="20%"}
+<img src="img/tripp_pic.jpg" alt="tripp" width="100%" style="border-radius: 10px;"/>
+:::
+
+::: {.column width="80%"}
+-   Biólogo Marino (2006; UABCS)\
+-   Maestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\
+-   Doctor en Ciencias Naturales (Uni Bremen/AWI)\
+-   Posdoct Dept Acuicultura (2019 - 2021)\
+-   Posdoct Acuicultura (2022 - 2025; CIBNOR)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## ¿Que es el Tidyverse?
+
+::::: columns
+::: {.column width="30%"}
+<img src="img/tidy_pckg.png" alt="tidyverse packages" width="300%"/>
+:::
+
+::: {.column width="70%"}
+-   Un conjunto de paquetes de R diseñados para ciencia de datos.
+
+-   Todos los paquetes comparten una filosofía, gramática y estructura.
+
+-   Diseñados para apoyar el flujo de trabajo de cualquier proyecto de análisis de datos.
+:::
+:::::
+
+<img src="img/workflow.png" alt="workflow" width="50%" style="display: block; margin: auto; margin-top: -40px;"/>
+
+------------------------------------------------------------------------
+
+## ¿Que ventajas tiene usar Tidyverse?
+
+:::: columns
+::: {.column width="1000%"}
+-   Eficiencia y consistencia
+-   Simplificación de código
+-   [Intuitivo para el humano]{.fragment .highlight-red}
+:::
+::::
+
+:::::::: columns
+::: {.column width="40%"}
+```{r}
+#| echo: false
+library(tidyverse)
+
+df <- data.frame(
+  nombre = c("Ana", "Juan", "María", "Pedro", "Lucía"),
+  edad = c(20, 22, 19, 21, 23),
+  nota = c(85, 90, 78, 92, 88),
+  ciudad = c("Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao")
+)
+
+df
+```
+:::
+
+:::: {.column width="60%"}
+::: {.fragment .fade-out}
+```{r}
+
+base <- df[df$nota > 85, c("nombre", "nota")]
+base <- base[order(base$nota, decreasing = TRUE), ]
+```
+:::
+::::
+
+:::: {.column width="60%"}
+::: {.fragment .fade-in}
+```{r}
+#| eval: false
+tidy <- df %>%
+  select(nombre, nota) %>%
+  filter(nota > 85) %>%
+  arrange(desc(nota))
+```
+:::
+::::
+::::::::
+
+------------------------------------------------------------------------
+
+## ¿Realmente necesito aprender a usar Tidyverse?
+
+<img src="img/wtf.jpg" alt="depresion" width="45%" style="display: block; margin: auto; margin-top: -60px;"/>
+
+------------------------------------------------------------------------
+
+## ¿Quien desarrolla Tidyverse?
+
+:::: columns
+::: {.column width="100%"}
+<img src="img/posit_logo.png" alt="posit logo" width="75%" style="display: block; margin: auto;"/>
+:::
+::::
+
+<br>
+
+::::: columns
+::: {.column width="50%"}
+<img src="img/wickham.jpeg" alt="hadley wickham" width="55%" style="display: block; margin: auto;"/>
+:::
+
+::: {.column width="50%"}
+<img src="img/book.png" alt="r4ds" width="35%" style="display: block; margin: auto;"/>
+:::
+:::::
+
+------------------------------------------------------------------------
+
+::::: columns
+::: {.column width="50%"}
+**R**
+
+![](img/engine.jpg){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+**Rstudio**
+
+![](img/car.jpeg){fig-width="150%" width="597"}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Rstudio
+
+**I**ntegrated **D**evelopment **E**nvironemnt (**IDE**)
+
+::::: columns
+::: {.column width="70%"}
+![](img/Ride.png){fig-align="center" width="707"}
+:::
+
+::: {.column width="30%"}
+-   Escribir código
+-   Navegar archivos
+-   Inspeccionar variables
+-   Visualizar gráficos
+-   Control de versiones
+:::
+:::::
+
+⚠️ Es necesario tener ambos (R y Rstudio) instalados
+
+------------------------------------------------------------------------
+
+![](img/handson.png){fig-alt="manos a la obra" fig-align="center" width="751"}

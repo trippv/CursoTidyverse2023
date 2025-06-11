@@ -74,6 +74,7 @@ Que el alumno adquiera habilidades prácticas para importar, explorar, transform
 countdown::countdown(1, warn_when = 10)
 ```
 
+
 # Descarga de programas
 
 Para curso necesitaremos tener instaladas las ultimas versiones de R y Rstudio. Puedes descargar ambos desde la página oficial de Posit.
@@ -85,3 +86,4 @@ Para curso necesitaremos tener instaladas las ultimas versiones de R y Rstudio. 
 Durante el curso estaremos trabajando desde un espacio en la nube. Puedes acceder en el siguiente enlace
 
 [https://posit.cloud/](https://posit.cloud/){target="_blank"}
+

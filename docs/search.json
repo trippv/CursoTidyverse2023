@@ -516,5 +516,131 @@
     "title": "Preparation",
     "section": "Resources",
     "text": "Resources\nLecture notes (insert link)\nLab notes (insert link)"
+  },
+  {
+    "objectID": "slides/introduccion.html#bienvenidos",
+    "href": "slides/introduccion.html#bienvenidos",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Bienvenidos",
+    "text": "Bienvenidos\nExplorando el Tidyverse"
+  },
+  {
+    "objectID": "slides/introduccion.html#qué-es-el-tidyverse",
+    "href": "slides/introduccion.html#qué-es-el-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "¿Qué es el Tidyverse?",
+    "text": "¿Qué es el Tidyverse?\n\n\n\n\n\nUn conjunto de paquetes de R diseñados para ciencia de datos.\nTodos los paquetes comparten una filosofía, gramática y estructura.\nDiseñados para apoyar el flujo de trabajo de cualquier proyecto de análisis de datos."
+  },
+  {
+    "objectID": "slides/introduccion.html#filosofía-tidyverse",
+    "href": "slides/introduccion.html#filosofía-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Filosofía Tidyverse",
+    "text": "Filosofía Tidyverse\n\n“La idea del tidyverse es que los datos limpios y las funciones legibles hacen el análisis más fluido.”\n\n\nSintaxis coherente\nFunciones legibles y expresivas\nPromueve el flujo de trabajo reproducible"
+  },
+  {
+    "objectID": "slides/introduccion.html#visualización-de-datos-con-ggplot2",
+    "href": "slides/introduccion.html#visualización-de-datos-con-ggplot2",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Visualización de Datos con ggplot2",
+    "text": "Visualización de Datos con ggplot2\n\nlibrary(ggplot2)\n\nggplot(mpg, aes(displ, hwy, color = class)) +\n  geom_point() +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+  },
+  {
+    "objectID": "slides/introduccion.html#análisis-de-datos-con-tidyverse",
+    "href": "slides/introduccion.html#análisis-de-datos-con-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Análisis de datos con Tidyverse",
+    "text": "Análisis de datos con Tidyverse\nExplorando el Tidyverse"
+  },
+  {
+    "objectID": "slides/presentation.markdown.html#introduction-to-r-and-rstudio",
+    "href": "slides/presentation.markdown.html#introduction-to-r-and-rstudio",
+    "title": "Introduction to R, RStudio, and Tidyverse",
+    "section": "Introduction to R and RStudio",
+    "text": "Introduction to R and RStudio\n\nR: A programming language for statistical computing and graphics.\n\nOpen-source, widely used in data analysis and research.\n\nRStudio: An IDE for R (now part of Posit).\n\nFeatures: Code editor, package management, visualization tools, and Quarto integration.\n\nWhy use them?\n\nFree, extensible, and supported by a large community.\nIdeal for reproducible research and data science."
+  },
+  {
+    "objectID": "slides/presentation.markdown.html#introduction-to-tidyverse",
+    "href": "slides/presentation.markdown.html#introduction-to-tidyverse",
+    "title": "Introduction to R, RStudio, and Tidyverse",
+    "section": "Introduction to Tidyverse",
+    "text": "Introduction to Tidyverse\n\nTidyverse: A collection of R packages for data manipulation, visualization, and analysis.\nCore packages include:\n\nggplot2: Advanced data visualization.\ndplyr: Data manipulation (filtering, grouping, etc.).\ntidyr: Data tidying (reshaping datasets).\nreadr: Fast data import.\npurrr: Functional programming tools.\ntibble: Enhanced data frames.\n\nFocuses on “tidy” data principles."
+  },
+  {
+    "objectID": "slides/presentation.markdown.html#tidyverse-vs.-r-base",
+    "href": "slides/presentation.markdown.html#tidyverse-vs.-r-base",
+    "title": "Introduction to R, RStudio, and Tidyverse",
+    "section": "Tidyverse vs. R Base",
+    "text": "Tidyverse vs. R Base\n\nR Base:\n\nUses built-in functions (e.g., subset(), merge()).\nSyntax can be less consistent and harder to read.\nSuited for basic statistical tasks.\n\nTidyverse:\n\nUnified syntax with the pipe operator (%&gt;% or |&gt;) for chaining operations.\nDesigned for tidy data (each column a variable, each row an observation).\nMore intuitive for complex data workflows."
+  },
+  {
+    "objectID": "slides/presentation.markdown.html#advantages-of-using-tidyverse",
+    "href": "slides/presentation.markdown.html#advantages-of-using-tidyverse",
+    "title": "Introduction to R, RStudio, and Tidyverse",
+    "section": "Advantages of Using Tidyverse",
+    "text": "Advantages of Using Tidyverse\n\nReadability: Pipe-based syntax makes code clear and sequential.\nConsistency: Shared design philosophy across packages.\nEfficiency: Simplifies common tasks like filtering, summarizing, and joining.\nVisualization: ggplot2 offers publication-quality graphics.\nCommunity Support: Extensive tutorials, forums, and documentation."
+  },
+  {
+    "objectID": "slides/presentation.markdown.html#who-develops-and-maintains-tidyverse",
+    "href": "slides/presentation.markdown.html#who-develops-and-maintains-tidyverse",
+    "title": "Introduction to R, RStudio, and Tidyverse",
+    "section": "Who Develops and Maintains Tidyverse?",
+    "text": "Who Develops and Maintains Tidyverse?\n\nDeveloped by: Posit (formerly RStudio), with key contributions from Hadley Wickham.\nMaintained by:\n\nPosit team for core packages.\nOpen-source contributors via GitHub.\n\nUpdates: Regular releases and new packages to address modern data needs.\nCommunity: Engaged through Posit Community, R conferences, and online platforms."
+  },
+  {
+    "objectID": "slides/presentation.markdown.html#thank-you",
+    "href": "slides/presentation.markdown.html#thank-you",
+    "title": "Introduction to R, RStudio, and Tidyverse",
+    "section": "Thank You!",
+    "text": "Thank You!\n\nLearn more at tidyverse.org.\nDownload R and RStudio at posit.co.\nJoin the conversation at community.rstudio.com.\n\n\n\n\n\nIntroduction to R and Tidyverse"
+  },
+  {
+    "objectID": "slides/introduccion.html#sobre-mi",
+    "href": "slides/introduccion.html#sobre-mi",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Sobre mi",
+    "text": "Sobre mi\n\n\n\n\n\nBiólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
+  },
+  {
+    "objectID": "slides/introduccion.html#qué-es-el-tidyverse-1",
+    "href": "slides/introduccion.html#qué-es-el-tidyverse-1",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "¿Qué es el Tidyverse?",
+    "text": "¿Qué es el Tidyverse?\n\n\nUn conjunto de paquetes de R diseñados para ciencia de datos.\nTodos los paquetes comparten una filosofía, gramática y estructura.\nDiseñados para apoyar el flujo de trabajo de cualquier proyecto de análisis de datos."
+  },
+  {
+    "objectID": "slides/introduccion.html#que-ventajas-tiene-usar-tidyverse",
+    "href": "slides/introduccion.html#que-ventajas-tiene-usar-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "¿Que ventajas tiene usar Tidyverse?",
+    "text": "¿Que ventajas tiene usar Tidyverse?\n\n\n\nEficiencia y consistencia\nSimplificación de código\nIntuitivo para el humano\n\n\n\n\n\n\n  nombre edad nota    ciudad\n1    Ana   20   85    Madrid\n2   Juan   22   90 Barcelona\n3  María   19   78  Valencia\n4  Pedro   21   92   Sevilla\n5  Lucía   23   88    Bilbao\n\n\n\n\n\nbase &lt;- df[df$nota &gt; 85, c(\"nombre\", \"nota\")]\nbase &lt;- base[order(base$nota, decreasing = TRUE), ]\n\n\n\n\n\ntidy &lt;- df %&gt;%\n  select(nombre, nota) %&gt;%\n  filter(nota &gt; 85) %&gt;%\n  arrange(desc(nota))"
+  },
+  {
+    "objectID": "slides/introduccion.html#realmente-necesito-aprender-a-usar-tidyverse",
+    "href": "slides/introduccion.html#realmente-necesito-aprender-a-usar-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "¿Realmente necesito aprender a usar Tidyverse?",
+    "text": "¿Realmente necesito aprender a usar Tidyverse?"
+  },
+  {
+    "objectID": "slides/introduccion.html#quien-desarrolla-tidyverse",
+    "href": "slides/introduccion.html#quien-desarrolla-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "¿Quien desarrolla Tidyverse?",
+    "text": "¿Quien desarrolla Tidyverse?"
+  },
+  {
+    "objectID": "slides/introduccion.html#que-es-el-tidyverse",
+    "href": "slides/introduccion.html#que-es-el-tidyverse",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "¿Que es el Tidyverse?",
+    "text": "¿Que es el Tidyverse?\n\n\n\n\n\nUn conjunto de paquetes de R diseñados para ciencia de datos.\nTodos los paquetes comparten una filosofía, gramática y estructura.\nDiseñados para apoyar el flujo de trabajo de cualquier proyecto de análisis de datos."
+  },
+  {
+    "objectID": "slides/introduccion.html#rstudio",
+    "href": "slides/introduccion.html#rstudio",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "Rstudio",
+    "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
   }
 ]
