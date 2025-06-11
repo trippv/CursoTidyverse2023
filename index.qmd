@@ -59,7 +59,7 @@ Que el alumno adquiera habilidades prácticas para importar, explorar, transform
 |             |                |                                                      |
 |             |                | -   Pivot                                            |
 |             |                | -   Unión de tablas                                  |
-|             |                | -   Transformaciones por columnas (across())         |
+|             |                | -   Transformaciones por columnas (`across()`)       |
 |             |                |                                                      |
 |             |                | **Análisis de series de tiempo**                     |
 |             |                |                                                      |
@@ -73,3 +73,16 @@ Que el alumno adquiera habilidades prácticas para importar, explorar, transform
 
 countdown::countdown(1, warn_when = 10)
 ```
+
+# Descarga de programas
+
+Para curso necesitaremos tener instaladas las ultimas versiones de R y Rstudio. Puedes descargar ambos desde la página oficial de Posit.
+
+[![](slides/img/posit_logo.png){fig-align="center" width="344"}](https://posit.co/download/rstudio-desktop/){target="_blank"}
+
+
+# Acceso a Posit Cloud
+
+Durante el curso estaremos trabajando desde un espacio en la nube. Puedes acceder en el siguiente enlace
+
+[https://posit.cloud/](https://posit.cloud/){target="_blank"}
