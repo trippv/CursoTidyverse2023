@@ -158,23 +158,20 @@ tidy <- df %>%
 
 **I**ntegrated **D**evelopment **E**nvironemnt (**IDE**)
 
-
-::: {.columns}
-::: {.column width=70%}
-
+::::: columns
+::: {.column width="70%"}
 ![](img/Ride.png){fig-align="center" width="707"}
 :::
 
-::: {.column width=30%}
-
-- Escribir código
-- Navegar archivos
-- Inspeccionar variables
-- Visualizar gráficos
-- Control de versiones
+::: {.column width="30%"}
+-   Escribir código
+-   Navegar archivos
+-   Inspeccionar variables
+-   Visualizar gráficos
+-   Control de versiones
 :::
+:::::
 
-:::
 ⚠️ Es necesario tener ambos (R y Rstudio) instalados
 
 ------------------------------------------------------------------------
