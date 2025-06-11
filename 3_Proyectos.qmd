@@ -66,3 +66,9 @@ El paquete **`here()`** se utiliza para construir rutas de archivos y directorio
 :::
 
 ![Allison Horst (\@allison_horst)](img/Horst_functions/here.png){fig-align="center" width="560"}
+
+::: {.callout-note icon="false"}
+## Para mas información
+
+Puedes leer mas sobre la organización de proyectos en el libro [R for Data Science](https://r4ds.hadley.nz/workflow-scripts.html){target="_blank"}.
+:::

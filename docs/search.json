@@ -214,7 +214,7 @@
     "href": "3_Proyectos.html",
     "title": "Proyectos en Rstudio",
     "section": "",
-    "text": "Alliston Horts (@allison_horst)\n\n\nIndependientemente de si estás dando tus primeros pasos en R o si ya eres un experto, es frecuente que la primera línea de tu código sea algo como esto:\nsetwd(\"C:\\Users\\miguel\\ruta\\que\\solo\\yo\\tengo\")\nsetwd() toma una ruta absoluta y la establece como el directorio de trabajo activo. El utilizar una ruta absoluta como directorio de trabajo hace que sea difícil de reproducir o de mover ya que otra persona u otro equipo no tiene esa misma ruta absoluta.\n\nProyectos en Rstudio\nLos proyectos de RStudio resuelven el problema de las rutas ‘frágiles’ al hacer que las rutas de archivo sean relativas. El archivo de proyecto de RStudio es un archivo que se encuentra en el directorio raíz, con la extensión .Rproj. Cuando tu sesión de RStudio está siendo ejecutada a través del archivo de proyecto (.Rproj), el directorio de trabajo actual apunta a la carpeta raíz donde se guarda ese archivo .Rproj.\nEste proyecto facilita importar y exportar archivos ya que todos están a la mano a partir de rutas relativas a la carpeta raíz.\n\n\n\n\n\n\nTip\n\n\n\nOtra gran ventaja de los proyectos de Rstudio, es que puedes compartirlo con otra persona manteniendo la estructura de las rutas relativas, de manera que no importa en donde se guarde el proyecto o si esta utilizando otro sistema operativo, las rutas relativas permanecen funcionales siempre y cuando abra la sesión utilizando el proyecto (.Rproj).\n\n\nUn ejemplo de como podemos estructurar un proyecto es el siguiente:\n\n\n\n\n\n\nDatos: Esta es la carpeta en la que se guardan los archivos que necesito leer en R para realizar mi análisis o visualización. Estos pueden ser CSV, TXT, TSV, etc. La idea principal de tener esta carpeta es que estos archivos crudos en ningún momento debería sobrescribir o editar para garantizar la reproducibilidad.\nScript: Aquí es donde puedes guardar los scripts de R y/o archivos RMarkdown o Quarto.\nSalida: En esta carpeta puedes guardar todas tus salidas, incluyendo gráficos, HTML y tablas, etc. Tener esta carpeta de Salida ayuda a otros a identificar qué archivos son resultados del código, en contraste con los archivos fuente que se utilizaron para producir el análisis.\n\n\n\nComo generar un proyecto nuevo\nPara crear un proyecto nuevo sigue estos pasos:\n\nAbre Rstudio y selecciona Archivo -&gt; Nuevo Proyecto\n\n\n\n\n\n\n\nSelecciona Nueva Carpeta si estas empezando el proyecto desde cero o carpeta existente si deseas crear un proyecto dentro de alguna carpeta que ya tengas\n\n\n\n\n\n\n\nDa un nombre a tu proyecto y ¡listo! ya puedes empezar a trabajar.\n\nEl proyecto R que has creado estará en una carpeta que contiene un archivo .Rproj. Este archivo es un acceso directo y probablemente la forma más directa de abrir tu proyecto. También puedes abrir un proyecto seleccionando “Open Project” en el menú File. Alternativamente, en el extremo superior derecho de RStudio verás un icono de R projects y un menú desplegable de proyectos disponibles.\n\n\n\n\n\nPara salir de un proyecto R, abre un nuevo proyecto o cierra el proyecto actual (Archivo - Cerrar proyecto).\n\n\n\n\n\n\nEjercicio\n\n\n\nAhora prueba creando un proyecto dentro de una carpeta local en tu computadora y genera una estructura de carpetas como la indicada anteriormente\n\n\n\n\n\n\n\n\nPro tip: uso de here() para rutas relativas\n\n\n\nEl paquete here() se utiliza para construir rutas de archivos y directorios de manera relativa al directorio del proyecto actual. En lugar de utilizar rutas absolutas (que especifican la ruta completa desde la raíz del sistema de archivos) o rutas relativas estándar (que se basan en la ubicación del script en ejecución), here() crea rutas relativas desde el directorio del proyecto.\n\n\n\n\n\nAllison Horst (@allison_horst)"
+    "text": "Alliston Horts (@allison_horst)\n\n\nIndependientemente de si estás dando tus primeros pasos en R o si ya eres un experto, es frecuente que la primera línea de tu código sea algo como esto:\nsetwd(\"C:\\Users\\miguel\\ruta\\que\\solo\\yo\\tengo\")\nsetwd() toma una ruta absoluta y la establece como el directorio de trabajo activo. El utilizar una ruta absoluta como directorio de trabajo hace que sea difícil de reproducir o de mover ya que otra persona u otro equipo no tiene esa misma ruta absoluta.\n\nProyectos en Rstudio\nLos proyectos de RStudio resuelven el problema de las rutas ‘frágiles’ al hacer que las rutas de archivo sean relativas. El archivo de proyecto de RStudio es un archivo que se encuentra en el directorio raíz, con la extensión .Rproj. Cuando tu sesión de RStudio está siendo ejecutada a través del archivo de proyecto (.Rproj), el directorio de trabajo actual apunta a la carpeta raíz donde se guarda ese archivo .Rproj.\nEste proyecto facilita importar y exportar archivos ya que todos están a la mano a partir de rutas relativas a la carpeta raíz.\n\n\n\n\n\n\nTip\n\n\n\nOtra gran ventaja de los proyectos de Rstudio, es que puedes compartirlo con otra persona manteniendo la estructura de las rutas relativas, de manera que no importa en donde se guarde el proyecto o si esta utilizando otro sistema operativo, las rutas relativas permanecen funcionales siempre y cuando abra la sesión utilizando el proyecto (.Rproj).\n\n\nUn ejemplo de como podemos estructurar un proyecto es el siguiente:\n\n\n\n\n\n\nDatos: Esta es la carpeta en la que se guardan los archivos que necesito leer en R para realizar mi análisis o visualización. Estos pueden ser CSV, TXT, TSV, etc. La idea principal de tener esta carpeta es que estos archivos crudos en ningún momento debería sobrescribir o editar para garantizar la reproducibilidad.\nScript: Aquí es donde puedes guardar los scripts de R y/o archivos RMarkdown o Quarto.\nSalida: En esta carpeta puedes guardar todas tus salidas, incluyendo gráficos, HTML y tablas, etc. Tener esta carpeta de Salida ayuda a otros a identificar qué archivos son resultados del código, en contraste con los archivos fuente que se utilizaron para producir el análisis.\n\n\n\nComo generar un proyecto nuevo\nPara crear un proyecto nuevo sigue estos pasos:\n\nAbre Rstudio y selecciona Archivo -&gt; Nuevo Proyecto\n\n\n\n\n\n\n\nSelecciona Nueva Carpeta si estas empezando el proyecto desde cero o carpeta existente si deseas crear un proyecto dentro de alguna carpeta que ya tengas\n\n\n\n\n\n\n\nDa un nombre a tu proyecto y ¡listo! ya puedes empezar a trabajar.\n\nEl proyecto R que has creado estará en una carpeta que contiene un archivo .Rproj. Este archivo es un acceso directo y probablemente la forma más directa de abrir tu proyecto. También puedes abrir un proyecto seleccionando “Open Project” en el menú File. Alternativamente, en el extremo superior derecho de RStudio verás un icono de R projects y un menú desplegable de proyectos disponibles.\n\n\n\n\n\nPara salir de un proyecto R, abre un nuevo proyecto o cierra el proyecto actual (Archivo - Cerrar proyecto).\n\n\n\n\n\n\nEjercicio\n\n\n\nAhora prueba creando un proyecto dentro de una carpeta local en tu computadora y genera una estructura de carpetas como la indicada anteriormente\n\n\n\n\n\n\n\n\nPro tip: uso de here() para rutas relativas\n\n\n\nEl paquete here() se utiliza para construir rutas de archivos y directorios de manera relativa al directorio del proyecto actual. En lugar de utilizar rutas absolutas (que especifican la ruta completa desde la raíz del sistema de archivos) o rutas relativas estándar (que se basan en la ubicación del script en ejecución), here() crea rutas relativas desde el directorio del proyecto.\n\n\n\n\n\nAllison Horst (@allison_horst)\n\n\n\n\n\n\n\n\nNote\n\n\n\nPuedes leer mas sobre la organización de proyectos en el libro R for Data Science."
   },
   {
     "objectID": "1_Introduccion.html",
@@ -556,8 +556,8 @@
     "objectID": "slides/presentation.markdown.html#introduction-to-r-and-rstudio",
     "href": "slides/presentation.markdown.html#introduction-to-r-and-rstudio",
     "title": "Introduction to R, RStudio, and Tidyverse",
-    "section": "Introduction to R and RStudio",
-    "text": "Introduction to R and RStudio\n\nR: A programming language for statistical computing and graphics.\n\nOpen-source, widely used in data analysis and research.\n\nRStudio: An IDE for R (now part of Posit).\n\nFeatures: Code editor, package management, visualization tools, and Quarto integration.\n\nWhy use them?\n\nFree, extensible, and supported by a large community.\nIdeal for reproducible research and data science."
+    "section": "",
+    "text": "R: A programming language for statistical computing and graphics.\n\nOpen-source, widely used in data analysis and research.\n\nRStudio: An IDE for R (now part of Posit).\n\nFeatures: Code editor, package management, visualization tools, and Quarto integration.\n\nWhy use them?\n\nFree, extensible, and supported by a large community.\nIdeal for reproducible research and data science."
   },
   {
     "objectID": "slides/presentation.markdown.html#introduction-to-tidyverse",
@@ -592,14 +592,14 @@
     "href": "slides/presentation.markdown.html#thank-you",
     "title": "Introduction to R, RStudio, and Tidyverse",
     "section": "Thank You!",
-    "text": "Thank You!\n\nLearn more at tidyverse.org.\nDownload R and RStudio at posit.co.\nJoin the conversation at community.rstudio.com.\n\n\n\n\n\nIntroduction to R and Tidyverse"
+    "text": "Thank You!\n\nLearn more at tidyverse.org.\nDownload R and RStudio at posit.co.\nJoin the conversation at community.rstudio.com."
   },
   {
     "objectID": "slides/introduccion.html#sobre-mi",
     "href": "slides/introduccion.html#sobre-mi",
     "title": "Análisis de datos con Tidyverse",
-    "section": "Sobre mi",
-    "text": "Sobre mi\n\n\n\n\n\nBiólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
+    "section": "",
+    "text": "Biólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
   },
   {
     "objectID": "slides/introduccion.html#qué-es-el-tidyverse-1",
@@ -613,7 +613,7 @@
     "href": "slides/introduccion.html#que-ventajas-tiene-usar-tidyverse",
     "title": "Análisis de datos con Tidyverse",
     "section": "¿Que ventajas tiene usar Tidyverse?",
-    "text": "¿Que ventajas tiene usar Tidyverse?\n\n\n\nEficiencia y consistencia\nSimplificación de código\nIntuitivo para el humano\n\n\n\n\n\n\n  nombre edad nota    ciudad\n1    Ana   20   85    Madrid\n2   Juan   22   90 Barcelona\n3  María   19   78  Valencia\n4  Pedro   21   92   Sevilla\n5  Lucía   23   88    Bilbao\n\n\n\n\n\nbase &lt;- df[df$nota &gt; 85, c(\"nombre\", \"nota\")]\nbase &lt;- base[order(base$nota, decreasing = TRUE), ]\n\n\n\n\n\ntidy &lt;- df %&gt;%\n  select(nombre, nota) %&gt;%\n  filter(nota &gt; 85) %&gt;%\n  arrange(desc(nota))"
+    "text": "¿Que ventajas tiene usar Tidyverse?\n\n\n\nEficiencia y consistencia\nSimplificación de código\nIntuitivo para el humano\n\n\n\n\n\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n  nombre edad nota    ciudad\n1    Ana   20   85    Madrid\n2   Juan   22   90 Barcelona\n3  María   19   78  Valencia\n4  Pedro   21   92   Sevilla\n5  Lucía   23   88    Bilbao\n\n\n\n\n\nbase &lt;- df[df$nota &gt; 85, c(\"nombre\", \"nota\")]\nbase &lt;- base[order(base$nota, decreasing = TRUE), ]\n\n\n\n\n\ntidy &lt;- df %&gt;%\n  select(nombre, nota) %&gt;%\n  filter(nota &gt; 85) %&gt;%\n  arrange(desc(nota))"
   },
   {
     "objectID": "slides/introduccion.html#realmente-necesito-aprender-a-usar-tidyverse",
@@ -627,7 +627,7 @@
     "href": "slides/introduccion.html#quien-desarrolla-tidyverse",
     "title": "Análisis de datos con Tidyverse",
     "section": "¿Quien desarrolla Tidyverse?",
-    "text": "¿Quien desarrolla Tidyverse?"
+    "text": "¿Quien desarrolla Tidyverse?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\nRstudio"
   },
   {
     "objectID": "slides/introduccion.html#que-es-el-tidyverse",
@@ -641,6 +641,20 @@
     "href": "slides/introduccion.html#rstudio",
     "title": "Análisis de datos con Tidyverse",
     "section": "Rstudio",
-    "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
+    "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
+  },
+  {
+    "objectID": "slides/presentation.markdown.html",
+    "href": "slides/presentation.markdown.html",
+    "title": "Introduction to R, RStudio, and Tidyverse",
+    "section": "",
+    "text": "R: A programming language for statistical computing and graphics.\n\nOpen-source, widely used in data analysis and research.\n\nRStudio: An IDE for R (now part of Posit).\n\nFeatures: Code editor, package management, visualization tools, and Quarto integration.\n\nWhy use them?\n\nFree, extensible, and supported by a large community.\nIdeal for reproducible research and data science."
+  },
+  {
+    "objectID": "slides/introduccion.html",
+    "href": "slides/introduccion.html",
+    "title": "Análisis de datos con Tidyverse",
+    "section": "",
+    "text": "Biólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
   }
 ]
