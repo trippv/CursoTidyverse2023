@@ -94,5 +94,8 @@
   },
   "slides/presentation.markdown.qmd": {
     "presentation.markdown.html": "1b7b6ce7"
+  },
+  "slides/proyectos.qmd": {
+    "proyectos.html": "f1db36e7"
   }
 }

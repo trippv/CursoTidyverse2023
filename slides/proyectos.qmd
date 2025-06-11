@@ -1,0 +1,21 @@
+---
+title: "Proyectos en Rstudio"
+author: "Miguel A. Tripp Valdez"
+date: "`r Sys.Date()`"
+institute: CIBNOR
+format: 
+  revealjs:
+    theme: simple
+    width: 1200
+    slide-number: c/t
+    transition: fade
+    toc: false
+    logo: "img/logo.png"
+    echo: true
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
+    css: styles/custom.scss
+title-slide-attributes: 
+  data-background-image: img/tidyverse_cover.png
+  data-background-size: cover
+  data-background-opacity: "0.4"
+---
