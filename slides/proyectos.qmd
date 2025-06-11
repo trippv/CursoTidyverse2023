@@ -1,7 +1,6 @@
 ---
 title: "Proyectos en Rstudio"
 author: "Miguel A. Tripp Valdez"
-date: "`r Sys.Date()`"
 institute: CIBNOR
 format: 
   revealjs:
@@ -19,3 +18,4 @@ title-slide-attributes:
   data-background-size: cover
   data-background-opacity: "0.4"
 ---
+
