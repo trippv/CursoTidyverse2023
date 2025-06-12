@@ -956,18 +956,24 @@ $ pendiente_2            &lt;dbl&gt; 2.660772, 2.331190, 11.503215, 10.498392, 2
 <li>Abre el archivo <code>ejercicio_readxls.xlsx</code> que se encuentra dentro de la carpeta <code>datos</code>.</li>
 <li>Evalúa a partir de que se fila inicia los datos de interés.</li>
 <li>Limpia los nombres de las columnas con <strong>janitor</strong>.</li>
-<li>Visualiza con <code>summary</code> o con <code>gt_plt_summary()</code> las variables de la tabla. ¿Cuales de ellas son categóricas?</li>
+<li>Visualiza con <code>summary</code> o con <code>glimpse()</code> las variables de la tabla. ¿Cuales de ellas son categóricas?</li>
 <li>Guarda la nueva tabla como archivo <code>csv</code> dentro de la carpeta <code>resultados/tablas</code>.</li>
 </ol>
 <div class="cell">
 <details class="code-fold">
 <summary>ver codigo</summary>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/ejercicio_readxls.xlsx"</span>, <span class="at">skip =</span> <span class="dv">3</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>e1_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(e1)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_plt_summary</span>(e1_clean)</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(e1_clean)</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="at">x =</span> e1_clean, </span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"resultados/tablas/ejercicio_readxls_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importar datos. inicia con la tercera linea</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/ejercicio_readxls.xlsx"</span>, <span class="at">skip =</span> <span class="dv">3</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># limpiar los nombres con janitor</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>e1_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(e1)</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ver un summary de los datos</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(e1_clean)</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="co"># guardar los datos en el directorio resultados/tablas</span></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="at">x =</span> e1_clean, </span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">file =</span> <span class="st">"resultados/tablas/ejercicio_readxls_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
