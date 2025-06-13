@@ -3,7 +3,18 @@ title: "R y Rstudio: Comandos Basicos"
 author: "Miguel Tripp"
 ---
 
-## Introducción a R y algunos comandos básicos
+::: callout-objetivos
+### 🎓Objetivos
+
+Esta sección esta dirigida a personas con poca o nula experiencia en el uso de R y Rstudio. Al final de esta lección serás capaz de:
+
+-   Reconocer los distintos elementos de Rstudio
+-   Interactuar con la consola de R desde Rstudio
+-   Realizar operaciones básicas en la consola
+-   Reonocer las principales tipos de objetos y operaciones en R
+:::
+
+## Introducción
 
 R es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&T a partir de otro lenguaje de programación.
 
@@ -11,7 +22,71 @@ Entre las características que han hecho de R un lenguaje muy popular entre la c
 
 ------------------------------------------------------------------------
 
-## Generalidades
+## R y Rstudio
+
+Si eres nuevo en el uso de R o algún otro lenguaje de programación es importante que distingas entre el lenguaje (que puede ser R, Python, Julia, etc) y la forma en que interactuamos con el. Es decir, R es como el motor de un vehículo, mientras que programas como Rstudio son el tablero que nos permiten manejar ese motor.
+
+::::: columns
+::: {.column width="50%"}
+![](img/engine.jpg){fig-align="center" width="338"}
+:::
+
+::: {.column width="50%"}
+![](img/car.jpeg){fig-align="center" width="339"}
+:::
+:::::
+
+Rstudio es un entorno de desarrollo integrado (**I**ntegrated **D**evelopment **E**nvironment; **IDE**), es decir, en el mismo programa puedes editar código, ejecutarlo en la consola, visualizar imágenes e interactuar con el ambiente.
+
+Por default, la interfaz gráfica de Rstudio se compone de 4 paneles principales:
+
+-   Panel fuente (source)
+-   Panel de consola (console)
+-   Panel del entorno (envionment)
+-   Panel de salida (output) con imagenes, archivos, presentaciones, etc.
+
+![](img/rstudio_panels.jpeg){fig-align="center" width="532"}
+
+
+
+#### Consola
+
+La consola se encuentra por default en la parte inferior-izquierda y es donde R espera que se ejecuten las instrucciones. Dichas instrucciones pueden escribirse directamente en la consola o ejecutarse desde el panel de código fuente (script).
+
+
+#### Panel de script
+
+Por default, este panel se encuentra en la parte superior-izquierda. Este panel de script o código fuente es como un cuaderno de trabajo, donde podemos escribir y editar nuestro código para posteriormente ejecutarlo en la consola. 
+
+Podemos ejecutar nuestro codigo desde el panel de script línea por línea o seleccionando un bloque. 
+
+
+:::callout-tip
+# shortcuts
+
+Para ejecutar una línea o un bloque de forma rápida, presiona la combinacion de teclas
+
+**Ctrl + Enter**
+:::
+
+
+#### Panel de entorno
+
+El panel de entorno (environemnt) es donde se van registrando los objetos, como data frames, vectores, listas, funciones, etc, que vayamos creando en la sesión de trabajo. Esto permite visualizar de forma mas sencilla estos objetos. 
+Además, este panel normalmente contiene la pestaña de **History** en la cual se registran todas las instrucciones ejecutadas.
+
+
+#### Panel de salidas (outputs)
+
+El último panel se encuentra por default en la parte inferior-derecha y en el se despliegan las figuras, contenido html, tutoriales, presentaciones, etc. 
+
+Este panel tambien contiene pestañas que resultaran escenciales para nuestro trabajo:
+
+* **Files**: contiene un explorador de directorios
+* **Packages**: Proporciona un listado de los paquetes instalados en R y los que han sido cargados en la sesión. También nos permite instalar nuevos paquetes.
+* **Help**: Para obtener ayuda o desplegar el manual de un paquete o función. 
+
+## Generalidades de R
 
 Antes de iniciar en el *Tidyverse* vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores así como revisar los diferentes tipos de estructuras de datos.
 

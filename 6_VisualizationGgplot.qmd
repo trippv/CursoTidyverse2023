@@ -503,5 +503,5 @@ demo %>%
 
 El uso de histogramas, densidades o gráficas de dispersión nos permite hacer un análisis exploratorio de los datos, permitiendo tomar mejores decisiones sobre el tipo de estadísticos o procesamiento que se van a utilizar.
 
-Puedes encontrar una discusión mas profunda sobra la importancia de la correcta presentación e interpretación de datos en publicaciones científicas [aquí](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128).
+Puedes encontrar una discusión mas profunda sobra la importancia de la correcta presentación e interpretación de datos en publicaciones científicas [aquí](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128){page="_blank"}.
 ::::

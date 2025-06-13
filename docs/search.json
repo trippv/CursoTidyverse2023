@@ -305,14 +305,14 @@
     "href": "2_RBasico.html",
     "title": "R y Rstudio: Comandos Basicos",
     "section": "",
-    "text": "R es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&T a partir de otro lenguaje de programación.\nEntre las características que han hecho de R un lenguaje muy popular entre la comunidad científica y académica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso."
+    "text": "Esta sección esta dirigida a personas con poca o nula experiencia en el uso de R y Rstudio. Al final de esta lección serás capaz de:\n\nReconocer los distintos elementos de Rstudio\nInteractuar con la consola de R desde Rstudio\nRealizar operaciones básicas en la consola\nReonocer las principales tipos de objetos y operaciones en R"
   },
   {
     "objectID": "2_RBasico.html#introducción-a-r-y-algunos-comandos-básicos",
     "href": "2_RBasico.html#introducción-a-r-y-algunos-comandos-básicos",
     "title": "R y Rstudio: Comandos Basicos",
-    "section": "",
-    "text": "R es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&T a partir de otro lenguaje de programación.\nEntre las características que han hecho de R un lenguaje muy popular entre la comunidad científica y académica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso."
+    "section": "Introducción a R y algunos comandos básicos",
+    "text": "Introducción a R y algunos comandos básicos\nR es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&T a partir de otro lenguaje de programación.\nEntre las características que han hecho de R un lenguaje muy popular entre la comunidad científica y académica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso."
   },
   {
     "objectID": "2_RBasico.html#generalidades",
@@ -663,5 +663,26 @@
     "title": "Proyectos en Rstudio",
     "section": "",
     "text": "Directorios de trabajo\nEl directorio de trabajo working directory es la carpeta donde R busca archivos por defecto.\nPara saber en que carpeta estas trabajando, puedes usar el comando\n\ngetwd()\n\n[1] \"C:/Users/migue/OneDrive/Documentos/Cursos/Taller_Tidyverse_CIBNOR_2023/CursoTidyverse2023/slides\"\n\n\ny para establecer un directorio de trabajo.\n\nsetwd()\n\n\n\n\n\n\n\n\n\nPuedes leer la discusión aqui\n\n\nlibrary(ggplot2)\nsetwd(\"/Users/miguel/documentos/analisis/data\")\ndf &lt;- read.delim(\"datos_crudos.csv\")\n\np &lt;- ggplot(df, aes(x, y)) + geom_point()\n\nsetwd(\"/Users/miguel/documentos/analisis/figuras\")\nggsave(\"figura_scatterplot.png\")\n\nLa posibilidad de que esto tenga el efecto deseado en alguien mas es de 0%\n\n\n\n\n\n\n\n\n\nFlujos de trabajo en proyectos\n\n\n\n\nVentajas:\n\nFacilita trabajar con rutas relativas\nMantiene organizados tus scripts, figuras, tablas, etc.\nMejora la reproducibilidad\nEvita el uso de setwd()"
+  },
+  {
+    "objectID": "2_RBasico.html#r-y-rstudio",
+    "href": "2_RBasico.html#r-y-rstudio",
+    "title": "R y Rstudio: Comandos Basicos",
+    "section": "R y Rstudio",
+    "text": "R y Rstudio\nSi eres nuevo en el uso de R o algún otro lenguaje de programación es importante que distingas entre el lenguaje (que puede ser R, Python, Julia, etc) y la forma en que interactuamos con el. Es decir, R es como el motor de un vehículo, mientras que programas como Rstudio son el tablero que nos permiten manejar ese motor.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRstudio es un entorno de desarrollo integrado (Integrated Development Environment; IDE), es decir, en el mismo programa puedes editar código, ejecutarlo en la consola, visualizar imágenes e interactuar con el ambiente.\nPor default, la interfaz gráfica de Rstudio se compone de 4 paneles principales:\n\nPanel fuente (source)\nPanel de consola (console)\nPanel del entorno (envionment)\nPanel de salida (output) con imagenes, archivos, presentaciones, etc.\n\n\n\n\n\n\n\nConsola\nLa consola se encuentra por default en la parte inferior-izquierda y es donde R espera que se ejecuten las instrucciones. Dichas instrucciones pueden escribirse directamente en la consola o ejecutarse desde el panel de código fuente (script).\n\n\nPanel de script\nPor default, este panel se encuentra en la parte superior-izquierda. Este panel de script o código fuente es como un cuaderno de trabajo, donde podemos escribir y editar nuestro código para posteriormente ejecutarlo en la consola.\nPodemos ejecutar nuestro codigo desde el panel de script línea por línea o seleccionando un bloque.\n\n\n\n\n\n\nshortcuts\n\n\n\nPara ejecutar una línea o un bloque de forma rápida, presiona la combinacion de teclas\nCtrl + Enter\n\n\n\n\nPanel de entorno\nEl panel de entorno (environemnt) es donde se van registrando los objetos, como data frames, vectores, listas, funciones, etc, que vayamos creando en la sesión de trabajo. Esto permite visualizar de forma mas sencilla estos objetos. Además, este panel normalmente contiene la pestaña de History en la cual se registran todas las instrucciones ejecutadas.\n\n\nPanel de salidas (outputs)\nEl último panel se encuentra por default en la parte inferior-derecha y en el se despliegan las figuras, contenido html, tutoriales, presentaciones, etc.\nEste panel tambien contiene pestañas que resultaran escenciales para nuestro trabajo:\n\nFiles: contiene un explorador de directorios\nPackages: Proporciona un listado de los paquetes instalados en R y los que han sido cargados en la sesión. También nos permite instalar nuevos paquetes.\nHelp: Para obtener ayuda o desplegar el manual de un paquete o función."
+  },
+  {
+    "objectID": "2_RBasico.html#introducción",
+    "href": "2_RBasico.html#introducción",
+    "title": "R y Rstudio: Comandos Basicos",
+    "section": "Introducción",
+    "text": "Introducción\nR es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&T a partir de otro lenguaje de programación.\nEntre las características que han hecho de R un lenguaje muy popular entre la comunidad científica y académica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso."
+  },
+  {
+    "objectID": "2_RBasico.html#generalidades-de-r",
+    "href": "2_RBasico.html#generalidades-de-r",
+    "title": "R y Rstudio: Comandos Basicos",
+    "section": "Generalidades de R",
+    "text": "Generalidades de R\nAntes de iniciar en el Tidyverse vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores así como revisar los diferentes tipos de estructuras de datos.\nAlgunos aspectos importantes que debemos recordar son los siguientes:\n\nR es sensible a las mayúsculas y minúsculas, de manera que A es diferente que a de la misma forma que la función anova() es diferente a la función Anova()\nEl símbolo # sirve para insertar un comentario en la línea de comando, de manera que todo lo que siga después de # no se ejecutara. Es importante incluir comentarios como parte de las buenas practicas en el uso de R ya que le facilitará el trabajo a tus colaboradores y revisores (y a ti mismo) saber que estas haciendo en cada paso.\nEn la consola usualmente veremos el símbolo &gt; lo que la indica que la consola esta lista para recibir nuevas instrucciones. Si por el contrario vemos el símbolo + entonces nos esta indicando que no hemos terminado de completar correctamente una línea de código.\nSi despúes de ejecutar un comando la consola nos arroja un mensaje de advertencia WARNING significa que el comando se ejecutó pero hay algo inesperado que debe revisarse. Por el contrario si nos arroja un mensaje de error ERROR entonces hay algo mal en la línea de codigo y por lo tanto no se pudo ejecutar."
   }
 ]
