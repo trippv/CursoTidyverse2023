@@ -72,8 +72,6 @@ La posibilidad de que esto tenga el efecto deseado en alguien mas es de 0%
 ![](img/better_way.jpg){fig-align="center" width="500"}
 :::
 
-
-
 # Flujos de trabajo en proyectos
 
 ::::: columns
@@ -91,9 +89,6 @@ La posibilidad de que esto tenga el efecto deseado en alguien mas es de 0%
 :::
 :::::
 
-
 ------------------------------------------------------------------------
 
-
 ![](img/handson.png){fig-alt="manos a la obra" fig-align="center" width="751"}
-
