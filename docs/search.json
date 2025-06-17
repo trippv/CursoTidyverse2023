@@ -641,6 +641,7 @@
     "href": "slides/introduccion.html#rstudio",
     "title": "Análisis de datos con Tidyverse",
     "section": "Rstudio",
+<<<<<<< HEAD
     "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
   },
   {
@@ -656,5 +657,36 @@
     "title": "Análisis de datos con Tidyverse",
     "section": "",
     "text": "Biólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
+=======
+    "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
+  },
+  {
+    "objectID": "slides/importar.html#tipos-de-datos",
+    "href": "slides/importar.html#tipos-de-datos",
+    "title": "Importar datos",
+    "section": "Tipos de datos",
+    "text": "Tipos de datos\nLa mayoría de los análisis en R comienzan con laimportación de datos desde archivos externos.\n1. Valores separados por comas (,) .csv\n\nnombre,edad,ciudad\nAna,28,México\nLuis,32,Guadalajara\nSofía,25,Monterrey\n\n2. Valores separados por tabulador (\\t) .tsv .txt\n\nnombre  edad    ciudad\nAna 28  México\nLuis    32  Guadalajara\nSofía   25  Monterrey\n\n3. Archivos excel"
+  },
+  {
+    "objectID": "slides/importar.html#este-es-otro-encabezado",
+    "href": "slides/importar.html#este-es-otro-encabezado",
+    "title": "Importar datos",
+    "section": "Este es otro encabezado",
+    "text": "Este es otro encabezado\n\n\n\n\nAnálisis de datos con Tidyverse"
+  },
+  {
+    "objectID": "slides/importar.html#funciones-mas-comunes",
+    "href": "slides/importar.html#funciones-mas-comunes",
+    "title": "Importar datos",
+    "section": "Funciones mas comunes",
+    "text": "Funciones mas comunes\nread.table() es la función mas básica para importar\n\ndf &lt;- read.table(file = \"ruta/archivo.txt\", #ruta al archivo (incluye extensión)\n                 sep = \"\\t\", #tipo de separado\n                 header = TRUE, #tiene encabezado (primera fila)\n                 dec = \",\", #tipo de separador de decimales\n                 skip = 1 #salta n filas antes de empezar a leer\n                )\n\n\n\nread.csv() permite importar directamente archivos .csv\n\ndf &lt;- read.csv(file = \"ruta/archivo.csv\")"
+  },
+  {
+    "objectID": "slides/importar.html#importar-datos-a-lá-tudyverse",
+    "href": "slides/importar.html#importar-datos-a-lá-tudyverse",
+    "title": "Importar datos",
+    "section": "Importar datos a lá Tudyverse",
+    "text": "Importar datos a lá Tudyverse\n\n\n  \n\n\nread_csv() → archivos .csv (coma)\nread_tsv() → archivos .tsv (tabulador)\nread_delim() → separador personalizado\nread_lines() → lectura línea por línea\nread_table() → separados por espacios en blanco"
+>>>>>>> 496e875 (diapositivos leccion importar)
   }
 ]
