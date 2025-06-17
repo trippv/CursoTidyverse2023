@@ -1,0 +1,122 @@
+---
+title: "Importar datos"
+author: "Miguel A. Tripp Valdez"
+institute: CIBNOR
+format: 
+  revealjs:
+    theme: default
+    width: 1200
+    slide-number: c/t
+    transition: fade
+    toc: false
+    logo: "img/logo.png"
+    echo: true
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
+    css: styles/custom.scss
+title-slide-attributes: 
+  data-background-image: img/tidyverse_cover.png
+  data-background-size: cover
+  data-background-opacity: "0.4"
+---
+
+## Tipos de datos
+
+La mayoría de los análisis en R comienzan con laimportación de datos desde archivos externos.
+
+#### 1. Valores separados por comas (`,`) [.csv]{style="color:red;"}
+
+```{r}
+#| eval: false
+#| echo: true
+
+nombre,edad,ciudad
+Ana,28,México
+Luis,32,Guadalajara
+Sofía,25,Monterrey
+```
+
+#### 2. Valores separados por tabulador (`\t`) [.tsv .txt]{style="color:red;"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+nombre	edad	ciudad
+Ana	28	México
+Luis	32	Guadalajara
+Sofía	25	Monterrey
+
+```
+
+### 3. Archivos excel
+
+------------------------------------------------------------------------
+
+## Funciones mas comunes
+
+[`read.table()`]{style="color:blue;"} es la función mas básica para importar
+
+```{r}
+#| eval: false
+#| code-line-numbers: "|1,|2,|3,|4,|5"
+
+df <- read.table(file = "ruta/archivo.txt", #ruta al archivo (incluye extensión)
+                 sep = "\t", #tipo de separado
+                 header = TRUE, #tiene encabezado (primera fila)
+                 dec = ",", #tipo de separador de decimales
+                 skip = 1 #salta n filas antes de empezar a leer
+                )
+```
+
+<br>
+
+::: {.fragment .fade-in}
+[`read.csv()`]{style="color:blue;"} permite importar directamente archivos .csv
+
+```{r}
+#| eval: false
+
+df <- read.csv(file = "ruta/archivo.csv")
+```
+:::
+
+------------------------------------------------------------------------
+
+![](img/handson.png){fig-alt="manos a la obra" fig-align="center" width="751"}
+
+------------------------------------------------------------------------
+
+## Importar datos a lá Tudyverse
+
+::::: columns
+::: {.column width="30%"}
+<a href="https://readr.tidyverse.org/index.html" target="_blank">
+  <img src="img/readr_logo.png" width="250">
+</a>
+
+:::
+
+::: {.column width="70%"}
+-   `read_csv()` → archivos .csv (coma)
+
+-   `read_tsv()` → archivos .tsv (tabulador)
+
+-   `read_delim()` → separador personalizado
+
+-   `read_lines()` → lectura línea por línea
+
+-   `read_table()`  → separados por espacios en blanco 
+:::
+:::::
+
+
+
+
+------------------------------------------------------------------------
+
+![](img/handson.png){fig-alt="manos a la obra" fig-align="center" width="751"}
+
+------------------------------------------------------------------------
+
+
+
