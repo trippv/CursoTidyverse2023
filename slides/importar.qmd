@@ -21,7 +21,7 @@ title-slide-attributes:
 
 ## Tipos de datos
 
-La mayoría de los análisis en R comienzan con laimportación de datos desde archivos externos.
+La mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.
 
 #### 1. Valores separados por comas (`,`) [.csv]{style="color:red;"}
 

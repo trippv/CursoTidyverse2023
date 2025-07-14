@@ -598,8 +598,8 @@
     "objectID": "slides/introduccion.html#sobre-mi",
     "href": "slides/introduccion.html#sobre-mi",
     "title": "Análisis de datos con Tidyverse",
-    "section": "",
-    "text": "Biólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
+    "section": "Sobre mi",
+    "text": "Sobre mi\n\n\n\n\n\nBiólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
   },
   {
     "objectID": "slides/introduccion.html#qué-es-el-tidyverse-1",
@@ -613,7 +613,7 @@
     "href": "slides/introduccion.html#que-ventajas-tiene-usar-tidyverse",
     "title": "Análisis de datos con Tidyverse",
     "section": "¿Que ventajas tiene usar Tidyverse?",
-    "text": "¿Que ventajas tiene usar Tidyverse?\n\n\n\nEficiencia y consistencia\nSimplificación de código\nIntuitivo para el humano\n\n\n\n\n\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n  nombre edad nota    ciudad\n1    Ana   20   85    Madrid\n2   Juan   22   90 Barcelona\n3  María   19   78  Valencia\n4  Pedro   21   92   Sevilla\n5  Lucía   23   88    Bilbao\n\n\n\n\n\nbase &lt;- df[df$nota &gt; 85, c(\"nombre\", \"nota\")]\nbase &lt;- base[order(base$nota, decreasing = TRUE), ]\n\n\n\n\n\ntidy &lt;- df %&gt;%\n  select(nombre, nota) %&gt;%\n  filter(nota &gt; 85) %&gt;%\n  arrange(desc(nota))"
+    "text": "¿Que ventajas tiene usar Tidyverse?\n\n\n\nEficiencia y consistencia\nSimplificación de código\nIntuitivo para el humano\n\n\n\n\n\n\n  nombre edad nota    ciudad\n1    Ana   20   85    Madrid\n2   Juan   22   90 Barcelona\n3  María   19   78  Valencia\n4  Pedro   21   92   Sevilla\n5  Lucía   23   88    Bilbao\n\n\n\n\n\nbase &lt;- df[df$nota &gt; 85, c(\"nombre\", \"nota\")]\nbase &lt;- base[order(base$nota, decreasing = TRUE), ]\n\n\n\n\n\ntidy &lt;- df %&gt;%\n  select(nombre, nota) %&gt;%\n  filter(nota &gt; 85) %&gt;%\n  arrange(desc(nota))"
   },
   {
     "objectID": "slides/introduccion.html#realmente-necesito-aprender-a-usar-tidyverse",
@@ -627,7 +627,7 @@
     "href": "slides/introduccion.html#quien-desarrolla-tidyverse",
     "title": "Análisis de datos con Tidyverse",
     "section": "¿Quien desarrolla Tidyverse?",
-    "text": "¿Quien desarrolla Tidyverse?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\nRstudio"
+    "text": "¿Quien desarrolla Tidyverse?"
   },
   {
     "objectID": "slides/introduccion.html#que-es-el-tidyverse",
@@ -641,8 +641,7 @@
     "href": "slides/introduccion.html#rstudio",
     "title": "Análisis de datos con Tidyverse",
     "section": "Rstudio",
-
-    "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
+    "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
   },
   {
     "objectID": "slides/presentation.markdown.html",
@@ -657,7 +656,6 @@
     "title": "Análisis de datos con Tidyverse",
     "section": "",
     "text": "Biólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
-
   },
   {
     "objectID": "slides/proyectos.html",
@@ -686,6 +684,5 @@
     "title": "R y Rstudio: Comandos Basicos",
     "section": "Generalidades de R",
     "text": "Generalidades de R\nAntes de iniciar en el Tidyverse vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores así como revisar los diferentes tipos de estructuras de datos.\nAlgunos aspectos importantes que debemos recordar son los siguientes:\n\nR es sensible a las mayúsculas y minúsculas, de manera que A es diferente que a de la misma forma que la función anova() es diferente a la función Anova()\nEl símbolo # sirve para insertar un comentario en la línea de comando, de manera que todo lo que siga después de # no se ejecutara. Es importante incluir comentarios como parte de las buenas practicas en el uso de R ya que le facilitará el trabajo a tus colaboradores y revisores (y a ti mismo) saber que estas haciendo en cada paso.\nEn la consola usualmente veremos el símbolo &gt; lo que la indica que la consola esta lista para recibir nuevas instrucciones. Si por el contrario vemos el símbolo + entonces nos esta indicando que no hemos terminado de completar correctamente una línea de código.\nSi despúes de ejecutar un comando la consola nos arroja un mensaje de advertencia WARNING significa que el comando se ejecutó pero hay algo inesperado que debe revisarse. Por el contrario si nos arroja un mensaje de error ERROR entonces hay algo mal en la línea de codigo y por lo tanto no se pudo ejecutar."
-
   }
 ]
