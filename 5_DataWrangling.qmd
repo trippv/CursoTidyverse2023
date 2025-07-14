@@ -223,7 +223,13 @@ filter(pokemon, !between(attack, 100, 150))
 ![](img/jigglypuff.png){fig-align="center" width="500"}
 :::
 
-Nuestro pokémon tiene un valor de HP entre 100 y 200; valor de velocidad menor a 50; es del tipo1 Normal; tiene un valor de defensa menor a 40 y pertenece a la primera generación
+Nuestro pokémon tiene las siguientes caracteristicas:
+
+-   valor de HP entre 100 y 200
+-   valor de velocidad menor a 50
+-   es del tipo1 Normal
+-   valor de defensa menor a 40
+-   pertenece a la primera generación
 
 ```{r}
 #| include: true
@@ -576,7 +582,7 @@ Con esta nueva tabla y usando las herramientas vista al momento, contesta lo sig
 #| eval: false
 
 
-attacks <- read_csv("data/attacks.csv", skip = 3)
+attacks <- read_csv("data/attacks.csv")
 
 attacks_tidy <- attacks %>% 
   clean_names() %>% 
@@ -600,7 +606,6 @@ attacks_tidy %>%
   # pregunta e4
   attacks_tidy %>% 
     filter(str_detect(species, "white shark|White shark")) %>% 
-    group_by(country) %>% 
     count(country, sort = TRUE) 
   
   
@@ -682,6 +687,8 @@ pinguinos <- read_csv("data/palmer_penguins.csv") %>%
 :::
 
 # Manejo de datos faltantes `NA`
+
+![Allison Horst (\@allison_horst)](img/naniar.png){width="644"}
 
 Los datos faltantes (`NA`) son bastante comunes en el análisis de datos y puedes afectar los resultados y ser un verdadero dolor en el 🍑 si no se manejan adecuadamente.
 

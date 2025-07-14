@@ -13,9 +13,18 @@ setwd("C:\Users\miguel\ruta\que\solo\yo\tengo")
 
 `setwd()` toma una ruta absoluta y la establece como el directorio de trabajo activo. El utilizar una ruta absoluta como directorio de trabajo hace que sea difícil de reproducir o de mover ya que otra persona u otro equipo no tiene esa misma ruta absoluta.
 
-# Proyectos en Rstudio
+# ¿Qué es un proyecto de Rstudio?
 
-Los proyectos de RStudio resuelven el problema de las rutas 'frágiles' al hacer que las rutas de archivo sean **relativas**. El archivo de proyecto de RStudio es un archivo que se encuentra en el directorio raíz, con la extensión .Rproj. Cuando tu sesión de RStudio está siendo ejecutada a través del archivo de proyecto (.Rproj), el directorio de trabajo actual apunta a la carpeta raíz donde se guarda ese archivo .Rproj.
+Es un archivo especial que al ejecutarlo hará tres cosas:
+
+-   Abrirá una nueva sesión de Rstudio.
+-   Establecerá la ubicación del proyecto como tu **directorio de trabajo**.
+-   Establecerá la ubicación del proyecto como la raíz de los archivos.
+
+De esta forma, los proyectos de RStudio resuelven el problema de las rutas 'frágiles' al hacer que las rutas de archivo sean **relativas** a la raíz.
+
+El archivo de proyecto de RStudio es un archivo que se encuentra en el directorio raíz, con la extensión `.Rproj` ![](img/Rproj_logo.PNG){width="46"}. Cuando tu sesión de RStudio está siendo ejecutada a través del archivo de proyecto (.Rproj), el directorio de trabajo actual apunta a la carpeta raíz donde se guarda ese archivo `.Rproj`.
+
 
 Este proyecto facilita importar y exportar archivos ya que todos están *a la mano* a partir de rutas relativas a la carpeta raíz.
 
