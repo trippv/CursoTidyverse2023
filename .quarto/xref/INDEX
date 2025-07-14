@@ -97,5 +97,8 @@
   },
   "slides/proyectos.qmd": {
     "proyectos.html": "f1db36e7"
+  },
+  "slides/importar.qmd": {
+    "importar.html": "dd9440af"
   }
 }

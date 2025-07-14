@@ -641,6 +641,7 @@
     "href": "slides/introduccion.html#rstudio",
     "title": "Análisis de datos con Tidyverse",
     "section": "Rstudio",
+
     "text": "Rstudio\nIntegrated Development Environemnt (IDE)\n\n\n\n\n\n\n\n\n\nEscribir código\nNavegar archivos\nInspeccionar variables\nVisualizar gráficos\nControl de versiones\n\n\n\n⚠️ Es necesario tener ambos (R y Rstudio) instalados"
   },
   {
@@ -656,6 +657,7 @@
     "title": "Análisis de datos con Tidyverse",
     "section": "",
     "text": "Biólogo Marino (2006; UABCS)\n\nMaestría en Uso Manejo y Preservación de los Recursos Naturales (2009; CIBNOR)\n\nDoctor en Ciencias Naturales (Uni Bremen/AWI)\n\nPosdoct Dept Acuicultura (2019 - 2021)\n\nPosdoct Acuicultura (2022 - 2025; CIBNOR)"
+
   },
   {
     "objectID": "slides/proyectos.html",
@@ -684,5 +686,6 @@
     "title": "R y Rstudio: Comandos Basicos",
     "section": "Generalidades de R",
     "text": "Generalidades de R\nAntes de iniciar en el Tidyverse vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores así como revisar los diferentes tipos de estructuras de datos.\nAlgunos aspectos importantes que debemos recordar son los siguientes:\n\nR es sensible a las mayúsculas y minúsculas, de manera que A es diferente que a de la misma forma que la función anova() es diferente a la función Anova()\nEl símbolo # sirve para insertar un comentario en la línea de comando, de manera que todo lo que siga después de # no se ejecutara. Es importante incluir comentarios como parte de las buenas practicas en el uso de R ya que le facilitará el trabajo a tus colaboradores y revisores (y a ti mismo) saber que estas haciendo en cada paso.\nEn la consola usualmente veremos el símbolo &gt; lo que la indica que la consola esta lista para recibir nuevas instrucciones. Si por el contrario vemos el símbolo + entonces nos esta indicando que no hemos terminado de completar correctamente una línea de código.\nSi despúes de ejecutar un comando la consola nos arroja un mensaje de advertencia WARNING significa que el comando se ejecutó pero hay algo inesperado que debe revisarse. Por el contrario si nos arroja un mensaje de error ERROR entonces hay algo mal en la línea de codigo y por lo tanto no se pudo ejecutar."
+
   }
 ]
