@@ -705,5 +705,68 @@
     "title": "Análisis de datos con Tidyverse",
     "section": "¿Que ventajas tiene usar Tidyverse?",
     "text": "¿Que ventajas tiene usar Tidyverse?\n\n\n\nEficiencia y consistencia\nSimplificación de código\nIntuitivo para el humano\n\n\n\n\n\n\n  nombre edad nota    ciudad\n1    Ana   20   85    Madrid\n2   Juan   22   90 Barcelona\n3  María   19   78  Valencia\n4  Pedro   21   92   Sevilla\n5  Lucía   23   88    Bilbao\n\n\n\n\n\nbase &lt;- df[df$nota &gt; 85, c(\"nombre\", \"nota\")]\nbase &lt;- base[order(base$nota, decreasing = TRUE), ]\n\n\n\n\n\ntidy &lt;- df %&gt;%\n  select(nombre, nota) %&gt;%\n  filter(nota &gt; 85) %&gt;%\n  arrange(desc(nota))"
+  },
+  {
+    "objectID": "slides/importar.html#tipos-de-datos",
+    "href": "slides/importar.html#tipos-de-datos",
+    "title": "Importar datos",
+    "section": "Tipos de datos",
+    "text": "Tipos de datos\nLa mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.\n1. Valores separados por comas (,) .csv\n\nnombre,edad,ciudad\nAna,28,México\nLuis,32,Guadalajara\nSofía,25,Monterrey\n\n2. Valores separados por tabulador (\\t) .tsv .txt\n\nnombre  edad    ciudad\nAna 28  México\nLuis    32  Guadalajara\nSofía   25  Monterrey\n\n3. Archivos excel"
+  },
+  {
+    "objectID": "slides/importar.html#funciones-mas-comunes",
+    "href": "slides/importar.html#funciones-mas-comunes",
+    "title": "Importar datos",
+    "section": "Funciones mas comunes",
+    "text": "Funciones mas comunes\nread.table() es la función mas básica para importar\n\ndf &lt;- read.table(file = \"ruta/archivo.txt\", #ruta al archivo (incluye extensión)\n                 sep = \"\\t\", #tipo de separado\n                 header = TRUE, #tiene encabezado (primera fila)\n                 dec = \",\", #tipo de separador de decimales\n                 skip = 1 #salta n filas antes de empezar a leer\n                )\n\n\n\nread.csv() permite importar directamente archivos .csv\n\ndf &lt;- read.csv(file = \"ruta/archivo.csv\")"
+  },
+  {
+    "objectID": "slides/importar.html#importar-datos-a-lá-tudyverse",
+    "href": "slides/importar.html#importar-datos-a-lá-tudyverse",
+    "title": "Importar datos",
+    "section": "Importar datos a lá Tudyverse",
+    "text": "Importar datos a lá Tudyverse\n\n\n  \n\n\nread_csv() → archivos .csv (coma)\nread_tsv() → archivos .tsv (tabulador)\nread_delim() → separador personalizado\nread_lines() → lectura línea por línea\nread_table() → separados por espacios en blanco"
+  },
+  {
+    "objectID": "slides/importar.html#importar-datos-a-lá-tidyverse",
+    "href": "slides/importar.html#importar-datos-a-lá-tidyverse",
+    "title": "Importar datos",
+    "section": "Importar datos a lá Tidyverse",
+    "text": "Importar datos a lá Tidyverse\n\n\n  \n\n\nread_csv() → archivos .csv (coma)\nread_tsv() → archivos .tsv (tabulador)\nread_delim() → separador personalizado\nread_lines() → lectura línea por línea\nread_table() → separados por espacios en blanco"
+  },
+  {
+    "objectID": "slides/importar.html#tibbles",
+    "href": "slides/importar.html#tibbles",
+    "title": "Importar datos",
+    "section": "Tibbles",
+    "text": "Tibbles\n\n\n\nNo imprime todo el contenido en pantalla\nNo convierte texto a otros formatos\nNo modifica formato de los nombres de columnas"
+  },
+  {
+    "objectID": "slides/importar.html#leer-archivos-desde-ms-excel",
+    "href": "slides/importar.html#leer-archivos-desde-ms-excel",
+    "title": "Importar datos",
+    "section": "Leer archivos desde MS Excel",
+    "text": "Leer archivos desde MS Excel\n\n\n\nreadxl permite leer archivos Excel (.xls y .xlsx) fácilmente en R.\nEs parte del universo tidyverse, aunque no se carga por defecto.\nSin dependencias externas → funciona en Windows, macOS y Linux."
+  },
+  {
+    "objectID": "slides/importar.html#leer-archivos-desde-ms-excel-1",
+    "href": "slides/importar.html#leer-archivos-desde-ms-excel-1",
+    "title": "Importar datos",
+    "section": "Leer archivos desde MS Excel",
+    "text": "Leer archivos desde MS Excel\n\ndata &lt;- read_xlsx(path = here::here(\"data/ejercicio_readxls.xlsx\"), # ruta del archivo\n                  sheet = 1, # Hoja en donde se encuentran los datos.\n                  skip = 2, # saltar n líneas\n                  range = NULL, # intervalo de celdas donde estan los datos\n                  na = \"na\" #simbolo para na. default celdas vacias \n                  )\n\ndata\n\n# A tibble: 300 × 13\n   `Número de individuo` Grupo `peso humedo (g)` `Longitud Total (cm)`\n                   &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;                 &lt;dbl&gt;\n 1                     1 A                     4                    14\n 2                     2 A                    12                    10\n 3                     3 A                    13                    11\n 4                     4 A                     4                    19\n 5                     5 A                     2                    23\n 6                     6 A                     9                    24\n 7                     7 A                     5                    10\n 8                     8 A                    14                    10\n 9                     9 A                    14                    18\n10                    10 A                     3                    12\n# ℹ 290 more rows\n# ℹ 9 more variables: `Relación masa & longitud (g/cm)` &lt;dbl&gt;,\n#   `% gonada` &lt;dbl&gt;, TEMPERATURA &lt;chr&gt;, `Sexo (M/F)` &lt;chr&gt;,\n#   `# de localidad` &lt;chr&gt;, `num-huevos_producidos` &lt;dbl&gt;, T_media &lt;dbl&gt;,\n#   t_media &lt;dbl&gt;, `:)` &lt;chr&gt;"
+  },
+  {
+    "objectID": "slides/importar.html#janitor",
+    "href": "slides/importar.html#janitor",
+    "title": "Importar datos",
+    "section": "Janitor",
+    "text": "Janitor\n\n{janitor} es un paquete útil para la limpieza de nombres de columnas\nMuy útil en flujos de trabajo tidyverse.\nEspecialmente práctico al importar datos de Excel o CSV."
+  },
+  {
+    "objectID": "slides/importar.html#tipos-de-estructura-de-nombres",
+    "href": "slides/importar.html#tipos-de-estructura-de-nombres",
+    "title": "Importar datos",
+    "section": "Tipos de estructura de nombres",
+    "text": "Tipos de estructura de nombres\n\n\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
   }
 ]

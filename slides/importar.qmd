@@ -86,14 +86,11 @@ df <- read.csv(file = "ruta/archivo.csv")
 
 ------------------------------------------------------------------------
 
-## Importar datos a lá Tudyverse
+## Importar datos a lá Tidyverse
 
 ::::: columns
 ::: {.column width="30%"}
-<a href="https://readr.tidyverse.org/index.html" target="_blank">
-  <img src="img/readr_logo.png" width="250">
-</a>
-
+<a href="https://readr.tidyverse.org/index.html" target="_blank"> <img src="img/readr_logo.png" width="250"/> </a>
 :::
 
 ::: {.column width="70%"}
@@ -105,12 +102,9 @@ df <- read.csv(file = "ruta/archivo.csv")
 
 -   `read_lines()` → lectura línea por línea
 
--   `read_table()`  → separados por espacios en blanco 
+-   `read_table()` → separados por espacios en blanco
 :::
 :::::
-
-
-
 
 ------------------------------------------------------------------------
 
@@ -118,5 +112,73 @@ df <- read.csv(file = "ruta/archivo.csv")
 
 ------------------------------------------------------------------------
 
+## Tibbles
+
+::::: columns
+::: {.column width="60%"}
+-   No imprime todo el contenido en pantalla
+-   No convierte texto a otros formatos
+-   No modifica formato de los nombres de columnas
+:::
+
+::: {.column width="40%"}
+![](img/tibble_logo.jpg){style="margin: auto;" width="396"}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Leer archivos desde MS Excel
+
+::::: columns
+::: {.column width="60%"}
+-   `readxl` permite **leer archivos Excel (.xls y .xlsx)** fácilmente en R.
+-   Es parte del universo `tidyverse`, aunque no se carga por defecto.
+-   **Sin dependencias externas** → funciona en Windows, macOS y Linux.
+:::
+
+::: {.column width="40%"}
+<img src="https://readxl.tidyverse.org/logo.png" width="80%" style="margin: auto;"/>
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Leer archivos desde MS Excel
+
+```{r}
+#| eval: true
+#| echo: false
 
 
+library(tidyverse)
+library(readxl)
+```
+
+```{r}
+
+data <- read_xlsx(path = here::here("data/ejercicio_readxls.xlsx"), # ruta del archivo
+                  sheet = 1, # Hoja en donde se encuentran los datos.
+                  skip = 2, # saltar n líneas
+                  range = NULL, # intervalo de celdas donde estan los datos
+                  na = "na" #simbolo para na. default celdas vacias 
+                  )
+
+data
+```
+
+------------------------------------------------------------------------
+
+## Janitor
+
+-   `{janitor}` es un paquete útil para la limpieza de nombres de columnas
+-   Muy útil en flujos de trabajo `tidyverse`.
+-   Especialmente práctico al importar datos de Excel o CSV.
+
+![](img/janitor.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Tipos de estructura de nombres
+
+![](img/cases.jpeg){fig-align="center"}

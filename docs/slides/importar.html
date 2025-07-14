@@ -408,7 +408,7 @@ Miguel A. Tripp Valdez
 </section>
 <section id="tipos-de-datos" class="slide level2">
 <h2>Tipos de datos</h2>
-<p>La mayoría de los análisis en R comienzan con laimportación de datos desde archivos externos.</p>
+<p>La mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.</p>
 <h4 id="valores-separados-por-comas-.csv">1. Valores separados por comas (<code>,</code>) <span style="color:red;">.csv</span></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>nombre,edad,ciudad</span>
@@ -448,8 +448,8 @@ Miguel A. Tripp Valdez
 
 
 <img data-src="img/handson.png" class="quarto-figure quarto-figure-center r-stretch" alt="manos a la obra" width="751"></section>
-<section id="importar-datos-a-lá-tudyverse" class="slide level2">
-<h2>Importar datos a lá Tudyverse</h2>
+<section id="importar-datos-a-lá-tidyverse" class="slide level2">
+<h2>Importar datos a lá Tidyverse</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><a href="https://readr.tidyverse.org/index.html" target="_blank"> <img src="img/readr_logo.png" width="250"> </a></p>
@@ -467,8 +467,81 @@ Miguel A. Tripp Valdez
 
 
 <img data-src="img/handson.png" class="quarto-figure quarto-figure-center r-stretch" alt="manos a la obra" width="751"></section>
-<section class="slide level2">
+<section id="tibbles" class="slide level2">
+<h2>Tibbles</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>No imprime todo el contenido en pantalla</li>
+<li>No convierte texto a otros formatos</li>
+<li>No modifica formato de los nombres de columnas</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="img/tibble_logo.jpg" style="margin: auto;" width="396"></p>
+</div></div>
+</section>
+<section id="leer-archivos-desde-ms-excel" class="slide level2">
+<h2>Leer archivos desde MS Excel</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li><code>readxl</code> permite <strong>leer archivos Excel (.xls y .xlsx)</strong> fácilmente en R.</li>
+<li>Es parte del universo <code>tidyverse</code>, aunque no se carga por defecto.</li>
+<li><strong>Sin dependencias externas</strong> → funciona en Windows, macOS y Linux.</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img src="https://readxl.tidyverse.org/logo.png" width="80%" style="margin: auto;"></p>
+</div></div>
+</section>
+<section id="leer-archivos-desde-ms-excel-1" class="slide level2">
+<h2>Leer archivos desde MS Excel</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/ejercicio_readxls.xlsx"</span>), <span class="co"># ruta del archivo</span></span>
+<span id="cb5-2"><a></a>                  <span class="at">sheet =</span> <span class="dv">1</span>, <span class="co"># Hoja en donde se encuentran los datos.</span></span>
+<span id="cb5-3"><a></a>                  <span class="at">skip =</span> <span class="dv">2</span>, <span class="co"># saltar n líneas</span></span>
+<span id="cb5-4"><a></a>                  <span class="at">range =</span> <span class="cn">NULL</span>, <span class="co"># intervalo de celdas donde estan los datos</span></span>
+<span id="cb5-5"><a></a>                  <span class="at">na =</span> <span class="st">"na"</span> <span class="co">#simbolo para na. default celdas vacias </span></span>
+<span id="cb5-6"><a></a>                  )</span>
+<span id="cb5-7"><a></a></span>
+<span id="cb5-8"><a></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 300 × 13
+   `Número de individuo` Grupo `peso humedo (g)` `Longitud Total (cm)`
+                   &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;                 &lt;dbl&gt;
+ 1                     1 A                     4                    14
+ 2                     2 A                    12                    10
+ 3                     3 A                    13                    11
+ 4                     4 A                     4                    19
+ 5                     5 A                     2                    23
+ 6                     6 A                     9                    24
+ 7                     7 A                     5                    10
+ 8                     8 A                    14                    10
+ 9                     9 A                    14                    18
+10                    10 A                     3                    12
+# ℹ 290 more rows
+# ℹ 9 more variables: `Relación masa &amp; longitud (g/cm)` &lt;dbl&gt;,
+#   `% gonada` &lt;dbl&gt;, TEMPERATURA &lt;chr&gt;, `Sexo (M/F)` &lt;chr&gt;,
+#   `# de localidad` &lt;chr&gt;, `num-huevos_producidos` &lt;dbl&gt;, T_media &lt;dbl&gt;,
+#   t_media &lt;dbl&gt;, `:)` &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="janitor" class="slide level2">
+<h2>Janitor</h2>
+<ul>
+<li><code>{janitor}</code> es un paquete útil para la limpieza de nombres de columnas</li>
+<li>Muy útil en flujos de trabajo <code>tidyverse</code>.</li>
+<li>Especialmente práctico al importar datos de Excel o CSV.</li>
+</ul>
 
+<img data-src="img/janitor.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="tipos-de-estructura-de-nombres" class="slide level2">
+<h2>Tipos de estructura de nombres</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cases.jpeg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
 
 <div class="quarto-auto-generated-content">
 <p><img src="img/logo.png" class="slide-logo"></p>
