@@ -58,13 +58,63 @@ title-slide-attributes:
 
 ------------------------------------------------------------------------
 
+## Paquetes y funciones
+
+![tomado de: utrectUniversity](img/collection.png){fig-align="center"}
+
+
+------------------------------------------------------------------------
+
 ## ¿Que ventajas tiene usar Tidyverse?
 
 :::: columns
-::: {.column width="1000%"}
+::: {.column width="100%"}
 -   Eficiencia y consistencia
 -   Simplificación de código
 -   [Intuitivo para el humano]{.fragment .highlight-red}
+:::
+::::
+
+:::::::: columns
+::: {.column width="40%"}
+::: {.fragment .fade-in}
+```{r}
+#| echo: false
+library(tidyverse)
+
+df <- data.frame(
+  nombre = c("Ana", "Juan", "María", "Pedro", "Lucía"),
+  edad = c(20, 22, 19, 21, 23),
+  nota = c(85, 90, 78, 92, 88),
+  ciudad = c("Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao")
+)
+
+df
+```
+:::
+:::
+
+:::: {.column width="60%"}
+::: {.fragment .fade-in}
+```{r}
+
+base <- df[df$nota > 85, c("nombre", "nota")]
+base <- base[order(base$nota, decreasing = TRUE), ]
+```
+:::
+::::
+:::
+
+
+------------------------------------------------------------------------
+
+## ¿Que ventajas tiene usar Tidyverse?
+
+:::: columns
+::: {.column width="100%"}
+-   Eficiencia y consistencia
+-   Simplificación de código
+-   <span style="color:red">Intuitivo para el humano</span>
 :::
 ::::
 
@@ -85,15 +135,7 @@ df
 ```
 :::
 
-:::: {.column width="60%"}
-::: {.fragment .fade-out}
-```{r}
 
-base <- df[df$nota > 85, c("nombre", "nota")]
-base <- base[order(base$nota, decreasing = TRUE), ]
-```
-:::
-::::
 
 :::: {.column width="60%"}
 ::: {.fragment .fade-in}
@@ -107,6 +149,9 @@ tidy <- df %>%
 :::
 ::::
 ::::::::
+
+
+
 
 ------------------------------------------------------------------------
 

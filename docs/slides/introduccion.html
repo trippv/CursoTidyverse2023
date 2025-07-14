@@ -441,14 +441,51 @@ Miguel A. Tripp Valdez
 </div></div>
 <p><img src="img/workflow.png" alt="workflow" width="50%" style="display: block; margin: auto; margin-top: -40px;"></p>
 </section>
+<section id="paquetes-y-funciones" class="slide level2">
+<h2>Paquetes y funciones</h2>
+
+<img data-src="img/collection.png" class="r-stretch quarto-figure-center"><p class="caption">tomado de: utrectUniversity</p></section>
 <section id="que-ventajas-tiene-usar-tidyverse" class="slide level2">
 <h2>¿Que ventajas tiene usar Tidyverse?</h2>
 <div class="columns">
-<div class="column" style="width:1000%;">
+<div class="column" style="width:100%;">
 <ul>
 <li>Eficiencia y consistencia</li>
 <li>Simplificación de código</li>
 <li><span class="fragment highlight-red">Intuitivo para el humano</span></li>
+</ul>
+</div></div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="fragment fade-in">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre edad nota    ciudad
+1    Ana   20   85    Madrid
+2   Juan   22   90 Barcelona
+3  María   19   78  Valencia
+4  Pedro   21   92   Sevilla
+5  Lucía   23   88    Bilbao</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="fragment fade-in">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>base <span class="ot">&lt;-</span> df[df<span class="sc">$</span>nota <span class="sc">&gt;</span> <span class="dv">85</span>, <span class="fu">c</span>(<span class="st">"nombre"</span>, <span class="st">"nota"</span>)]</span>
+<span id="cb2-2"><a></a>base <span class="ot">&lt;-</span> base[<span class="fu">order</span>(base<span class="sc">$</span>nota, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="que-ventajas-tiene-usar-tidyverse-1" class="slide level2">
+<h2>¿Que ventajas tiene usar Tidyverse?</h2>
+<div class="columns">
+<div class="column" style="width:100%;">
+<ul>
+<li>Eficiencia y consistencia</li>
+<li>Simplificación de código</li>
+<li><span style="color:red">Intuitivo para el humano</span></li>
 </ul>
 </div></div>
 <div class="columns">
@@ -464,19 +501,12 @@ Miguel A. Tripp Valdez
 </div>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="fragment fade-out">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>base <span class="ot">&lt;-</span> df[df<span class="sc">$</span>nota <span class="sc">&gt;</span> <span class="dv">85</span>, <span class="fu">c</span>(<span class="st">"nombre"</span>, <span class="st">"nota"</span>)]</span>
-<span id="cb2-2"><a></a>base <span class="ot">&lt;-</span> base[<span class="fu">order</span>(base<span class="sc">$</span>nota, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
 <div class="fragment fade-in">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>tidy <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a></a>  <span class="fu">select</span>(nombre, nota) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a></a>  <span class="fu">filter</span>(nota <span class="sc">&gt;</span> <span class="dv">85</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(nota))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>tidy <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a></a>  <span class="fu">select</span>(nombre, nota) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a></a>  <span class="fu">filter</span>(nota <span class="sc">&gt;</span> <span class="dv">85</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(nota))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></div>
