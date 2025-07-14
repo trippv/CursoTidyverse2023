@@ -86,7 +86,7 @@ df <- read.csv(file = "ruta/archivo.csv")
 
 ------------------------------------------------------------------------
 
-## Importar datos a lá Tudyverse
+## Importar datos a lá Tidyverse
 
 ::::: columns
 ::: {.column width="30%"}
