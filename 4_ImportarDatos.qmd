@@ -372,7 +372,7 @@ Pon a prueba tus conocimientos
 1.  Abre el archivo `ejercicio_readxls.xlsx` que se encuentra dentro de la carpeta `datos`.
 2.  Evalúa a partir de que se fila inicia los datos de interés.
 3.  Limpia los nombres de las columnas con **janitor**.
-4.  Visualiza con `summary` o con `gt_plt_summary()` las variables de la tabla. ¿Cuales de ellas son categóricas?
+4.  Visualiza con `summary` o con `glimpse()` las variables de la tabla. ¿Cuales de ellas son categóricas?
 5.  Guarda la nueva tabla como archivo `csv` dentro de la carpeta `resultados/tablas`.
 
 ```{r}
@@ -381,10 +381,16 @@ Pon a prueba tus conocimientos
 #| code-summary: "ver codigo"
 #| eval: false
 
+# importar datos. inicia con la tercera linea
 e1 <- read_xlsx("data/ejercicio_readxls.xlsx", skip = 3)
+
+# limpiar los nombres con janitor
 e1_clean <- clean_names(e1)
-gt_plt_summary(e1_clean)
+
+# ver un summary de los datos
 summary(e1_clean)
+
+# guardar los datos en el directorio resultados/tablas
 write_csv(x = e1_clean, 
           file = "resultados/tablas/ejercicio_readxls_clean.csv")
 ```

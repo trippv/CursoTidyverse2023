@@ -773,7 +773,14 @@ Nota
 </div>
 <div class="callout-body-container callout-body">
 
-<p>Nuestro pokémon tiene un valor de HP entre 100 y 200; valor de velocidad menor a 50; es del tipo1 Normal; tiene un valor de defensa menor a 40 y pertenece a la primera generación</p>
+<p>Nuestro pokémon tiene las siguientes caracteristicas:</p>
+<ul>
+<li>valor de HP entre 100 y 200</li>
+<li>valor de velocidad menor a 50</li>
+<li>es del tipo1 Normal</li>
+<li>valor de defensa menor a 40</li>
+<li>pertenece a la primera generación</li>
+</ul>
 <div class="cell">
 <details class="code-fold">
 <summary>ver codigo</summary>
@@ -1418,7 +1425,7 @@ Ejercicio: !!Tiburón a la vista!!
 <div class="cell">
 <details class="code-fold">
 <summary>ver codigo</summary>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>attacks <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/attacks.csv"</span>, <span class="at">skip =</span> <span class="dv">3</span>)</span>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>attacks <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/attacks.csv"</span>)</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>attacks_tidy <span class="ot">&lt;-</span> attacks <span class="sc">%&gt;%</span> </span>
 <span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
@@ -1442,8 +1449,7 @@ Ejercicio: !!Tiburón a la vista!!
 <span id="cb81-22"><a href="#cb81-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pregunta e4</span></span>
 <span id="cb81-23"><a href="#cb81-23" aria-hidden="true" tabindex="-1"></a>  attacks_tidy <span class="sc">%&gt;%</span> </span>
 <span id="cb81-24"><a href="#cb81-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">str_detect</span>(species, <span class="st">"white shark|White shark"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb81-25"><a href="#cb81-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> </span>
-<span id="cb81-26"><a href="#cb81-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(country, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb81-25"><a href="#cb81-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(country, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1525,6 +1531,12 @@ Ejercicio 2
 </section>
 <section id="manejo-de-datos-faltantes-na" class="level1">
 <h1>Manejo de datos faltantes <code>NA</code></h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/naniar.png" class="img-fluid figure-img" width="644"></p>
+<figcaption>Allison Horst (@allison_horst)</figcaption>
+</figure>
+</div>
 <p>Los datos faltantes (<code>NA</code>) son bastante comunes en el análisis de datos y puedes afectar los resultados y ser un verdadero dolor en el 🍑 si no se manejan adecuadamente.</p>
 <section id="detectar-valores-faltantes" class="level2">
 <h2 class="anchored" data-anchor-id="detectar-valores-faltantes">Detectar valores faltantes</h2>

@@ -207,8 +207,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#introducción-a-r-y-algunos-comandos-básicos" id="toc-introducción-a-r-y-algunos-comandos-básicos" class="nav-link active" data-scroll-target="#introducción-a-r-y-algunos-comandos-básicos">Introducción a R y algunos comandos básicos</a></li>
-  <li><a href="#generalidades" id="toc-generalidades" class="nav-link" data-scroll-target="#generalidades">Generalidades</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link active" data-scroll-target="#objetivos">🎓Objetivos</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#r-y-rstudio" id="toc-r-y-rstudio" class="nav-link" data-scroll-target="#r-y-rstudio">R y Rstudio</a></li>
+  <li><a href="#generalidades-de-r" id="toc-generalidades-de-r" class="nav-link" data-scroll-target="#generalidades-de-r">Generalidades de R</a></li>
   <li><a href="#uso-de-la-línea-de-comando-como-calculadora" id="toc-uso-de-la-línea-de-comando-como-calculadora" class="nav-link" data-scroll-target="#uso-de-la-línea-de-comando-como-calculadora">Uso de la línea de comando como calculadora</a></li>
   <li><a href="#uso-de-objetos" id="toc-uso-de-objetos" class="nav-link" data-scroll-target="#uso-de-objetos">Uso de objetos</a></li>
   <li><a href="#tipos-y-estructura-de-datos-classes" id="toc-tipos-y-estructura-de-datos-classes" class="nav-link" data-scroll-target="#tipos-y-estructura-de-datos-classes">Tipos y estructura de datos (Classes)</a></li>
@@ -249,14 +251,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introducción-a-r-y-algunos-comandos-básicos" class="level2">
-<h2 class="anchored" data-anchor-id="introducción-a-r-y-algunos-comandos-básicos">Introducción a R y algunos comandos básicos</h2>
+<section id="objetivos" class="level3 callout-objetivos">
+<h3 class="anchored" data-anchor-id="objetivos">🎓Objetivos</h3>
+<p>Esta sección esta dirigida a personas con poca o nula experiencia en el uso de R y Rstudio. Al final de esta lección serás capaz de:</p>
+<ul>
+<li>Reconocer los distintos elementos de Rstudio</li>
+<li>Interactuar con la consola de R desde Rstudio</li>
+<li>Realizar operaciones básicas en la consola</li>
+<li>Reonocer las principales tipos de objetos y operaciones en R</li>
+</ul>
+</section>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
 <p>R es un lenguaje de programación y un entorno de software libre dedicado principalmente al análisis estadístico y la visualización de datos. Desarrollado inicialmente por los laboratorios de AT&amp;T a partir de otro lenguaje de programación.</p>
 <p>Entre las características que han hecho de R un lenguaje muy popular entre la comunidad científica y académica (ademas de que es gratuito 😉 ) es su capacidad para manejar y analizar grandes conjuntos de datos, junto con una vasta colección de paquetes desarrollados por la comunidad, lo hace altamente versátil y poderoso.</p>
 <hr>
 </section>
-<section id="generalidades" class="level2">
-<h2 class="anchored" data-anchor-id="generalidades">Generalidades</h2>
+<section id="r-y-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="r-y-rstudio">R y Rstudio</h2>
+<p>Si eres nuevo en el uso de R o algún otro lenguaje de programación es importante que distingas entre el lenguaje (que puede ser R, Python, Julia, etc) y la forma en que interactuamos con el. Es decir, R es como el motor de un vehículo, mientras que programas como Rstudio son el tablero que nos permiten manejar ese motor.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/engine.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="338"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/car.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="339"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Rstudio es un entorno de desarrollo integrado (<strong>I</strong>ntegrated <strong>D</strong>evelopment <strong>E</strong>nvironment; <strong>IDE</strong>), es decir, en el mismo programa puedes editar código, ejecutarlo en la consola, visualizar imágenes e interactuar con el ambiente.</p>
+<p>Por default, la interfaz gráfica de Rstudio se compone de 4 paneles principales:</p>
+<ul>
+<li>Panel fuente (source)</li>
+<li>Panel de consola (console)</li>
+<li>Panel del entorno (envionment)</li>
+<li>Panel de salida (output) con imagenes, archivos, presentaciones, etc.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/rstudio_panels.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="532"></p>
+</figure>
+</div>
+<section id="consola" class="level4">
+<h4 class="anchored" data-anchor-id="consola">Consola</h4>
+<p>La consola se encuentra por default en la parte inferior-izquierda y es donde R espera que se ejecuten las instrucciones. Dichas instrucciones pueden escribirse directamente en la consola o ejecutarse desde el panel de código fuente (script).</p>
+</section>
+<section id="panel-de-script" class="level4">
+<h4 class="anchored" data-anchor-id="panel-de-script">Panel de script</h4>
+<p>Por default, este panel se encuentra en la parte superior-izquierda. Este panel de script o código fuente es como un cuaderno de trabajo, donde podemos escribir y editar nuestro código para posteriormente ejecutarlo en la consola.</p>
+<p>Podemos ejecutar nuestro codigo desde el panel de script línea por línea o seleccionando un bloque.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+shortcuts
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para ejecutar una línea o un bloque de forma rápida, presiona la combinacion de teclas</p>
+<p><strong>Ctrl + Enter</strong></p>
+</div>
+</div>
+</section>
+<section id="panel-de-entorno" class="level4">
+<h4 class="anchored" data-anchor-id="panel-de-entorno">Panel de entorno</h4>
+<p>El panel de entorno (environemnt) es donde se van registrando los objetos, como data frames, vectores, listas, funciones, etc, que vayamos creando en la sesión de trabajo. Esto permite visualizar de forma mas sencilla estos objetos. Además, este panel normalmente contiene la pestaña de <strong>History</strong> en la cual se registran todas las instrucciones ejecutadas.</p>
+</section>
+<section id="panel-de-salidas-outputs" class="level4">
+<h4 class="anchored" data-anchor-id="panel-de-salidas-outputs">Panel de salidas (outputs)</h4>
+<p>El último panel se encuentra por default en la parte inferior-derecha y en el se despliegan las figuras, contenido html, tutoriales, presentaciones, etc.</p>
+<p>Este panel tambien contiene pestañas que resultaran escenciales para nuestro trabajo:</p>
+<ul>
+<li><strong>Files</strong>: contiene un explorador de directorios</li>
+<li><strong>Packages</strong>: Proporciona un listado de los paquetes instalados en R y los que han sido cargados en la sesión. También nos permite instalar nuevos paquetes.</li>
+<li><strong>Help</strong>: Para obtener ayuda o desplegar el manual de un paquete o función.</li>
+</ul>
+</section>
+</section>
+<section id="generalidades-de-r" class="level2">
+<h2 class="anchored" data-anchor-id="generalidades-de-r">Generalidades de R</h2>
 <p>Antes de iniciar en el <em>Tidyverse</em> vamos a revisar algunas funcionalidades básicas de R tales como crear objetos y vectores así como revisar los diferentes tipos de estructuras de datos.</p>
 <p>Algunos aspectos importantes que debemos recordar son los siguientes:</p>
 <ul>
