@@ -54,7 +54,7 @@ Puedes leer la discusión [aqui](https://www.tidyverse.org/blog/2017/12/workflow
 
 ```{r}
 #| eval: false
-
+#| code-line-numbers: "|1,2,3,4,5|7,8"
 
 library(ggplot2)
 setwd("/Users/miguel/documentos/analisis/data")
