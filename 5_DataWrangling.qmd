@@ -34,6 +34,8 @@ En resumen, los principios de tidy data son los siguientes:
 
 # Manipulación de datos con Dplyr
 
+![](img/hexs/dplyr.png){fig-align="center" width="182"}
+
 El paquete Dplyr proporciona un conjunto coherente de funciones que permiten realizar operaciones comunes de manipulación de datos de manera **intuitiva** y eficaz. Estas funciones están optimizadas para trabajar con datos grandes y complejos, y permiten realizar tareas como filtrar `filter()` filas, seleccionar `select()` columnas, transformar valores `mutate()`, crear resúmenes `summarise()` y agrupar datos `group_by()` entre muchas otras funciones. Las cinco funciones mas comunes que usaremos son:
 
 -   `select()`: selecciona columnas de una tabla.

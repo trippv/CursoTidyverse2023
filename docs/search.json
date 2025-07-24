@@ -710,8 +710,8 @@
     "objectID": "slides/importar.html#tipos-de-datos",
     "href": "slides/importar.html#tipos-de-datos",
     "title": "Importar datos",
-    "section": "Tipos de datos",
-    "text": "Tipos de datos\nLa mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.\n1. Valores separados por comas (,) .csv\n\nnombre,edad,ciudad\nAna,28,México\nLuis,32,Guadalajara\nSofía,25,Monterrey\n\n2. Valores separados por tabulador (\\t) .tsv .txt\n\nnombre  edad    ciudad\nAna 28  México\nLuis    32  Guadalajara\nSofía   25  Monterrey\n\n3. Archivos excel"
+    "section": "",
+    "text": "La mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.\n\n\n\nnombre,edad,ciudad\nAna,28,México\nLuis,32,Guadalajara\nSofía,25,Monterrey\n\n\n\n\n\nnombre  edad    ciudad\nAna 28  México\nLuis    32  Guadalajara\nSofía   25  Monterrey"
   },
   {
     "objectID": "slides/importar.html#funciones-mas-comunes",
@@ -767,6 +767,111 @@
     "href": "slides/importar.html#tipos-de-estructura-de-nombres",
     "title": "Importar datos",
     "section": "Tipos de estructura de nombres",
-    "text": "Tipos de estructura de nombres\n\n\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+    "text": "Tipos de estructura de nombres"
+  },
+  {
+    "objectID": "slides/importar.html",
+    "href": "slides/importar.html",
+    "title": "Importar datos",
+    "section": "",
+    "text": "La mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.\n\n\n\nnombre,edad,ciudad\nAna,28,México\nLuis,32,Guadalajara\nSofía,25,Monterrey\n\n\n\n\n\nnombre  edad    ciudad\nAna 28  México\nLuis    32  Guadalajara\nSofía   25  Monterrey"
+  },
+  {
+    "objectID": "slides/dplyr.html",
+    "href": "slides/dplyr.html",
+    "title": "dplyr",
+    "section": "",
+    "text": "La mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.\n\n\n\nnombre,edad,ciudad\nAna,28,México\nLuis,32,Guadalajara\nSofía,25,Monterrey\n\n\n\n\n\nnombre  edad    ciudad\nAna 28  México\nLuis    32  Guadalajara\nSofía   25  Monterrey"
+  },
+  {
+    "objectID": "slides/dplyr.html#tipos-de-datos",
+    "href": "slides/dplyr.html#tipos-de-datos",
+    "title": "dplyr",
+    "section": "",
+    "text": "La mayoría de los análisis en R comienzan con la importación de datos desde archivos externos.\n\n\n\nnombre,edad,ciudad\nAna,28,México\nLuis,32,Guadalajara\nSofía,25,Monterrey\n\n\n\n\n\nnombre  edad    ciudad\nAna 28  México\nLuis    32  Guadalajara\nSofía   25  Monterrey"
+  },
+  {
+    "objectID": "slides/dplyr.html#funciones-mas-comunes",
+    "href": "slides/dplyr.html#funciones-mas-comunes",
+    "title": "dplyr",
+    "section": "Funciones mas comunes",
+    "text": "Funciones mas comunes\nread.table() es la función mas básica para importar\n\ndf &lt;- read.table(file = \"ruta/archivo.txt\", #ruta al archivo (incluye extensión)\n                 sep = \"\\t\", #tipo de separado\n                 header = TRUE, #tiene encabezado (primera fila)\n                 dec = \",\", #tipo de separador de decimales\n                 skip = 1 #salta n filas antes de empezar a leer\n                )\n\n\n\nread.csv() permite importar directamente archivos .csv\n\ndf &lt;- read.csv(file = \"ruta/archivo.csv\")"
+  },
+  {
+    "objectID": "slides/dplyr.html#importar-datos-a-lá-tidyverse",
+    "href": "slides/dplyr.html#importar-datos-a-lá-tidyverse",
+    "title": "dplyr",
+    "section": "Importar datos a lá Tidyverse",
+    "text": "Importar datos a lá Tidyverse\n\n\n  \n\n\nread_csv() → archivos .csv (coma)\nread_tsv() → archivos .tsv (tabulador)\nread_delim() → separador personalizado\nread_lines() → lectura línea por línea\nread_table() → separados por espacios en blanco"
+  },
+  {
+    "objectID": "slides/dplyr.html#tibbles",
+    "href": "slides/dplyr.html#tibbles",
+    "title": "dplyr",
+    "section": "Tibbles",
+    "text": "Tibbles\n\n\n\nNo imprime todo el contenido en pantalla\nNo convierte texto a otros formatos\nNo modifica formato de los nombres de columnas"
+  },
+  {
+    "objectID": "slides/dplyr.html#leer-archivos-desde-ms-excel",
+    "href": "slides/dplyr.html#leer-archivos-desde-ms-excel",
+    "title": "dplyr",
+    "section": "Leer archivos desde MS Excel",
+    "text": "Leer archivos desde MS Excel\n\n\n\nreadxl permite leer archivos Excel (.xls y .xlsx) fácilmente en R.\nEs parte del universo tidyverse, aunque no se carga por defecto.\nSin dependencias externas → funciona en Windows, macOS y Linux."
+  },
+  {
+    "objectID": "slides/dplyr.html#leer-archivos-desde-ms-excel-1",
+    "href": "slides/dplyr.html#leer-archivos-desde-ms-excel-1",
+    "title": "dplyr",
+    "section": "Leer archivos desde MS Excel",
+    "text": "Leer archivos desde MS Excel\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nWarning: package 'readxl' was built under R version 4.5.1\n\n\n\ndata &lt;- read_xlsx(path = here::here(\"data/ejercicio_readxls.xlsx\"), # ruta del archivo\n                  sheet = 1, # Hoja en donde se encuentran los datos.\n                  skip = 2, # saltar n líneas\n                  range = NULL, # intervalo de celdas donde estan los datos\n                  na = \"na\" #simbolo para na. default celdas vacias \n                  )\n\ndata\n\n# A tibble: 300 × 13\n   `Número de individuo` Grupo `peso humedo (g)` `Longitud Total (cm)`\n                   &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;                 &lt;dbl&gt;\n 1                     1 A                     4                    14\n 2                     2 A                    12                    10\n 3                     3 A                    13                    11\n 4                     4 A                     4                    19\n 5                     5 A                     2                    23\n 6                     6 A                     9                    24\n 7                     7 A                     5                    10\n 8                     8 A                    14                    10\n 9                     9 A                    14                    18\n10                    10 A                     3                    12\n# ℹ 290 more rows\n# ℹ 9 more variables: `Relación masa & longitud (g/cm)` &lt;dbl&gt;,\n#   `% gonada` &lt;dbl&gt;, TEMPERATURA &lt;chr&gt;, `Sexo (M/F)` &lt;chr&gt;,\n#   `# de localidad` &lt;chr&gt;, `num-huevos_producidos` &lt;dbl&gt;, T_media &lt;dbl&gt;,\n#   t_media &lt;dbl&gt;, `:)` &lt;chr&gt;"
+  },
+  {
+    "objectID": "slides/dplyr.html#janitor",
+    "href": "slides/dplyr.html#janitor",
+    "title": "dplyr",
+    "section": "Janitor",
+    "text": "Janitor\n\n{janitor} es un paquete útil para la limpieza de nombres de columnas\nMuy útil en flujos de trabajo tidyverse.\nEspecialmente práctico al importar datos de Excel o CSV."
+  },
+  {
+    "objectID": "slides/dplyr.html#tipos-de-estructura-de-nombres",
+    "href": "slides/dplyr.html#tipos-de-estructura-de-nombres",
+    "title": "dplyr",
+    "section": "Tipos de estructura de nombres",
+    "text": "Tipos de estructura de nombres"
+  },
+  {
+    "objectID": "slides/dplyr.html#dplyr",
+    "href": "slides/dplyr.html#dplyr",
+    "title": "dplyr",
+    "section": "Dplyr",
+    "text": "Dplyr\nPaquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:\n\n\n\n\n\n\n\n\n\nselect()\nfilter()\nmutate()\ngroup_by()\nsummarise()"
+  },
+  {
+    "objectID": "slides/dplyr.html#base-de-datos",
+    "href": "slides/dplyr.html#base-de-datos",
+    "title": "dplyr",
+    "section": "Base de datos",
+    "text": "Base de datos\nBase de datos de Pokémon obtenida de Kaggle. La base de datos contiene la siguiente información:\n\n\n\n\n\npokedex number: Número de identificador\nName: Nombre de cada Pokémon\n\nType: Tipo de Pokémon\nHP: Hit Points, define qué tanto daño puede tolerar\n\nAttack: Ataque\n\nDefense: Defensa\n\nSP Atk: Ataque especial\n\nSP Def: Defensa especial\n\nSpeed: Velocidad. Determina cuál Pokémon ataca primero en cada ronda\n\nWeight: Peso en kg\n\nGeneration: A cuál generación pertenece\n\nis legendary: Si es legendario o no"
+  },
+  {
+    "objectID": "slides/dplyr.html#base-de-datos-1",
+    "href": "slides/dplyr.html#base-de-datos-1",
+    "title": "dplyr",
+    "section": "Base de datos",
+    "text": "Base de datos\n\n\n\n\nBase de datos de Pokémon obtenida de Kaggle. La base de datos contiene la siguiente información:\n\npokedex number: Número de identificador de cada pokémon\n\nName: Nombre de cada Pokémon\n\nType: Tipo de Pokémon, esto determina su resistencia o debilidad a los ataques\n\nHP: Hit Points, define qué tanto daño puede tolerar un Pokémon antes de desvanecerse\n\nAttack: Ataque\n\nDefense: Defensa\n\nSP Atk: Ataque especial\n\nSP Def: Defensa especial\n\nSpeed: Velocidad. Determina cuál Pokémon ataca primero en cada ronda\n\nWeight: Peso en kg\n\nGeneration: A cuál generación pertenece\n\nis legendary: Si es legendario o no\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+  },
+  {
+    "objectID": "slides/dplyr.html#ejercicio",
+    "href": "slides/dplyr.html#ejercicio",
+    "title": "dplyr",
+    "section": "Ejercicio:",
+    "text": "Ejercicio:\n¿Quien es ese pokemon? ❗💥\n\n\n\nvalor de HP entre 100 y 200\nvalor de velocidad menor a 50\nes del tipo1 Normal\nvalor de defensa menor a 40\npertenece a la primera generación\n\n\n\n\n\n\n\n−+\n05:00"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe",
+    "href": "slides/dplyr.html#el-operador-pipe",
+    "title": "dplyr",
+    "section": "El operador pipe %>%",
+    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\n El operador originalmente viene del paquete magrittr, nombrado asi por René Magritte \n\n\n\n\n\nAnálisis de datos con Tidyverse"
   }
 ]

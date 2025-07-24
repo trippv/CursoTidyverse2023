@@ -100,5 +100,8 @@
   },
   "slides/importar.qmd": {
     "importar.html": "dd9440af"
+  },
+  "slides/dplyr.qmd": {
+    "dplyr.html": "09e5818e"
   }
 }

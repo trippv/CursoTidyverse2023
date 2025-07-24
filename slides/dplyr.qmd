@@ -1,0 +1,117 @@
+---
+title: "dplyr"
+author: "Miguel A. Tripp Valdez"
+institute: CIBNOR
+format: 
+  revealjs:
+    theme: default
+    width: 1200
+    slide-number: c/t
+    transition: fade
+    toc: false
+    logo: "img/logo.png"
+    echo: true
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
+    css: styles/custom.scss
+title-slide-attributes: 
+  data-background-image: img/tidyverse_cover.png
+  data-background-size: cover
+  data-background-opacity: "0.4"
+---
+
+## Dplyr
+
+Paquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:
+
+::::: columns
+::: {.column width="30%"}
+![](img/dplyr.png){fig-align="center" width="350"}
+:::
+
+::: {.column width="70%"}
+-   `select()`
+
+-   `filter()`
+
+-   `mutate()`
+
+-   `group_by()`
+
+-   `summarise()`
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Base de datos
+
+Base de datos de Pokémon obtenida de [Kaggle](https://www.kaggle.com/datasets/rounakbanik/pokemon). La base de datos contiene la siguiente información:
+
+::::: columns
+::: {.column width="30%"}
+![](img/pokemon_log.png){width="250" style="margin-top:5em;"}
+:::
+
+::: {.column .smaller width="70%"}
+-   **pokedex number**: Número de identificador
+-   **Name**: Nombre de cada Pokémon\
+-   **Type**: Tipo de Pokémon
+-   **HP**: Hit Points, define qué tanto daño puede tolerar\
+-   **Attack**: Ataque\
+-   **Defense**: Defensa\
+-   **SP Atk**: Ataque especial\
+-   **SP Def**: Defensa especial\
+-   **Speed**: Velocidad. Determina cuál Pokémon ataca primero en cada ronda\
+-   **Weight**: Peso en kg\
+-   **Generation**: A cuál generación pertenece\
+-   **is legendary**: Si es legendario o no
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Ejercicio:
+
+### ¿Quien es ese pokemon? ❗💥
+
+::::: columns
+::: {.column width="50%"}
+-   valor de HP entre 100 y 200
+
+-   valor de velocidad menor a 50
+
+-   es del tipo1 Normal
+
+-   valor de defensa menor a 40
+
+-   pertenece a la primera generación
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-486799225.png){width="510"}
+:::
+:::::
+
+```{r}
+#| eval: true
+#| include: true
+#| echo: false
+
+
+countdown::countdown(5, warn_when = 10)
+```
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>%
+
+Permite aplicar una serie de funciones secuenciales a un objeto
+
+::: columns
+::: {.column width="30%"}
+![](img/pipe.png)
+
+<span class="smaller"> El operador originalmente viene del paquete `magrittr`, nombrado asi por René Magritte </span>
+
+:::
+:::
