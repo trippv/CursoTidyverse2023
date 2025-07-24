@@ -262,15 +262,6 @@ Si buscamos múltiples patrones dentro de nuestra variable con caracteres, podem
 filter(pokemon, str_detect(name, "saur|Char"))
 ```
 
-::: {.callout-caution icon="false"}
-# Ejercicio: Una galaxia muy lejana...
-
-Abre la tabla `starwars` que se encuentra en el directorio de *databases* y genera los siguientes objetos:
-
-1.  Una tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.
-2.  Una tabla que incluya solamente los personajes femeninos del planeta Naboo.
-3.  Una tabla con los personajes que hayan aparecido en *Attack of the Clones*.
-:::
 
 # Transformar o crear columnas con `mutate()`
 
@@ -305,7 +296,7 @@ pokemon_mutate
 ```
 
 ::: callout-tip
-# Protip
+# Pro-tip
 
 Cuando generas una nueva columna con *mutate*, puedes ajustar la posición de la columna incluyendo el parámetro `.before =` o `.after =` indicando la posición de la columna deseada
 
@@ -325,6 +316,66 @@ La función `rename()` cambia el nombre de variables individuales usando una sin
          nombre = name,
          ataque = attack)
 ```
+
+
+::: {.callout-caution icon="false"}
+# Ejercicio: Una galaxia muy lejana...
+
+Abre la tabla `starwars` que se encuentra en el directorio de *databases* y genera los siguientes objetos:
+
+**Parte I:**
+
+1.  Una tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.
+2.  Una tabla que incluya solamente los personajes femeninos del planeta Naboo.
+3.  Una tabla con los personajes que hayan aparecido en *Attack of the Clones*.
+
+
+**Parte II:**
+
+Genera un solo objeto donde realices lo siguiente:
+
+1. Selecciona las columnas `name`, `height`, `mass`, `sex`, `gender`.
+2. Cambia el nombre de las columnas por *"nombre", "altura", "masa", "sexo", "genero"*.
+3. Calcula la relación masa/altura
+4. Filtra los individuos con una relación masa/altura > 1
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: false
+
+#paso 1: abrir la base de datos
+starwars <- read_csv("data/starwars.csv")
+
+#paso 2: seleccionar las columnas con select()
+starwars_df <- select(starwars, 
+                      name, height, mass, sex, gender)
+
+# paso 3: renombrar las columnas con rename()
+starwars_df <- rename(starwars_df, 
+                      nombre = name,
+                      altura = height, 
+                      masa = mass,
+                      sexo = sex,
+                      genero = gender)
+
+#paso 4: crear la relacion masa/altura
+starwars_df <- mutate(starwars_df,
+                      masa_altura = masa/altura)
+
+#paso 5: filtrar los indiviuos con relacion masa/altura > 1
+starwars_df <- filter(starwars_df, 
+                      masa_altura >1 )
+```
+
+
+:::
+
+
+
+
+
 
 # Pipes *%\>%* y *\|\>*
 
