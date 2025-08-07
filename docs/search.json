@@ -417,14 +417,14 @@
     "href": "6_VisualizationGgplot.html#poniendo-capas-ggplot",
     "title": "Visualización de datos con ggplot2",
     "section": "Poniendo capas: ggplot()",
-    "text": "Poniendo capas: ggplot()\nPara empezar a hacer gráficos, vamos a utilizar la base de datos de los pingünios (penguins) que ya hemos utilizado anteriormente. Para crear un gráfico con ggplot se usa el comando ggplot()\n\nggplot(data = penguins)\n\n\n\n\n\n\n\n\nAl ejecutar la función, no se genera ningún error pero tampoco vemos ninguna gráfica. Esto se debe a que no hemos indicado a ggplot cuales son las coordenadas y ni las geometrías que queremos graficar.\nPara designar los estéticos, definimos el plano usando los datos de la longitud del culmen y la masa corporal ejecutando:\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))\n\n\n\n\n\n\n\n\nEl argumento aes() es sinónimo de estética. ggplot2 considera que el eje x y y de la gráfica es estético, junto con el color, el tamaño, la forma, el relleno, etc. Se puede agregar cualquier estética que se desee dentro del argumento aes(), como por ejemplo indicar los ejes x y y, especificando las variables respectivas del conjunto de datos.\nLa variable en función de la cual el color, tamaño, forma y trazo debe cambiar también se puede especificar aquí mismo. Debes tener en cuenta que la estética especificada aquí será heredada por todas las capas geom() que se agregarán posteriormente.\nSin embargo, aún no vemos ninguna gráfica, ya que para esto es necesario indicar que tipo de geometría (geom()) de gráfica queremos utilizar.\nPara crear un diagrama, por ejemplo, de dispersión es necesario agregarle la geometria geom_point(). Es importante recalcar que cada nueva capa que agreguemos al gráfico se agrega con el símbolo +.\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+\n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDonde poner los aes?\n\n\n\nLos aes() se pueden definir desde que se inicia la función ggplot()pero estos aes se heredaran al resto de las capas. Por otro lado, se pueden definir los aes dentro de cada geom()\n\nggplot(data = data, aes(x = x, y = y))+\n  geom_point()\n\nes igual que\n\nggplot()+\n  geom_point(data = data, aes(x = x, y = y))"
+    "text": "Poniendo capas: ggplot()\nPara empezar a hacer gráficos, vamos a utilizar la base de datos de los pingünios (penguins) que ya hemos utilizado anteriormente. Para crear un gráfico con ggplot se usa el comando ggplot()\nPara esto, utilizaremos la base de datos de penguins que ya hemos utilizado anteriormente.\n\n# cargar Tidyverse e importar los datos\nlibrary(tidyverse)\n\npenguins &lt;- read_csv(\"data/palmer_penguins.csv\") %&gt;% \n  na.omit()\n\n\nggplot(data = penguins)\n\n\n\n\n\n\n\n\nAl ejecutar la función, no se genera ningún error pero tampoco vemos ninguna gráfica. Esto se debe a que no hemos indicado a ggplot cuales son las coordenadas y ni las geometrías que queremos graficar.\nPara designar los estéticos, definimos el plano usando los datos de la longitud del culmen y la masa corporal ejecutando:\n\nggplot(data = penguins, \n       mapping = aes(x = bill_length_mm, y = body_mass_g))\n\n\n\n\n\n\n\n\nEl argumento aes() es sinónimo de estética. ggplot2 considera que el eje x y y de la gráfica es estético, junto con el color, el tamaño, la forma, el relleno, etc. Se puede agregar cualquier estética que se desee dentro del argumento aes(), como por ejemplo indicar los ejes x y y, especificando las variables respectivas del conjunto de datos.\nLa variable en función de la cual el color, tamaño, forma y trazo debe cambiar también se puede especificar aquí mismo. Debes tener en cuenta que la estética especificada aquí será heredada por todas las capas geom() que se agregarán posteriormente.\nSin embargo, aún no vemos ninguna gráfica, ya que para esto es necesario indicar que tipo de geometría (geom()) de gráfica queremos utilizar.\nPara crear un diagrama, por ejemplo, de dispersión es necesario agregarle la geometria geom_point(). Es importante recalcar que cada nueva capa que agreguemos al gráfico se agrega con el símbolo +.\n\nggplot(data = penguins, \n       mapping = aes(x = bill_length_mm, y = body_mass_g))+\n  geom_point()"
   },
   {
     "objectID": "6_VisualizationGgplot.html#aesthetics",
     "href": "6_VisualizationGgplot.html#aesthetics",
     "title": "Visualización de datos con ggplot2",
     "section": "Aesthetics()",
-    "text": "Aesthetics()\nComo mencionamos, es posible agregar diferentes estéticos a la gráfica para controlar diversos aspectos como color, tamaño, forma, etc. Esto nos permite asignarle un estético a los grupos.\npor ejemplo, podemos asignarle un color diferente a cada especie con el argumento color\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+\n  geom_point()\n\n\n\n\n\n\n\n\nY asignarle una forma diferente a por sexo con el argumento shape\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex))+\n  geom_point()\n\n\n\n\n\n\n\n\no cambiar el tamaño con size\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex, size = bill_length_mm))+\n  geom_point()\n\n\n\n\n\n\n\n\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+\n  geom_point()+\n  geom_smooth(method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\nggplot(data = penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species))+\n  geom_smooth(aes(x = bill_length_mm, y = body_mass_g), method = \"lm\", color = \"grey75\")+\n  geom_smooth(aes(x = bill_length_mm, y = body_mass_g, color = species), method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'"
+    "text": "Aesthetics()\nComo mencionamos, es posible agregar diferentes estéticos a la gráfica para controlar diversos aspectos como color, tamaño, forma, etc. Esto nos permite asignarle un estético a los grupos.\npor ejemplo, podemos asignarle un color diferente a cada especie con el argumento color\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+\n  geom_point()\n\n\n\n\n\n\n\n\nEn resumen, hasta la forma en que hemos “mapeado” nuestros datos al gráfico es:\n\nbill_length_mm en el eje x\nbody_mass_g en el eje y\nspecies como color de los puntos\n\nArriba ya hemos mencionado los tipos de aesthetics que podemos emplear en nuestra gráfica que puede ser:\n\nx, y: Variables en el eje x y y\ncolor: Color de las geometrías de acuerdo a los datos\nfill: Color de relleno de las geometrías\ngroup: A que grupo corresponde cada geometría\nshape: Figura utilizada para cada punto\nlinetype: Tipo de línea\nsize: Tamaño de la geometría\nalpha: valor de transparencia de la geometría\n\nDe esta forma, podemos mapear mas variables utilizando distintos aestetics. Por ejemplo, podemos distinguir el sexo de los pingüinos con diferentes formas usando shape\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex))+\n  geom_point()\n\n\n\n\n\n\n\n\no cambiar el tamaño con size\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex, size = bill_length_mm))+\n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDonde poner los aes?\n\n\n\nLos aes() se pueden definir desde que se inicia la función ggplot()pero estos aes se heredaran al resto de las capas. Por otro lado, se pueden definir los aes dentro de cada geom()\n\nggplot(data = data, aes(x = x, y = y))+\n  geom_point()\n\nes igual que\n\nggplot()+\n  geom_point(data = data, aes(x = x, y = y))\n\n\n\n\nggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+\n  geom_point()+\n  geom_smooth(method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\nggplot(data = penguins)+\n  geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species))+\n  geom_smooth(aes(x = bill_length_mm, y = body_mass_g), method = \"lm\", color = \"grey75\")+\n  geom_smooth(aes(x = bill_length_mm, y = body_mass_g, color = species), method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'"
   },
   {
     "objectID": "6_VisualizationGgplot.html#breve-tour-por-las-distintas-geometrias",
@@ -843,8 +843,8 @@
     "objectID": "slides/dplyr.html#dplyr",
     "href": "slides/dplyr.html#dplyr",
     "title": "dplyr",
-    "section": "Dplyr",
-    "text": "Dplyr\nPaquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:\n\n\n\n\n\n\n\n\n\nselect()\nfilter()\nmutate()\ngroup_by()\nsummarise()"
+    "section": "",
+    "text": "Paquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:\n\n\n\n\n\n\n\n\n\nselect()\nfilter()\nmutate()\ngroup_by()\nsummarise()"
   },
   {
     "objectID": "slides/dplyr.html#base-de-datos",
@@ -865,42 +865,42 @@
     "href": "slides/dplyr.html#ejercicio",
     "title": "dplyr",
     "section": "Ejercicio:",
-    "text": "Ejercicio:\n¿Quien es ese pokemon? ❗💥\n\n\n\nvalor de HP entre 100 y 200\nvalor de velocidad menor a 50\nes del tipo1 Normal\nvalor de defensa menor a 40\npertenece a la primera generación\n\n\n\n\n\n\n\n−+\n05:00"
+    "text": "Ejercicio:\n\n¿Quien es ese pokemon? ❗💥\n\n\n\nvalor de HP entre 100 y 200\nvalor de velocidad menor a 50\nes del tipo1 Normal\nvalor de defensa menor a 40\npertenece a la primera generación\n\n\n\n\n\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "slides/dplyr.html#el-operador-pipe",
     "href": "slides/dplyr.html#el-operador-pipe",
     "title": "dplyr",
     "section": "El operador pipe %>%",
-    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, attack &lt; 100), name, attack))\n\n:::"
+    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, attack &lt; 100), name, attack))\n\n\n:::"
   },
   {
     "objectID": "slides/dplyr.html#ejercicio-1",
     "href": "slides/dplyr.html#ejercicio-1",
     "title": "dplyr",
     "section": "Ejercicio:",
-    "text": "Ejercicio:\nEn una galaxía muy lejana…\n\n\n\n\n\n\n\n\nAbre la tabla starwars que se encuentra en el directorio de databases y genera los siguientes objetos:\nParte I:\n\nUna tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.\nUna tabla que incluya solamente los personajes femeninos del planeta Naboo.\nUna tabla con los personajes que hayan aparecido en Attack of the Clones."
+    "text": "Ejercicio:\n\nEn una galaxía muy lejana…\n\n\n\n\n\n\n\n\nAbre la tabla starwars que se encuentra en el directorio de databases y genera los siguientes objetos:\nParte I:\n\nUna tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.\nUna tabla que incluya solamente los personajes femeninos del planeta Naboo.\nUna tabla con los personajes que hayan aparecido en Attack of the Clones."
   },
   {
     "objectID": "slides/dplyr.html#ejercicio-2",
     "href": "slides/dplyr.html#ejercicio-2",
     "title": "dplyr",
     "section": "Ejercicio:",
-    "text": "Ejercicio:\nEn una galaxía muy lejana…\n\n\n\n\n\n\n\n\nAbre la tabla starwars que se encuentra en el directorio de databases y genera los siguientes objetos:\nParte II:\nGenera un solo objeto donde realices lo siguiente:\n\nSelecciona las columnas name, height, mass, sex, gender.\nCambia el nombre de las columnas por “nombre”, “altura”, “masa”, “sexo”, “genero”.\nCalcula la relación masa/altura\nFiltra los individuos con una relación masa/altura &gt; 1"
+    "text": "Ejercicio:\n\nEn una galaxía muy lejana…\n\n\n\n\n\n\n\n\nAbre la tabla starwars que se encuentra en el directorio de databases y genera los siguientes objetos:\nParte II:\nGenera un solo objeto donde realices lo siguiente:\n\nSelecciona las columnas name, height, mass, sex, gender.\nCambia el nombre de las columnas por “nombre”, “altura”, “masa”, “sexo”, “genero”.\nCalcula la relación masa/altura\nFiltra los individuos con una relación masa/altura &gt; 1"
   },
   {
     "objectID": "slides/dplyr.html#el-operador-pipe-1",
     "href": "slides/dplyr.html#el-operador-pipe-1",
     "title": "dplyr",
     "section": "El operador pipe %>%",
-    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, \n                   attack &lt; 100), \n            name, attack)\n     )\n\n:::"
+    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, \n                   attack &lt; 100), \n            name, attack)\n     )\n\n\n:::"
   },
   {
     "objectID": "slides/dplyr.html#el-operador-pipe-2",
     "href": "slides/dplyr.html#el-operador-pipe-2",
     "title": "dplyr",
     "section": "El operador pipe %>%",
-    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, \n                   attack &lt; 100), \n            name, attack)\n     )\n\nFiltrar, seleccionar y mostrar primeras líneas en Tidyverse\n\npokemon %&gt;% \n  select(name, attack) %&gt;% \n  fitler(attack &lt; 100) %&gt;% \n  head()\n\n:::"
+    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, \n                   attack &lt; 100), \n            name, attack)\n     )\n\nFiltrar, seleccionar y mostrar primeras líneas en Tidyverse\n\npokemon %&gt;% \n  select(name, attack) %&gt;% \n  fitler(attack &lt; 100) %&gt;% \n  head()\n\n\n:::"
   },
   {
     "objectID": "slides/dplyr.html#el-operador-pipe-y-luego",
@@ -963,21 +963,21 @@
     "href": "slides/dplyr.html#ejercicio-3",
     "title": "dplyr",
     "section": "Ejercicio:",
-    "text": "Ejercicio:\nPalmer penguins\n\n\n\n\n\n\n\n\nAbre la tabla palmer_penguis.csv que se encuentra en el directorio de databases y utilizando pipes genera los siguientes objetos:\n\nUn objeto con los pingüinos de la especie Adelie y que incluya una columna con la proporción (ratio) entre la longitud y profundidad del pico.\nUn objeto solamente los individuos hembras y que solamente contenta las columnas de especie, isla y peso corporal en Kg.\nUn objeto que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a 4 Kg. Convierte la columna isla a factor.\n\n\n\n\n\n−+\n05:00"
+    "text": "Ejercicio:\n\nPalmer penguins\n\n\n\n\n\n\n\n\nAbre la tabla palmer_penguis.csv que se encuentra en el directorio de databases y utilizando pipes genera los siguientes objetos:\n\nUn objeto con los pingüinos de la especie Adelie y que incluya una columna con la proporción (ratio) entre la longitud y profundidad del pico.\nUn objeto solamente los individuos hembras y que solamente contenta las columnas de especie, isla y peso corporal en Kg.\nUn objeto que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a 4 Kg. Convierte la columna isla a factor.\n\n\n\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "slides/dplyr.html#ejercicio-4",
     "href": "slides/dplyr.html#ejercicio-4",
     "title": "dplyr",
     "section": "Ejercicio:",
-    "text": "Ejercicio:\nTiburon a la vista!\n\n\n\n\n\n\n\n\nAbre la tabla attacks.csv que se encuentra en el directorio databases. Explora los datos que contiene y realiza lo siguiente:\n\nLimpia el nombre de las columnas\nFiltra los registros que se tengan a partir del siglo XIX\n\nCon esta nueva tabla y usando las herramientas vista al momento, contesta lo siguiente:\n\n¿Que país tiene el mayor número de registros de ataque?\n¿Que actividad tiene el mayor número de registros?\n¿Que actividad tiene el mayor número de registros con resultado fatal?\n¿Que país tiene el mayor número de registros de tiburón blanco?"
+    "text": "Ejercicio:\n\nTiburon a la vista!\n\n\n\n\n\n\n\n\nAbre la tabla attacks.csv que se encuentra en el directorio databases. Explora los datos que contiene y realiza lo siguiente:\n\nLimpia el nombre de las columnas\nFiltra los registros que se tengan a partir del siglo XIX\n\nCon esta nueva tabla y usando las herramientas vista al momento, contesta lo siguiente:\n\n¿Que país tiene el mayor número de registros de ataque?\n¿Que actividad tiene el mayor número de registros?\n¿Que actividad tiene el mayor número de registros con resultado fatal?\n¿Que país tiene el mayor número de registros de tiburón blanco?"
   },
   {
     "objectID": "slides/dplyr.html#ejercicio-5",
     "href": "slides/dplyr.html#ejercicio-5",
     "title": "dplyr",
     "section": "Ejercicio:",
-    "text": "Ejercicio:\nA continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (body_mass_g) y el tamaño de la aleta (flipper_length_mm) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:\n\n# a \narrange(aleta_peso_ratio_promedio)\n\n# b \npinguinos &lt;- read.csv(\"data/palmer_penguins.csv\")\n\n# c \ngroup_by(species)\n\n# d\nsummarise(aleta_peso_ratio_promedio = mean(aleta_peso_ratio, na.rm = TRUE))\n\n# e\nmutate(aleta_peso_ratio = body_mass_g/flipper_length_mm)\n\n\n\n\n−+\n05:00\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+    "text": "Ejercicio:\nA continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (body_mass_g) y el tamaño de la aleta (flipper_length_mm) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:\n\n# a \narrange(aleta_peso_ratio_promedio)\n\n# b \npinguinos &lt;- read.csv(\"data/palmer_penguins.csv\")\n\n# c \ngroup_by(species)\n\n# d\nsummarise(aleta_peso_ratio_promedio = mean(aleta_peso_ratio, na.rm = TRUE))\n\n# e\nmutate(aleta_peso_ratio = body_mass_g/flipper_length_mm)\n\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "slides/ggplot.html#visualización-con-r-base",

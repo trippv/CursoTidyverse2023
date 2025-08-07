@@ -105,6 +105,23 @@ Los elementos **necesarios** para realizar un gráfico con ggplot son los siguie
 
 Para empezar a hacer gráficos, vamos a utilizar la base de datos de los pingünios (*penguins*) que ya hemos utilizado anteriormente. Para crear un gráfico con ggplot se usa el comando `ggplot()`
 
+
+Para esto, utilizaremos la base de datos de `penguins` que ya hemos utilizado anteriormente. 
+
+```{r}
+#| warning: false
+#| message: false
+
+
+# cargar Tidyverse e importar los datos
+library(tidyverse)
+
+penguins <- read_csv("data/palmer_penguins.csv") %>% 
+  na.omit()
+
+
+```
+
 ```{r}
 ggplot(data = penguins)
 ```
@@ -114,7 +131,8 @@ Al ejecutar la función, no se genera ningún error pero tampoco vemos ninguna g
 Para designar los estéticos, definimos el plano usando los datos de la longitud del culmen y la masa corporal ejecutando:
 
 ```{r}
-ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm, y = body_mass_g))
 ```
 
 El argumento `aes()` es sinónimo de estética. ggplot2 considera que el eje *x* y *y* de la gráfica es estético, junto con el color, el tamaño, la forma, el relleno, etc. Se puede agregar cualquier estética que se desee dentro del argumento `aes()`, como por ejemplo indicar los ejes *x* y *y*, especificando las variables respectivas del conjunto de datos.
@@ -126,11 +144,60 @@ Sin embargo, aún no vemos ninguna gráfica, ya que para esto es necesario indic
 Para crear un diagrama, por ejemplo, de dispersión es necesario agregarle la geometria `geom_point()`. Es importante recalcar que cada nueva capa que agreguemos al gráfico se agrega con el símbolo `+`.
 
 ```{r}
-ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))+
+ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm, y = body_mass_g))+
   geom_point()
 ```
 
-:::: column-margin
+
+## Aesthetics()
+
+Como mencionamos, es posible agregar diferentes estéticos a la gráfica para controlar diversos aspectos como color, tamaño, forma, etc. Esto nos permite asignarle un estético a los grupos.
+
+por ejemplo, podemos asignarle un color diferente a cada especie con el argumento color
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()
+```
+
+En resumen, hasta la forma en que hemos _"mapeado"_ nuestros datos al gráfico es:
+
+* `bill_length_mm` en el eje x
+* `body_mass_g` en el eje y
+* `species` como color de los puntos
+
+
+Arriba ya hemos mencionado los tipos de _aesthetics_ que podemos emplear en nuestra gráfica que puede ser:
+
+  * `x`, `y`: Variables en el eje x y y
+  * `color`: Color de las geometrías de acuerdo a los datos
+  * `fill`: Color de relleno de las geometrías
+  * `group`: A que grupo corresponde cada geometría
+  * `shape`: Figura utilizada para cada punto
+  * `linetype`: Tipo de línea
+  * `size`: Tamaño de la geometría
+  * `alpha`: valor de transparencia de la geometría
+
+
+
+De esta forma, podemos mapear mas variables utilizando distintos aestetics. Por ejemplo, podemos distinguir el sexo de los pingüinos con diferentes formas usando *shape*
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex))+
+  geom_point()
+```
+
+o cambiar el tamaño con *size*
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex, size = bill_length_mm))+
+  geom_point()
+```
+
+
+
+
 ::: {.callout-tip icon="true"}
 # Donde poner los aes?
 
@@ -150,32 +217,9 @@ ggplot()+
   geom_point(data = data, aes(x = x, y = y))
 ```
 :::
-::::
 
-## Aesthetics()
 
-Como mencionamos, es posible agregar diferentes estéticos a la gráfica para controlar diversos aspectos como color, tamaño, forma, etc. Esto nos permite asignarle un estético a los grupos.
 
-por ejemplo, podemos asignarle un color diferente a cada especie con el argumento color
-
-```{r}
-ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
-  geom_point()
-```
-
-Y asignarle una forma diferente a por sexo con el argumento *shape*
-
-```{r}
-ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex))+
-  geom_point()
-```
-
-o cambiar el tamaño con *size*
-
-```{r}
-ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex, size = bill_length_mm))+
-  geom_point()
-```
 
 ```{r}
 ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
