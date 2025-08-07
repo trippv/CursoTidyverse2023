@@ -103,5 +103,8 @@
   },
   "slides/dplyr.qmd": {
     "dplyr.html": "09e5818e"
+  },
+  "slides/ggplot.qmd": {
+    "ggplot.html": "fda3d3e2"
   }
 }

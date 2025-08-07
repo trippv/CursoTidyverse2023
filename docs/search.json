@@ -843,8 +843,8 @@
     "objectID": "slides/dplyr.html#dplyr",
     "href": "slides/dplyr.html#dplyr",
     "title": "dplyr",
-    "section": "",
-    "text": "Paquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:\n\n\n\n\n\n\n\n\n\nselect()\nfilter()\nmutate()\ngroup_by()\nsummarise()"
+    "section": "Dplyr",
+    "text": "Dplyr\nPaquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:\n\n\n\n\n\n\n\n\n\nselect()\nfilter()\nmutate()\ngroup_by()\nsummarise()"
   },
   {
     "objectID": "slides/dplyr.html#base-de-datos",
@@ -865,13 +865,167 @@
     "href": "slides/dplyr.html#ejercicio",
     "title": "dplyr",
     "section": "Ejercicio:",
-    "text": "Ejercicio:\n\n¿Quien es ese pokemon? ❗💥\n\n\n\nvalor de HP entre 100 y 200\nvalor de velocidad menor a 50\nes del tipo1 Normal\nvalor de defensa menor a 40\npertenece a la primera generación\n\n\n\n\n\n\n\n\n−+\n05:00"
+    "text": "Ejercicio:\n¿Quien es ese pokemon? ❗💥\n\n\n\nvalor de HP entre 100 y 200\nvalor de velocidad menor a 50\nes del tipo1 Normal\nvalor de defensa menor a 40\npertenece a la primera generación\n\n\n\n\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "slides/dplyr.html#el-operador-pipe",
     "href": "slides/dplyr.html#el-operador-pipe",
     "title": "dplyr",
     "section": "El operador pipe %>%",
-    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\n El operador originalmente viene del paquete magrittr, nombrado asi por René Magritte"
+    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, attack &lt; 100), name, attack))\n\n:::"
+  },
+  {
+    "objectID": "slides/dplyr.html#ejercicio-1",
+    "href": "slides/dplyr.html#ejercicio-1",
+    "title": "dplyr",
+    "section": "Ejercicio:",
+    "text": "Ejercicio:\nEn una galaxía muy lejana…\n\n\n\n\n\n\n\n\nAbre la tabla starwars que se encuentra en el directorio de databases y genera los siguientes objetos:\nParte I:\n\nUna tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.\nUna tabla que incluya solamente los personajes femeninos del planeta Naboo.\nUna tabla con los personajes que hayan aparecido en Attack of the Clones."
+  },
+  {
+    "objectID": "slides/dplyr.html#ejercicio-2",
+    "href": "slides/dplyr.html#ejercicio-2",
+    "title": "dplyr",
+    "section": "Ejercicio:",
+    "text": "Ejercicio:\nEn una galaxía muy lejana…\n\n\n\n\n\n\n\n\nAbre la tabla starwars que se encuentra en el directorio de databases y genera los siguientes objetos:\nParte II:\nGenera un solo objeto donde realices lo siguiente:\n\nSelecciona las columnas name, height, mass, sex, gender.\nCambia el nombre de las columnas por “nombre”, “altura”, “masa”, “sexo”, “genero”.\nCalcula la relación masa/altura\nFiltra los individuos con una relación masa/altura &gt; 1"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-1",
+    "href": "slides/dplyr.html#el-operador-pipe-1",
+    "title": "dplyr",
+    "section": "El operador pipe %>%",
+    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, \n                   attack &lt; 100), \n            name, attack)\n     )\n\n:::"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-2",
+    "href": "slides/dplyr.html#el-operador-pipe-2",
+    "title": "dplyr",
+    "section": "El operador pipe %>%",
+    "text": "El operador pipe %&gt;%\nPermite aplicar una serie de funciones secuenciales a un objeto\n\n\n\nEl operador originalmente viene del paquete magrittr, nombrado asi por René Magritte\n\n\nFiltrar, seleccionar y mostrar primeras líneas en R base\n\nhead(select(filter(pokemon, \n                   attack &lt; 100), \n            name, attack)\n     )\n\nFiltrar, seleccionar y mostrar primeras líneas en Tidyverse\n\npokemon %&gt;% \n  select(name, attack) %&gt;% \n  fitler(attack &lt; 100) %&gt;% \n  head()\n\n:::"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-y-luego",
+    "href": "slides/dplyr.html#el-operador-pipe-y-luego",
+    "title": "dplyr",
+    "section": "El operador pipe %>% (y luego…)",
+    "text": "El operador pipe %&gt;% (y luego…)"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-y-luego-1",
+    "href": "slides/dplyr.html#el-operador-pipe-y-luego-1",
+    "title": "dplyr",
+    "section": "El operador pipe %>% (y luego…)",
+    "text": "El operador pipe %&gt;% (y luego…)"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-y-luego-2",
+    "href": "slides/dplyr.html#el-operador-pipe-y-luego-2",
+    "title": "dplyr",
+    "section": "El operador pipe %>% (y luego…)",
+    "text": "El operador pipe %&gt;% (y luego…)"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-y-luego-3",
+    "href": "slides/dplyr.html#el-operador-pipe-y-luego-3",
+    "title": "dplyr",
+    "section": "El operador pipe %>% (y luego…)",
+    "text": "El operador pipe %&gt;% (y luego…)"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-y-luego-4",
+    "href": "slides/dplyr.html#el-operador-pipe-y-luego-4",
+    "title": "dplyr",
+    "section": "El operador pipe %>% (y luego…)",
+    "text": "El operador pipe %&gt;% (y luego…)\n\nsalgo_casa(\n  visto(\n    salgo_cama(\n      despierto(yo)\n    )\n  )\n)"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-y-luego-5",
+    "href": "slides/dplyr.html#el-operador-pipe-y-luego-5",
+    "title": "dplyr",
+    "section": "El operador pipe %>% (y luego…)",
+    "text": "El operador pipe %&gt;% (y luego…)\n\nyo &lt;- despierto(yo)\nyo &lt;- salgo_cama(yo)\nyo &lt;- visto(yo)\nyo &lt;- salgo_casa(yo)"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-y-luego-6",
+    "href": "slides/dplyr.html#el-operador-pipe-y-luego-6",
+    "title": "dplyr",
+    "section": "El operador pipe %>% (y luego…)",
+    "text": "El operador pipe %&gt;% (y luego…)\n\nyo %&gt;% \n  despierto() %&gt;% \n  salgo_cama() %&gt;% \n  visto() %&gt;% \n  salgo_casa()"
+  },
+  {
+    "objectID": "slides/dplyr.html#el-operador-pipe-3",
+    "href": "slides/dplyr.html#el-operador-pipe-3",
+    "title": "dplyr",
+    "section": "El operador pipe %>%",
+    "text": "El operador pipe %&gt;%\nDesde su versión 4.1.0, R incluye un pipe nativo |&gt;. El comportamiento de ambos pipes es en gran medida el mismo, permitiendo expresar una secuencia de operaciones a un objeto."
+  },
+  {
+    "objectID": "slides/dplyr.html#ejercicio-3",
+    "href": "slides/dplyr.html#ejercicio-3",
+    "title": "dplyr",
+    "section": "Ejercicio:",
+    "text": "Ejercicio:\nPalmer penguins\n\n\n\n\n\n\n\n\nAbre la tabla palmer_penguis.csv que se encuentra en el directorio de databases y utilizando pipes genera los siguientes objetos:\n\nUn objeto con los pingüinos de la especie Adelie y que incluya una columna con la proporción (ratio) entre la longitud y profundidad del pico.\nUn objeto solamente los individuos hembras y que solamente contenta las columnas de especie, isla y peso corporal en Kg.\nUn objeto que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a 4 Kg. Convierte la columna isla a factor.\n\n\n\n\n\n−+\n05:00"
+  },
+  {
+    "objectID": "slides/dplyr.html#ejercicio-4",
+    "href": "slides/dplyr.html#ejercicio-4",
+    "title": "dplyr",
+    "section": "Ejercicio:",
+    "text": "Ejercicio:\nTiburon a la vista!\n\n\n\n\n\n\n\n\nAbre la tabla attacks.csv que se encuentra en el directorio databases. Explora los datos que contiene y realiza lo siguiente:\n\nLimpia el nombre de las columnas\nFiltra los registros que se tengan a partir del siglo XIX\n\nCon esta nueva tabla y usando las herramientas vista al momento, contesta lo siguiente:\n\n¿Que país tiene el mayor número de registros de ataque?\n¿Que actividad tiene el mayor número de registros?\n¿Que actividad tiene el mayor número de registros con resultado fatal?\n¿Que país tiene el mayor número de registros de tiburón blanco?"
+  },
+  {
+    "objectID": "slides/dplyr.html#ejercicio-5",
+    "href": "slides/dplyr.html#ejercicio-5",
+    "title": "dplyr",
+    "section": "Ejercicio:",
+    "text": "Ejercicio:\nA continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (body_mass_g) y el tamaño de la aleta (flipper_length_mm) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:\n\n# a \narrange(aleta_peso_ratio_promedio)\n\n# b \npinguinos &lt;- read.csv(\"data/palmer_penguins.csv\")\n\n# c \ngroup_by(species)\n\n# d\nsummarise(aleta_peso_ratio_promedio = mean(aleta_peso_ratio, na.rm = TRUE))\n\n# e\nmutate(aleta_peso_ratio = body_mass_g/flipper_length_mm)\n\n\n\n\n−+\n05:00\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+  },
+  {
+    "objectID": "slides/ggplot.html#visualización-con-r-base",
+    "href": "slides/ggplot.html#visualización-con-r-base",
+    "title": "ggplot2: Visualización de datos",
+    "section": "Visualización con R base",
+    "text": "Visualización con R base\n\n\n\nlibrary(tidyverse)\nlibrary(here)\npenguins &lt;- read_csv(here(\"data/palmer_penguins.csv\")) %&gt;% \n  na.omit()\n\npenguins_adelie &lt;- penguins[penguins$species == \"Adelie\", ]\n\n# definir area de grafico\npar(mfrow = c(1, 3), oma = c(0, 0, 2, 0))\n\n# Lista de islas\nislas &lt;- unique(penguins_adelie$island)\n\n# forloop para islas \nfor (isla in islas) {\n  boxplot(bill_length_mm ~ sex, \n          data = filter(penguins_adelie, island == isla),\n          main = isla,\n          ylab = \"Bill Length (mm)\",\n          col = \"lightblue\")\n}\n\n# Agregar titulo \nmtext(\"Datos de longitud del culmen por isla y sexo (Adelie)\", outer = TRUE)"
+  },
+  {
+    "objectID": "slides/ggplot.html#visualización-con-r-base-1",
+    "href": "slides/ggplot.html#visualización-con-r-base-1",
+    "title": "ggplot2: Visualización de datos",
+    "section": "Visualización con R base",
+    "text": "Visualización con R base\n\n\n\nlibrary(tidyverse)\nlibrary(here)\npenguins &lt;- read_csv(here(\"data/palmer_penguins.csv\")) %&gt;% \n  na.omit()\n\npenguins %&gt;% \n  filter(species == \"Adelie\") %&gt;% \n  ggplot(aes(x = sex, y = bill_length_mm))+\n  geom_boxplot(fill = \"lightblue\")+\n  facet_wrap(~island)+\n  labs(title = \"Datos de longitud del culmen por isla y por sexo (Adelie)\",\n       y = \"Bill Length (mm)\",\n       x = \"Sexo\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+  },
+  {
+    "objectID": "slides/ggplot.html#visualización-con-ggplot",
+    "href": "slides/ggplot.html#visualización-con-ggplot",
+    "title": "ggplot2: Visualización de datos",
+    "section": "Visualización con ggplot",
+    "text": "Visualización con ggplot\n\n\n\nlibrary(tidyverse)\nlibrary(here)\npenguins &lt;- read_csv(here(\"data/palmer_penguins.csv\")) %&gt;% \n  na.omit()\n\npenguins %&gt;% \n  filter(species == \"Adelie\") %&gt;% \n  ggplot(aes(x = sex, y = bill_length_mm))+\n  geom_boxplot(fill = \"lightblue\")+\n  facet_wrap(~island)+\n  labs(title = \"Datos de longitud del culmen por isla y por sexo (Adelie)\",\n       y = \"Bill Length (mm)\",\n       x = \"Sexo\")"
+  },
+  {
+    "objectID": "slides/ggplot.html#gramática-de-los-gráficos",
+    "href": "slides/ggplot.html#gramática-de-los-gráficos",
+    "title": "ggplot2: Visualización de datos",
+    "section": "Gramática de los gráficos",
+    "text": "Gramática de los gráficos\n“grammar gives language rules” - Liland Wilkinson\n\n\n\nggplot es un sistema de visualización en R\nParte del ecosistema tidyverse\nBasado en la Grammar of Graphics de Leland Wilkinson"
+  },
+  {
+    "objectID": "slides/ggplot.html#gramática-de-los-gráficos-1",
+    "href": "slides/ggplot.html#gramática-de-los-gráficos-1",
+    "title": "ggplot2: Visualización de datos",
+    "section": "Gramática de los gráficos",
+    "text": "Gramática de los gráficos\nComo diseñar un sistema (gramática) que permita:\n\nCalcular la posición de los datos\nRealizar gráficos atractivos\nSeleccionar un tipo de gráfico"
+  },
+  {
+    "objectID": "slides/ggplot.html#gramática-de-los-gráficos-2",
+    "href": "slides/ggplot.html#gramática-de-los-gráficos-2",
+    "title": "ggplot2: Visualización de datos",
+    "section": "Gramática de los gráficos",
+    "text": "Gramática de los gráficos\nComo diseñar un sistema (gramática) que permita:\n\nCalcular la posición de los datos\nRealizar gráficos atractivos\nSeleccionar un tipo de gráfico"
+  },
+  {
+    "objectID": "slides/ggplot.html#gramática-de-los-gráficos-3",
+    "href": "slides/ggplot.html#gramática-de-los-gráficos-3",
+    "title": "ggplot2: Visualización de datos",
+    "section": "Gramática de los gráficos",
+    "text": "Gramática de los gráficos\n\n\nData: Información que queremos visualizar. (La gramática requiere un formato tidy)\nMappings: Constituye la descripción de como las variables son asignadas (mapping) a atributos esteticos (aesthetics)\nGeoms: Representación de los datos (puntos, líneas, polígonos, barras, etc)\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
   }
 ]

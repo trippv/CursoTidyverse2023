@@ -103,15 +103,314 @@ countdown::countdown(5, warn_when = 10)
 
 ------------------------------------------------------------------------
 
+## Ejercicio:
+
+### En una galaxía muy lejana...
+
+::::: columns
+::: {.column width="50%"}
+![](img/jabba.jpg){fig-align="center" width="358"}
+:::
+
+::: {.column .smaller width="50%"}
+Abre la tabla `starwars` que se encuentra en el directorio de *databases* y genera los siguientes objetos:
+
+**Parte I:**
+
+1.  Una tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.
+2.  Una tabla que incluya solamente los personajes femeninos del planeta Naboo.
+3.  Una tabla con los personajes que hayan aparecido en *Attack of the Clones*.
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Ejercicio:
+
+### En una galaxía muy lejana...
+
+::::: columns
+::: {.column width="50%"}
+![](img/jabba.jpg){fig-align="center" width="358"}
+:::
+
+::: {.column .smaller width="50%"}
+Abre la tabla `starwars` que se encuentra en el directorio de *databases* y genera los siguientes objetos:
+
+**Parte II:**
+
+Genera un solo objeto donde realices lo siguiente:
+
+1.  Selecciona las columnas `name`, `height`, `mass`, `sex`, `gender`.
+2.  Cambia el nombre de las columnas por *"nombre", "altura", "masa", "sexo", "genero"*.
+3.  Calcula la relación masa/altura
+4.  Filtra los individuos con una relación masa/altura \> 1
+:::
+:::::
+
+------------------------------------------------------------------------
+
 ## El operador pipe %\>%
 
 Permite aplicar una serie de funciones secuenciales a un objeto
 
-::: columns
+:::: columns
 ::: {.column width="30%"}
 ![](img/pipe.png)
 
-<span class="smaller"> El operador originalmente viene del paquete `magrittr`, nombrado asi por René Magritte </span>
+[El operador originalmente viene del paquete `magrittr`, nombrado asi por René Magritte]{.smaller}
+:::
+::::
+
+::: {.column .smaller width="70"}
+Filtrar, seleccionar y mostrar primeras líneas en **R base**
+
+```{r}
+#| include: true
+#| eval: false
+#| echo: true
+
+head(select(filter(pokemon, attack < 100), name, attack))
+```
+:::
 
 :::
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>%
+
+Permite aplicar una serie de funciones secuenciales a un objeto
+
+:::: columns
+::: {.column width="30%"}
+![](img/pipe.png)
+
+[El operador originalmente viene del paquete `magrittr`, nombrado asi por René Magritte]{.smaller}
 :::
+::::
+
+::: {.column .smaller width="70"}
+Filtrar, seleccionar y mostrar primeras líneas en **R base**
+
+```{r}
+#| include: true
+#| eval: false
+#| echo: true
+
+head(select(filter(pokemon, 
+                   attack < 100), 
+            name, attack)
+     )
+```
+:::
+
+:::
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>%
+
+Permite aplicar una serie de funciones secuenciales a un objeto
+
+:::: columns
+::: {.column width="30%"}
+![](img/pipe.png)
+
+[El operador originalmente viene del paquete `magrittr`, nombrado asi por René Magritte]{.smaller}
+:::
+::::
+
+::: {.column .smaller width="70"}
+Filtrar, seleccionar y mostrar primeras líneas en **R base**
+
+```{r}
+#| include: true
+#| eval: false
+#| echo: true
+
+head(select(filter(pokemon, 
+                   attack < 100), 
+            name, attack)
+     )
+```
+
+Filtrar, seleccionar y mostrar primeras líneas en **Tidyverse**
+
+```{r}
+#| include: true
+#| eval: false
+#| echo: true
+
+pokemon %>% 
+  select(name, attack) %>% 
+  fitler(attack < 100) %>% 
+  head()
+```
+:::
+
+:::
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>% (y luego...)
+
+![](img/pipe1.png){fig-align="center" width="790"}
+
+## El operador pipe %\>% (y luego...)
+
+![](img/pipe2.png){fig-align="center" width="790"}
+
+## El operador pipe %\>% (y luego...)
+
+![](img/pipe3.png){fig-align="center" width="790"}
+
+## El operador pipe %\>% (y luego...)
+
+![](img/pipe4.png){fig-align="center" width="1040"}
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>% (y luego...)
+
+```{r}
+#| eval: false
+
+salgo_casa(
+  visto(
+    salgo_cama(
+      despierto(yo)
+    )
+  )
+)
+```
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>% (y luego...)
+
+```{r}
+#| eval: false
+yo <- despierto(yo)
+yo <- salgo_cama(yo)
+yo <- visto(yo)
+yo <- salgo_casa(yo)
+```
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>% (y luego...)
+
+```{r}
+#| eval: false
+yo %>% 
+  despierto() %>% 
+  salgo_cama() %>% 
+  visto() %>% 
+  salgo_casa()
+```
+
+------------------------------------------------------------------------
+
+## El operador pipe %\>%
+
+Desde su versión 4.1.0, R incluye un pipe nativo `|>`. El comportamiento de ambos pipes es en gran medida el mismo, permitiendo expresar una secuencia de operaciones a un objeto.
+
+![](img/catsup_pipes.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Ejercicio:
+
+### Palmer penguins
+
+::::: columns
+::: {.column width="50%"}
+![](img/Palmer.png){fig-align="center"}
+:::
+
+::: {.column .smaller width="50%"}
+Abre la tabla `palmer_penguis.csv` que se encuentra en el directorio de databases y utilizando pipes genera los siguientes objetos:
+
+1.  Un objeto con los pingüinos de la especie **Adelie** y que incluya una columna con la proporción (ratio) entre la longitud y profundidad del pico.
+
+2.  Un objeto solamente los individuos hembras y que solamente contenta las columnas de especie, isla y peso corporal **en Kg**.
+
+3.  Un objeto que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a **4 Kg**. [Convierte la columna isla a factor.]{.fragment .highlight-red}
+:::
+:::::
+
+```{r}
+#| eval: true
+#| include: true
+#| echo: false
+
+
+countdown::countdown(5, warn_when = 10)
+```
+
+------------------------------------------------------------------------
+
+## Ejercicio:
+
+### Tiburon a la vista!
+
+::::: columns
+::: {.column width="50%"}
+![](img/sharky.jpeg){fig-align="center" width="484"}
+:::
+
+::: {.column .smaller width="50%"}
+Abre la tabla `attacks.csv` que se encuentra en el directorio **databases**. Explora los datos que contiene y realiza lo siguiente:
+
+1.  Limpia el nombre de las columnas
+
+2.  Filtra los registros que se tengan a partir del siglo XIX
+
+Con esta nueva tabla y usando las herramientas vista al momento, contesta lo siguiente:
+
+-   ¿Que país tiene el mayor número de registros de ataque?
+-   ¿Que actividad tiene el mayor número de registros?
+-   ¿Que actividad tiene el mayor número de registros con resultado fatal?
+-   ¿Que país tiene el mayor número de registros de tiburón blanco?
+
+:::
+:::::
+
+
+------------------------------------------------------------------------
+
+## Ejercicio: { .smaller}
+
+A continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (`body_mass_g`) y el tamaño de la aleta (`flipper_length_mm`) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:
+
+```{r}
+#| eval: false
+#| echo: true
+
+# a 
+arrange(aleta_peso_ratio_promedio)
+
+# b 
+pinguinos <- read.csv("data/palmer_penguins.csv")
+
+# c 
+group_by(species)
+
+# d
+summarise(aleta_peso_ratio_promedio = mean(aleta_peso_ratio, na.rm = TRUE))
+
+# e
+mutate(aleta_peso_ratio = body_mass_g/flipper_length_mm)
+```
+
+
+```{r}
+#| eval: true
+#| include: true
+#| echo: false
+
+
+countdown::countdown(5, warn_when = 10)
+```
+

@@ -262,7 +262,6 @@ Si buscamos múltiples patrones dentro de nuestra variable con caracteres, podem
 filter(pokemon, str_detect(name, "saur|Char"))
 ```
 
-
 # Transformar o crear columnas con `mutate()`
 
 ![Allison Horst (\@allison_horst)](img/Horst_functions/mutate.png){fig-align="center" width="500"}
@@ -317,7 +316,6 @@ La función `rename()` cambia el nombre de variables individuales usando una sin
          ataque = attack)
 ```
 
-
 ::: {.callout-caution icon="false"}
 # Ejercicio: Una galaxia muy lejana...
 
@@ -329,15 +327,14 @@ Abre la tabla `starwars` que se encuentra en el directorio de *databases* y gene
 2.  Una tabla que incluya solamente los personajes femeninos del planeta Naboo.
 3.  Una tabla con los personajes que hayan aparecido en *Attack of the Clones*.
 
-
 **Parte II:**
 
 Genera un solo objeto donde realices lo siguiente:
 
-1. Selecciona las columnas `name`, `height`, `mass`, `sex`, `gender`.
-2. Cambia el nombre de las columnas por *"nombre", "altura", "masa", "sexo", "genero"*.
-3. Calcula la relación masa/altura
-4. Filtra los individuos con una relación masa/altura > 1
+1.  Selecciona las columnas `name`, `height`, `mass`, `sex`, `gender`.
+2.  Cambia el nombre de las columnas por *"nombre", "altura", "masa", "sexo", "genero"*.
+3.  Calcula la relación masa/altura
+4.  Filtra los individuos con una relación masa/altura \> 1
 
 ```{r}
 #| include: true
@@ -368,14 +365,7 @@ starwars_df <- mutate(starwars_df,
 starwars_df <- filter(starwars_df, 
                       masa_altura >1 )
 ```
-
-
 :::
-
-
-
-
-
 
 # Pipes *%\>%* y *\|\>*
 

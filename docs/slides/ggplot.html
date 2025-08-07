@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.53">
 
   <meta name="author" content="Miguel A. Tripp Valdez">
-  <title>Tidyverse – dplyr</title>
+  <title>Tidyverse – ggplot2: Visualización de datos</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -386,17 +386,13 @@
       margin-right: 0; 
     }
   </style>
-  <link href="../site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
-
-  <script src="../site_libs/countdown-0.4.0/countdown.js"></script>
-
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" data-background-image="img/tidyverse_cover.png" data-background-opacity="0.4" data-background-size="cover" class="quarto-title-block center">
-  <h1 class="title">dplyr</h1>
+  <h1 class="title">ggplot2: Visualización de datos</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -410,313 +406,131 @@ Miguel A. Tripp Valdez
 </div>
 
 </section>
-<section id="dplyr" class="slide level2">
-<h2>Dplyr</h2>
-<p>Paquete que proporciona un set de herramientas para manipular set de datos en R. Alguna de las funciones que revisaremos son:</p>
+<section id="visualización-con-r-base" class="slide level2">
+<h2>Visualización con R base</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
+<div class="column medium" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/palmer_penguins.csv"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>penguins_adelie <span class="ot">&lt;-</span> penguins[penguins<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Adelie"</span>, ]</span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a><span class="co"># definir area de grafico</span></span>
+<span id="cb1-9"><a></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>))</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co"># Lista de islas</span></span>
+<span id="cb1-12"><a></a>islas <span class="ot">&lt;-</span> <span class="fu">unique</span>(penguins_adelie<span class="sc">$</span>island)</span>
+<span id="cb1-13"><a></a></span>
+<span id="cb1-14"><a></a><span class="co"># forloop para islas </span></span>
+<span id="cb1-15"><a></a><span class="cf">for</span> (isla <span class="cf">in</span> islas) {</span>
+<span id="cb1-16"><a></a>  <span class="fu">boxplot</span>(bill_length_mm <span class="sc">~</span> sex, </span>
+<span id="cb1-17"><a></a>          <span class="at">data =</span> <span class="fu">filter</span>(penguins_adelie, island <span class="sc">==</span> isla),</span>
+<span id="cb1-18"><a></a>          <span class="at">main =</span> isla,</span>
+<span id="cb1-19"><a></a>          <span class="at">ylab =</span> <span class="st">"Bill Length (mm)"</span>,</span>
+<span id="cb1-20"><a></a>          <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
+<span id="cb1-21"><a></a>}</span>
+<span id="cb1-22"><a></a></span>
+<span id="cb1-23"><a></a><span class="co"># Agregar titulo </span></span>
+<span id="cb1-24"><a></a><span class="fu">mtext</span>(<span class="st">"Datos de longitud del culmen por isla y sexo (Adelie)"</span>, <span class="at">outer =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
 <figure>
-<p><img data-src="img/dplyr.png" class="quarto-figure quarto-figure-center" width="350"></p>
+<p><img data-src="ggplot_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:100.0%"></p>
 </figure>
 </div>
-</div><div class="column" style="width:70%;">
-<ul>
-<li><p><code>select()</code></p></li>
-<li><p><code>filter()</code></p></li>
-<li><p><code>mutate()</code></p></li>
-<li><p><code>group_by()</code></p></li>
-<li><p><code>summarise()</code></p></li>
-</ul>
+</div>
+</div>
 </div></div>
 </section>
-<section id="base-de-datos" class="slide level2">
-<h2>Base de datos</h2>
-<p>Base de datos de Pokémon obtenida de <a href="https://www.kaggle.com/datasets/rounakbanik/pokemon">Kaggle</a>. La base de datos contiene la siguiente información:</p>
+<section id="visualización-con-ggplot" class="slide level2">
+<h2>Visualización con ggplot</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pokemon_log.png" style="margin-top:5em;" width="250"></p>
-</div><div class="column smaller" style="width:70%;">
-<ul>
-<li><strong>pokedex number</strong>: Número de identificador</li>
-<li><strong>Name</strong>: Nombre de cada Pokémon<br>
-</li>
-<li><strong>Type</strong>: Tipo de Pokémon</li>
-<li><strong>HP</strong>: Hit Points, define qué tanto daño puede tolerar<br>
-</li>
-<li><strong>Attack</strong>: Ataque<br>
-</li>
-<li><strong>Defense</strong>: Defensa<br>
-</li>
-<li><strong>SP Atk</strong>: Ataque especial<br>
-</li>
-<li><strong>SP Def</strong>: Defensa especial<br>
-</li>
-<li><strong>Speed</strong>: Velocidad. Determina cuál Pokémon ataca primero en cada ronda<br>
-</li>
-<li><strong>Weight</strong>: Peso en kg<br>
-</li>
-<li><strong>Generation</strong>: A cuál generación pertenece<br>
-</li>
-<li><strong>is legendary</strong>: Si es legendario o no</li>
-</ul>
+<div class="column medium" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a></a><span class="fu">library</span>(here)</span>
+<span id="cb2-3"><a></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/palmer_penguins.csv"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-8"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> bill_length_mm))<span class="sc">+</span></span>
+<span id="cb2-9"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>)<span class="sc">+</span></span>
+<span id="cb2-10"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>island)<span class="sc">+</span></span>
+<span id="cb2-11"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Datos de longitud del culmen por isla y por sexo (Adelie)"</span>,</span>
+<span id="cb2-12"><a></a>       <span class="at">y =</span> <span class="st">"Bill Length (mm)"</span>,</span>
+<span id="cb2-13"><a></a>       <span class="at">x =</span> <span class="st">"Sexo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
 </section>
-<section id="ejercicio" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="quien-es-ese-pokemon">¿Quien es ese pokemon? ❗💥</h3>
+<section id="gramática-de-los-gráficos" class="slide level2">
+<h2>Gramática de los gráficos</h2>
+<p><em>“grammar gives language rules”</em> - Liland Wilkinson</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>valor de HP entre 100 y 200</p></li>
-<li><p>valor de velocidad menor a 50</p></li>
-<li><p>es del tipo1 Normal</p></li>
-<li><p>valor de defensa menor a 40</p></li>
-<li><p>pertenece a la primera generación</p></li>
+<li>ggplot es un sistema de visualización en R</li>
+<li>Parte del ecosistema <strong>tidyverse</strong></li>
+<li>Basado en la <strong>Grammar of Graphics</strong> de Leland Wilkinson</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><img data-src="images/clipboard-486799225.png" width="510"></p>
-</div></div>
-<div class="cell">
-<div class="cell-output-display">
-<div class="countdown" id="timer_aaa553ab" data-warn-when="10" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
-</section>
-<section id="ejercicio-1" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="en-una-galaxía-muy-lejana">En una galaxía muy lejana…</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/jabba.jpg" class="quarto-figure quarto-figure-center" width="358"></p>
+<p><img data-src="img/ggraphics_book.jpeg" class="quarto-figure quarto-figure-center" width="313"></p>
 </figure>
 </div>
-</div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>starwars</code> que se encuentra en el directorio de <em>databases</em> y genera los siguientes objetos:</p>
-<p><strong>Parte I:</strong></p>
-<ol type="1">
-<li>Una tabla que incluya solamente el nombre del personaje y todas las variables relacionadas con colores.</li>
-<li>Una tabla que incluya solamente los personajes femeninos del planeta Naboo.</li>
-<li>Una tabla con los personajes que hayan aparecido en <em>Attack of the Clones</em>.</li>
-</ol>
 </div></div>
 </section>
-<section id="ejercicio-2" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="en-una-galaxía-muy-lejana-1">En una galaxía muy lejana…</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/jabba.jpg" class="quarto-figure quarto-figure-center" width="358"></p>
-</figure>
-</div>
-</div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>starwars</code> que se encuentra en el directorio de <em>databases</em> y genera los siguientes objetos:</p>
-<p><strong>Parte II:</strong></p>
-<p>Genera un solo objeto donde realices lo siguiente:</p>
-<ol type="1">
-<li>Selecciona las columnas <code>name</code>, <code>height</code>, <code>mass</code>, <code>sex</code>, <code>gender</code>.</li>
-<li>Cambia el nombre de las columnas por <em>“nombre”, “altura”, “masa”, “sexo”, “genero”</em>.</li>
-<li>Calcula la relación masa/altura</li>
-<li>Filtra los individuos con una relación masa/altura &gt; 1</li>
-</ol>
-</div></div>
-</section>
-<section id="el-operador-pipe" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Permite aplicar una serie de funciones secuenciales a un objeto</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pipe.png"></p>
-<p><span class="smaller">El operador originalmente viene del paquete <code>magrittr</code>, nombrado asi por René Magritte</span></p>
-</div></div>
-<div class="column smaller" style="width:70;">
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>R base</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">head</span>(<span class="fu">select</span>(<span class="fu">filter</span>(pokemon, attack <span class="sc">&lt;</span> <span class="dv">100</span>), name, attack))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><p>:::</p>
-</section>
-<section id="el-operador-pipe-1" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Permite aplicar una serie de funciones secuenciales a un objeto</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pipe.png"></p>
-<p><span class="smaller">El operador originalmente viene del paquete <code>magrittr</code>, nombrado asi por René Magritte</span></p>
-</div></div>
-<div class="column smaller" style="width:70;">
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>R base</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">head</span>(<span class="fu">select</span>(<span class="fu">filter</span>(pokemon, </span>
-<span id="cb2-2"><a></a>                   attack <span class="sc">&lt;</span> <span class="dv">100</span>), </span>
-<span id="cb2-3"><a></a>            name, attack)</span>
-<span id="cb2-4"><a></a>     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><p>:::</p>
-</section>
-<section id="el-operador-pipe-2" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Permite aplicar una serie de funciones secuenciales a un objeto</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/pipe.png"></p>
-<p><span class="smaller">El operador originalmente viene del paquete <code>magrittr</code>, nombrado asi por René Magritte</span></p>
-</div></div>
-<div class="column smaller" style="width:70;">
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>R base</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">head</span>(<span class="fu">select</span>(<span class="fu">filter</span>(pokemon, </span>
-<span id="cb3-2"><a></a>                   attack <span class="sc">&lt;</span> <span class="dv">100</span>), </span>
-<span id="cb3-3"><a></a>            name, attack)</span>
-<span id="cb3-4"><a></a>     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Filtrar, seleccionar y mostrar primeras líneas en <strong>Tidyverse</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>pokemon <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a></a>  <span class="fu">select</span>(name, attack) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a></a>  <span class="fu">fitler</span>(attack <span class="sc">&lt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div><p>:::</p>
-</section>
-<section id="el-operador-pipe-y-luego" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-
-<img data-src="img/pipe1.png" class="quarto-figure quarto-figure-center r-stretch" width="790"></section>
-<section id="el-operador-pipe-y-luego-1" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-
-<img data-src="img/pipe2.png" class="quarto-figure quarto-figure-center r-stretch" width="790"></section>
-<section id="el-operador-pipe-y-luego-2" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-
-<img data-src="img/pipe3.png" class="quarto-figure quarto-figure-center r-stretch" width="790"></section>
-<section id="el-operador-pipe-y-luego-3" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-
-<img data-src="img/pipe4.png" class="quarto-figure quarto-figure-center r-stretch" width="1040"></section>
-<section id="el-operador-pipe-y-luego-4" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">salgo_casa</span>(</span>
-<span id="cb5-2"><a></a>  <span class="fu">visto</span>(</span>
-<span id="cb5-3"><a></a>    <span class="fu">salgo_cama</span>(</span>
-<span id="cb5-4"><a></a>      <span class="fu">despierto</span>(yo)</span>
-<span id="cb5-5"><a></a>    )</span>
-<span id="cb5-6"><a></a>  )</span>
-<span id="cb5-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="el-operador-pipe-y-luego-5" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">despierto</span>(yo)</span>
-<span id="cb6-2"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">salgo_cama</span>(yo)</span>
-<span id="cb6-3"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">visto</span>(yo)</span>
-<span id="cb6-4"><a></a>yo <span class="ot">&lt;-</span> <span class="fu">salgo_casa</span>(yo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="el-operador-pipe-y-luego-6" class="slide level2">
-<h2>El operador pipe %&gt;% (y luego…)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>yo <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a></a>  <span class="fu">despierto</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a></a>  <span class="fu">salgo_cama</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-4"><a></a>  <span class="fu">visto</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-5"><a></a>  <span class="fu">salgo_casa</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="el-operador-pipe-3" class="slide level2">
-<h2>El operador pipe %&gt;%</h2>
-<p>Desde su versión 4.1.0, R incluye un pipe nativo <code>|&gt;</code>. El comportamiento de ambos pipes es en gran medida el mismo, permitiendo expresar una secuencia de operaciones a un objeto.</p>
-
-<img data-src="img/catsup_pipes.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="ejercicio-3" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="palmer-penguins">Palmer penguins</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/Palmer.png" class="quarto-figure quarto-figure-center"></p>
-</figure>
-</div>
-</div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>palmer_penguis.csv</code> que se encuentra en el directorio de databases y utilizando pipes genera los siguientes objetos:</p>
-<ol type="1">
-<li><p>Un objeto con los pingüinos de la especie <strong>Adelie</strong> y que incluya una columna con la proporción (ratio) entre la longitud y profundidad del pico.</p></li>
-<li><p>Un objeto solamente los individuos hembras y que solamente contenta las columnas de especie, isla y peso corporal <strong>en Kg</strong>.</p></li>
-<li><p>Un objeto que contenga a los individuos machos de la especie Gentoo con un peso corporal mayor a <strong>4 Kg</strong>. <span class="fragment highlight-red">Convierte la columna isla a factor.</span></p></li>
-</ol>
-</div></div>
-<div class="cell">
-<div class="cell-output-display">
-<div class="countdown" id="timer_fca71420" data-warn-when="10" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
-</section>
-<section id="ejercicio-4" class="slide level2">
-<h2>Ejercicio:</h2>
-<h3 id="tiburon-a-la-vista">Tiburon a la vista!</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/sharky.jpeg" class="quarto-figure quarto-figure-center" width="484"></p>
-</figure>
-</div>
-</div><div class="column smaller" style="width:50%;">
-<p>Abre la tabla <code>attacks.csv</code> que se encuentra en el directorio <strong>databases</strong>. Explora los datos que contiene y realiza lo siguiente:</p>
-<ol type="1">
-<li><p>Limpia el nombre de las columnas</p></li>
-<li><p>Filtra los registros que se tengan a partir del siglo XIX</p></li>
-</ol>
-<p>Con esta nueva tabla y usando las herramientas vista al momento, contesta lo siguiente:</p>
+<section id="gramática-de-los-gráficos-1" class="slide level2">
+<h2>Gramática de los gráficos</h2>
+<p>Como diseñar un sistema (gramática) que permita:</p>
 <ul>
-<li>¿Que país tiene el mayor número de registros de ataque?</li>
-<li>¿Que actividad tiene el mayor número de registros?</li>
-<li>¿Que actividad tiene el mayor número de registros con resultado fatal?</li>
-<li>¿Que país tiene el mayor número de registros de tiburón blanco?</li>
+<li>Calcular la posición de los datos</li>
+<li>Realizar gráficos atractivos</li>
+<li>Seleccionar un tipo de gráfico</li>
 </ul>
+
+<img data-src="img/how_pie.PNG" class="quarto-figure quarto-figure-center r-stretch" width="607"></section>
+<section id="gramática-de-los-gráficos-2" class="slide level2">
+<h2>Gramática de los gráficos</h2>
+<p>Como diseñar un sistema (gramática) que permita:</p>
+<ul>
+<li>Calcular la posición de los datos</li>
+<li>Realizar gráficos atractivos</li>
+<li>Seleccionar un tipo de gráfico</li>
+</ul>
+
+<img data-src="img/how_pie2.PNG" class="quarto-figure quarto-figure-center r-stretch" width="739"></section>
+<section id="gramática-de-los-gráficos-3" class="slide level2">
+<h2>Gramática de los gráficos</h2>
+<div class="columns">
+<div class="column medium" style="width:45%;">
+<p><span class="fragment fade-in"><strong>Data</strong>: Información que queremos visualizar. (La gramática requiere un formato tidy)</span></p>
+<p><span class="fragment fade-in"><strong>Mappings</strong>: Constituye la descripción de como las variables son asignadas (<em>mapping</em>) a atributos esteticos (<em>aesthetics</em>)</span></p>
+<p><span class="fragment fade-in"><strong>Geoms</strong>: Representación de los datos (puntos, líneas, polígonos, barras, etc)</span></p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/ggplot_components.png" class="quarto-figure quarto-figure-center" width="720"></p>
+</figure>
+</div>
 </div></div>
-</section>
-<section id="ejercicio-5" class="slide level2 smaller">
-<h2>Ejercicio:</h2>
-<p>A continuación se muestra una cadena de funciones con dplyr para estimar el promedio del ratio entre la masa corporal (<code>body_mass_g</code>) y el tamaño de la aleta (<code>flipper_length_mm</code>) en las tres especies de pingüinos de Palmer. Acomoda la cadena en el orden correcto:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># a </span></span>
-<span id="cb8-2"><a></a><span class="fu">arrange</span>(aleta_peso_ratio_promedio)</span>
-<span id="cb8-3"><a></a></span>
-<span id="cb8-4"><a></a><span class="co"># b </span></span>
-<span id="cb8-5"><a></a>pinguinos <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/palmer_penguins.csv"</span>)</span>
-<span id="cb8-6"><a></a></span>
-<span id="cb8-7"><a></a><span class="co"># c </span></span>
-<span id="cb8-8"><a></a><span class="fu">group_by</span>(species)</span>
-<span id="cb8-9"><a></a></span>
-<span id="cb8-10"><a></a><span class="co"># d</span></span>
-<span id="cb8-11"><a></a><span class="fu">summarise</span>(<span class="at">aleta_peso_ratio_promedio =</span> <span class="fu">mean</span>(aleta_peso_ratio, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb8-12"><a></a></span>
-<span id="cb8-13"><a></a><span class="co"># e</span></span>
-<span id="cb8-14"><a></a><span class="fu">mutate</span>(<span class="at">aleta_peso_ratio =</span> body_mass_g<span class="sc">/</span>flipper_length_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div class="countdown" id="timer_67e14452" data-warn-when="10" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
-</div>
-</div>
 
 <div class="quarto-auto-generated-content">
 <p><img src="img/logo.png" class="slide-logo"></p>

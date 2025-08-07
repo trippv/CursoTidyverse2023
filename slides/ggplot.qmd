@@ -1,0 +1,213 @@
+---
+title: "ggplot2: Visualización de datos"
+author: "Miguel A. Tripp Valdez"
+institute: CIBNOR
+format: 
+  revealjs:
+    theme: default
+    width: 1200
+    slide-number: c/t
+    transition: fade
+    toc: false
+    logo: "img/logo.png"
+    echo: true
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
+    css: styles/custom.scss
+title-slide-attributes: 
+  data-background-image: img/tidyverse_cover.png
+  data-background-size: cover
+  data-background-opacity: "0.4"
+---
+
+## Visualización con R base
+
+::::: columns
+::: {.column .medium width="50%"}
+```{r}
+#| eval: false
+#| echo: true
+
+
+library(tidyverse)
+library(here)
+penguins <- read_csv(here("data/palmer_penguins.csv")) %>% 
+  na.omit()
+
+penguins_adelie <- penguins[penguins$species == "Adelie", ]
+
+# definir area de grafico
+par(mfrow = c(1, 3), oma = c(0, 0, 2, 0))
+
+# Lista de islas
+islas <- unique(penguins_adelie$island)
+
+# forloop para islas 
+for (isla in islas) {
+  boxplot(bill_length_mm ~ sex, 
+          data = filter(penguins_adelie, island == isla),
+          main = isla,
+          ylab = "Bill Length (mm)",
+          col = "lightblue")
+}
+
+# Agregar titulo 
+mtext("Datos de longitud del culmen por isla y sexo (Adelie)", outer = TRUE)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| eval: true
+#| echo: false
+#| out.width: "100%"
+#| fig.height: 8
+#| fig.width: 10
+
+library(tidyverse)
+library(here)
+penguins <- read_csv(here("data/palmer_penguins.csv")) %>% 
+  na.omit()
+
+penguins_adelie <- penguins[penguins$species == "Adelie", ]
+
+# definir area de grafico
+par(mfrow = c(1, 3), oma = c(0, 0, 2, 0))
+
+# Lista de islas
+islas <- unique(penguins_adelie$island)
+
+# forloop para islas 
+for (isla in islas) {
+  boxplot(bill_length_mm ~ sex, 
+          data = filter(penguins_adelie, island == isla),
+          main = isla,
+          ylab = "Bill Length (mm)",
+          col = "lightblue")
+}
+
+# Agregar titulo 
+mtext("Datos de longitud del culmen por isla y sexo (Adelie)", outer = TRUE)
+```
+:::
+:::::
+
+## Visualización con ggplot
+
+::::: columns
+::: {.column .medium width="50%"}
+```{r}
+#| eval: false
+#| echo: true
+
+
+library(tidyverse)
+library(here)
+penguins <- read_csv(here("data/palmer_penguins.csv")) %>% 
+  na.omit()
+
+penguins %>% 
+  filter(species == "Adelie") %>% 
+  ggplot(aes(x = sex, y = bill_length_mm))+
+  geom_boxplot(fill = "lightblue")+
+  facet_wrap(~island)+
+  labs(title = "Datos de longitud del culmen por isla y por sexo (Adelie)",
+       y = "Bill Length (mm)",
+       x = "Sexo")
+
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| eval: true
+#| echo: false
+#| out.width: "100%"
+#| fig.height: 8
+#| fig.width: 10
+
+library(tidyverse)
+library(here)
+penguins <- read_csv(here("data/palmer_penguins.csv")) %>% 
+  na.omit()
+
+penguins %>% 
+  filter(species == "Adelie") %>% 
+  ggplot(aes(x = sex, y = bill_length_mm))+
+  geom_boxplot(fill = "lightblue")+
+  facet_wrap(~island)+
+  labs(title = "Datos de longitud del culmen por isla y por sexo (Adelie)",
+       y = "Bill Length (mm)",
+       x = "Sexo")
+```
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Gramática de los gráficos
+
+*"grammar gives language rules"* - Liland Wilkinson
+
+::::: columns
+::: {.column width="50%"}
+-   ggplot es un sistema de visualización en R
+-   Parte del ecosistema **tidyverse**
+-   Basado en la **Grammar of Graphics** de Leland Wilkinson
+:::
+
+::: {.column width="50%"}
+![](img/ggraphics_book.jpeg){fig-align="center" width="313"}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Gramática de los gráficos
+
+Como diseñar un sistema (gramática) que permita:
+
+-   Calcular la posición de los datos
+-   Realizar gráficos atractivos
+-   Seleccionar un tipo de gráfico
+
+![](img/how_pie.PNG){fig-align="center" width="607"}
+
+------------------------------------------------------------------------
+
+## Gramática de los gráficos
+
+Como diseñar un sistema (gramática) que permita:
+
+-   Calcular la posición de los datos
+-   Realizar gráficos atractivos
+-   Seleccionar un tipo de gráfico
+
+![](img/how_pie2.PNG){fig-align="center" width="739"}
+
+
+------------------------------------------------------------------------
+## Gramática de los gráficos
+
+
+::::: columns
+::: {.column .medium width="45%"}
+[**Data**: Información que queremos visualizar. (La gramática requiere un formato tidy)]{.fragment .fade-in}
+    
+    
+    
+[**Mappings**: Constituye la descripción de como las variables son asignadas (*mapping*) a atributos esteticos (*aesthetics*)]{.fragment .fade-in} 
+  
+  
+  
+[**Geoms**: Representación de los datos (puntos, líneas, polígonos, barras, etc)]{.fragment .fade-in}
+    
+:::
+
+::: {.column width="55%"}
+
+
+![](img/ggplot_components.png){fig-align="center" width="720"}
+
+:::
+:::::
