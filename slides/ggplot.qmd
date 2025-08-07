@@ -185,29 +185,41 @@ Como diseñar un sistema (gramática) que permita:
 
 ![](img/how_pie2.PNG){fig-align="center" width="739"}
 
-
 ------------------------------------------------------------------------
-## Gramática de los gráficos
 
+## Gramática de los gráficos
 
 ::::: columns
 ::: {.column .medium width="45%"}
 [**Data**: Información que queremos visualizar. (La gramática requiere un formato tidy)]{.fragment .fade-in}
-    
-    
-    
-[**Mappings**: Constituye la descripción de como las variables son asignadas (*mapping*) a atributos esteticos (*aesthetics*)]{.fragment .fade-in} 
-  
-  
-  
+
+[**Mappings**: Constituye la descripción de como las variables son asignadas (*mapping*) a atributos esteticos (*aesthetics*)]{.fragment .fade-in}
+
 [**Geoms**: Representación de los datos (puntos, líneas, polígonos, barras, etc)]{.fragment .fade-in}
-    
 :::
 
 ::: {.column width="55%"}
-
-
 ![](img/ggplot_components.png){fig-align="center" width="720"}
-
 :::
 :::::
+
+------------------------------------------------------------------------
+
+```{r}
+#| eval: true
+#| echo: false
+
+penguins %>% 
+  filter(species == "Adelie") %>% 
+  ggplot(aes(x = sex, y = bill_length_mm))+
+  geom_boxplot(fill = "lightblue")+
+  facet_wrap(~island)+
+  labs(title = "Datos de longitud del culmen por isla y por sexo (Adelie)",
+       y = "Bill Length (mm)",
+       x = "Sexo")
+
+```
+
+------------------------------------------------------------------------
+
+![aRtsy: Generative Art with R and ggplot2](img/artsy.png){fig-align="center" width="541"}

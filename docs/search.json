@@ -1026,6 +1026,6 @@
     "href": "slides/ggplot.html#gramática-de-los-gráficos-3",
     "title": "ggplot2: Visualización de datos",
     "section": "Gramática de los gráficos",
-    "text": "Gramática de los gráficos\n\n\nData: Información que queremos visualizar. (La gramática requiere un formato tidy)\nMappings: Constituye la descripción de como las variables son asignadas (mapping) a atributos esteticos (aesthetics)\nGeoms: Representación de los datos (puntos, líneas, polígonos, barras, etc)\n\n\n\n\n\n\n\n\n\n\n\nAnálisis de datos con Tidyverse"
+    "text": "Gramática de los gráficos\n\n\nData: Información que queremos visualizar. (La gramática requiere un formato tidy)\nMappings: Constituye la descripción de como las variables son asignadas (mapping) a atributos esteticos (aesthetics)\nGeoms: Representación de los datos (puntos, líneas, polígonos, barras, etc)"
   }
 ]
