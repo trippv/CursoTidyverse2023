@@ -181,7 +181,7 @@ Arriba ya hemos mencionado los tipos de _aesthetics_ que podemos emplear en nues
 
 
 
-De esta forma, podemos mapear mas variables utilizando distintos aestetics. Por ejemplo, podemos distinguir el sexo de los pingüinos con diferentes formas usando *shape*
+De esta forma, podemos mapear mas variables utilizando distintos _aesthetics_. Por ejemplo, podemos distinguir el sexo de los pingüinos con diferentes formas usando *shape*
 
 ```{r}
 ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex))+
@@ -220,19 +220,48 @@ ggplot()+
 
 
 
+Dependiendo de lo que queramos comunicar con nuestra gráfica, podemos definir los _aesthetics_ de forma global o específico para cada geom. Por ejemplo:
 
 ```{r}
 ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
   geom_point()+
-  geom_smooth(method = "lm")
+  geom_smooth()
 ```
 
 ```{r}
 ggplot(data = penguins)+
   geom_point(aes(x = bill_length_mm, y = body_mass_g, color = species))+
-  geom_smooth(aes(x = bill_length_mm, y = body_mass_g), method = "lm", color = "grey75")+
-  geom_smooth(aes(x = bill_length_mm, y = body_mass_g, color = species), method = "lm")
+  geom_smooth(aes(x = bill_length_mm, y = body_mass_g))
 ```
+
+
+### Diferencia entre aes() y parámetros
+
+Es importante distinguir entre los parámetros que se definen dentro de `aes()` y los que se definen fuera de este. Los parámetros dentro de `aes()` están mapeando una variable del conjunto de datos a un estético, mientras que los parámetros fuera de `aes()` están definiendo un valor fijo para ese estético.
+
+Por ejemplo, observa que pasa cuando definimos el color dentro y fuera de `aes()` en al siguiente gráfica:
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm,
+                     color = "blue")) +
+    geom_point()
+``` 
+
+Entonces, ¿por qué los puntos se ven rojos? ¿No debería ser azul?
+
+Esto se debe a la distinción entre mapeo y configuración de un estético. Cuando definimos el color dentro de `aes()`, estamos mapeando el color a una variable del conjunto de datos, en este caso, a un valor constante "blue". Sin embargo, al no haber una columna llamada "blue" en el conjunto de datos, ggplot2 asigna un color por defecto (rojo) a los puntos.
+
+Para hacer que los puntos sean azules, debemos definir el color fuera de `aes()` como un parámetro:
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm,
+                     y = bill_depth_mm)) +
+    geom_point(color = "blue")
+```
+
+
+
 
 ## Breve tour por las distintas geometrias
 
