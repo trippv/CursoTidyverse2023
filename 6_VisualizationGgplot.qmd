@@ -105,8 +105,7 @@ Los elementos **necesarios** para realizar un gráfico con ggplot son los siguie
 
 Para empezar a hacer gráficos, vamos a utilizar la base de datos de los pingünios (*penguins*) que ya hemos utilizado anteriormente. Para crear un gráfico con ggplot se usa el comando `ggplot()`
 
-
-Para esto, utilizaremos la base de datos de `penguins` que ya hemos utilizado anteriormente. 
+Para esto, utilizaremos la base de datos de `penguins` que ya hemos utilizado anteriormente.
 
 ```{r}
 #| warning: false
@@ -149,7 +148,6 @@ ggplot(data = penguins,
   geom_point()
 ```
 
-
 ## Aesthetics()
 
 Como mencionamos, es posible agregar diferentes estéticos a la gráfica para controlar diversos aspectos como color, tamaño, forma, etc. Esto nos permite asignarle un estético a los grupos.
@@ -161,27 +159,24 @@ ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species
   geom_point()
 ```
 
-En resumen, hasta la forma en que hemos _"mapeado"_ nuestros datos al gráfico es:
+En resumen, hasta la forma en que hemos *"mapeado"* nuestros datos al gráfico es:
 
-* `bill_length_mm` en el eje x
-* `body_mass_g` en el eje y
-* `species` como color de los puntos
+-   `bill_length_mm` en el eje x
+-   `body_mass_g` en el eje y
+-   `species` como color de los puntos
 
+Arriba ya hemos mencionado los tipos de *aesthetics* que podemos emplear en nuestra gráfica que puede ser:
 
-Arriba ya hemos mencionado los tipos de _aesthetics_ que podemos emplear en nuestra gráfica que puede ser:
+-   `x`, `y`: Variables en el eje x y y
+-   `color`: Color de las geometrías de acuerdo a los datos
+-   `fill`: Color de relleno de las geometrías
+-   `group`: A que grupo corresponde cada geometría
+-   `shape`: Figura utilizada para cada punto
+-   `linetype`: Tipo de línea
+-   `size`: Tamaño de la geometría
+-   `alpha`: valor de transparencia de la geometría
 
-  * `x`, `y`: Variables en el eje x y y
-  * `color`: Color de las geometrías de acuerdo a los datos
-  * `fill`: Color de relleno de las geometrías
-  * `group`: A que grupo corresponde cada geometría
-  * `shape`: Figura utilizada para cada punto
-  * `linetype`: Tipo de línea
-  * `size`: Tamaño de la geometría
-  * `alpha`: valor de transparencia de la geometría
-
-
-
-De esta forma, podemos mapear mas variables utilizando distintos _aesthetics_. Por ejemplo, podemos distinguir el sexo de los pingüinos con diferentes formas usando *shape*
+De esta forma, podemos mapear mas variables utilizando distintos *aesthetics*. Por ejemplo, podemos distinguir el sexo de los pingüinos con diferentes formas usando *shape*
 
 ```{r}
 ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex))+
@@ -194,9 +189,6 @@ o cambiar el tamaño con *size*
 ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species, shape = sex, size = bill_length_mm))+
   geom_point()
 ```
-
-
-
 
 ::: {.callout-tip icon="true"}
 # Donde poner los aes?
@@ -218,9 +210,7 @@ ggplot()+
 ```
 :::
 
-
-
-Dependiendo de lo que queramos comunicar con nuestra gráfica, podemos definir los _aesthetics_ de forma global o específico para cada geom. Por ejemplo:
+Dependiendo de lo que queramos comunicar con nuestra gráfica, podemos definir los *aesthetics* de forma global o específico para cada geom. Por ejemplo:
 
 ```{r}
 ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
@@ -234,7 +224,6 @@ ggplot(data = penguins)+
   geom_smooth(aes(x = bill_length_mm, y = body_mass_g))
 ```
 
-
 ### Diferencia entre aes() y parámetros
 
 Es importante distinguir entre los parámetros que se definen dentro de `aes()` y los que se definen fuera de este. Los parámetros dentro de `aes()` están mapeando una variable del conjunto de datos a un estético, mientras que los parámetros fuera de `aes()` están definiendo un valor fijo para ese estético.
@@ -246,7 +235,7 @@ ggplot(data = penguins, aes(x = bill_length_mm,
                      y = bill_depth_mm,
                      color = "blue")) +
     geom_point()
-``` 
+```
 
 Entonces, ¿por qué los puntos se ven rojos? ¿No debería ser azul?
 
@@ -260,8 +249,37 @@ ggplot(data = penguins, aes(x = bill_length_mm,
     geom_point(color = "blue")
 ```
 
+:::: {.callout-caution icon="false"}
+# **Ejercicio: Un geom_point() es un geom_point() es un geom_point()**
+
+::: column-margin
+![](img/penguin_group.jpg){fig-align="center" width="500"}
+:::
+
+Utilizando tus conocimientos previos, crea un gráfico de dispersión con la base de datos de `penguins` donde se muestre la longitud del pico en el eje x y la profundidad del pico en el eje y. Utiliza el color para distinguir las especies.
+
+Ademas, agrega un punto con el valor promedio de la longitud y profundidad del pico de cada especie en color gris.
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
 
 
+#make a dataframe with mean values of bill_depth_mm and bill_length_mm
+promedios <- penguins %>% 
+  group_by(species) %>% 
+  summarise(mean_bill_length = mean(bill_length_mm, na.rm = TRUE),
+            mean_bill_depth = mean(bill_depth_mm, na.rm = TRUE))
+
+
+ggplot()+
+  geom_point(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point(data = promedios, aes(x = mean_bill_length, y = mean_bill_depth), size = 5, color = "grey") 
+
+```
+::::
 
 ## Breve tour por las distintas geometrias
 
@@ -277,6 +295,10 @@ Para facilitar el tour, vamos a generar un objeto con las coordenadas de la long
 base <- ggplot(penguins, aes(x = bill_length_mm, fill = species))
 ```
 
+Los histogramas y los poligonos de frecuencia son dos formas comunes de visualizar la distribución de una variable continua. Tanto los histogramas como lo polígonos de frecuencia trabajan de la misma forma: dividen el rango de valores de la variable en intervalos (o "bins") y cuentan cuántos valores caen en cada intervalo. La diferencia principal entre ambos es que los histogramas muestran estos conteos como barras, mientras que las densidades representan la distribución como una curva suave.
+
+Es posible controlar el ancho de los `bins` con el parámetro `binwidth =` dentro de `geom_histogram()`
+
 #### geom_histogram()
 
 ```{r}
@@ -286,12 +308,16 @@ base +
 
 #### geom_density()
 
+El gráfico de densidad genera una estimación de la densidad de probabilidad de una variable numérica. Es básicamente una versión suavizada de un histograma: en lugar de mostrar barras por intervalos, dibuja una curva continua que representa dónde se concentran más los valores. Internamente usa el método KDE (Kernel Density Estimation) para suavizar la distribución.
+
 ```{r}
 base +
   geom_density()
 ```
 
 #### geom_qqplot()
+
+Un gráfico Q-Q (Quantile-Quantile) compara la distribución de una variable con una distribución teórica, como la normal. En un gráfico Q-Q, los cuantiles de la variable se trazan contra los cuantiles de la distribución teórica. Si los puntos siguen aproximadamente una línea recta, indica que la variable sigue esa distribución.
 
 ```{r}
 ggplot(penguins, aes(sample = bill_length_mm, color = species)) +
@@ -303,7 +329,7 @@ ggplot(penguins, aes(sample = bill_length_mm, color = species)) +
 
 #### geom_bar() y geom_col()
 
-Las gráficas de barras son una de las visualizaciones mas comunes. ggplot ofrece dos alternativas dependiendo del formato de los datos que se vayan a graficar. Una descripción mas detallada sobre la diferencia entre ambos se puede encontrar [aquí](https://r-charts.com/ranking/bar-plot-ggplot2/).
+Las gráficas de barras son una de las visualizaciones mas comunes. ggplot ofrece dos alternativas dependiendo del formato de los datos que se vayan a graficar. Una descripción mas detallada sobre la diferencia entre ambos se puede encontrar [aquí](https://r-charts.com/ranking/bar-plot-ggplot2/){target="_blank"}.
 
 Recordemos en nuestra sesión pasada que podemos contar el número de apariciones de un elemento dentro de un grupo con la función `count()`
 
@@ -319,7 +345,7 @@ ggplot(penguins, aes(x = species))+
   geom_bar()
 ```
 
-Por el contrario, si queremos que gráfique un valor ya establecido en los datos, tenemos que incorporar el parámetro `stat = "identity"`.
+Por el contrario, si queremos que muestre un valor ya establecido en los datos, tenemos que incorporar el parámetro `stat = "identity"`.
 
 ```{r}
 penguins %>%  
@@ -328,7 +354,7 @@ ggplot(aes(x = species, y = n))+
   geom_bar(stat = "identity")
 ```
 
-Por otro lado, `geom_col()` es lo mismo que `geom_bar(stat = "identity")`, por lo que si tus datos contienen groups y el número de apariciones de cada uno de estos, puedes utilizar esta función
+Por otro lado, `geom_col()` es lo mismo que `geom_bar(stat = "identity")`, por lo que si tus datos contienen groupos y el número de apariciones de cada uno de estos, puedes utilizar esta función
 
 ```{r}
 penguins %>% 
@@ -340,15 +366,15 @@ penguins %>%
 Podemos incorporar mas variables discretas dentro de los *aes()* incorporando la variable `fill=`
 
 ```{r}
-ggplot(penguins, aes(x = species, fill = sex)) +
-  geom_bar()
+ggplot(penguins, aes(x = species)) +
+  geom_bar(aes(fill = sex))
 ```
 
 Por default, `geom_bar()` nos arrojará una gráfica de barras apiladas. Si queremos poner cada grupo por separado, incorporamos el parametro `position = "dodge"`
 
 ```{r}
-ggplot(penguins, aes(x = species, fill = sex)) +
-  geom_bar(position = "dodge")
+ggplot(penguins, aes(x = species)) +
+  geom_bar(aes(fill = sex), position = "dodge")
 ```
 
 O usar `position="fill"` para que nos arroje valores proporcionales
@@ -399,8 +425,36 @@ starwars %>%
   filter(str_detect(films, "A New Hope")) %>% 
   ggplot(., aes(x = homeworld)) +
   geom_bar()
+
+### ejrcicio 3 alternativo
+starwars %>%
+  filter(str_detect(films, "A New Hope")) %>%
+  count(homeworld,sort = TRUE) %>%
+  ggplot(aes(x = homeworld, y = n)) +
+  geom_col(fill = "steelblue")
+
 ```
 ::::
+
+::: callout-tip
+Un problema con el ejercicio 3 anterior es que las barras están ordenadas en orden alfabético, lo cual hace ggplot por default cuando utilizamos factores.
+
+En lugar de ordenar lo factores a mano, podemos hacerlo de forma automática con la función `reorder()` de R base en el eje x, es decir, en el *aes* x.
+
+```{r}
+#| warning: false
+#| message: false
+
+
+starwars %>%
+  filter(str_detect(films, "A New Hope")) %>%
+  count(homeworld,sort = TRUE) %>%
+  ggplot(aes(x = reorder(homeworld, n), y = n)) +
+  geom_col(fill = "steelblue")
+```
+
+Busca la documentación de `reorder()`. Puedes leer mas sobre como ordenar factores en R \[aquí\]https://guslipkin.medium.com/reordering-bar-and-column-charts-with-ggplot2-in-r-435fad1c643e){target="\_blank"}.
+:::
 
 ### Variable discreta + variable continua
 
@@ -412,12 +466,25 @@ La caja de un boxplot comienza en el primer cuartil Q1 (25%) y termina en el ter
 
 ![Partes de un boxplot de una distribución normal. Imagen tomada de Byjus.com](img/boxplot.png){fig-align="center" width="622"}
 
+Un boxplot es una excelente forma de visualizar la dispersión de los datos categóricos. Para crear un boxplot, utilizamos la función `geom_boxplot()`. Por ejemplo, si queremos ver la longitud del pico de los pingüinos por especie, podemos hacer lo siguiente:
+
 ```{r}
-ggplot(data = penguins, aes(x = species, y = bill_length_mm, fill = sex))+
+ggplot(data = penguins, aes(x = species, y = bill_length_mm))+
   geom_boxplot()
 ```
 
-Otra opción para visualizar la dispersión de los datos es utilizando gráficos de violin. Esto es particularmente útil cuando se tienen muchos datos.
+Al igual en los geom anteriores, podemos cambiar el color de relleno de las cajas con el parámetro `fill =` dentro de `aes()`
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_length_mm))+
+  geom_boxplot(aes(fill = sex))
+```
+
+#### Violin plot
+
+Un gráfico de violín es una extensión del boxplot que muestra la distribución de los datos a través de una estimación de densidad. En lugar de mostrar solo los cuartiles y la mediana, el gráfico de violín también muestra la forma de la distribución de los datos, lo que permite ver si hay múltiples picos o si la distribución es simétrica o asimétrica.
+
+Para utilizar un gráfico de violín, utilizamos la función `geom_violin()`. Por ejemplo, si queremos ver la longitud del pico de los pingüinos por especie, podemos hacer lo siguiente:
 
 ```{r}
 ggplot(data = penguins, aes(x = species, y = bill_length_mm, fill = sex))+
@@ -426,7 +493,7 @@ ggplot(data = penguins, aes(x = species, y = bill_length_mm, fill = sex))+
 
 #### `geom_point()` y `geom_jitter()`
 
-La función `geom_point()` es una función versatil ya que nos permite crear gráficos de dispersión (mas adelante) o para vidualizar la dispersión real de los datos categóricos
+La función `geom_point()` es una función versátil ya que nos permite crear gráficos de dispersión (mas adelante) o para visualizar la dispersión de datos categóricos. Por ejemplo, si queremos ver la longitud del pico de los pingüinos por especie y sexo, podemos hacer lo siguiente:
 
 ```{r}
 ggplot(data = penguins, aes(x = species, y = bill_length_mm, color = sex))+
@@ -434,25 +501,35 @@ ggplot(data = penguins, aes(x = species, y = bill_length_mm, color = sex))+
 
 ```
 
-Esta visualización es poco útil ya que todos los puntos se traslapan. Para poder separar cada uno de los grupos (*sexo*) necesitamos incluir el parámetro `position =` para darle espacio entre cada grupo
+Esta visualización es poco útil ya que todos los puntos se traslapan. Para poder separar cada uno de los grupos (*sexo*) necesitamos incluir el parámetro `position =` para darle espacio entre cada grupo.
+
+El parámetro `position =` se puede incluir en cualquier tipo de geoms, no solo en los puntos, y permite ajustar el traslape entre grupos. Tiene varias opciones. Entre las mas útiles que utilizaremos en este curso se encuentra:
+
+-   `position_dodge()`: Esquiva el traslape lado a lado entre objetos
+-   `position_jitter()`: Agrega una dispersión aleatoria en el eje x a los puntos para eviar que se traslape
+-   `position_jitterdodge()`: Agrega de forma simultanea un *jitter* y *dodge* a los puntos
+-   `position_identity()`: No ajusta la posición de los puntos
+
+Para evitar el traslape entre los puntos, podemos utilizar el parámetro `position = position_dodge()`. Por ejemplo:
 
 ```{r}
 ggplot(data = penguins, aes(x = species, y = bill_length_mm, color = sex))+
   geom_point(position = position_dodge(0.2))
 ```
 
-El parámetro `posiiton =` se puede incluir en cualquier tipo de geoms, no solo en los puntos, y permite ajustar el traslape entre grupos. Tiene varias opciones. Entre las mas útiles que utilizaremos en este curso se encuentra:
-
--   `position_dodge()`: Esquiva el traslape lado a lado entre objettos
--   `position_jitter()`: Agrega una dispersión aleatoria en el eje x a los puntos para eviar que se traslape
--   `position_jitterdodge()`: Agrega de forma simultanea un *jitter* y *dodge* a los puntos
--   `position_identity()`: No ajusta la posición de los puntos
-
-Entonces, podemos incorporar el parámetro `position_jitterdodge()` para disminuir el traslape entre los puntos entre y dentor de cada grupo
+o podemos utilizar el parámetro `position = position_jitter()` que agrega un desplazamiento aleatorio a los puntos en el eje x. Por ejemplo:
 
 ```{r}
 ggplot(data = penguins, aes(x = species, y = bill_length_mm, color = sex))+
-  geom_point(position = position_jitterdodge(0.1))
+  geom_point(position = position_jitter(0.2))
+```
+
+Finalmente, podemos incorporar el parámetro `position_jitterdodge()` para disminuir el traslape entre los puntos entre y dentro de cada grupo
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_length_mm, color = sex))+
+  geom_point(position = position_jitterdodge(dodge.width = 0.3, 
+                                             jitter.width = 0.1))
 ```
 
 :::: column-margin
@@ -469,6 +546,8 @@ Dado que el valor es aleatorio, cada que se genere la gráfica, el desplazamient
 
 Este tipo de visualizaciones nos permite ver la relación entre dos variables continuas. Hay diversos geoms que podemos implementar, pero el más común es nuevamente `geom_point()`.
 
+Por ejemplo, si queremos ver la relación entre la longitud del pico y la masa corporal de los pingüinos, podemos hacer lo siguiente:
+
 ```{r}
 ggplot(data = penguins, aes(x = body_mass_g, y = bill_length_mm, color = sex))+
   geom_point()
@@ -476,9 +555,9 @@ ggplot(data = penguins, aes(x = body_mass_g, y = bill_length_mm, color = sex))+
 
 ### Visualización de resumenes estadisticos: `geom_errorbar()`
 
-Muchas veces queremos mostrar de forma clara y sencilla como se comportan nuestro datos, por lo que podemos mostrar solamente algunos estadisticos básicos, como el promedio y el grado de dispersión de los datos usando ya sea la desviación estandar o el error estandar. Esto lo podemos lograr utilizando funciones como `geom_point()` en conjunto con barras de dispersión con la función `geom_errorbar()`.
+Muchas veces queremos mostrar de forma clara y sencilla como se comportan nuestro datos, por lo que podemos mostrar solamente algunos estadísticos básicos, como el promedio y el grado de dispersión de los datos usando ya sea la desviación estándar o el error estándar. Esto lo podemos lograr utilizando funciones como `geom_point()` en conjunto con barras de dispersión con la función `geom_errorbar()`.
 
-al igual que otros geoms, `geom_errorbar()` requiere que indiquemos su posición en el eje x, pero también requiere que indiquemos sus limites superior e inferior sobre el eje y con los parámetros `ymax =` y `ymin =`, respectivamente.
+Al igual que otros geoms, `geom_errorbar()` requiere que indiquemos su posición en el eje x, pero también requiere que indiquemos sus limites superior e inferior sobre el eje y con los parámetros `ymax =` y `ymin =`, respectivamente.
 
 Para esto, primero necesitamos calcular estos estadísticos antes de gráficarlos.
 
@@ -507,10 +586,35 @@ ggplot(penguins_estat, aes(x = species, y = promedio))+
                 width = 0.5)
 ```
 
+::: callout-tip
+# Estadisticos fáciles con Rstatix
+
+`rstatix` es un paquete que nos permite calcular estadísticos básicos de forma sencilla y que se integra en la sintaxis de Tidiyverse.
+
+Una de las herramientas de este paquete es la función `get_summary_stats()` que nos permite calcular en un paso todos los estadisticos básicos.
+
+```{r}
+#| message: false
+#| warning: false
+
+
+#install.packages(rstatix)
+library(rstatix)
+
+penguins_estat <- penguins %>% 
+  group_by(species, sex) %>% 
+  get_summary_stats(bill_length_mm)
+
+penguins_estat
+```
+
+
+:::
+
 ::: {.callout-caution icon="false"}
 # Desafio pingüinos
 
-Realiza una gráfica de barras donde se muestre el promedio $\pm$ desviación estandar de la longitud del pico de cada especie y sexo. Distingue los sexos por el color de relleno de las barras.
+Realiza una gráfica de barras donde se muestre el promedio $\pm$ desviación estándar de la longitud del pico de cada especie y sexo. Distingue los sexos por el color de relleno de las barras.
 
 Recuerda que puedes incluir el parámetros `position = position_dodge()` para separar las barras entre grupos
 
@@ -539,7 +643,7 @@ penguins %>%
 
 # Los amigos no permiten que sus amigos hagan gráficas de barras
 
-Muchas veces al presentar los datos de una investigación nos vamos directamente a mostrar el promedio $\pm$ desviación estandar o algún otro valor de dispersión pero puede que esto no muestre toda la verdad sobre la distribución de los datos. Como demostración haz el siguiente ejercicio:
+Muchas veces al presentar los datos de una investigación nos vamos directamente a mostrar el promedio $\pm$ desviación estándar o algún otro valor de dispersión pero puede que esto no muestre toda la verdad sobre la distribución de los datos. Como demostración haz el siguiente ejercicio:
 
 1.  Abre la tabla `datos_demo.csv` que se encuentra en la carpeta de datos
 2.  Sin hacer ningún tipo de observación previa, haz una gráfica donde se muestre el promedio $\pm$ desviación estándar. Para ello, utiliza las funciones `group_by()` y `summarise()` que hemos visto anteriormente.
@@ -578,3 +682,136 @@ El uso de histogramas, densidades o gráficas de dispersión nos permite hacer u
 
 Puedes encontrar una discusión mas profunda sobra la importancia de la correcta presentación e interpretación de datos en publicaciones científicas [aquí](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128){page="_blank"}.
 ::::
+
+
+
+:::: {.callout-caution icon="false"}
+# **Ejercicio**
+
+
+Recrea el gráfico de dispersión de los pingüinos que se muestra al inicio de esta sección, donde se muestre la longitud del pico en el eje x y la profundidad del pico en el eje y. Utiliza el color para distinguir las especies y agrega un punto con el valor promedio de la longitud y profundidad del pico de cada especie en color gris.
+
+Ahora, agrega barras de error que representen la desviación estándar de la longitud y profundidad del pico de cada especie.
+
+
+
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+#make a dataframe with mean values of bill_depth_mm and bill_length_mm
+promedios <- penguins %>% 
+  group_by(species) %>% 
+  summarise(mean_bill_length = mean(bill_length_mm, na.rm = TRUE),
+            mean_bill_depth = mean(bill_depth_mm, na.rm = TRUE),
+            desvest_bill_lenght = sd(bill_length_mm, na.rm = TRUE),
+            desvest_bill_depth = sd(bill_depth_mm, na.rm = TRUE))
+
+
+ggplot()+
+  geom_point(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point(data = promedios, aes(x = mean_bill_length, y = mean_bill_depth), 
+             size = 5, color = "grey") +
+  geom_errorbar(data = promedios, aes(x = mean_bill_length,
+                                      ymax = mean_bill_depth + desvest_bill_depth , 
+                                      ymin = mean_bill_depth - desvest_bill_depth))+
+    geom_errorbar(data = promedios, aes(y = mean_bill_depth,
+                                      xmax = mean_bill_length + desvest_bill_lenght , 
+                                      xmin = mean_bill_length - desvest_bill_lenght))
+```
+
+:::
+
+
+
+
+
+### Visualización de series de tiempo; geom_line()
+
+Un gráfico de líneas es una representación visual de datos que muestra la relación entre dos variables, donde una variable se representa en el eje x y la otra en el eje y. Los puntos de datos se conectan mediante líneas para mostrar tendencias o patrones a lo largo del tiempo o de otra variable continua.
+
+En ggplot `geom_line()` permite graficar líneas conectando puntos, donde el _aesthetics_ `group` nos permite definir que observaciones estan conectadas. 
+
+
+Para entender mejor esta geometría, utilizaremos el archivo `respiracion.csv`dentro de la carpeta `data` el cual contiene valores de consumo de oxígeno diario en un molusco marino bajo dos condiciones experimentales: **Control** y **Tratamiento**.
+
+Por el momento, vamos a filtrar los datos para quedarnos con la experimento **Control**
+
+```{r}
+#| warning: false
+#| message: false
+
+respiracion <- read_csv("data/respiracion_long.csv")
+
+# echamos un vistazo a los datos
+glimpse(respiracion)
+
+# Filtrar condición Control
+respiracion_control <- respiracion %>% 
+  filter(experimento == "Control")
+
+```
+Para graficar los datos de consumo de oxígeno diario, podemos utilizar `geom_line()` para conectar los puntos de datos. Para esto, necesitamos definir el eje x y el eje y, así como el grupo al que pertenece cada observación, es decir, a cada individuo. 
+
+
+Observa que pasa cuando no definimos el grupo:
+```{r}
+ggplot(respiracion_control, aes(x = dia, y = mo2)) +
+  geom_line()
+```
+
+Ahora con el _aesthetic_ `group = individuo`:
+
+```{r}
+ggplot(respiracion_control, aes(x = dia, y = mo2, group = individuo)) +
+  geom_line()
+```
+
+Si queremos distinguir los individuos por color, podemos agregar el _aesthetic_ `color = individuo`:
+
+```{r}
+ggplot(respiracion_control, aes(x = dia, y = mo2, group = individuo, color = individuo)) +
+  geom_line()
+```
+
+
+Si queremos distinguir los individuos por color y además agregar puntos en cada observación, podemos agregar `geom_point()`:
+```{r}
+ggplot(respiracion_control, aes(x = dia, y = mo2, group = individuo, color = individuo)) +
+  geom_line() +
+  geom_point()
+```
+
+
+**¿Como podrias agregar una línea con los valores promedio de cada individuo?**
+
+
+
+
+
+Podemos calcular el promedio de cada individuo y luego agregarlo al gráfico utilizando `geom_line()` nuevamente. Primero, calculamos el promedio de `mo2` por `dia`, y luego lo graficamos.
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+promedios_mo2 <- respiracion_control %>% 
+  group_by(dia) %>% 
+  summarise(promedio_mo2 = mean(mo2, na.rm = TRUE), .groups = "drop") 
+
+ggplot(respiracion_control) +
+  geom_line(aes(x = dia, y = mo2, group = individuo, color = individuo)) +
+  geom_line(data = promedios_mo2, aes(x = dia, y = promedio_mo2, group = 1), 
+            color = "black")
+
+
+```
+
+
