@@ -768,7 +768,7 @@ Donde poner los aes?
 </div>
 </div>
 </div>
-<p>Por default, <code>geom_bar()</code> nos arrojará una gráfica de barras apiladas. Si queremos poner cada grupo por separado, incorporamos el parametro <code>position = "dodge"</code></p>
+<p>Por default, <code>geom_bar()</code> nos arrojará una gráfica de barras apiladas. Si queremos poner cada grupo por separado, incorporamos el parámetro <code>position = "dodge"</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> sex), <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -798,7 +798,7 @@ Donde poner los aes?
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Ejercicio: Star Wars
+Ejercicio: Una galaxía muy lejana…
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -806,7 +806,7 @@ Ejercicio: Star Wars
 <p>Abre la tabla <code>starwars.csv</code> que se encuentra en el directorio de <em>databases</em> y utilizando pipes genera los siguientes objetos:</p>
 <ol type="1">
 <li>Una gráfico de densidad donde se compare la distribución de los valore de altura <code>height</code> de los planetas <strong>Tatooine</strong> y <strong>Naboo</strong>, excluyendo los androides.</li>
-<li>Una gráfica de barras de los mismas planetas y excluyendo androides donde se muestre la proporción de sexos.</li>
+<li>Una gráfica de barras de los mismos planetas y excluyendo androides donde se muestre la proporción de sexos.</li>
 <li>Una gráfica de barras donde se muestre el número de personajes de cada planeta del filme <strong>A New Hope</strong></li>
 </ol>
 <div class="cell">

@@ -538,17 +538,225 @@ Miguel A. Tripp Valdez
 <img data-src="ggplot_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section class="slide level2">
 
+
+<img data-src="img/artsy.png" width="541" class="r-stretch quarto-figure-center"><p class="caption">aRtsy: Generative Art with R and ggplot2</p><p>Algunos otros ejemplso <a href="https://blog.djnavarro.net/posts/2024-12-18_art-from-code-1/">aquí</a></p>
+</section>
+<section class="slide level2">
+
+
+<img data-src="img/Trump_NSF.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+
+<img data-src="img/simpsons_ratings_infographic.png" class="quarto-figure quarto-figure-center r-stretch" width="420"></section>
+<section class="slide level2">
+
+
+<img data-src="img/GO_terms.PNG" class="quarto-figure quarto-figure-center r-stretch" width="301"></section>
+<section class="slide level2">
+
+
+<img data-src="img/handson.png" class="quarto-figure quarto-figure-center r-stretch" width="419"></section>
+<section id="ejercicio-un-geom_point-es-un-geom_point-es-un-geom_point" class="slide level2">
+<h2><strong>Ejercicio:</strong> <em>Un geom_point() es un geom_point() es un geom_point()</em></h2>
+<div class="columns">
+<div class="column medium" style="width:50%;">
+<p>Utilizando tus conocimientos previos, crea un gráfico de dispersión con la base de datos de <code>penguins</code> donde se muestre la longitud del pico en el eje x y la profundidad del pico en el eje y. Utiliza el color para distinguir las especies.</p>
+<p>Ademas, agrega un punto con el valor promedio de la longitud y profundidad del pico de cada especie en color gris.</p>
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/artsy.png" width="541"></p>
-<figcaption>aRtsy: Generative Art with R and ggplot2</figcaption>
+<p><img data-src="img/penguin_group.jpg" class="quarto-figure quarto-figure-center" width="358"></p>
 </figure>
+</div>
+</div></div>
+</section>
+<section id="ejercicio-un-geom_point-es-un-geom_point-es-un-geom_point-1" class="slide level2">
+<h2><strong>Ejercicio:</strong> <em>Un geom_point() es un geom_point() es un geom_point()</em></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co">#make a dataframe with mean values of bill_depth_mm and bill_length_mm</span></span>
+<span id="cb3-2"><a></a>promedios <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a></a>  <span class="fu">summarise</span>(<span class="at">mean_bill_length =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-5"><a></a>            <span class="at">mean_bill_depth =</span> <span class="fu">mean</span>(bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb3-9"><a></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb3-10"><a></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> promedios, <span class="fu">aes</span>(<span class="at">x =</span> mean_bill_length, <span class="at">y =</span> mean_bill_depth), </span>
+<span id="cb3-11"><a></a>             <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"grey"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="ggplot_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="ejercicio-una-galaxía-muy-lejana" class="slide level2">
+<h2><strong>Ejercicio:</strong> Una galaxía muy lejana</h2>
+<div class="columns">
+<div class="column medium" style="width:50%;">
+<p>Abre la tabla <code>starwars.csv</code> que se encuentra en el directorio de <em>databases</em> y utilizando pipes genera los siguientes objetos:</p>
+<ol type="1">
+<li>Una gráfico de densidad donde se compare la distribución de los valore de altura <code>height</code> de los planetas <strong>Tatooine</strong> y <strong>Naboo</strong>, excluyendo los androides.</li>
+<li>Una gráfica de barras de los mismos planetas y excluyendo androides donde se muestre la proporción de sexos.</li>
+<li>Una gráfica de barras donde se muestre el número de personajes de cada planeta del filme <strong>A New Hope</strong></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/starwar_coding.jpeg" class="quarto-figure quarto-figure-center" width="358"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="ejercicio-una-galaxía-muy-lejana-1" class="slide level2">
+<h2><strong>Ejercicio:</strong> Una galaxía muy lejana</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>starwars <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/starwars.csv"</span>))</span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a><span class="co">#ejercicio e1</span></span>
+<span id="cb4-4"><a></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a></a>  <span class="fu">filter</span>(homeworld <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Tatooine"</span>, <span class="st">"Naboo"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-6"><a></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">"droid"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-7"><a></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">fill =</span> homeworld))<span class="sc">+</span></span>
+<span id="cb4-8"><a></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="ggplot_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="ejercicio-una-galaxía-muy-lejana-2" class="slide level2">
+<h2><strong>Ejercicio:</strong> Una galaxía muy lejana</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a></a>  <span class="fu">filter</span>(homeworld <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Tatooine"</span>, <span class="st">"Naboo"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">"droid"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a></a>  <span class="fu">ggplot</span>(.,<span class="fu">aes</span>(<span class="at">x =</span> homeworld, <span class="at">fill =</span> sex))<span class="sc">+</span></span>
+<span id="cb5-5"><a></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="ggplot_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="ejercicio-una-galaxía-muy-lejana-3" class="slide level2">
+<h2><strong>Ejercicio:</strong> Una galaxía muy lejana</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># ejercicio e3</span></span>
+<span id="cb6-2"><a></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(films, <span class="st">"A New Hope"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> homeworld)) <span class="sc">+</span></span>
+<span id="cb6-5"><a></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="ggplot_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="boxplots" class="slide level2">
+<h2>Boxplots</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/boxplot.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><div class="column medium" style="width:50%;">
+<p>La caja de un boxplot comienza en el primer cuartil Q1 (25%) y termina en el tercero Q3 (75%). Por lo tanto, la caja representa el 50% de los datos centrales, con una línea que representa la mediana.</p>
+<p>A cada lado de la caja se dibuja un segmento con los datos más lejanos sin contar los valores atípicos (outliers) del boxplot, que en caso de existir, se representarán con círculos.</p>
+</div></div>
+</section>
+<section id="boxplots-1" class="slide level2">
+<h2>Boxplots</h2>
+
+<img data-src="img/boxplot_distributions.png" class="r-stretch quarto-figure-center"><p class="caption">tomado de LabXechange</p></section>
+<section id="ejercicio" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Utilizando la base de datos <code>penguins</code>, realiza una gráfica de barras donde se muestre el promedio desviación estándar de la longitud del pico de cada especie y sexo. Distingue los sexos por el color de relleno de las barras.</p>
+<p>Recuerda que puedes incluir el parámetros position = position_dodge() para separar las barras entre grupos</p>
+</section>
+<section id="ejercicio-1" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a></a>  <span class="fu">summarise</span>(<span class="at">promedio =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-4"><a></a>            <span class="at">desvest =</span> <span class="fu">sd</span>(bill_length_mm, <span class="at">na.rm=</span> <span class="cn">TRUE</span>), </span>
+<span id="cb7-5"><a></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> promedio, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb7-7"><a></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb7-8"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> promedio <span class="sc">-</span> desvest, <span class="at">ymax =</span> promedio <span class="sc">+</span> desvest),</span>
+<span id="cb7-9"><a></a>                <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="ggplot_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="los-amigos-no-permiten-que-sus-amigos-hagan-gráficas-de-barras" class="slide level2">
+<h2>Los amigos no permiten que sus amigos hagan gráficas de barras</h2>
+<div class="columns">
+<div class="column medium" style="width:50%;">
+<ol type="1">
+<li>Abre la tabla <code>datos_demo.csv</code> que se encuentra en la carpeta de datos</li>
+<li>Sin hacer ningún tipo de observación previa, haz una gráfica donde se muestre el promedio <span class="math inline">\(\pm\)</span> desviación estándar. Para ello, utiliza las funciones <code>group_by()</code> y <code>summarise()</code> que hemos visto anteriormente.</li>
+<li>Ahora, utilizando el set de datos completo, gráfica la dispersión de los datos con <code>geom_point()</code> y añade un boxplot con <code>geom_boxplot()</code>.</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/friends_dont_barcharts.jpg" class="quarto-figure quarto-figure-center" width="348"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="los-amigos-no-permiten-que-sus-amigos-hagan-gráficas-de-barras-1" class="slide level2">
+<h2>Los amigos no permiten que sus amigos hagan gráficas de barras</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>demo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/datos_demo.csv"</span>))</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a></span>
+<span id="cb8-4"><a></a><span class="co"># promedios</span></span>
+<span id="cb8-5"><a></a>demo <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a></a>  <span class="fu">group_by</span>(grupo) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-7"><a></a>  <span class="fu">summarise</span>(<span class="at">promedio =</span> <span class="fu">mean</span>(valor),</span>
+<span id="cb8-8"><a></a>            <span class="at">desvest =</span> <span class="fu">sd</span>(valor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-9"><a></a>  <span class="fu">ggplot</span>(.,<span class="fu">aes</span>(<span class="at">x =</span> grupo, <span class="at">y =</span> promedio, <span class="at">fill =</span> grupo))<span class="sc">+</span></span>
+<span id="cb8-10"><a></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
+<span id="cb8-11"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> promedio <span class="sc">-</span> desvest, <span class="at">ymax =</span> promedio <span class="sc">+</span> desvest),</span>
+<span id="cb8-12"><a></a>                <span class="at">width =</span> <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="ggplot_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="los-amigos-no-permiten-que-sus-amigos-hagan-gráficas-de-barras-2" class="slide level2">
+<h2>Los amigos no permiten que sus amigos hagan gráficas de barras</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver codigo</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># datos completos</span></span>
+<span id="cb9-2"><a></a>demo <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a></a>  <span class="fu">ggplot</span>(.,<span class="fu">aes</span>(<span class="at">x =</span> grupo, <span class="at">y =</span> valor, <span class="at">color =</span> grupo))<span class="sc">+</span></span>
+<span id="cb9-4"><a></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb9-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="fl">0.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="ggplot_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 
 <div class="quarto-auto-generated-content">
 <p><img src="img/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p><a href="https://trippv.github.io/CursoTidyverse2023/">Análisis de datos con Tidyverse</a></p>
+<p><a href="https://trippv.github.io/CursoTidyverse2025/">Análisis de datos con Tidyverse</a></p>
 </div>
 </div>
 </section>

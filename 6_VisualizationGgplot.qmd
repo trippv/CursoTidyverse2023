@@ -370,7 +370,7 @@ ggplot(penguins, aes(x = species)) +
   geom_bar(aes(fill = sex))
 ```
 
-Por default, `geom_bar()` nos arrojará una gráfica de barras apiladas. Si queremos poner cada grupo por separado, incorporamos el parametro `position = "dodge"`
+Por default, `geom_bar()` nos arrojará una gráfica de barras apiladas. Si queremos poner cada grupo por separado, incorporamos el parámetro `position = "dodge"`
 
 ```{r}
 ggplot(penguins, aes(x = species)) +
@@ -385,7 +385,7 @@ ggplot(penguins, aes(x = species, fill = sex)) +
 ```
 
 :::: {.callout-caution icon="false"}
-# Ejercicio: Star Wars
+# Ejercicio: Una galaxía muy lejana...
 
 ::: column-margin
 ![](img/starwar_coding.jpeg){fig-align="center" width="316"}
@@ -394,7 +394,7 @@ ggplot(penguins, aes(x = species, fill = sex)) +
 Abre la tabla `starwars.csv` que se encuentra en el directorio de *databases* y utilizando pipes genera los siguientes objetos:
 
 1.  Una gráfico de densidad donde se compare la distribución de los valore de altura `height` de los planetas **Tatooine** y **Naboo**, excluyendo los androides.
-2.  Una gráfica de barras de los mismas planetas y excluyendo androides donde se muestre la proporción de sexos.
+2.  Una gráfica de barras de los mismos planetas y excluyendo androides donde se muestre la proporción de sexos.
 3.  Una gráfica de barras donde se muestre el número de personajes de cada planeta del filme **A New Hope**
 
 ```{r}
@@ -607,8 +607,6 @@ penguins_estat <- penguins %>%
 
 penguins_estat
 ```
-
-
 :::
 
 ::: {.callout-caution icon="false"}
@@ -683,18 +681,12 @@ El uso de histogramas, densidades o gráficas de dispersión nos permite hacer u
 Puedes encontrar una discusión mas profunda sobra la importancia de la correcta presentación e interpretación de datos en publicaciones científicas [aquí](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128){page="_blank"}.
 ::::
 
-
-
-:::: {.callout-caution icon="false"}
+::: {.callout-caution icon="false"}
 # **Ejercicio**
-
 
 Recrea el gráfico de dispersión de los pingüinos que se muestra al inicio de esta sección, donde se muestre la longitud del pico en el eje x y la profundidad del pico en el eje y. Utiliza el color para distinguir las especies y agrega un punto con el valor promedio de la longitud y profundidad del pico de cada especie en color gris.
 
 Ahora, agrega barras de error que representen la desviación estándar de la longitud y profundidad del pico de cada especie.
-
-
-
 
 ```{r}
 #| include: true
@@ -723,19 +715,13 @@ ggplot()+
                                       xmax = mean_bill_length + desvest_bill_lenght , 
                                       xmin = mean_bill_length - desvest_bill_lenght))
 ```
-
 :::
-
-
-
-
 
 ### Visualización de series de tiempo; geom_line()
 
 Un gráfico de líneas es una representación visual de datos que muestra la relación entre dos variables, donde una variable se representa en el eje x y la otra en el eje y. Los puntos de datos se conectan mediante líneas para mostrar tendencias o patrones a lo largo del tiempo o de otra variable continua.
 
-En ggplot `geom_line()` permite graficar líneas conectando puntos, donde el _aesthetics_ `group` nos permite definir que observaciones estan conectadas. 
-
+En ggplot `geom_line()` permite graficar líneas conectando puntos, donde el *aesthetics* `group` nos permite definir que observaciones estan conectadas.
 
 Para entender mejor esta geometría, utilizaremos el archivo `respiracion.csv`dentro de la carpeta `data` el cual contiene valores de consumo de oxígeno diario en un molusco marino bajo dos condiciones experimentales: **Control** y **Tratamiento**.
 
@@ -755,43 +741,39 @@ respiracion_control <- respiracion %>%
   filter(experimento == "Control")
 
 ```
-Para graficar los datos de consumo de oxígeno diario, podemos utilizar `geom_line()` para conectar los puntos de datos. Para esto, necesitamos definir el eje x y el eje y, así como el grupo al que pertenece cada observación, es decir, a cada individuo. 
 
+Para graficar los datos de consumo de oxígeno diario, podemos utilizar `geom_line()` para conectar los puntos de datos. Para esto, necesitamos definir el eje x y el eje y, así como el grupo al que pertenece cada observación, es decir, a cada individuo.
 
 Observa que pasa cuando no definimos el grupo:
+
 ```{r}
 ggplot(respiracion_control, aes(x = dia, y = mo2)) +
   geom_line()
 ```
 
-Ahora con el _aesthetic_ `group = individuo`:
+Ahora con el *aesthetic* `group = individuo`:
 
 ```{r}
 ggplot(respiracion_control, aes(x = dia, y = mo2, group = individuo)) +
   geom_line()
 ```
 
-Si queremos distinguir los individuos por color, podemos agregar el _aesthetic_ `color = individuo`:
+Si queremos distinguir los individuos por color, podemos agregar el *aesthetic* `color = individuo`:
 
 ```{r}
 ggplot(respiracion_control, aes(x = dia, y = mo2, group = individuo, color = individuo)) +
   geom_line()
 ```
 
-
 Si queremos distinguir los individuos por color y además agregar puntos en cada observación, podemos agregar `geom_point()`:
+
 ```{r}
 ggplot(respiracion_control, aes(x = dia, y = mo2, group = individuo, color = individuo)) +
   geom_line() +
   geom_point()
 ```
 
-
 **¿Como podrias agregar una línea con los valores promedio de cada individuo?**
-
-
-
-
 
 Podemos calcular el promedio de cada individuo y luego agregarlo al gráfico utilizando `geom_line()` nuevamente. Primero, calculamos el promedio de `mo2` por `dia`, y luego lo graficamos.
 
@@ -813,5 +795,3 @@ ggplot(respiracion_control) +
 
 
 ```
-
-

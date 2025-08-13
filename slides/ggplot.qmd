@@ -11,7 +11,7 @@ format:
     toc: false
     logo: "img/logo.png"
     echo: true
-    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2023/)"
+    footer: "[Análisis de datos con Tidyverse](https://trippv.github.io/CursoTidyverse2025/)"
     css: styles/custom.scss
 title-slide-attributes: 
   data-background-image: img/tidyverse_cover.png
@@ -223,3 +223,233 @@ penguins %>%
 ------------------------------------------------------------------------
 
 ![aRtsy: Generative Art with R and ggplot2](img/artsy.png){fig-align="center" width="541"}
+
+Algunos otros ejemplso [aquí](https://blog.djnavarro.net/posts/2024-12-18_art-from-code-1/)
+
+------------------------------------------------------------------------
+
+![](img/Trump_NSF.jpg){fig-align="center"}
+
+------------------------------------------------------------------------
+
+![](img/simpsons_ratings_infographic.png){fig-align="center" width="420"}
+
+------------------------------------------------------------------------
+
+![](img/GO_terms.PNG){width="301" fig-align="center" width="420"}
+
+------------------------------------------------------------------------
+
+![](img/handson.png){fig-align="center" width="419"}
+
+------------------------------------------------------------------------
+
+## **Ejercicio:** *Un geom_point() es un geom_point() es un geom_point()*
+
+::::: columns
+::: {.column .medium width="50%"}
+Utilizando tus conocimientos previos, crea un gráfico de dispersión con la base de datos de `penguins` donde se muestre la longitud del pico en el eje x y la profundidad del pico en el eje y. Utiliza el color para distinguir las especies.
+
+Ademas, agrega un punto con el valor promedio de la longitud y profundidad del pico de cada especie en color gris.
+:::
+
+::: {.column width="50%"}
+![](img/penguin_group.jpg){fig-align="center" width="358"}
+:::
+:::::
+
+## **Ejercicio:** *Un geom_point() es un geom_point() es un geom_point()*
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+#make a dataframe with mean values of bill_depth_mm and bill_length_mm
+promedios <- penguins %>% 
+  group_by(species) %>% 
+  summarise(mean_bill_length = mean(bill_length_mm, na.rm = TRUE),
+            mean_bill_depth = mean(bill_depth_mm, na.rm = TRUE))
+
+
+ggplot()+
+  geom_point(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point(data = promedios, aes(x = mean_bill_length, y = mean_bill_depth), 
+             size = 5, color = "grey") 
+
+```
+
+## **Ejercicio:** Una galaxía muy lejana
+
+::::: columns
+::: {.column .medium width="50%"}
+Abre la tabla `starwars.csv` que se encuentra en el directorio de *databases* y utilizando pipes genera los siguientes objetos:
+
+1.  Una gráfico de densidad donde se compare la distribución de los valore de altura `height` de los planetas **Tatooine** y **Naboo**, excluyendo los androides.
+2.  Una gráfica de barras de los mismos planetas y excluyendo androides donde se muestre la proporción de sexos.
+3.  Una gráfica de barras donde se muestre el número de personajes de cada planeta del filme **A New Hope**
+:::
+
+::: {.column width="50%"}
+![](img/starwar_coding.jpeg){fig-align="center" width="358"}
+:::
+:::::
+
+## **Ejercicio:** Una galaxía muy lejana
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+starwars <- read_csv(here("data/starwars.csv"))
+
+#ejercicio e1
+starwars %>% 
+  filter(homeworld %in% c("Tatooine", "Naboo")) %>% 
+  filter(species != "droid") %>% 
+  ggplot(., aes(x = height, fill = homeworld))+
+  geom_density(alpha = 0.4)
+
+```
+
+## **Ejercicio:** Una galaxía muy lejana
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+starwars %>% 
+  filter(homeworld %in% c("Tatooine", "Naboo")) %>% 
+  filter(species != "droid") %>% 
+  ggplot(.,aes(x = homeworld, fill = sex))+
+  geom_bar(position = "fill")
+
+
+```
+
+## **Ejercicio:** Una galaxía muy lejana
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+# ejercicio e3
+starwars %>% 
+  filter(str_detect(films, "A New Hope")) %>% 
+  ggplot(., aes(x = homeworld)) +
+  geom_bar()
+
+
+
+```
+
+## Boxplots
+
+::::: columns
+::: {.column width="50%"}
+![](img/boxplot.png){fig-align="center"}
+:::
+
+::: {.column .medium width="50%"}
+La caja de un boxplot comienza en el primer cuartil Q1 (25%) y termina en el tercero Q3 (75%). Por lo tanto, la caja representa el 50% de los datos centrales, con una línea que representa la mediana.
+
+A cada lado de la caja se dibuja un segmento con los datos más lejanos sin contar los valores atípicos (outliers) del boxplot, que en caso de existir, se representarán con círculos.
+:::
+:::::
+
+## Boxplots
+
+![tomado de LabXechange](img/boxplot_distributions.png){fig-align="center"}
+
+## **Ejercicio**
+
+Utilizando la base de datos `penguins`, realiza una gráfica de barras donde se muestre el promedio desviación estándar de la longitud del pico de cada especie y sexo. Distingue los sexos por el color de relleno de las barras.
+
+Recuerda que puedes incluir el parámetros position = position_dodge() para separar las barras entre grupos
+
+## **Ejercicio**
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+penguins %>% 
+  group_by(species, sex) %>% 
+  summarise(promedio = mean(bill_length_mm, na.rm = TRUE),
+            desvest = sd(bill_length_mm, na.rm= TRUE), 
+            .groups = "drop") %>% 
+  ggplot(., aes(x = species, y = promedio, fill = sex)) +
+  geom_col(position = position_dodge(), color = "black")+
+  geom_errorbar(aes(ymin = promedio - desvest, ymax = promedio + desvest),
+                width = 0.5, position = position_dodge(0.9))
+```
+
+## Los amigos no permiten que sus amigos hagan gráficas de barras
+
+::::: columns
+::: {.column .medium width="50%"}
+1.  Abre la tabla `datos_demo.csv` que se encuentra en la carpeta de datos
+2.  Sin hacer ningún tipo de observación previa, haz una gráfica donde se muestre el promedio $\pm$ desviación estándar. Para ello, utiliza las funciones `group_by()` y `summarise()` que hemos visto anteriormente.
+3.  Ahora, utilizando el set de datos completo, gráfica la dispersión de los datos con `geom_point()` y añade un boxplot con `geom_boxplot()`.
+:::
+
+::: {.column width="50%"}
+![](img/friends_dont_barcharts.jpg){fig-align="center" width="348"}
+:::
+:::::
+
+
+## Los amigos no permiten que sus amigos hagan gráficas de barras
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+demo <- read_csv(here("data/datos_demo.csv"))
+
+
+# promedios
+demo %>% 
+  group_by(grupo) %>% 
+  summarise(promedio = mean(valor),
+            desvest = sd(valor)) %>% 
+  ggplot(.,aes(x = grupo, y = promedio, fill = grupo))+
+  geom_col()+
+  geom_errorbar(aes(ymin = promedio - desvest, ymax = promedio + desvest),
+                width = 0.3)
+
+```
+
+## Los amigos no permiten que sus amigos hagan gráficas de barras
+
+```{r}
+#| include: true
+#| code-fold: true
+#| code-summary: "ver codigo"
+#| eval: true
+
+
+# datos completos
+demo %>% 
+  ggplot(.,aes(x = grupo, y = valor, color = grupo))+
+  geom_boxplot()+
+  geom_point(position = position_jitterdodge(0.2))
+```
+
